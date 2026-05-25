@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Aura week 1 — Claude Code dev diary">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0d1117"/>
+      <stop offset="100%" stop-color="#1a2333"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0a66c2"/>
+      <stop offset="100%" stop-color="#5ea8ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <g font-family="ui-monospace, SF Mono, Menlo, monospace" fill="#7d8a99" font-size="22">
+    <text x="80" y="120">$ git log --oneline | tail</text>
+    <text x="80" y="160">a73f1c   chore: archive aura</text>
+    <text x="80" y="195">2706de0  feat: kill switch</text>
+    <text x="80" y="230">763c197  fix: bubble layout (final)</text>
+    <text x="80" y="265">cb96a5b  refactor: single-file SPA</text>
+    <text x="80" y="300">016fd5b  feat: voice recorder</text>
+  </g>
+
+  <g font-family="-apple-system, BlinkMacSystemFont, Inter, sans-serif" fill="#e6edf3">
+    <text x="80" y="430" font-size="72" font-weight="700" letter-spacing="-2">Aura · week 1</text>
+    <text x="80" y="490" font-size="32" font-weight="400" fill="#5ea8ff">What Claude Code got right.</text>
+    <text x="80" y="530" font-size="32" font-weight="400" fill="#9aa5b1">What I should have checked first.</text>
+  </g>
+
+  <g transform="translate(960,170)">
+    <circle r="120" fill="none" stroke="url(#accent)" stroke-width="3" opacity="0.4"/>
+    <circle r="80" fill="none" stroke="url(#accent)" stroke-width="3" opacity="0.7"/>
+    <circle r="40" fill="url(#accent)"/>
+    <text text-anchor="middle" dominant-baseline="central" font-family="ui-monospace, monospace" font-size="28" font-weight="700" fill="#0d1117">14d</text>
+  </g>
+</svg>

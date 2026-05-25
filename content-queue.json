@@ -33,9 +33,11 @@
   },
   {
     "niche": "dev-diary",
+    "slug": "aura-week-1-claude-code",
     "topic": "Building Aura app week 1 — what Claude Code got right and what it didn't",
     "anecdote": "First commit at 11pm Sunday. By Tuesday Claude Code had refactored my auth flow three times. Two were wrong.",
-    "status": "pending"
+    "status": "published",
+    "pickedAt": "2026-05-26T00:00:00.000Z"
   },
   {
     "niche": "dev-diary",

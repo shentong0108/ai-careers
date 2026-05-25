@@ -1,0 +1,121 @@
+---
+title: "Aura week 1: I killed my voice-first ECE app on day 14"
+slug: "aura-week-1-claude-code"
+description: "Two weeks. 60 commits. One 4-hour bubble bug. Then I killed the project. What Claude Code got right, and what I should have checked first."
+publishedAt: "2026-05-26"
+updatedAt: "2026-05-26"
+author: "stone"
+category: "dev-diary"
+tags: ["claude code", "indie dev", "post-mortem", "voice-first", "ECE tech"]
+keywords: ["claude code review", "claude code workflow", "voice-first PWA", "indie hacker failure", "competitor research timing", "Sydney indie dev"]
+canonical: "https://stonemegan.dev/blog/aura-week-1-claude-code"
+draft: false
+aiDetectionScore: null
+heroImage: "/images/aura-week-1-hero.svg"
+factChecked: false
+factCheckNotes: []
+---
+
+Last Wednesday at 8pm my partner said something that quietly ruined the next two weeks of my evenings.
+
+She runs the pre-school room at a Sydney centre. Five-plus years as an ECT. Mid-conversation about her day, she dropped this line: "the kids see the back of a clipboard more than the educator's face." Then she walked me through her usual night-time routine — 30 to 40 minutes writing 12 individual learning observations, one per child, every shift.
+
+I went to my laptop. Two hours later I had a Claude Code session open and the first commit of an app I was calling Aura.
+
+Two weeks later I killed it. This is the post-mortem.
+
+## What Aura was meant to be
+
+Voice-first iPad PWA for Australian early-childhood educators. One voice recording — say, two minutes about today's room — fans out into 12 personalised per-child diary entries via an LLM. All AI running on a local server in the centre, not in some US cloud. Privacy was the moat.
+
+That was the pitch. Local-first. Voice in, structured per-child out.
+
+## Day 1: the Whisper miss
+
+Monday, 9pm, kitchen table. First commit at 11:40pm. Three hours, mostly thinking.
+
+I gave Claude Code a vague prompt: build me a voice recorder UI plus a Whisper transcription endpoint. It did, and the code looked fine — until I noticed the fetch was pointed at `api.openai.com`. That's the wrong Whisper. I had a Whisper Docker container planned for `localhost:8000` on a NUC running at the centre, not OpenAI's hosted API.
+
+The fix wasn't the code, it was the prompt. Round two I gave Claude Code a 7-line network topology in plain English (iPad → local NUC → Ollama and Whisper containers, no internet egress) and the second pass came back correct.
+
+Lesson I'm keeping: network topology in the prompt matters more than feature description. Claude Code is fine at building the thing. It's not psychic about where the thing connects.
+
+## The day-6 moment
+
+Saturday night, 11pm. I was tired and decided to do the thing I had been putting off: collapse six separate HTML pages (Parts 1-4 plus dashboard plus settings) into a single-file SPA with a hash router.
+
+I wrote a ~500-line prompt. Network topology, yes — lesson stuck. I specified hash router, IIFE-per-Part for state isolation, three new helper modules to extract, and a verification script that should pass at the end. I expected to wake up Sunday and spend most of the day debugging.
+
+What I got, thirty minutes later: a 540KB single-file SPA. Three new modules extracted cleanly. A `merge_build.py` and `verify_aura.py` written without me asking — Claude Code inferred I'd want them. Smoke test green. The hash router worked first try.
+
+I spent the next hour reading the diff because I couldn't believe it. That was the wow moment.
+
+The reason isn't that Claude Code is magic. It's that I had built up enough context across the project over six days that one fat prompt could carry the whole refactor. Big prompts work when you've earned the context. Day 1 me couldn't have written that prompt.
+
+## The 4-hour bubble bug
+
+The other shoe dropped on day 11. Part 2 of the app had 5 inspiration bubbles meant to arrange in a ring around a central mic button. They wouldn't align. I'd nudge one CSS property, two new misalignments would surface. I'd fix those, the first one would come back. Mole-whacking for hours.
+
+I made the mistake every indie dev with a Claude Code MCP browser tool makes: I went into the browser and started injecting CSS overrides live. Watching the layout shift in real-time felt productive. By midnight I had five layers of `!important` piled up and zero idea what was actually authoritative.
+
+Root cause, when I finally stopped: there were two inspiration-bubble systems in the codebase. The new ring layout I had been building, and an older `openInspiration()` function from an earlier sketch that still ran on click and wrote inline `style="visibility:...; opacity:...; transform:..."` on each bubble. Inline styles win over stylesheet rules. My new CSS was being painted over by ghost code I hadn't deleted.
+
+The fix took ten minutes once I stopped browser-injecting and asked Claude Code to dump the relevant 200 lines of source. It pointed straight at the old function. One commit: `-201 / +10`. Old system gone. New system worked.
+
+Four hours of "debugging." Ten minutes of actual debugging. Math doesn't work.
+
+## Numbers from the two weeks
+
+Things I tracked, roughly:
+
+- About 60 commits across Stages 1.5 to 1.10
+- Final single-file SPA: 540KB (~12,000 lines)
+- My time: ~60 hours over 14 evenings
+- Estimated Claude tokens: 3-5M (didn't measure precisely — should have)
+- Plan mode invocations: 2-3, only on big refactors
+- Times I rewrote the Part 2 bubble layout: 8
+
+The bubble-rewrite count is the one that stings. Eight rewrites of the same component is not engineering. It's flailing.
+
+## Controversial opinion: browser MCP debugging is a trap
+
+Claude Code's browser tools let you inject CSS or JavaScript into a live page and watch the effect. It feels like the fastest possible feedback loop. It is — for the first five minutes. After that, you're not debugging the code anymore. You're debugging a temporary overlay that will vanish when you refresh.
+
+My rule, formed at hour 4 of the bubble bug: any browser-inject session over 10 minutes is a sign to stop and dump source. Ask Claude Code to show you the actual files. Read them. Find the conflict. Edit the source. Push. Refresh.
+
+I expect pushback on this one. Browser-inject feels fast. The dopamine is real. But the reason it feels productive is precisely because there is no friction — and friction is what tells you when you've gone off-piste. Without friction, you can spend four hours convinced you're nearly there. You're not.
+
+## Why I killed it on day 14
+
+This is the part that hurts to write. I did my competitor research on day 14. Should have been day 0.
+
+Three things I found in one afternoon of searching:
+
+1. [Mana announced a "Live" voice-first feature for autumn 2026](https://www.makemana.com/blog/2026-autumn-launch). That's Aura's USP. Already shipping.
+2. [Early Edu AI is at $8.99/month for individual educators](https://earlyedu.ai/pricing-detail.html), with a stated 1,000+ subscribers. The single-educator long-tail I assumed was unserved is not.
+3. [Mana / LoveHeart has SOC2 and a public trust center](https://trust.loveheart.ai). They're already on the Australian Childcare Alliance's official AI-partner list.
+
+I had also quietly decided — for cost and complexity reasons — to drop the local-first deployment. Cloud SaaS. Which meant I had no remaining moat against any of the above.
+
+Cloud SaaS Aura, by a solo indie, against an ACA-backed compliance-credentialed incumbent with the voice feature also shipping. That's not a fight I can win on technology, and I have no distribution advantage.
+
+Killing the project on day 14 cost me 60 hours. Continuing would have cost me 600. Sunk-cost reasoning is the most expensive bias in indie dev — more expensive than any cloud bill.
+
+## Three things I'm taking with me
+
+1. Competitor research happens on day 0, every single time. Even (especially) when the problem feels obvious.
+2. Network topology belongs in the prompt before features do.
+3. The browser MCP inject tool is a 10-minute thing, not an hours-long workflow.
+
+The blog you're reading is what I'm building instead. Aura's repo is archived. The next post in this dev-diary will be about rebuilding stonemegan.dev itself with Claude Code — failures included on purpose.
+
+If you're an indie dev mid-build right now and haven't checked who else is shipping the same thing this quarter: close this tab and go do that first. Day 14 is too late.
+
+## TL;DR
+
+- Built a voice-first ECE app for two weeks with Claude Code.
+- Claude Code was great at scaffolding once given enough context. Single-file SPA refactor went from "all-Sunday job" to 30 minutes.
+- Claude Code's browser-inject tool wasted 4 of my hours on a bug a source dump solved in 10 minutes.
+- Three direct competitors had already shipped or were about to ship the same thing, with better distribution and credentials.
+- Killed the project on day 14. Sunk-cost reasoning is the most expensive bias in indie dev.
+- Competitor research on day 0, not day 14.
