@@ -1,0 +1,33 @@
+---
+import authorsJson from '../../.claude/authors.json';
+
+interface AuthorRecord {
+  name: string;
+  jobTitle: string;
+  credential: string;
+  bio: string;
+  url: string;
+  sameAs: string[];
+  image: string;
+  categories: string[];
+}
+
+const authors = authorsJson as Record<string, AuthorRecord>;
+
+export interface Props {
+  authorKey: 'stone' | 'megan';
+  publishedAt?: Date;
+}
+
+const { authorKey, publishedAt } = Astro.props;
+const a = authors[authorKey];
+if (!a) throw new Error(`Unknown author key: ${authorKey}`);
+---
+
+<div class="byline">
+  <img src={a.image} alt={a.name} width="48" height="48" loading="lazy" />
+  <div>
+    <p><strong>{a.name}</strong> · {a.jobTitle}</p>
+    <p><small>{a.credential}{publishedAt ? ` · ${publishedAt.toISOString().slice(0, 10)}` : ''}</small></p>
+  </div>
+</div>

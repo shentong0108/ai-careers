@@ -1,0 +1,104 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogImage?: string;
+  type?: 'website' | 'article';
+}
+
+const {
+  title,
+  description,
+  canonical,
+  ogImage = '/og-default.png',
+  type = 'website',
+} = Astro.props;
+
+const fullCanonical = canonical ?? new URL(Astro.url.pathname, Astro.site).toString();
+const fullOg = ogImage.startsWith('http') ? ogImage : new URL(ogImage, Astro.site).toString();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={fullCanonical} />
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={fullOg} />
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={fullCanonical} />
+    <meta property="og:site_name" content="stonemegan.dev" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={fullOg} />
+
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <style is:global>
+      :root {
+        --max-w: 720px;
+        --c-text: #1a1a1a;
+        --c-muted: #6b6b6b;
+        --c-link: #0a66c2;
+        --c-border: #e5e5e5;
+        --c-bg: #fafafa;
+        --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        --font-serif: 'Charter', 'Georgia', serif;
+      }
+      html { font-family: var(--font-sans); color: var(--c-text); background: white; }
+      body { margin: 0; line-height: 1.6; }
+      main { max-width: var(--max-w); margin: 2rem auto; padding: 0 1rem; }
+      a { color: var(--c-link); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+      header, footer { background: var(--c-bg); border-bottom: 1px solid var(--c-border); padding: 1rem; }
+      footer { border-bottom: none; border-top: 1px solid var(--c-border); margin-top: 4rem; font-size: 0.875rem; color: var(--c-muted); text-align: center; }
+      header nav { max-width: var(--max-w); margin: 0 auto; display: flex; gap: 1rem; align-items: center; }
+      header nav a:first-child { font-weight: 700; }
+      article { font-family: var(--font-serif); font-size: 1.125rem; }
+      article h1 { font-family: var(--font-sans); }
+      article h2, article h3 { font-family: var(--font-sans); margin-top: 2.5rem; }
+      img { max-width: 100%; height: auto; }
+      pre { background: #0d1117; color: #e6edf3; padding: 1rem; overflow-x: auto; border-radius: 6px; font-size: 0.875rem; }
+      code { background: var(--c-bg); padding: 0.1em 0.3em; border-radius: 3px; font-size: 0.9em; }
+      pre code { background: transparent; padding: 0; }
+      .byline { display: flex; align-items: center; gap: 0.75rem; margin: 1.5rem 0; padding: 0.75rem; background: var(--c-bg); border-radius: 6px; }
+      .byline img { border-radius: 50%; }
+      .byline p { margin: 0; line-height: 1.3; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="/">stonemegan.dev</a>
+        <a href="/nurse-ai">Nurse + AI</a>
+        <a href="/ece-ai">ECE + AI</a>
+        <a href="/dev-diary">Dev Diary</a>
+        <span style="flex:1"></span>
+        <a href="/about">About</a>
+      </nav>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer>
+      <p>
+        © {new Date().getFullYear()} stonemegan.dev ·
+        <a href="/about">About</a> ·
+        <a href="/privacy">Privacy</a> ·
+        <a href="/contact">Contact</a> ·
+        <a href="/disclaimer">Disclaimer</a>
+      </p>
+    </footer>
+  </body>
+</html>

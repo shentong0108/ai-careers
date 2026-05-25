@@ -26,17 +26,19 @@ const ROTATION: QueueEntry['niche'][] = ['nurse-ai', 'ece-ai', 'dev-diary'];
 
 function lastPublishedNiche(queue: QueueEntry[]): QueueEntry['niche'] | null {
   for (let i = queue.length - 1; i >= 0; i--) {
-    if (queue[i].status === 'published' || queue[i].status === 'in-flight') {
-      return queue[i].niche;
+    const entry = queue[i];
+    if (!entry) continue;
+    if (entry.status === 'published' || entry.status === 'in-flight') {
+      return entry.niche;
     }
   }
   return null;
 }
 
 function nextNiche(last: QueueEntry['niche'] | null): QueueEntry['niche'] {
-  if (!last) return ROTATION[0];
+  if (!last) return ROTATION[0]!;
   const idx = ROTATION.indexOf(last);
-  return ROTATION[(idx + 1) % ROTATION.length];
+  return ROTATION[(idx + 1) % ROTATION.length]!;
 }
 
 function slugify(s: string): string {

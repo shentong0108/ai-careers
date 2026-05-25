@@ -1,0 +1,52 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+const posts = (await getCollection('posts', ({ data }: CollectionEntry<'posts'>) => !data.draft))
+  .sort((a: CollectionEntry<'posts'>, b: CollectionEntry<'posts'>) =>
+    b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf()
+  )
+  .slice(0, 10);
+---
+
+<BaseLayout
+  title="stonemegan.dev — nurse + ECE + AI, no hype"
+  description="Real stories from a nurse and an early childhood teacher using AI in their jobs. Plus dev diary of building Aura app. No buzzwords. Some failures."
+>
+  <h1>What AI actually does in our jobs</h1>
+  <p>
+    Stone (RN) and Megan (ECT) write about the AI tools we actually use day to day —
+    what saves time, what wastes it, what we abandoned. Plus a dev diary of building
+    Aura app with Claude Code.
+  </p>
+
+  <h2>Latest</h2>
+  {posts.length === 0 ? (
+    <p style="color: var(--c-muted);">First articles coming soon.</p>
+  ) : (
+    <ul style="list-style: none; padding: 0;">
+      {posts.map((p: CollectionEntry<'posts'>) => (
+        <li style="border-bottom: 1px solid var(--c-border); padding: 1rem 0;">
+          <p style="margin: 0 0 0.25rem; font-size: 0.875rem; color: var(--c-muted);">
+            <a href={`/${p.data.category}`}>{p.data.category}</a>
+            {' · '}
+            <time datetime={p.data.publishedAt.toISOString()}>
+              {p.data.publishedAt.toISOString().slice(0, 10)}
+            </time>
+          </p>
+          <h3 style="margin: 0;">
+            <a href={`/blog/${p.data.slug}`}>{p.data.title}</a>
+          </h3>
+          <p style="margin: 0.25rem 0 0; color: var(--c-muted);">{p.data.description}</p>
+        </li>
+      ))}
+    </ul>
+  )}
+
+  <h2>By topic</h2>
+  <ul>
+    <li><a href="/nurse-ai">Nurse + AI</a> — AI tools for nursing practice, by an RN.</li>
+    <li><a href="/ece-ai">ECE + AI</a> — AI for early childhood educators, by an ECT.</li>
+    <li><a href="/dev-diary">Dev Diary</a> — building Aura app with Claude Code, including the failures.</li>
+  </ul>
+</BaseLayout>

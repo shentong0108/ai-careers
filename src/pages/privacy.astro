@@ -1,0 +1,96 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const lastUpdated = new Date('2026-05-25');
+---
+
+<BaseLayout
+  title="Privacy Policy — stonemegan.dev"
+  description="Privacy policy for stonemegan.dev — what data we collect, third-party services, your rights."
+>
+  <h1>Privacy Policy</h1>
+  <p><small>Last updated: {lastUpdated.toISOString().slice(0, 10)}</small></p>
+
+  <p>
+    This is a personal blog. We collect the minimum data needed to operate it
+    and understand which posts are useful. This page is a plain-language summary
+    of what is collected and by whom.
+  </p>
+
+  <h2>What we collect directly</h2>
+  <p>
+    Nothing directly. There is no signup form, no comments, no account. If you
+    email us via the address on the <a href="/contact">contact page</a>, we
+    receive your email and message; we don't share it.
+  </p>
+
+  <h2>Third-party services on this site</h2>
+
+  <h3>Cloudflare</h3>
+  <p>
+    This site is hosted on Cloudflare Pages. Cloudflare may log standard request
+    data (IP address, user agent, request path) as part of its DDoS protection
+    and CDN service. See
+    <a href="https://www.cloudflare.com/privacypolicy/" rel="noopener">Cloudflare's privacy policy</a>.
+  </p>
+
+  <h3>Cloudflare Web Analytics</h3>
+  <p>
+    We use Cloudflare Web Analytics, which is privacy-friendly and does not use
+    cookies or track individuals across sites. It records aggregate page views,
+    referrers, and country. See
+    <a href="https://www.cloudflare.com/web-analytics/" rel="noopener">Cloudflare Web Analytics</a>.
+  </p>
+
+  <h3>Plausible Analytics</h3>
+  <p>
+    We may also use Plausible, a cookie-less analytics service that does not
+    collect personal data. See
+    <a href="https://plausible.io/privacy" rel="noopener">Plausible privacy policy</a>.
+  </p>
+
+  <h3>Google AdSense</h3>
+  <p>
+    Once we are approved, this site may serve ads via Google AdSense. Google
+    and its partners use cookies and similar technologies to serve ads based on
+    your prior visits to this and other sites. You can opt out of personalized
+    advertising by visiting
+    <a href="https://www.google.com/settings/ads" rel="noopener">Google Ad Settings</a>.
+    You may also opt out of third-party vendor use of cookies at
+    <a href="https://www.aboutads.info/" rel="noopener">aboutads.info</a>.
+  </p>
+
+  <h3>Affiliate links</h3>
+  <p>
+    Some links on this site are affiliate links (Amazon Associates and similar).
+    Clicking these may set a cookie from the partner site that attributes a
+    later purchase to us. See the partner's privacy policy for details.
+  </p>
+
+  <h2>Cookies on this site</h2>
+  <p>
+    The base site sets no cookies. Cookies may be set by AdSense or affiliate
+    partners once those are enabled. There is no cookie banner because the site
+    itself sets none.
+  </p>
+
+  <h2>Your rights</h2>
+  <p>
+    Under GDPR / UK GDPR / Australia Privacy Act, you have the right to ask
+    what data we hold about you and to request deletion. Since we don't store
+    user accounts, there is typically nothing to delete from our end. For
+    third-party services listed above, see their policies for opt-out and
+    deletion procedures.
+  </p>
+
+  <h2>Children</h2>
+  <p>
+    This site is not directed at children under 13. We do not knowingly collect
+    information from children.
+  </p>
+
+  <h2>Contact</h2>
+  <p>
+    Questions or requests: see the <a href="/contact">contact page</a>.
+  </p>
+</BaseLayout>

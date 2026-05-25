@@ -33,8 +33,8 @@ function parseArgs(argv: string[]): { agentName: string; params: Record<string, 
   }
   const params: Record<string, string> = {};
   for (const arg of argv.slice(3)) {
-    const match = arg.match(/^--([^=]+)=(.*)$/);
-    if (match) params[match[1]] = match[2];
+    const [, key, value] = arg.match(/^--([^=]+)=(.*)$/) ?? [];
+    if (key !== undefined) params[key] = value ?? '';
   }
   return { agentName, params };
 }

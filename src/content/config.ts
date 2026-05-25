@@ -1,4 +1,5 @@
 import { defineCollection, z } from 'astro:content';
+import { glob } from 'astro/loaders';
 
 const postSchema = z.object({
   title: z.string().min(10).max(70),
@@ -30,7 +31,7 @@ const postSchema = z.object({
 });
 
 const posts = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/posts' }),
   schema: postSchema,
 });
 

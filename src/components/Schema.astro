@@ -1,0 +1,11 @@
+---
+export interface Props {
+  type: string;
+  data: Record<string, unknown>;
+}
+
+const { type, data } = Astro.props;
+const ld = { '@context': 'https://schema.org', '@type': type, ...data };
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(ld)} is:inline />

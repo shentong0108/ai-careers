@@ -1,0 +1,51 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import { CATEGORIES, type CategoryKey } from '@/lib/categories';
+
+export const getStaticPaths = (() =>
+  Object.keys(CATEGORIES).map((category) => ({
+    params: { category },
+  }))) satisfies GetStaticPaths;
+
+const { category } = Astro.params;
+const meta = CATEGORIES[category as CategoryKey];
+if (!meta) throw new Error(`Unknown category: ${category}`);
+
+const posts = (await getCollection(
+  'posts',
+  ({ data }: CollectionEntry<'posts'>) => !data.draft && data.category === category
+))
+  .sort((a: CollectionEntry<'posts'>, b: CollectionEntry<'posts'>) =>
+    b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf()
+  );
+---
+
+<BaseLayout
+  title={`${meta.title} — stonemegan.dev`}
+  description={meta.description}
+>
+  <h1>{meta.title}</h1>
+  <p>{meta.intro}</p>
+
+  {posts.length === 0 ? (
+    <p style="color: var(--c-muted);">No posts yet in this category.</p>
+  ) : (
+    <ul style="list-style: none; padding: 0;">
+      {posts.map((p: CollectionEntry<'posts'>) => (
+        <li style="border-bottom: 1px solid var(--c-border); padding: 1rem 0;">
+          <p style="margin: 0 0 0.25rem; font-size: 0.875rem; color: var(--c-muted);">
+            <time datetime={p.data.publishedAt.toISOString()}>
+              {p.data.publishedAt.toISOString().slice(0, 10)}
+            </time>
+          </p>
+          <h3 style="margin: 0;">
+            <a href={`/blog/${p.data.slug}`}>{p.data.title}</a>
+          </h3>
+          <p style="margin: 0.25rem 0 0; color: var(--c-muted);">{p.data.description}</p>
+        </li>
+      ))}
+    </ul>
+  )}
+</BaseLayout>

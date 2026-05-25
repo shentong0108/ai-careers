@@ -1,0 +1,108 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Schema from '@/components/Schema.astro';
+import authorsJson from '../../.claude/authors.json';
+
+interface AuthorRecord {
+  name: string;
+  jobTitle: string;
+  credential: string;
+  bio: string;
+  url: string;
+  sameAs: string[];
+  image: string;
+  categories: string[];
+}
+const authors = authorsJson as Record<string, AuthorRecord>;
+const stone = authors.stone!;
+const megan = authors.megan!;
+---
+
+<BaseLayout
+  title="About — stonemegan.dev"
+  description="About Stone (RN) and Megan (ECT), the two humans behind stonemegan.dev. Why we write about AI in our jobs."
+>
+  <h1>About</h1>
+
+  <p>
+    Two real people. Two jobs that don't usually get tech-blog coverage.
+    One shared interest in figuring out what AI actually does in the day-to-day.
+  </p>
+
+  <h2>Stone — Registered Nurse</h2>
+  <p><strong>{stone.jobTitle}</strong> · {stone.credential}</p>
+  <p>{stone.bio}</p>
+  <p>
+    Find me on:
+    {stone.sameAs.map((url, i) => (
+      <>
+        {i > 0 ? ' · ' : ''}
+        <a href={url} rel="me">{new URL(url).hostname.replace('www.', '')}</a>
+      </>
+    ))}
+  </p>
+
+  <h2>Megan — Early Childhood Teacher</h2>
+  <p><strong>{megan.jobTitle}</strong> · {megan.credential}</p>
+  <p>{megan.bio}</p>
+  <p>
+    Find me on:
+    {megan.sameAs.map((url, i) => (
+      <>
+        {i > 0 ? ' · ' : ''}
+        <a href={url} rel="me">{new URL(url).hostname.replace('www.', '')}</a>
+      </>
+    ))}
+  </p>
+
+  <h2>Why this site exists</h2>
+  <p>
+    Every other AI blog is written by someone whose job is writing AI blogs.
+    We wanted a record of what AI actually does for two specific jobs — nursing
+    and early childhood — where the stakes are real and the buzzwords are loud.
+  </p>
+  <p>
+    Posts include the failures. The tool we abandoned. The prompt that gave
+    wrong dosing advice. The Claude Code refactor that broke auth twice.
+    Especially the failures.
+  </p>
+
+  <h2>How posts are written</h2>
+  <p>
+    Drafts may start from a Claude prompt. Every post is then edited by a human
+    (one of us) before publication. The personal anecdotes, opinions, and
+    citations are real. We run AI-detection on every post and don't publish if
+    it scores above 30%.
+  </p>
+  <p>
+    Sub-agents and the build pipeline are open source — see the
+    <a href="https://github.com/{stone.sameAs[0]?.split('/').pop() ?? ''}/ai-careers">repo</a>.
+  </p>
+
+  <h2>Disclosures</h2>
+  <p>
+    Some links are affiliate links. We only link to tools we actually use.
+    See <a href="/disclaimer">disclaimer</a> for the full list.
+  </p>
+
+  <Schema
+    type="Person"
+    data={{
+      name: stone.name,
+      jobTitle: stone.jobTitle,
+      url: stone.url,
+      sameAs: stone.sameAs,
+      image: stone.image,
+    }}
+  />
+  <Schema
+    type="Person"
+    data={{
+      name: megan.name,
+      jobTitle: megan.jobTitle,
+      url: megan.url,
+      sameAs: megan.sameAs,
+      image: megan.image,
+    }}
+  />
+</BaseLayout>

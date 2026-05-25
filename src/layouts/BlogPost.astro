@@ -1,0 +1,95 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import AuthorByline from '@/components/AuthorByline.astro';
+import Schema from '@/components/Schema.astro';
+import authorsJson from '../../.claude/authors.json';
+import { render, type CollectionEntry } from 'astro:content';
+
+interface AuthorRecord {
+  name: string;
+  jobTitle: string;
+  credential: string;
+  url: string;
+  sameAs: string[];
+  image: string;
+}
+const authors = authorsJson as Record<string, AuthorRecord>;
+
+export interface Props {
+  entry: CollectionEntry<'posts'>;
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const fm = entry.data;
+const author = authors[fm.author];
+if (!author) throw new Error(`Unknown author: ${fm.author}`);
+
+const breadcrumb = [
+  { name: 'Home', url: new URL('/', Astro.site).toString() },
+  { name: fm.category, url: new URL(`/${fm.category}`, Astro.site).toString() },
+  { name: fm.title, url: fm.canonical },
+];
+---
+
+<BaseLayout
+  title={fm.title}
+  description={fm.description}
+  canonical={fm.canonical}
+  ogImage={fm.ogImage ?? fm.heroImage}
+  type="article"
+>
+  <article>
+    <p style="color: var(--c-muted); font-size: 0.875rem;">
+      <a href={`/${fm.category}`}>{fm.category}</a>
+    </p>
+    <h1>{fm.title}</h1>
+    <p style="font-size: 1rem; color: var(--c-muted);">{fm.description}</p>
+    <AuthorByline authorKey={fm.author} publishedAt={fm.publishedAt} />
+    <img src={fm.heroImage} alt={fm.title} />
+    <Content />
+    {fm.factChecked && (
+      <p style="color: var(--c-muted); font-size: 0.75rem; border-top: 1px solid var(--c-border); padding-top: 1rem; margin-top: 3rem;">
+        Fact-checked {fm.factCheckedAt?.toISOString().slice(0, 10)}.
+        Last reviewed {fm.updatedAt.toISOString().slice(0, 10)}.
+      </p>
+    )}
+  </article>
+
+  <Schema
+    type="Article"
+    data={{
+      headline: fm.title,
+      description: fm.description,
+      datePublished: fm.publishedAt.toISOString(),
+      dateModified: fm.updatedAt.toISOString(),
+      image: new URL(fm.heroImage, Astro.site).toString(),
+      author: {
+        '@type': 'Person',
+        name: author.name,
+        jobTitle: author.jobTitle,
+        url: author.url,
+        sameAs: author.sameAs,
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: 'stonemegan.dev',
+        logo: { '@type': 'ImageObject', url: new URL('/logo.png', Astro.site).toString() },
+      },
+      mainEntityOfPage: { '@type': 'WebPage', '@id': fm.canonical },
+      keywords: fm.keywords.join(', '),
+    }}
+  />
+
+  <Schema
+    type="BreadcrumbList"
+    data={{
+      itemListElement: breadcrumb.map((b, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: b.name,
+        item: b.url,
+      })),
+    }}
+  />
+</BaseLayout>
