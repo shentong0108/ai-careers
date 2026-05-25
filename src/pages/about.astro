@@ -32,28 +32,32 @@ const megan = authors.megan!;
   <h2>Stone — Registered Nurse</h2>
   <p><strong>{stone.jobTitle}</strong> · {stone.credential}</p>
   <p>{stone.bio}</p>
-  <p>
-    Find me on:
-    {stone.sameAs.map((url, i) => (
-      <>
-        {i > 0 ? ' · ' : ''}
-        <a href={url} rel="me">{new URL(url).hostname.replace('www.', '')}</a>
-      </>
-    ))}
-  </p>
+  {stone.sameAs.length > 0 && (
+    <p>
+      Find me on:
+      {stone.sameAs.map((url, i) => (
+        <>
+          {i > 0 ? ' · ' : ''}
+          <a href={url} rel="me">{new URL(url).hostname.replace('www.', '')}</a>
+        </>
+      ))}
+    </p>
+  )}
 
   <h2>Megan — Early Childhood Teacher</h2>
   <p><strong>{megan.jobTitle}</strong> · {megan.credential}</p>
   <p>{megan.bio}</p>
-  <p>
-    Find me on:
-    {megan.sameAs.map((url, i) => (
-      <>
-        {i > 0 ? ' · ' : ''}
-        <a href={url} rel="me">{new URL(url).hostname.replace('www.', '')}</a>
-      </>
-    ))}
-  </p>
+  {megan.sameAs.length > 0 && (
+    <p>
+      Find me on:
+      {megan.sameAs.map((url, i) => (
+        <>
+          {i > 0 ? ' · ' : ''}
+          <a href={url} rel="me">{new URL(url).hostname.replace('www.', '')}</a>
+        </>
+      ))}
+    </p>
+  )}
 
   <h2>Why this site exists</h2>
   <p>
@@ -76,7 +80,7 @@ const megan = authors.megan!;
   </p>
   <p>
     Sub-agents and the build pipeline are open source — see the
-    <a href="https://github.com/{stone.sameAs[0]?.split('/').pop() ?? ''}/ai-careers">repo</a>.
+    <a href="https://github.com/shentong0108/ai-careers">repo</a>.
   </p>
 
   <h2>Disclosures</h2>
@@ -90,8 +94,8 @@ const megan = authors.megan!;
     data={{
       name: stone.name,
       jobTitle: stone.jobTitle,
+      description: stone.credential,
       url: stone.url,
-      sameAs: stone.sameAs,
       image: stone.image,
     }}
   />
@@ -100,8 +104,8 @@ const megan = authors.megan!;
     data={{
       name: megan.name,
       jobTitle: megan.jobTitle,
+      description: megan.credential,
       url: megan.url,
-      sameAs: megan.sameAs,
       image: megan.image,
     }}
   />
