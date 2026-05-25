@@ -16,12 +16,30 @@ pnpm dev              # http://localhost:4321
 
 ## Automation
 
-- **Every 2 days**: GH Actions cron picks topic from `content-queue.json`, runs the agent pipeline, opens a PR.
+- **Every ~2 days**: macOS launchd fires `scripts/local-cron.sh`, which
+  runs `claude -p "/generate-article"` using your Claude Code subscription
+  quota (no API credits). Pipeline dispatches sub-agents natively, opens
+  a PR.
 - **Pipeline**: `keyword-researcher` → `content-writer` → `content-humanizer` → `fact-checker` (YMYL) → `seo-optimizer` → `deploy-verifier`.
 - **Human review required** before merge. No auto-merge.
 - **Cloudflare Pages** auto-deploys merged `main`.
 
-See `.claude/loop.md` for full pipeline doc and local `/loop` alternatives.
+**Install local cron:**
+
+```bash
+./scripts/install-launchd.sh
+```
+
+**Force a run now:**
+
+```bash
+rm -f .claude/cache/local-cron-last-run
+launchctl start dev.stonemegan.aicareers
+tail -f .claude/logs/cron-*.log
+```
+
+GH Actions cloud cron is **disabled by default** (would consume API credits).
+See `.claude/loop.md` for full automation doc.
 
 ## Project rules
 

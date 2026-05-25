@@ -7,8 +7,10 @@
 
 - **Astro** (static SSG) + MDX content collections
 - **Cloudflare Pages** (hosting, free tier)
-- **GitHub Actions** cron — every 2 days new article
-- **Claude API** (claude-opus-4-7) — draft generation
+- **macOS launchd cron** — primary automation, every ~2 days, uses Claude
+  Code subscription quota via `claude -p "/generate-article"`
+- **GitHub Actions** — disabled by default, manual-dispatch backup that
+  consumes API credits if used
 - **Plausible** + Cloudflare Web Analytics — dashboard
 - **TypeScript** strict mode
 - LSP: `astro check` + `eslint` + `prettier`

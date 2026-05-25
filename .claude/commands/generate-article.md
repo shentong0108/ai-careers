@@ -1,6 +1,9 @@
 # /generate-article
 
-Full article-generation pipeline. Runs all agents in sequence. Opens PR. Stops.
+Full article-generation pipeline. Runs all sub-agents in sequence. Opens PR. Stops.
+
+Uses local Claude Code subscription (sub-agents dispatched via Task tool).
+Does NOT call the Anthropic API directly — no API credits consumed.
 
 ## Inputs (optional)
 
@@ -9,7 +12,9 @@ Full article-generation pipeline. Runs all agents in sequence. Opens PR. Stops.
 
 ## Steps
 
-1. **Pick topic** — `node scripts/pick-next-topic.ts` reads `content-queue.json`, rotates niches, returns `{ niche, slug, topic }`.
+1. **Pick topic** — run `node scripts/pick-next-topic.ts` to read
+   `content-queue.json`, rotate niches, return `{ niche, slug, topic }`.
+   This script also marks the entry `status: in-flight`.
 
 2. **Create worktree**:
    ```bash
@@ -17,13 +22,18 @@ Full article-generation pipeline. Runs all agents in sequence. Opens PR. Stops.
    cd ../blog-site-$SLUG
    ```
 
-3. **Run pipeline** — dispatch agents in order, abort on any blocked status:
-   - `keyword-researcher` → `docs/research/keywords/$NICHE/$SLUG.json`
-   - `content-writer` → `src/content/posts/$NICHE/$SLUG.mdx`
-   - `content-humanizer` → same file, score < 30
-   - `fact-checker` (if YMYL) → frontmatter `factChecked: true`
-   - `seo-optimizer` → final MDX with JSON-LD
-   - `deploy-verifier` → all 9 gates pass
+3. **Dispatch sub-agents in order** via the Task tool. Each agent is defined
+   under `.claude/agents/<name>.md`; the body of that file is the agent's
+   system contract. Abort the pipeline if any agent returns `status: blocked`.
+
+   Order:
+
+   - `keyword-researcher` → writes `docs/research/keywords/$NICHE/$SLUG.json`
+   - `content-writer` → writes `src/content/posts/$NICHE/$SLUG.mdx`
+   - `content-humanizer` → rewrites the file until AI-detection < 30%
+   - `fact-checker` → only if niche is `nurse-ai` or `ece-ai`
+   - `seo-optimizer` → adds JSON-LD, internal links, OG meta
+   - `deploy-verifier` → runs all 9 gates; must return `Overall: READY`
 
 4. **Commit + push**:
    ```bash
@@ -34,12 +44,14 @@ Full article-generation pipeline. Runs all agents in sequence. Opens PR. Stops.
 
 5. **Open PR**:
    ```bash
-   gh pr create --label auto-content --title "content: $TOPIC" --body "$(cat .claude/templates/pr-body.md)"
+   gh pr create --label auto-content \
+     --title "content: $TOPIC" \
+     --body-file .claude/templates/pr-body.md
    ```
 
 6. **Cleanup worktree**:
    ```bash
-   cd ..
+   cd "$OLDPWD"
    git worktree remove ../blog-site-$SLUG
    ```
 
@@ -48,6 +60,20 @@ Full article-generation pipeline. Runs all agents in sequence. Opens PR. Stops.
 ## Boundaries
 
 - One article per invocation. No batch.
-- Hard cost cap: $5 Claude API spend per invocation (track tokens).
-- If any agent returns `status: blocked`: write `docs/blocked/<date>-<slug>.md` with reason, no PR, exit.
+- Hard time cap: 30 minutes from start. If `deploy-verifier` is still running
+  past that, abort and write `docs/blocked/<date>-<slug>.md` with timing.
+- If any agent returns `status: blocked`: write blocked report, no PR, exit
+  non-zero.
 - No edits to existing articles. New article only.
+- No `git push --force`, no `git reset --hard`, no merge to `main`.
+
+## Failure handling
+
+If pipeline aborts at any step:
+
+1. Reset the queue entry — read `content-queue.json`, find the in-flight
+   entry, set `status` back to `pending`. Save.
+2. Remove the worktree if it exists.
+3. Write `docs/blocked/<YYYY-MM-DD>-<slug>.md` summarizing where it failed
+   and the agent's blocked receipt.
+4. Exit non-zero so the cron driver logs the failure.

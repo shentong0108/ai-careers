@@ -1,12 +1,19 @@
-name: Auto Content Pipeline
+name: Auto Content Pipeline (Cloud Backup)
 
-# Cloud automation — runs every 2 days at 09:00 UTC.
-# Generates one article via Claude API, runs full agent pipeline,
-# opens PR for human review. Never auto-merges to main.
+# Cloud automation. DISABLED by default — primary cron is local launchd
+# at ~/Library/LaunchAgents/dev.stonemegan.aicareers.plist which uses the
+# Claude Code subscription quota instead of API credits.
+#
+# This workflow is kept as a manual-dispatch backup. Triggering it WILL
+# consume Anthropic API credits via ANTHROPIC_API_KEY secret. Use only
+# when local laptop is unavailable for an extended period.
+#
+# To re-enable the schedule trigger, uncomment the `schedule:` block below
+# AND ensure ANTHROPIC_API_KEY secret has sufficient balance.
 
 on:
-  schedule:
-    - cron: '0 9 */2 * *'
+  # schedule:
+  #   - cron: '0 9 */2 * *'
   workflow_dispatch:
     inputs:
       niche:

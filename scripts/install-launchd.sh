@@ -1,0 +1,92 @@
+#!/usr/bin/env bash
+# Installs the local cron LaunchAgent for ai-careers.
+# Idempotent — safe to re-run.
+#
+# What it does:
+#   1. Renders LaunchAgent plist with absolute paths to this checkout.
+#   2. Installs to ~/Library/LaunchAgents/dev.stonemegan.aicareers.plist
+#   3. Loads it into launchd (will run at next 9am local time).
+#
+# Uninstall:
+#   launchctl unload ~/Library/LaunchAgents/dev.stonemegan.aicareers.plist
+#   rm ~/Library/LaunchAgents/dev.stonemegan.aicareers.plist
+
+set -euo pipefail
+
+PROJECT_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+PLIST_LABEL="dev.stonemegan.aicareers"
+PLIST_PATH="$HOME/Library/LaunchAgents/${PLIST_LABEL}.plist"
+SCRIPT_PATH="${PROJECT_ROOT}/scripts/local-cron.sh"
+
+chmod +x "$SCRIPT_PATH"
+
+mkdir -p "$HOME/Library/LaunchAgents"
+
+cat > "$PLIST_PATH" <<EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>${PLIST_LABEL}</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/bash</string>
+    <string>${SCRIPT_PATH}</string>
+  </array>
+
+  <key>StartCalendarInterval</key>
+  <dict>
+    <key>Hour</key>
+    <integer>9</integer>
+    <key>Minute</key>
+    <integer>0</integer>
+  </dict>
+
+  <key>WorkingDirectory</key>
+  <string>${PROJECT_ROOT}</string>
+
+  <key>StandardOutPath</key>
+  <string>${PROJECT_ROOT}/.claude/logs/launchd-stdout.log</string>
+
+  <key>StandardErrorPath</key>
+  <string>${PROJECT_ROOT}/.claude/logs/launchd-stderr.log</string>
+
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PATH</key>
+    <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+    <key>HOME</key>
+    <string>${HOME}</string>
+  </dict>
+
+  <key>RunAtLoad</key>
+  <false/>
+
+  <key>ProcessType</key>
+  <string>Background</string>
+</dict>
+</plist>
+EOF
+
+echo "wrote $PLIST_PATH"
+
+# Unload if already loaded (idempotent reinstall)
+launchctl unload "$PLIST_PATH" 2>/dev/null || true
+
+launchctl load "$PLIST_PATH"
+echo "loaded $PLIST_LABEL"
+
+echo ""
+echo "Next scheduled run: today or tomorrow at 09:00 local time."
+echo ""
+echo "Manual test (runs now, ignores throttle):"
+echo "  rm -f ${PROJECT_ROOT}/.claude/cache/local-cron-last-run"
+echo "  launchctl start ${PLIST_LABEL}"
+echo ""
+echo "Watch logs:"
+echo "  tail -f ${PROJECT_ROOT}/.claude/logs/cron-*.log"
+echo ""
+echo "Unload (stop the cron):"
+echo "  launchctl unload ${PLIST_PATH}"
