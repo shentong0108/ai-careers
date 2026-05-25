@@ -45,6 +45,14 @@ const fullOg = ogImage.startsWith('http') ? ogImage : new URL(ogImage, Astro.sit
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
+    <!-- Privacy-friendly analytics by Plausible -->
+    <script is:inline async src="https://plausible.io/js/pa-u5eozdjXuao14-DCB_90O.js"></script>
+    <script is:inline>
+      window.plausible = window.plausible || function () { (plausible.q = plausible.q || []).push(arguments) };
+      plausible.init = plausible.init || function (i) { plausible.o = i || {} };
+      plausible.init();
+    </script>
+
     <style is:global>
       :root {
         --max-w: 720px;
