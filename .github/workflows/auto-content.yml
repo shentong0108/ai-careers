@@ -1,0 +1,137 @@
+name: Auto Content Pipeline
+
+# Cloud automation — runs every 2 days at 09:00 UTC.
+# Generates one article via Claude API, runs full agent pipeline,
+# opens PR for human review. Never auto-merges to main.
+
+on:
+  schedule:
+    - cron: '0 9 */2 * *'
+  workflow_dispatch:
+    inputs:
+      niche:
+        description: 'Niche'
+        required: false
+        type: choice
+        options: [auto, nurse-ai, ece-ai, dev-diary]
+        default: auto
+      topic_override:
+        description: 'Topic (optional — overrides queue)'
+        required: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      ZEROGPT_API_KEY: ${{ secrets.ZEROGPT_API_KEY }}
+      SITE_URL: https://stonemegan.dev
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'pnpm'
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Pick next topic from queue
+        id: topic
+        run: |
+          if [[ -n "${{ inputs.topic_override }}" ]]; then
+            echo "topic=${{ inputs.topic_override }}" >> $GITHUB_OUTPUT
+            echo "niche=${{ inputs.niche }}" >> $GITHUB_OUTPUT
+          else
+            node scripts/pick-next-topic.ts > /tmp/topic.json
+            echo "topic=$(jq -r .topic /tmp/topic.json)" >> $GITHUB_OUTPUT
+            echo "niche=$(jq -r .niche /tmp/topic.json)" >> $GITHUB_OUTPUT
+            echo "slug=$(jq -r .slug /tmp/topic.json)" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Run keyword research
+        run: node scripts/run-agent.ts keyword-researcher \
+          --niche="${{ steps.topic.outputs.niche }}" \
+          --topic="${{ steps.topic.outputs.topic }}"
+
+      - name: Draft article (content-writer)
+        run: node scripts/run-agent.ts content-writer \
+          --niche="${{ steps.topic.outputs.niche }}" \
+          --slug="${{ steps.topic.outputs.slug }}"
+
+      - name: Humanize (content-humanizer)
+        run: node scripts/run-agent.ts content-humanizer \
+          --file="src/content/posts/${{ steps.topic.outputs.niche }}/${{ steps.topic.outputs.slug }}.mdx"
+
+      - name: Fact-check (YMYL only)
+        if: steps.topic.outputs.niche != 'dev-diary'
+        run: node scripts/run-agent.ts fact-checker \
+          --file="src/content/posts/${{ steps.topic.outputs.niche }}/${{ steps.topic.outputs.slug }}.mdx"
+
+      - name: SEO optimize
+        run: node scripts/run-agent.ts seo-optimizer \
+          --file="src/content/posts/${{ steps.topic.outputs.niche }}/${{ steps.topic.outputs.slug }}.mdx"
+
+      - name: Deploy verifier (build + tests + lighthouse)
+        run: node scripts/run-agent.ts deploy-verifier \
+          --branch="auto/${{ steps.topic.outputs.slug }}" \
+          --articles="src/content/posts/${{ steps.topic.outputs.niche }}/${{ steps.topic.outputs.slug }}.mdx"
+
+      - name: Open PR for human review
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: auto/${{ steps.topic.outputs.slug }}
+          title: 'content: ${{ steps.topic.outputs.topic }}'
+          body: |
+            Auto-generated draft. Human review required before merge.
+
+            Pipeline output: see workflow logs.
+
+            ### Pre-merge checklist
+            - [ ] Read article — does it sound like Stone/Megan?
+            - [ ] Verify all citations are real
+            - [ ] Add hero image to `public/images/`
+            - [ ] AI-detection score < 30% (check frontmatter)
+            - [ ] Fact-checker passed (YMYL only)
+
+            Closes nothing — manual merge after review.
+          labels: auto-content, needs-review
+
+  analytics-weekly:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    needs: []
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with: { version: 9 }
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: 'pnpm' }
+      - run: pnpm install --frozen-lockfile
+      - name: Run analytics agent
+        env:
+          PLAUSIBLE_API_KEY: ${{ secrets.PLAUSIBLE_API_KEY }}
+          GSC_SERVICE_ACCOUNT: ${{ secrets.GSC_SERVICE_ACCOUNT }}
+          CF_ANALYTICS_TOKEN: ${{ secrets.CF_ANALYTICS_TOKEN }}
+        run: node scripts/run-agent.ts analytics-reader --period 7d
+      - name: Commit dashboard report
+        run: |
+          git config user.email "actions@github.com"
+          git config user.name "github-actions"
+          git add docs/dashboard/
+          git diff --staged --quiet || git commit -m "chore: weekly analytics report"
+          git push

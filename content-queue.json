@@ -1,0 +1,50 @@
+[
+  {
+    "niche": "nurse-ai",
+    "topic": "Using Claude for nursing shift handoff notes",
+    "anecdote": "Last week I tried having Claude summarise my 12-hour ED shift handoff for the next RN. Saved 14 minutes. Almost missed the bit about the patient with the latex allergy though.",
+    "status": "pending"
+  },
+  {
+    "niche": "nurse-ai",
+    "topic": "AI triage support tools — what actually works in 2026",
+    "status": "pending"
+  },
+  {
+    "niche": "nurse-ai",
+    "topic": "Writing better patient education handouts with Claude (with my actual prompts)",
+    "status": "pending"
+  },
+  {
+    "niche": "ece-ai",
+    "topic": "Using Claude to draft parent communication for a 3-year-old room",
+    "anecdote": "Megan tried using Claude to draft the weekly parent newsletter. First version was too corporate. Took 4 prompt iterations to sound like her.",
+    "status": "pending"
+  },
+  {
+    "niche": "ece-ai",
+    "topic": "AI lesson planning for under-5s — the line between helpful and lazy",
+    "status": "pending"
+  },
+  {
+    "niche": "ece-ai",
+    "topic": "Documenting child learning observations with AI assist (without losing your voice)",
+    "status": "pending"
+  },
+  {
+    "niche": "dev-diary",
+    "topic": "Building Aura app week 1 — what Claude Code got right and what it didn't",
+    "anecdote": "First commit at 11pm Sunday. By Tuesday Claude Code had refactored my auth flow three times. Two were wrong.",
+    "status": "pending"
+  },
+  {
+    "niche": "dev-diary",
+    "topic": "When Claude Code's plan mode saved me from a bad refactor",
+    "status": "pending"
+  },
+  {
+    "niche": "dev-diary",
+    "topic": "Why I killed my first nurse-tooling project after 6 weeks",
+    "status": "pending"
+  }
+]

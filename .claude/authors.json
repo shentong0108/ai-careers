@@ -1,0 +1,28 @@
+{
+  "stone": {
+    "name": "Stone",
+    "jobTitle": "Registered Nurse + Indie Dev",
+    "credential": "RN (registration number — fill in)",
+    "bio": "Nurse by day, dev by the rest of the day. Building tools that don't suck for healthcare workers.",
+    "url": "https://stonemegan.dev/authors/stone",
+    "sameAs": [
+      "https://github.com/<your-github>",
+      "https://x.com/<your-x>",
+      "https://linkedin.com/in/<your-linkedin>"
+    ],
+    "image": "/authors/stone.jpg",
+    "categories": ["dev-diary", "nurse-ai"]
+  },
+  "megan": {
+    "name": "Megan",
+    "jobTitle": "Early Childhood Teacher (ECT)",
+    "credential": "ECT Cert (qualification — fill in)",
+    "bio": "ECT working with under-5s. Writing about what AI actually does and doesn't do for early years educators.",
+    "url": "https://stonemegan.dev/authors/megan",
+    "sameAs": [
+      "https://linkedin.com/in/<megan-linkedin>"
+    ],
+    "image": "/authors/megan.jpg",
+    "categories": ["ece-ai", "nurse-ai"]
+  }
+}
