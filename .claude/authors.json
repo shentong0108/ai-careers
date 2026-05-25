@@ -2,8 +2,8 @@
   "stone": {
     "name": "Stone",
     "jobTitle": "Registered Nurse",
-    "credential": "Registered Nurse · 5+ years primary care",
-    "bio": "Working RN writing about AI tools I actually use on shift. No vendor pitches. Posts include the failures.",
+    "credential": "AHPRA-registered · 5+ years primary care, Sydney",
+    "bio": "Sydney-based RN, AHPRA-registered, working primary care. Writing about AI tools I actually use day to day — including the ones I dropped after a week.",
     "url": "https://stonemegan.dev/about",
     "sameAs": [],
     "image": "/authors/stone.svg",
@@ -12,8 +12,8 @@
   "megan": {
     "name": "Megan",
     "jobTitle": "Early Childhood Teacher",
-    "credential": "ECT · pre-school room",
-    "bio": "Working ECT writing about AI in the early years. Real classroom examples, real iteration cycles.",
+    "credential": "ACECQA-registered · 5+ years across baby, toddler & pre-school rooms, Sydney",
+    "bio": "Sydney-based ECT, ACECQA-registered, working across baby, toddler and pre-school rooms. Real classroom AI experiments, real reasons most of them fail.",
     "url": "https://stonemegan.dev/about",
     "sameAs": [],
     "image": "/authors/megan.svg",
