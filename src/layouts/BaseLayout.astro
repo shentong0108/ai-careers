@@ -137,8 +137,13 @@ const fullOg = ogImage.startsWith('http') ? ogImage : new URL(ogImage, Astro.sit
 
       .site-header {
         background: #ffffff;
-        padding: 1.1rem 1rem;
+        padding: 0.85rem 1rem;
         border-bottom: 1px solid var(--c-border);
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        backdrop-filter: saturate(180%) blur(8px);
+        background: rgba(255, 255, 255, 0.92);
       }
       .site-header .inner {
         max-width: var(--max-w);
@@ -152,49 +157,132 @@ const fullOg = ogImage.startsWith('http') ? ogImage : new URL(ogImage, Astro.sit
       .site-header .logo {
         display: inline-flex;
         align-items: center;
-        gap: 0.6rem;
+        gap: 0.7rem;
         font-family: var(--font-serif);
-        font-weight: 600;
-        font-size: 1.35rem;
-        color: var(--c-teal);
         text-decoration: none;
-        letter-spacing: -0.5px;
+        line-height: 1.1;
       }
       .site-header .logo-mark {
-        width: 28px;
-        height: 28px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, var(--c-teal) 0%, var(--c-green) 100%);
-        display: inline-block;
+        width: 38px;
+        height: 38px;
+        border-radius: 11px;
+        background: linear-gradient(135deg, var(--c-teal) 0%, var(--c-teal-mid) 55%, var(--c-green) 100%);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: #ffffff;
+        font-family: var(--font-serif);
+        font-weight: 700;
+        font-size: 1.05rem;
+        letter-spacing: -1px;
+        flex-shrink: 0;
+        box-shadow: 0 2px 6px rgba(29, 79, 90, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.18);
       }
+      .site-header .logo-text {
+        display: inline-flex;
+        flex-direction: column;
+        gap: 0.1rem;
+      }
+      .site-header .logo-main {
+        font-weight: 700;
+        font-size: 1.32rem;
+        color: var(--c-teal);
+        letter-spacing: -0.5px;
+      }
+      .site-header .logo-tld {
+        font-weight: 400;
+        color: var(--c-teal-mid);
+      }
+      .site-header .logo-tag {
+        font-family: var(--font-sans);
+        font-size: 0.66rem;
+        font-weight: 600;
+        color: var(--c-muted);
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+      }
+
       .site-header nav {
         display: flex;
-        gap: 0.35rem;
+        gap: 0.15rem;
         flex-wrap: wrap;
         align-items: center;
       }
       .site-header nav a.nav-link {
-        font-size: 0.95rem;
+        position: relative;
+        font-family: var(--font-sans);
+        font-size: 0.93rem;
         font-weight: 600;
         color: var(--c-text);
-        padding: 0.55rem 0.95rem;
+        padding: 0.55rem 0.9rem;
         border-radius: 6px;
-        transition: background 0.15s ease, color 0.15s ease;
+        transition: color 0.18s ease;
       }
-      .site-header nav a.nav-link:hover { background: var(--c-bg-soft); color: var(--c-teal); }
+      .site-header nav a.nav-link::after {
+        content: '';
+        position: absolute;
+        left: 0.9rem;
+        right: 0.9rem;
+        bottom: 0.32rem;
+        height: 2px;
+        background: var(--c-teal-mid);
+        transform: scaleX(0);
+        transform-origin: left center;
+        transition: transform 0.22s cubic-bezier(0.65, 0, 0.35, 1);
+      }
+      .site-header nav a.nav-link:hover { color: var(--c-teal); }
+      .site-header nav a.nav-link:hover::after { transform: scaleX(1); }
+      .site-header nav a.nav-link.active { color: var(--c-teal); }
+      .site-header nav a.nav-link.active::after { transform: scaleX(1); }
+
+      .site-header .nav-divider {
+        width: 1px;
+        height: 22px;
+        background: var(--c-border);
+        margin: 0 0.6rem;
+      }
       .site-header .cta {
-        font-size: 0.92rem;
+        font-family: var(--font-sans);
+        font-size: 0.9rem;
         font-weight: 600;
-        padding: 0.7rem 1.3rem;
+        padding: 0.6rem 1.2rem;
         border-radius: 999px;
-        margin-left: 0.4rem;
-        transition: filter 0.15s ease, transform 0.15s ease;
+        margin-left: 0.2rem;
+        transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
         white-space: nowrap;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
       }
-      .site-header .cta-primary { background: var(--c-green); color: #ffffff; }
-      .site-header .cta-primary:hover { filter: brightness(1.06); transform: translateY(-1px); color: #ffffff; }
-      .site-header .cta-secondary { background: var(--c-orange); color: #ffffff; }
-      .site-header .cta-secondary:hover { filter: brightness(1.06); transform: translateY(-1px); color: #ffffff; }
+      .site-header .cta-primary {
+        background: var(--c-teal);
+        color: #ffffff;
+        box-shadow: 0 1px 2px rgba(29, 79, 90, 0.2), 0 4px 12px rgba(29, 79, 90, 0.18);
+      }
+      .site-header .cta-primary:hover {
+        background: var(--c-teal-bar);
+        color: #ffffff;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 4px rgba(29, 79, 90, 0.25), 0 8px 18px rgba(29, 79, 90, 0.22);
+      }
+      .site-header .cta-secondary {
+        background: transparent;
+        color: var(--c-teal);
+        border: 1.5px solid var(--c-border);
+      }
+      .site-header .cta-secondary:hover {
+        background: var(--c-bg-soft);
+        color: var(--c-teal);
+        border-color: var(--c-teal-mid);
+      }
+
+      @media (max-width: 720px) {
+        .site-header .logo-tag { display: none; }
+        .site-header nav { gap: 0; }
+        .site-header nav a.nav-link { padding: 0.5rem 0.65rem; font-size: 0.88rem; }
+        .site-header .nav-divider { display: none; }
+        .site-header .cta { padding: 0.5rem 1rem; font-size: 0.85rem; }
+      }
 
       main { display: block; }
 
@@ -530,16 +618,23 @@ const fullOg = ogImage.startsWith('http') ? ogImage : new URL(ogImage, Astro.sit
     <div class="top-strip"></div>
     <header class="site-header">
       <div class="inner">
-        <a class="logo" href="/">
-          <span class="logo-mark" aria-hidden="true"></span>
-          stonemegan.dev
+        <a class="logo" href="/" aria-label="stonemegan.dev home">
+          <span class="logo-mark" aria-hidden="true">sm</span>
+          <span class="logo-text">
+            <span><span class="logo-main">stonemegan</span><span class="logo-tld">.dev</span></span>
+            <span class="logo-tag">Nurse · ECE · Indie Dev</span>
+          </span>
         </a>
         <nav>
           <a class="nav-link" href="/nurse-ai">Nurse + AI</a>
           <a class="nav-link" href="/ece-ai">ECE + AI</a>
           <a class="nav-link" href="/dev-diary">Dev Diary</a>
           <a class="nav-link" href="/about">About</a>
-          <a class="cta cta-primary" href="/#latest">Read latest</a>
+          <span class="nav-divider" aria-hidden="true"></span>
+          <a class="cta cta-primary" href="/#latest">
+            Read latest
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
         </nav>
       </div>
     </header>
