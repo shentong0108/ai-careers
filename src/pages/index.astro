@@ -7,46 +7,72 @@ const posts = (await getCollection('posts', ({ data }: CollectionEntry<'posts'>)
     b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf()
   )
   .slice(0, 10);
+
+const NICHE_LABEL: Record<string, string> = {
+  'nurse-ai': 'Nurse + AI',
+  'ece-ai': 'ECE + AI',
+  'dev-diary': 'Dev Diary',
+};
 ---
 
 <BaseLayout
   title="stonemegan.dev — nurse + ECE + AI, no hype"
-  description="Real stories from a nurse and an early childhood teacher using AI in their jobs. Plus dev diary of building Aura app. No buzzwords. Some failures."
+  description="Real stories from a Sydney-based nurse and an early-childhood teacher using AI in their jobs. Plus an indie dev diary. No buzzwords. Failures included."
 >
-  <h1>What AI actually does in our jobs</h1>
-  <p>
-    Stone (RN) and Megan (ECT) write about the AI tools we actually use day to day —
-    what saves time, what wastes it, what we abandoned. Plus a dev diary of building
-    Aura app with Claude Code.
-  </p>
+  <section class="hero">
+    <div class="niche-dots" aria-hidden="true">
+      <span class="dot" data-niche="nurse-ai">N</span>
+      <span class="dot" data-niche="ece-ai">E</span>
+      <span class="dot" data-niche="dev-diary">D</span>
+    </div>
+    <h1>What AI actually does in our jobs.</h1>
+    <p class="divider">· · · · · · ·</p>
+    <p class="sub">
+      A Sydney-based RN and an early-childhood teacher write about the AI tools we actually use
+      day to day — including the ones we dropped.
+    </p>
+    <a class="cta" href="#latest">Browse latest →</a>
+  </section>
 
-  <h2>Latest</h2>
+  <h2 class="section-title" id="latest">Latest</h2>
+
   {posts.length === 0 ? (
-    <p style="color: var(--c-muted);">First articles coming soon.</p>
+    <p style="color: var(--c-muted); text-align: center; padding: 2rem 0;">
+      First articles coming soon.
+    </p>
   ) : (
-    <ul style="list-style: none; padding: 0;">
+    <div>
       {posts.map((p: CollectionEntry<'posts'>) => (
-        <li style="border-bottom: 1px solid var(--c-border); padding: 1rem 0;">
-          <p style="margin: 0 0 0.25rem; font-size: 0.875rem; color: var(--c-muted);">
-            <a href={`/${p.data.category}`}>{p.data.category}</a>
-            {' · '}
-            <time datetime={p.data.publishedAt.toISOString()}>
-              {p.data.publishedAt.toISOString().slice(0, 10)}
-            </time>
+        <a class="post-card" href={`/blog/${p.data.slug}`}>
+          <span class="niche-tag" data-niche={p.data.category}>{NICHE_LABEL[p.data.category]}</span>
+          <h3>{p.data.title}</h3>
+          <p class="description">{p.data.description}</p>
+          <p class="meta">
+            {p.data.publishedAt.toISOString().slice(0, 10)}
+            <span style="margin: 0 0.4rem; opacity: 0.5">·</span>
+            by {p.data.author === 'stone' ? 'Stone' : 'Megan'}
           </p>
-          <h3 style="margin: 0;">
-            <a href={`/blog/${p.data.slug}`}>{p.data.title}</a>
-          </h3>
-          <p style="margin: 0.25rem 0 0; color: var(--c-muted);">{p.data.description}</p>
-        </li>
+        </a>
       ))}
-    </ul>
+    </div>
   )}
 
-  <h2>By topic</h2>
-  <ul>
-    <li><a href="/nurse-ai">Nurse + AI</a> — AI tools for nursing practice, by an RN.</li>
-    <li><a href="/ece-ai">ECE + AI</a> — AI for early childhood educators, by an ECT.</li>
-    <li><a href="/dev-diary">Dev Diary</a> — building Aura app with Claude Code, including the failures.</li>
-  </ul>
+  <h2 class="section-title">By topic</h2>
+  <div>
+    <a class="post-card" href="/nurse-ai">
+      <span class="niche-tag" data-niche="nurse-ai">Nurse + AI</span>
+      <h3>AI tools for nursing practice</h3>
+      <p class="description">Written by an AHPRA-registered RN. Real shifts. What helps, what wastes time.</p>
+    </a>
+    <a class="post-card" href="/ece-ai">
+      <span class="niche-tag" data-niche="ece-ai">ECE + AI</span>
+      <h3>AI for early-childhood educators</h3>
+      <p class="description">Written by a working ECT in Sydney. Lesson plans, parent comms, observations.</p>
+    </a>
+    <a class="post-card" href="/dev-diary">
+      <span class="niche-tag" data-niche="dev-diary">Dev Diary</span>
+      <h3>Indie dev diary with Claude Code</h3>
+      <p class="description">Building public, including the projects I killed and why.</p>
+    </a>
+  </div>
 </BaseLayout>

@@ -25,9 +25,11 @@ if (!a) throw new Error(`Unknown author key: ${authorKey}`);
 ---
 
 <div class="byline">
-  <img src={a.image} alt={a.name} width="48" height="48" loading="lazy" />
+  <img src={a.image} alt={a.name} width="52" height="52" loading="lazy" />
   <div>
-    <p><strong>{a.name}</strong> · {a.jobTitle}</p>
-    <p><small>{a.credential}{publishedAt ? ` · ${publishedAt.toISOString().slice(0, 10)}` : ''}</small></p>
+    <p><span class="author-name">{a.name}</span> · {a.jobTitle}</p>
+    <p class="author-meta">
+      {a.credential}{publishedAt ? ` · ${publishedAt.toISOString().slice(0, 10)}` : ''}
+    </p>
   </div>
 </div>

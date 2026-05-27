@@ -25,6 +25,7 @@ const fullOg = ogImage.startsWith('http') ? ogImage : new URL(ogImage, Astro.sit
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#faf7f0" />
 
     <title>{title}</title>
     <meta name="description" content={description} />
@@ -45,6 +46,13 @@ const fullOg = ogImage.startsWith('http') ? ogImage : new URL(ogImage, Astro.sit
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
     <!-- Privacy-friendly analytics by Plausible -->
     <script is:inline async src="https://plausible.io/js/pa-u5eozdjXuao14-DCB_90O.js"></script>
     <script is:inline>
@@ -55,56 +63,326 @@ const fullOg = ogImage.startsWith('http') ? ogImage : new URL(ogImage, Astro.sit
 
     <style is:global>
       :root {
-        --max-w: 720px;
-        --c-text: #1a1a1a;
-        --c-muted: #6b6b6b;
-        --c-link: #0a66c2;
-        --c-border: #e5e5e5;
-        --c-bg: #fafafa;
-        --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        --font-serif: 'Charter', 'Georgia', serif;
+        --max-w-narrow: 720px;
+        --max-w: 760px;
+        --max-w-wide: 1080px;
+
+        /* Soft cream palette */
+        --c-bg: #faf7f0;
+        --c-bg-soft: #f4ede0;
+        --c-card: #ffffff;
+        --c-border: #ebe5dd;
+        --c-border-soft: #f3ede2;
+        --c-text: #2a2520;
+        --c-text-soft: #54483f;
+        --c-muted: #8a7e76;
+
+        /* Niche accents */
+        --c-coral: #d97560;
+        --c-coral-bg: #fde8e2;
+        --c-coral-tag: #b85a47;
+        --c-mint: #5d9979;
+        --c-mint-bg: #e2ede5;
+        --c-mint-tag: #3f7558;
+        --c-butter: #c19052;
+        --c-butter-bg: #faf0dd;
+        --c-butter-tag: #946730;
+
+        --c-link: #4a6fa5;
+        --c-link-hover: #2c5285;
+
+        --font-serif: 'Newsreader', 'Charter', 'Iowan Old Style', 'Georgia', serif;
+        --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+        --radius: 18px;
+        --radius-sm: 10px;
+        --shadow: 0 1px 2px rgba(45, 38, 32, 0.04), 0 8px 24px rgba(45, 38, 32, 0.06);
+        --shadow-hover: 0 2px 4px rgba(45, 38, 32, 0.05), 0 16px 36px rgba(45, 38, 32, 0.09);
       }
-      html { font-family: var(--font-sans); color: var(--c-text); background: white; }
-      body { margin: 0; line-height: 1.6; }
-      main { max-width: var(--max-w); margin: 2rem auto; padding: 0 1rem; }
-      a { color: var(--c-link); text-decoration: none; }
-      a:hover { text-decoration: underline; }
-      header, footer { background: var(--c-bg); border-bottom: 1px solid var(--c-border); padding: 1rem; }
-      footer { border-bottom: none; border-top: 1px solid var(--c-border); margin-top: 4rem; font-size: 0.875rem; color: var(--c-muted); text-align: center; }
-      header nav { max-width: var(--max-w); margin: 0 auto; display: flex; gap: 1rem; align-items: center; }
-      header nav a:first-child { font-weight: 700; }
-      article { font-family: var(--font-serif); font-size: 1.125rem; }
-      article h1 { font-family: var(--font-sans); }
-      article h2, article h3 { font-family: var(--font-sans); margin-top: 2.5rem; }
-      img { max-width: 100%; height: auto; }
-      pre { background: #0d1117; color: #e6edf3; padding: 1rem; overflow-x: auto; border-radius: 6px; font-size: 0.875rem; }
-      code { background: var(--c-bg); padding: 0.1em 0.3em; border-radius: 3px; font-size: 0.9em; }
-      pre code { background: transparent; padding: 0; }
-      .byline { display: flex; align-items: center; gap: 0.75rem; margin: 1.5rem 0; padding: 0.75rem; background: var(--c-bg); border-radius: 6px; }
-      .byline img { border-radius: 50%; }
-      .byline p { margin: 0; line-height: 1.3; }
+
+      * { box-sizing: border-box; }
+      html { font-family: var(--font-serif); color: var(--c-text); background: var(--c-bg); -webkit-font-smoothing: antialiased; }
+      body { margin: 0; line-height: 1.7; font-size: 18px; }
+
+      a { color: var(--c-link); text-decoration: none; transition: color 0.15s ease; }
+      a:hover { color: var(--c-link-hover); text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+
+      .site-header {
+        background: transparent;
+        padding: 1.5rem 1rem;
+      }
+      .site-header .inner {
+        max-width: var(--max-w-wide);
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1.5rem;
+      }
+      .site-header .logo {
+        font-family: var(--font-serif);
+        font-weight: 700;
+        font-size: 1.4rem;
+        color: var(--c-text);
+        text-decoration: none;
+        letter-spacing: -0.5px;
+      }
+      .site-header nav {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+      }
+      .site-header nav a {
+        font-family: var(--font-sans);
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: var(--c-text-soft);
+        padding: 0.5rem 0.9rem;
+        border-radius: 999px;
+        transition: background 0.15s ease, color 0.15s ease;
+      }
+      .site-header nav a:hover { background: var(--c-bg-soft); color: var(--c-text); text-decoration: none; }
+
+      main {
+        max-width: var(--max-w);
+        margin: 1rem auto 4rem;
+        padding: 0 1.25rem;
+      }
+
+      h1, h2, h3 { font-family: var(--font-serif); letter-spacing: -0.5px; line-height: 1.25; color: var(--c-text); }
+      h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 600; margin: 2rem 0 1rem; }
+      h2 { font-size: clamp(1.5rem, 3.5vw, 1.9rem); font-weight: 600; margin: 3rem 0 1rem; }
+      h3 { font-size: 1.3rem; font-weight: 600; margin: 2rem 0 0.75rem; }
+      p { margin: 0 0 1.1em; }
+
+      img { max-width: 100%; height: auto; border-radius: var(--radius-sm); }
+
+      pre {
+        background: #fcf6e8;
+        color: #3a2e2e;
+        padding: 1.1rem 1.25rem;
+        overflow-x: auto;
+        border-radius: var(--radius-sm);
+        font-size: 0.9rem;
+        font-family: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+        border: 1px solid var(--c-border);
+      }
+      code {
+        background: var(--c-bg-soft);
+        padding: 0.15em 0.4em;
+        border-radius: 4px;
+        font-size: 0.88em;
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        color: var(--c-text-soft);
+      }
+      pre code { background: transparent; padding: 0; color: inherit; }
+
+      blockquote {
+        border-left: 3px solid var(--c-coral);
+        padding: 0.25rem 0 0.25rem 1.25rem;
+        margin: 1.5rem 0;
+        color: var(--c-text-soft);
+        font-style: italic;
+      }
+
+      /* Site footer */
+      .site-footer {
+        margin-top: 6rem;
+        padding: 2.5rem 1rem 3rem;
+        border-top: 1px solid var(--c-border-soft);
+        text-align: center;
+        font-family: var(--font-sans);
+        font-size: 0.875rem;
+        color: var(--c-muted);
+      }
+      .site-footer a { color: var(--c-muted); text-decoration: none; }
+      .site-footer a:hover { color: var(--c-text-soft); text-decoration: underline; }
+      .site-footer .dot { margin: 0 0.6rem; opacity: 0.5; }
+
+      /* Niche tags + cards */
+      .niche-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-family: var(--font-sans);
+        font-size: 0.78rem;
+        font-weight: 600;
+        padding: 0.35rem 0.7rem;
+        border-radius: 999px;
+        letter-spacing: 0.3px;
+        text-transform: uppercase;
+      }
+      .niche-tag[data-niche='nurse-ai'] { background: var(--c-coral-bg); color: var(--c-coral-tag); }
+      .niche-tag[data-niche='ece-ai'] { background: var(--c-mint-bg); color: var(--c-mint-tag); }
+      .niche-tag[data-niche='dev-diary'] { background: var(--c-butter-bg); color: var(--c-butter-tag); }
+
+      .post-card {
+        background: var(--c-card);
+        border: 1px solid var(--c-border-soft);
+        border-radius: var(--radius);
+        padding: 1.6rem 1.8rem;
+        margin-bottom: 1.25rem;
+        box-shadow: var(--shadow);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        display: block;
+        color: inherit;
+      }
+      .post-card:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-hover);
+        text-decoration: none;
+      }
+      .post-card h3 { margin: 0.6rem 0 0.4rem; font-size: 1.45rem; line-height: 1.3; }
+      .post-card h3 a { color: var(--c-text); }
+      .post-card h3 a:hover { color: var(--c-link-hover); text-decoration: none; }
+      .post-card .description { color: var(--c-text-soft); margin: 0 0 0.75rem; }
+      .post-card .meta {
+        font-family: var(--font-sans);
+        font-size: 0.85rem;
+        color: var(--c-muted);
+        margin: 0;
+      }
+
+      /* Author byline */
+      .byline {
+        display: flex;
+        align-items: center;
+        gap: 0.85rem;
+        margin: 1.5rem 0 2rem;
+        padding: 0.9rem 1.1rem;
+        background: var(--c-card);
+        border: 1px solid var(--c-border-soft);
+        border-radius: var(--radius);
+      }
+      .byline img { width: 52px; height: 52px; border-radius: 50%; flex-shrink: 0; }
+      .byline p { margin: 0; line-height: 1.4; font-family: var(--font-sans); font-size: 0.95rem; }
+      .byline .author-name { color: var(--c-text); font-weight: 600; }
+      .byline .author-meta { color: var(--c-muted); font-size: 0.82rem; }
+
+      /* Article reading style */
+      article.post {
+        font-size: 19px;
+        line-height: 1.75;
+      }
+      article.post h1 { margin-top: 0.5rem; font-size: clamp(2rem, 5.5vw, 2.7rem); }
+      article.post .lede {
+        font-size: 1.15rem;
+        color: var(--c-text-soft);
+        font-style: italic;
+        margin: 0.5rem 0 1.5rem;
+      }
+      article.post img {
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        margin: 2rem 0;
+      }
+      article.post hr {
+        border: none;
+        border-top: 1px solid var(--c-border);
+        margin: 2.5rem auto;
+        width: 30%;
+      }
+      article.post ul, article.post ol { padding-left: 1.5rem; }
+      article.post li { margin-bottom: 0.4rem; }
+
+      /* Hero (homepage) */
+      .hero {
+        text-align: center;
+        padding: 2.5rem 1rem 2rem;
+        margin-bottom: 2rem;
+      }
+      .hero .niche-dots {
+        display: flex;
+        gap: 0.6rem;
+        justify-content: center;
+        margin-bottom: 1.8rem;
+      }
+      .hero .dot {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-serif);
+        font-weight: 600;
+        font-size: 1.4rem;
+        color: white;
+        box-shadow: var(--shadow);
+      }
+      .hero .dot[data-niche='nurse-ai'] { background: var(--c-coral); }
+      .hero .dot[data-niche='ece-ai'] { background: var(--c-mint); }
+      .hero .dot[data-niche='dev-diary'] { background: var(--c-butter); }
+      .hero h1 {
+        font-size: clamp(2.2rem, 6vw, 3.6rem);
+        font-weight: 600;
+        line-height: 1.15;
+        margin: 0 auto 0.5rem;
+        max-width: 14ch;
+        letter-spacing: -1px;
+      }
+      .hero .divider {
+        color: var(--c-muted);
+        letter-spacing: 6px;
+        font-size: 0.9rem;
+        margin: 1.5rem 0;
+      }
+      .hero .sub {
+        font-size: 1.15rem;
+        color: var(--c-text-soft);
+        max-width: 38ch;
+        margin: 0.75rem auto 2rem;
+      }
+      .hero .cta {
+        display: inline-block;
+        font-family: var(--font-sans);
+        font-weight: 500;
+        font-size: 1rem;
+        padding: 0.85rem 1.8rem;
+        background: var(--c-text);
+        color: var(--c-bg);
+        border-radius: 999px;
+        transition: background 0.15s ease, transform 0.15s ease;
+      }
+      .hero .cta:hover { background: var(--c-text-soft); transform: translateY(-1px); text-decoration: none; color: var(--c-bg); }
+
+      /* Category section header */
+      .section-title {
+        font-family: var(--font-sans);
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: var(--c-muted);
+        font-weight: 600;
+        margin: 2.5rem 0 1.25rem;
+      }
     </style>
   </head>
   <body>
-    <header>
-      <nav>
-        <a href="/">stonemegan.dev</a>
-        <a href="/nurse-ai">Nurse + AI</a>
-        <a href="/ece-ai">ECE + AI</a>
-        <a href="/dev-diary">Dev Diary</a>
-        <span style="flex:1"></span>
-        <a href="/about">About</a>
-      </nav>
+    <header class="site-header">
+      <div class="inner">
+        <a class="logo" href="/">stonemegan</a>
+        <nav>
+          <a href="/nurse-ai">Nurse + AI</a>
+          <a href="/ece-ai">ECE + AI</a>
+          <a href="/dev-diary">Dev Diary</a>
+          <a href="/about">About</a>
+        </nav>
+      </div>
     </header>
     <main>
       <slot />
     </main>
-    <footer>
+    <footer class="site-footer">
       <p>
-        © {new Date().getFullYear()} stonemegan.dev ·
-        <a href="/about">About</a> ·
-        <a href="/privacy">Privacy</a> ·
-        <a href="/contact">Contact</a> ·
+        © {new Date().getFullYear()} stonemegan.dev
+        <span class="dot">·</span>
+        <a href="/about">About</a>
+        <span class="dot">·</span>
+        <a href="/privacy">Privacy</a>
+        <span class="dot">·</span>
+        <a href="/contact">Contact</a>
+        <span class="dot">·</span>
         <a href="/disclaimer">Disclaimer</a>
       </p>
     </footer>

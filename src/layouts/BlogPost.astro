@@ -19,6 +19,12 @@ export interface Props {
   entry: CollectionEntry<'posts'>;
 }
 
+const NICHE_LABEL: Record<string, string> = {
+  'nurse-ai': 'Nurse + AI',
+  'ece-ai': 'ECE + AI',
+  'dev-diary': 'Dev Diary',
+};
+
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 const fm = entry.data;
@@ -27,7 +33,7 @@ if (!author) throw new Error(`Unknown author: ${fm.author}`);
 
 const breadcrumb = [
   { name: 'Home', url: new URL('/', Astro.site).toString() },
-  { name: fm.category, url: new URL(`/${fm.category}`, Astro.site).toString() },
+  { name: NICHE_LABEL[fm.category] ?? fm.category, url: new URL(`/${fm.category}`, Astro.site).toString() },
   { name: fm.title, url: fm.canonical },
 ];
 ---
@@ -39,17 +45,19 @@ const breadcrumb = [
   ogImage={fm.ogImage ?? fm.heroImage}
   type="article"
 >
-  <article>
-    <p style="color: var(--c-muted); font-size: 0.875rem;">
-      <a href={`/${fm.category}`}>{fm.category}</a>
+  <article class="post">
+    <p style="margin: 0 0 1rem;">
+      <a class="niche-tag" data-niche={fm.category} href={`/${fm.category}`}>
+        {NICHE_LABEL[fm.category]}
+      </a>
     </p>
     <h1>{fm.title}</h1>
-    <p style="font-size: 1rem; color: var(--c-muted);">{fm.description}</p>
+    <p class="lede">{fm.description}</p>
     <AuthorByline authorKey={fm.author} publishedAt={fm.publishedAt} />
     <img src={fm.heroImage} alt={fm.title} />
     <Content />
     {fm.factChecked && (
-      <p style="color: var(--c-muted); font-size: 0.75rem; border-top: 1px solid var(--c-border); padding-top: 1rem; margin-top: 3rem;">
+      <p style="color: var(--c-muted); font-family: var(--font-sans); font-size: 0.85rem; border-top: 1px solid var(--c-border-soft); padding-top: 1.25rem; margin-top: 3rem;">
         Fact-checked {fm.factCheckedAt?.toISOString().slice(0, 10)}.
         Last reviewed {fm.updatedAt.toISOString().slice(0, 10)}.
       </p>
@@ -68,8 +76,8 @@ const breadcrumb = [
         '@type': 'Person',
         name: author.name,
         jobTitle: author.jobTitle,
+        description: author.credential,
         url: author.url,
-        sameAs: author.sameAs,
       },
       publisher: {
         '@type': 'Organization',
