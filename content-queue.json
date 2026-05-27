@@ -1,9 +1,11 @@
 [
   {
     "niche": "nurse-ai",
-    "topic": "Using Claude for nursing shift handoff notes",
-    "anecdote": "Last week I tried having Claude summarise my 12-hour ED shift handoff for the next RN. Saved 14 minutes. Almost missed the bit about the patient with the latex allergy though.",
-    "status": "pending"
+    "slug": "claude-nursing-handoff-notes",
+    "topic": "Claude-assisted nursing notes — 9x faster and one near-miss",
+    "anecdote": "Built a Claude-assisted Python template tool for 12 nursing-note types in a Sydney GP clinic. Iron-infusion record almost shipped without batch number / expiry — caught in cross-check.",
+    "status": "published",
+    "pickedAt": "2026-05-28T00:00:00.000Z"
   },
   {
     "niche": "nurse-ai",

@@ -1,0 +1,106 @@
+---
+title: "Claude-assisted nursing notes: 9× faster, and one near-miss"
+slug: "claude-nursing-handoff-notes"
+description: "An evening clinic. Twelve note types still to write. I built a Claude-assisted tool to draft them. Then an iron-infusion record nearly went out incomplete."
+publishedAt: "2026-05-28"
+updatedAt: "2026-05-28"
+author: "stone"
+category: "nurse-ai"
+tags: ["claude", "nursing", "primary care", "documentation", "AI safety", "GP clinic"]
+keywords: ["AI nursing documentation", "Claude for nurses", "primary care AI", "iron infusion documentation", "AHPRA AI", "nursing workload"]
+canonical: "https://stonemegan.dev/blog/claude-nursing-handoff-notes"
+draft: false
+aiDetectionScore: null
+heroImage: "/images/card-nurse-ai.jpg"
+factChecked: false
+factCheckNotes: []
+---
+
+It was 7pm on a weekday evening at a busy GP clinic in Sydney. The waiting room was empty. The doctors had already left. I was the only person in the building, sitting in front of a monitor with a long list of nursing notes still to write before I could go home.
+
+The GPs at our clinic had recently started using AI documentation tools. The notes that used to take them ten minutes were taking three. I sat there at 7pm thinking: why do nurses not get the same?
+
+That night I opened claude.ai. The article you're reading is what came of it, including the iron-infusion record that almost went out incomplete and what that taught me about how to actually use this tool safely.
+
+## What I write each shift
+
+As the sole RN at the clinic I cover about twelve distinct types of clinical notes on any given day. Injection records. Wound dressings and suture removals. Vaccinations (baby NIP shots, travel vaccines, the seasonal flu rollout). Health assessments (the 40-to-49 diabetes-risk screen, the 75+ comprehensive assessment). Spirometry. Nebuliser treatments. Ear irrigation. Iron infusions. ECGs. Minor procedure nursing records. Patient education notes.
+
+On a full clinic day I finish 15 to 20 individual notes. Some are short. A routine injection note used to take me 4 to 5 minutes to write longhand. An iron-infusion record, with all required batch numbers, observation sets, and time-stamped entries, was closer to 10 minutes per patient. Multiply that across a shift and you have an hour or two of documentation work that arrives only after the last patient leaves.
+
+This is the part of nursing that doesn't make it into the workload model. It's invisible overtime, and it's been normalised.
+
+## What I built with Claude
+
+I didn't open Claude to draft a single note. I asked it to help me build a tool.
+
+The brief I gave it was specific: a Python template generator for primary-care nursing notes, designed to ingest a small number of structured inputs (patient context, procedure type, vitals, batch numbers) and output a clinical note in the format our practice software expected. I described the twelve note types, the required fields for each, the regulatory requirements I could think of off the top of my head, and the formatting our system needed.
+
+Claude produced a working prototype in one session. Several template sections had gaps or phrasing that wasn't clinically precise. I went through each of them, identified the issues, and rewrote them with Claude's help until each template would produce a note that a nurse would actually sign off on.
+
+The first version was usable. It was also wrong in a way I didn't catch for about a week.
+
+## The iron-infusion near-miss
+
+Early in testing, I ran an iron-infusion record through the template. It produced a complete-looking clinical record. Observations time-stamped. Consent recorded. Patient response documented. Post-procedure instructions noted. It read as finished.
+
+But two fields had not populated: the cannula batch number and the expiry date.
+
+These are not optional fields. Under Australian standards they are legally required for traceability in the event of an adverse reaction. If a patient developed an iron-related reaction in the days following the infusion, that batch number is the only way to track which production lot was used and whether other patients had been exposed to it. Without it, the record would have been clinically incomplete and medico-legally indefensible.
+
+I was 90% of the way through my routine end-of-clinic cross-check, comparing the typed record against the physical product packaging in front of me, when I realised the field was blank on screen even though the packaging was sitting right there with the batch number visible.
+
+The reason was prosaic. The template expected those fields to come from an upstream input I hadn't passed in for that test run. The tool generated everything else convincingly enough that the gap was easy to miss.
+
+That single near-miss is now the reason I treat every generated note as a first draft, not a finished record. AI-assisted documentation that looks thorough is not the same as documentation that is thorough. Read aloud, those sentences sound obvious. In practice, after a 9-hour shift, with a queue of notes and a quiet building, "looks finished" is exactly what a tired brain accepts.
+
+## The workflow that came out of it
+
+After that iron-infusion run, I rewrote my own protocol around the tool.
+
+Every output is a first draft. The tool drafts. I verify.
+
+For every note, the cross-check is non-negotiable. Batch numbers and expiry dates I compare against the original product packaging or vial. Vitals I cross-check against the physical observation chart. Consent I confirm against both the record and a verbal recollection of the encounter. For anything involving a medication, a procedure of any complexity, or a patient with comorbidities, the note gets a deliberate second read before it goes into the system.
+
+The tool has made my workflow dramatically faster. The human check at the end is what makes the workflow safe.
+
+This is consistent with [AHPRA's guidance on AI in healthcare](https://www.ahpra.gov.au/Resources/Artificial-Intelligence-in-healthcare.aspx), which is unambiguous on the point: regardless of which AI tool is used, the practitioner retains full professional responsibility for the care delivered. There is no shifting of accountability to the model. The model is a typist. I am the nurse.
+
+It is also what the [ACSQHC Communicating for Safety standard](https://www.safetyandquality.gov.au/national-standards/nsqhs-standards/communicating-safety-standard) requires of every clinician working in an accredited Australian service: timely, accurate, complete documentation in the patient record. An iron-infusion note missing its batch number is not a workflow inconvenience. It is a gap in the documentation chain the standard exists to protect.
+
+## The numbers
+
+For routine notes the change is large.
+
+- Injection note: 4 to 5 minutes manually, around 30 seconds with the tool. About 9× faster.
+- Iron-infusion record: 10 minutes manually, 30 seconds to populate. About 20× faster, with the cross-check on top.
+- Across a full clinic day: close to one hour of documentation time reclaimed.
+- One near-miss caught during cross-check since I started using the tool, of the type described above. That count is why the cross-check is non-negotiable rather than optional.
+
+The hour I save now goes back into the shift. Not into leaving earlier. That distinction matters more than it sounds, and the third rule below explains why.
+
+## The opinion I will defend
+
+Being the sole nurse in a busy clinic means my documentation workload doesn't shrink when the last patient leaves. It becomes invisible overtime that nobody formally accounts for.
+
+Choosing to build an AI-assisted documentation tool wasn't a shortcut. It was a clinical decision to protect the time and cognitive bandwidth that should belong to patient care. The nurses pushing back hardest on AI tools are often the same nurses quietly doing two hours of unpaid overtime to finish their notes. The real question is not whether AI is safe to use. The real question is why we ever normalised that workload and called it professionalism.
+
+Australia's nursing union, the ANMF, [made a related case to the federal government in May 2025](https://www.anmf.org.au/media/d03hxk4n/2025-05-14-anmf-submission-jobs-and-skills-australia-ai-capacity-study.pdf), addressing AI's role in the nursing workforce, including documentation burden, at a policy level. The longer-term answer is staffing levels and software designed for actual nursing workflow. The short-term answer, sitting in front of a monitor at 7pm with the next morning's clinic starting in twelve hours, is a tool I build for myself and verify with my own hands.
+
+## Three rules I set on day one
+
+1. **Batch numbers, expiry dates, and allergy information are never auto-accepted.** The tool pre-fills these fields when it has the data. I physically verify each one against the original packaging or the patient's chart before the note is finalised. Every single time, no exceptions.
+
+2. **Sensitive social history does not enter any AI-assisted workflow.** Domestic violence disclosures, self-harm presentations, child-protection concerns: written by hand, in full, every time. Not because I distrust the model with the words. Because I distrust any system I do not fully control with that category of information.
+
+3. **The time AI saves goes back into patient-facing care, not into leaving earlier.** If the tool saves me an hour, that hour shows up somewhere as better patient contact, more thorough handover, a moment of real attention to someone who needs it. The only version of this experiment that is worth doing is the one where the patient ends up with more of me, not less.
+
+## TL;DR
+
+- Sole RN at a busy Sydney GP clinic. 15-20 nursing notes per shift across 12 distinct types.
+- Built a Claude-assisted Python tool to template the notes.
+- Injection notes: 4-5 minutes to 30 seconds. Iron-infusion records: 10 minutes to 30 seconds. About an hour saved per full clinic day.
+- One near-miss caught: an iron-infusion record looked complete, but the cannula batch number and expiry date had not populated. Legally required fields under Australian standards. Almost approved.
+- Every output is now treated as a first draft, not a finished record. Cross-check against physical source. Second read for anything involving medication, procedure, or complex patient.
+- Three rules: high-risk fields never auto-accepted; sensitive social history hand-written; time saved goes to patient care.
+- AHPRA's guidance is the baseline: the practitioner retains full professional responsibility regardless of AI tool used. The model is a typist. The nurse is the nurse.
