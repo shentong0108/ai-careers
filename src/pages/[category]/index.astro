@@ -14,15 +14,15 @@ const meta = CATEGORIES[category as CategoryKey];
 if (!meta) throw new Error(`Unknown category: ${category}`);
 
 const CARD_FALLBACK: Record<string, string> = {
-  'nurse-ai': '/images/card-nurse-ai.svg',
-  'ece-ai': '/images/card-ece-ai.svg',
-  'dev-diary': '/images/card-dev-diary.svg',
+  'nurse-ai': '/images/card-nurse-ai.jpg',
+  'ece-ai': '/images/card-ece-ai.jpg',
+  'dev-diary': '/images/card-dev-diary.jpg',
 };
 
 const HERO_BG: Record<string, string> = {
-  'nurse-ai': '/images/card-nurse-ai.svg',
-  'ece-ai': '/images/card-ece-ai.svg',
-  'dev-diary': '/images/card-dev-diary.svg',
+  'nurse-ai': '/images/card-nurse-ai.jpg',
+  'ece-ai': '/images/card-ece-ai.jpg',
+  'dev-diary': '/images/card-dev-diary.jpg',
 };
 
 const posts = (await getCollection(
@@ -46,7 +46,7 @@ const NICHE_LABEL: Record<string, string> = {
 >
   <section
     class="hero-banner"
-    style={`background-image: url('${HERO_BG[category as string] ?? '/images/hero-default.svg'}');`}
+    style={`background-image: url('${HERO_BG[category as string] ?? '/images/hero-default.jpg'}');`}
   >
     <div class="hero-card-container">
       <div class="hero-card">
