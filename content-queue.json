@@ -17,9 +17,11 @@
   },
   {
     "niche": "ece-ai",
+    "slug": "claude-parent-newsletter-iteration",
     "topic": "Using Claude to draft parent communication for a 3-year-old room",
     "anecdote": "Megan tried using Claude to draft the weekly parent newsletter. First version was too corporate. Took 4 prompt iterations to sound like her.",
-    "status": "pending"
+    "status": "published",
+    "pickedAt": "2026-05-27T09:00:00.000Z"
   },
   {
     "niche": "ece-ai",
