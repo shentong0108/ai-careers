@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Dev Diary">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2c7a8c"/>
+      <stop offset="100%" stop-color="#1d4f5a"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#g)"/>
+  <g font-family="ui-monospace, SF Mono, Menlo, monospace" fill="#ffffff" fill-opacity="0.55" font-size="22">
+    <text x="60" y="180">$ git commit -m "fix"</text>
+    <text x="60" y="220">$ pnpm build</text>
+    <text x="60" y="260">$ deploy</text>
+    <text x="60" y="300" fill-opacity="0.85">▮</text>
+  </g>
+  <g opacity="0.18" fill="none" stroke="#ffffff" stroke-width="1.5">
+    <rect x="370" y="380" width="170" height="110" rx="10"/>
+    <line x1="385" y1="410" x2="500" y2="410"/>
+    <line x1="385" y1="430" x2="470" y2="430"/>
+    <line x1="385" y1="450" x2="485" y2="450"/>
+  </g>
+</svg>

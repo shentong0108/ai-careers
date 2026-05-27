@@ -13,6 +13,18 @@ const { category } = Astro.params;
 const meta = CATEGORIES[category as CategoryKey];
 if (!meta) throw new Error(`Unknown category: ${category}`);
 
+const CARD_FALLBACK: Record<string, string> = {
+  'nurse-ai': '/images/card-nurse-ai.svg',
+  'ece-ai': '/images/card-ece-ai.svg',
+  'dev-diary': '/images/card-dev-diary.svg',
+};
+
+const HERO_BG: Record<string, string> = {
+  'nurse-ai': '/images/card-nurse-ai.svg',
+  'ece-ai': '/images/card-ece-ai.svg',
+  'dev-diary': '/images/card-dev-diary.svg',
+};
+
 const posts = (await getCollection(
   'posts',
   ({ data }: CollectionEntry<'posts'>) => !data.draft && data.category === category
@@ -20,40 +32,73 @@ const posts = (await getCollection(
   .sort((a: CollectionEntry<'posts'>, b: CollectionEntry<'posts'>) =>
     b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf()
   );
+
+const NICHE_LABEL: Record<string, string> = {
+  'nurse-ai': 'Nurse + AI',
+  'ece-ai': 'ECE + AI',
+  'dev-diary': 'Dev Diary',
+};
 ---
 
 <BaseLayout
   title={`${meta.title} — stonemegan.dev`}
   description={meta.description}
 >
-  <section class="hero" style="padding-top: 1rem;">
-    <div class="niche-dots" aria-hidden="true">
-      <span class="dot" data-niche={category}>{meta.title.charAt(0)}</span>
+  <section
+    class="hero-banner"
+    style={`background-image: url('${HERO_BG[category as string] ?? '/images/hero-default.svg'}');`}
+  >
+    <div class="hero-card-container">
+      <div class="hero-card">
+        <p class="eyebrow">Topic</p>
+        <h1>{meta.title}</h1>
+        <p>{meta.intro}</p>
+      </div>
     </div>
-    <h1 style="max-width: 16ch;">{meta.title}</h1>
-    <p class="sub">{meta.intro}</p>
   </section>
 
-  <h2 class="section-title">All posts</h2>
-
-  {posts.length === 0 ? (
-    <p style="color: var(--c-muted); text-align: center; padding: 2rem 0;">
-      No posts yet in this category. First one coming soon.
-    </p>
-  ) : (
-    <div>
-      {posts.map((p: CollectionEntry<'posts'>) => (
-        <a class="post-card" href={`/blog/${p.data.slug}`}>
-          <span class="niche-tag" data-niche={p.data.category}>{meta.title}</span>
-          <h3>{p.data.title}</h3>
-          <p class="description">{p.data.description}</p>
-          <p class="meta">
-            {p.data.publishedAt.toISOString().slice(0, 10)}
-            <span style="margin: 0 0.4rem; opacity: 0.5">·</span>
-            by {p.data.author === 'stone' ? 'Stone' : 'Megan'}
-          </p>
-        </a>
-      ))}
+  <div class="filter-row">
+    <div class="inner">
+      <span class="label">Filter:</span>
+      <a class="filter-pill" href="/nurse-ai">Nurse + AI</a>
+      <a class="filter-pill" href="/ece-ai">ECE + AI</a>
+      <a class="filter-pill" href="/dev-diary">Dev Diary</a>
+      <a class="filter-pill" href="/">All</a>
     </div>
-  )}
+  </div>
+
+  <div class="container">
+    <h2 class="section-title">All posts</h2>
+    {posts.length === 0 ? (
+      <p style="color: var(--c-muted); text-align: center; padding: 3rem 0;">
+        No posts yet in this topic. First one coming soon.
+      </p>
+    ) : (
+      <div class="card-grid">
+        {posts.map((p: CollectionEntry<'posts'>) => (
+          <a class="post-card" href={`/blog/${p.data.slug}`}>
+            <div class="img-wrap">
+              <img
+                src={p.data.heroImage || CARD_FALLBACK[p.data.category]}
+                alt={p.data.title}
+                loading="lazy"
+              />
+              <span class="niche-pill" data-niche={p.data.category}>
+                {NICHE_LABEL[p.data.category]}
+              </span>
+            </div>
+            <div class="body">
+              <h3>{p.data.title}</h3>
+              <p class="desc">{p.data.description}</p>
+              <p class="meta">
+                {p.data.publishedAt.toISOString().slice(0, 10)}
+                <span style="margin: 0 0.4rem; opacity: 0.5">·</span>
+                {p.data.author === 'stone' ? 'Stone' : 'Megan'}
+              </p>
+            </div>
+          </a>
+        ))}
+      </div>
+    )}
+  </div>
 </BaseLayout>
