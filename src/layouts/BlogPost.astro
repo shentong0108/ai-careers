@@ -3,17 +3,20 @@ import BaseLayout from './BaseLayout.astro';
 import AuthorByline from '@/components/AuthorByline.astro';
 import Schema from '@/components/Schema.astro';
 import authorsJson from '../../.claude/authors.json';
-import { render, type CollectionEntry } from 'astro:content';
+import { render, getCollection, type CollectionEntry } from 'astro:content';
 
 interface AuthorRecord {
   name: string;
   jobTitle: string;
   credential: string;
+  bio: string;
   url: string;
   sameAs: string[];
   image: string;
 }
 const authors = authorsJson as Record<string, AuthorRecord>;
+
+const allPosts = await getCollection('posts', ({ data }: CollectionEntry<'posts'>) => !data.draft);
 
 export interface Props {
   entry: CollectionEntry<'posts'>;
@@ -36,6 +39,15 @@ const breadcrumb = [
   { name: NICHE_LABEL[fm.category] ?? fm.category, url: new URL(`/${fm.category}`, Astro.site).toString() },
   { name: fm.title, url: fm.canonical },
 ];
+
+// Read next: prefer same-niche posts, exclude current, take 2
+const sameNiche = allPosts.filter(
+  (p: CollectionEntry<'posts'>) => p.data.category === fm.category && p.data.slug !== fm.slug
+);
+const otherNiche = allPosts.filter(
+  (p: CollectionEntry<'posts'>) => p.data.category !== fm.category && p.data.slug !== fm.slug
+);
+const readNext = [...sameNiche, ...otherNiche].slice(0, 2);
 ---
 
 <BaseLayout
@@ -62,7 +74,7 @@ const breadcrumb = [
     </div>
   </section>
 
-  <div class="container" style="padding-top: 3rem; padding-bottom: 4rem;">
+  <div class="container" style="padding-top: 3rem; padding-bottom: 2rem;">
     <article class="post">
       <AuthorByline authorKey={fm.author} publishedAt={fm.publishedAt} />
       <Content />
@@ -73,6 +85,29 @@ const breadcrumb = [
         </p>
       )}
     </article>
+
+    <div class="post-author-footer">
+      <img src={author.image} alt={author.name} />
+      <div class="body">
+        <p>{author.name} · {author.jobTitle}</p>
+        <p>{author.bio}</p>
+        <p>More from {author.name} in <a href={`/${fm.category}`}>{NICHE_LABEL[fm.category]}</a>.</p>
+      </div>
+    </div>
+
+    {readNext.length > 0 && (
+      <div class="read-next">
+        <p class="read-next-title">Read next</p>
+        <div class="read-next-grid">
+          {readNext.map((p: CollectionEntry<'posts'>) => (
+            <a href={`/blog/${p.data.slug}`}>
+              <p class="rn-niche" data-niche={p.data.category}>{NICHE_LABEL[p.data.category]}</p>
+              <h3>{p.data.title}</h3>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
   </div>
 
   <Schema

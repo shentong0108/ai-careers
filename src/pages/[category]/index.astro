@@ -13,12 +13,6 @@ const { category } = Astro.params;
 const meta = CATEGORIES[category as CategoryKey];
 if (!meta) throw new Error(`Unknown category: ${category}`);
 
-const CARD_FALLBACK: Record<string, string> = {
-  'nurse-ai': '/images/card-nurse-ai.jpg',
-  'ece-ai': '/images/card-ece-ai.jpg',
-  'dev-diary': '/images/card-dev-diary.jpg',
-};
-
 const HERO_BG: Record<string, string> = {
   'nurse-ai': '/images/card-nurse-ai.jpg',
   'ece-ai': '/images/card-ece-ai.jpg',
@@ -41,12 +35,12 @@ const NICHE_LABEL: Record<string, string> = {
 ---
 
 <BaseLayout
-  title={`${meta.title} — stonemegan.dev`}
+  title={`${meta.title} — stonemegan`}
   description={meta.description}
 >
   <section
     class="hero-banner"
-    style={`background-image: url('${HERO_BG[category as string] ?? '/images/hero-default.jpg'}');`}
+    style={`background-image: url('${HERO_BG[category as string] ?? '/images/hero-default.jpg'}'); min-height: 420px;`}
   >
     <div class="hero-card-container">
       <div class="hero-card">
@@ -57,48 +51,32 @@ const NICHE_LABEL: Record<string, string> = {
     </div>
   </section>
 
-  <div class="filter-row">
-    <div class="inner">
-      <span class="label">Filter:</span>
-      <a class="filter-pill" href="/nurse-ai">Nurse + AI</a>
-      <a class="filter-pill" href="/ece-ai">ECE + AI</a>
-      <a class="filter-pill" href="/dev-diary">Dev Diary</a>
-      <a class="filter-pill" href="/">All</a>
-    </div>
-  </div>
-
   <div class="container">
-    <h2 class="section-title">All posts</h2>
     {posts.length === 0 ? (
       <p style="color: var(--c-muted); text-align: center; padding: 3rem 0;">
         No posts yet in this topic. First one coming soon.
       </p>
     ) : (
-      <div class="card-grid">
+      <ul class="article-list">
         {posts.map((p: CollectionEntry<'posts'>) => (
-          <a class="post-card" href={`/blog/${p.data.slug}`}>
-            <div class="img-wrap">
-              <img
-                src={p.data.heroImage || CARD_FALLBACK[p.data.category]}
-                alt={p.data.title}
-                loading="lazy"
-              />
-              <span class="niche-pill" data-niche={p.data.category}>
-                {NICHE_LABEL[p.data.category]}
-              </span>
-            </div>
-            <div class="body">
-              <h3>{p.data.title}</h3>
-              <p class="desc">{p.data.description}</p>
-              <p class="meta">
+          <li class="article-row">
+            <p class="meta-line">
+              <time datetime={p.data.publishedAt.toISOString()}>
                 {p.data.publishedAt.toISOString().slice(0, 10)}
-                <span style="margin: 0 0.4rem; opacity: 0.5">·</span>
-                {p.data.author === 'stone' ? 'Stone' : 'Megan'}
-              </p>
-            </div>
-          </a>
+              </time>
+              <span class="dot">·</span>
+              <span class="niche-mini" data-niche={p.data.category}>{NICHE_LABEL[p.data.category]}</span>
+              <span class="dot">·</span>
+              <span>{p.data.author === 'stone' ? 'Stone' : 'Megan'}</span>
+            </p>
+            <h2 class="row-title">
+              <a href={`/blog/${p.data.slug}`}>{p.data.title}</a>
+            </h2>
+            <p class="row-desc">{p.data.description}</p>
+            <a href={`/blog/${p.data.slug}`}><span class="read-more">Read</span></a>
+          </li>
         ))}
-      </div>
+      </ul>
     )}
   </div>
 </BaseLayout>

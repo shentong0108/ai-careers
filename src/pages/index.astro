@@ -5,27 +5,20 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 const posts = (await getCollection('posts', ({ data }: CollectionEntry<'posts'>) => !data.draft))
   .sort((a: CollectionEntry<'posts'>, b: CollectionEntry<'posts'>) =>
     b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf()
-  )
-  .slice(0, 12);
+  );
 
 const NICHE_LABEL: Record<string, string> = {
   'nurse-ai': 'Nurse + AI',
   'ece-ai': 'ECE + AI',
   'dev-diary': 'Dev Diary',
 };
-
-const CARD_FALLBACK: Record<string, string> = {
-  'nurse-ai': '/images/card-nurse-ai.jpg',
-  'ece-ai': '/images/card-ece-ai.jpg',
-  'dev-diary': '/images/card-dev-diary.jpg',
-};
 ---
 
 <BaseLayout
-  title="stonemegan.dev — nurse + ECE + AI, no hype"
+  title="stonemegan — nurse + ECE + AI, no hype"
   description="Real stories from a Sydney-based RN and an early-childhood teacher using AI in their jobs. Plus an indie dev diary. No buzzwords. Failures included."
 >
-  <section class="hero-banner" style="background-image: url('/images/hero-default.jpg'); min-height: 560px;">
+  <section class="hero-banner" style="background-image: url('/images/hero-default.jpg'); min-height: 540px;">
     <div class="hero-card-container">
       <div class="hero-card" style="max-width: 620px;">
         <div class="author-duo">
@@ -41,63 +34,62 @@ const CARD_FALLBACK: Record<string, string> = {
         </h1>
         <p style="font-size: 1.12rem; color: var(--c-text-soft); margin: 0;">
           Two real professionals — a nurse and an early-childhood teacher —
-          writing about the AI tools we actually use on shift. Including the
-          ones we dropped. Including the failures.
+          writing about the AI tools we use on shift. Including the ones we
+          dropped. Including the failures.
         </p>
       </div>
     </div>
   </section>
 
-  <div class="filter-row">
-    <div class="inner">
-      <span class="label">Filter:</span>
-      <a class="filter-pill" href="/nurse-ai">Nurse + AI</a>
-      <a class="filter-pill" href="/ece-ai">ECE + AI</a>
-      <a class="filter-pill" href="/dev-diary">Dev Diary</a>
-    </div>
+  <div class="author-intro">
+    <p class="greeting">Hey, we're Stone &amp; Megan</p>
+    <p>
+      <strong>Stone</strong> is an AHPRA-registered RN running solo in a Sydney
+      primary-care clinic. <strong>Megan</strong> is an ACECQA-registered ECT in
+      a Sydney pre-school room. We started this blog because every AI-in-our-job
+      article we found was written by someone whose job is writing AI articles.
+    </p>
+    <p>
+      Real shifts. Real rooms. Real failures. Posts every couple of days —
+      sometimes the system, sometimes the story behind a single near-miss.
+    </p>
   </div>
 
   <div class="container" id="latest">
-    <h2 class="section-title">Latest</h2>
     {posts.length === 0 ? (
       <p style="color: var(--c-muted); text-align: center; padding: 3rem 0;">
         First articles coming soon.
       </p>
     ) : (
-      <div class="card-grid">
+      <ul class="article-list">
         {posts.map((p: CollectionEntry<'posts'>) => (
-          <a class="post-card" href={`/blog/${p.data.slug}`}>
-            <div class="img-wrap">
-              <img
-                src={p.data.heroImage || CARD_FALLBACK[p.data.category]}
-                alt={p.data.title}
-                loading="lazy"
-              />
-              <span class="niche-pill" data-niche={p.data.category}>
-                {NICHE_LABEL[p.data.category]}
-              </span>
-            </div>
-            <div class="body">
-              <h3>{p.data.title}</h3>
-              <p class="desc">{p.data.description}</p>
-              <p class="meta">
+          <li class="article-row">
+            <p class="meta-line">
+              <time datetime={p.data.publishedAt.toISOString()}>
                 {p.data.publishedAt.toISOString().slice(0, 10)}
-                <span style="margin: 0 0.4rem; opacity: 0.5">·</span>
-                {p.data.author === 'stone' ? 'Stone' : 'Megan'}
-              </p>
-            </div>
-          </a>
+              </time>
+              <span class="dot">·</span>
+              <span class="niche-mini" data-niche={p.data.category}>{NICHE_LABEL[p.data.category]}</span>
+              <span class="dot">·</span>
+              <span>{p.data.author === 'stone' ? 'Stone' : 'Megan'}</span>
+            </p>
+            <h2 class="row-title">
+              <a href={`/blog/${p.data.slug}`}>{p.data.title}</a>
+            </h2>
+            <p class="row-desc">{p.data.description}</p>
+            <a href={`/blog/${p.data.slug}`}><span class="read-more">Read</span></a>
+          </li>
         ))}
-      </div>
+      </ul>
     )}
   </div>
 
   <div class="container" id="newsletter">
     <div class="signup-block">
       <p class="eyebrow">Get a real post once a week</p>
-      <h3>No filler. No hype. Just what we tried this week.</h3>
+      <h3>No filler. No hype. Just what we tried.</h3>
       <p>Drop your email and we'll send the new post the morning it goes up. Unsubscribe anytime.</p>
-      <form id="newsletter" action="#" method="post" onsubmit="event.preventDefault(); alert('Newsletter sign-up coming soon — for now bookmark the site or subscribe via RSS.'); return false;">
+      <form id="signup" action="#" method="post" onsubmit="event.preventDefault(); alert('Newsletter sign-up coming soon — for now bookmark the site or subscribe via RSS.'); return false;">
         <input type="email" placeholder="you@example.com" aria-label="Email address" required />
         <button type="submit">Notify me</button>
       </form>
