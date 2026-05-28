@@ -18,9 +18,20 @@ PLIST_LABEL="dev.stonemegan.aicareers"
 PLIST_PATH="$HOME/Library/LaunchAgents/${PLIST_LABEL}.plist"
 SCRIPT_PATH="${PROJECT_ROOT}/scripts/local-cron.sh"
 
-chmod +x "$SCRIPT_PATH"
-
+# launchd cannot open StandardOutPath/StandardErrorPath on external
+# volumes (/Volumes/...) — macOS TCC restricts launchd's file access
+# in a way the user shell does not see. Symptom: exit code 78
+# (EX_CONFIG) before the script even runs. Workaround: route
+# launchd's own stdout/stderr to ~/Library/Logs/, which is always
+# accessible to launchd in the user's GUI domain. The script
+# continues to write its own detailed log to .claude/logs/ inside
+# the project (which works fine because the script itself runs with
+# the user's full TCC permissions).
+LAUNCHD_LOG_DIR="$HOME/Library/Logs/stonemegan"
+mkdir -p "$LAUNCHD_LOG_DIR"
 mkdir -p "$HOME/Library/LaunchAgents"
+
+chmod +x "$SCRIPT_PATH"
 
 cat > "$PLIST_PATH" <<EOF
 <?xml version="1.0" encoding="UTF-8"?>
@@ -48,10 +59,10 @@ cat > "$PLIST_PATH" <<EOF
   <string>${PROJECT_ROOT}</string>
 
   <key>StandardOutPath</key>
-  <string>${PROJECT_ROOT}/.claude/logs/launchd-stdout.log</string>
+  <string>${LAUNCHD_LOG_DIR}/launchd-stdout.log</string>
 
   <key>StandardErrorPath</key>
-  <string>${PROJECT_ROOT}/.claude/logs/launchd-stderr.log</string>
+  <string>${LAUNCHD_LOG_DIR}/launchd-stderr.log</string>
 
   <key>EnvironmentVariables</key>
   <dict>
