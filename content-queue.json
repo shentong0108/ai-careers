@@ -1,41 +1,5 @@
 [
   {
-    "niche": "nurse-ai",
-    "slug": "claude-nursing-handoff-notes",
-    "topic": "Claude-assisted nursing notes — 9x faster and one near-miss",
-    "anecdote": "Built a Claude-assisted Python template tool for 12 nursing-note types in a Sydney GP clinic. Iron-infusion record almost shipped without batch number / expiry — caught in cross-check.",
-    "status": "published",
-    "pickedAt": "2026-05-28T00:00:00.000Z"
-  },
-  {
-    "niche": "nurse-ai",
-    "topic": "AI triage support tools — what actually works in 2026",
-    "status": "pending"
-  },
-  {
-    "niche": "nurse-ai",
-    "topic": "Writing better patient education handouts with Claude (with my actual prompts)",
-    "status": "pending"
-  },
-  {
-    "niche": "ece-ai",
-    "slug": "claude-parent-newsletter-iteration",
-    "topic": "Using Claude to draft parent communication for a 3-year-old room",
-    "anecdote": "Megan tried using Claude to draft the weekly parent newsletter. First version was too corporate. Took 4 prompt iterations to sound like her.",
-    "status": "published",
-    "pickedAt": "2026-05-27T09:00:00.000Z"
-  },
-  {
-    "niche": "ece-ai",
-    "topic": "AI lesson planning for under-5s — the line between helpful and lazy",
-    "status": "pending"
-  },
-  {
-    "niche": "ece-ai",
-    "topic": "Documenting child learning observations with AI assist (without losing your voice)",
-    "status": "pending"
-  },
-  {
     "niche": "dev-diary",
     "slug": "aura-week-1-claude-code",
     "topic": "Building Aura app week 1 — what Claude Code got right and what it didn't",
@@ -52,5 +16,42 @@
     "niche": "dev-diary",
     "topic": "Why I killed my first nurse-tooling project after 6 weeks",
     "status": "pending"
+  },
+  {
+    "niche": "ece-ai",
+    "slug": "claude-parent-newsletter-iteration",
+    "topic": "Using Claude to draft parent communication for a 3-year-old room",
+    "anecdote": "Megan tried using Claude to draft the weekly parent newsletter. First version was too corporate. Took 4 prompt iterations to sound like her.",
+    "status": "published",
+    "pickedAt": "2026-05-27T09:00:00.000Z"
+  },
+  {
+    "niche": "ece-ai",
+    "topic": "Documenting child learning observations with AI assist (without losing your voice)",
+    "anecdote": "Tried Claude on three individual learning observations for under-5s and deleted all three. The most memorable: I asked it to draft an observation aligned with EYLF Outcome 1 for a 4-year-old who had resolved a peer conflict over a toy in outdoor play. Claude returned a sentence about 'the child demonstrated an emerging capacity for self-regulation and prosocial negotiation strategies.' What I had actually seen was the child looking their friend in the eye and saying 'you can have it after I count to five,' then counting out loud on their fingers. Claude wrote the conclusion. I write the moment. Two things no prompt can give it. First, verbatim child words: a three-year-old saying 'I maked it go faster' tells you something about language development that the phrase 'used descriptive language' erases. Second, the physical detail: which hand they used, whether they leaned in or held back, the three seconds they spent staring at the paint before they touched it. The pause is the learning. My rule now: Claude helps with structure, grammar, and linking language to EYLF outcomes; the observational content stays mine. I write the raw note first, then Claude tightens. I never start with Claude and edit down. If I cannot write at least the core observation myself, I do not publish it.",
+    "status": "pending"
+  },
+  {
+    "niche": "ece-ai",
+    "topic": "AI lesson planning for under-5s — the line between helpful and lazy",
+    "status": "pending"
+  },
+  {
+    "niche": "nurse-ai",
+    "topic": "AI triage support tools — what actually works in 2026",
+    "status": "pending"
+  },
+  {
+    "niche": "nurse-ai",
+    "topic": "Writing better patient education handouts with Claude (with my actual prompts)",
+    "status": "pending"
+  },
+  {
+    "niche": "nurse-ai",
+    "slug": "claude-nursing-handoff-notes",
+    "topic": "Claude-assisted nursing notes — 9x faster and one near-miss",
+    "anecdote": "Built a Claude-assisted Python template tool for 12 nursing-note types in a Sydney GP clinic. Iron-infusion record almost shipped without batch number / expiry — caught in cross-check.",
+    "status": "published",
+    "pickedAt": "2026-05-28T00:00:00.000Z"
   }
 ]
