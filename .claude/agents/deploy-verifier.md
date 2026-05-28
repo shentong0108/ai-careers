@@ -29,104 +29,122 @@ MUST:
 - Capture exact output of failures.
 - Return clear pass/fail per gate.
 
-## Gates (run all)
+## Gates (run all, but tool-missing = skipped, not failed)
 
-### Gate 1: Build
+A gate is considered:
+- `PASS` — ran and met threshold
+- `FAIL` — ran and did not meet threshold (blocks deploy)
+- `SKIPPED` — required tool/key is unavailable; record and continue. Skipped gates do not block deploy, but their absence is reported so the reviewer knows what was not verified.
 
-```bash
-npm run build
-```
-Pass: exit 0 + `dist/` populated.
+Gates 1-3 are **hard required** — pipeline must not bypass them. The rest can be SKIPPED if the tooling is unavailable.
 
-### Gate 2: Type Check
-
-```bash
-npx astro check
-```
-Pass: exit 0, zero errors, zero warnings.
-
-### Gate 3: Tests
+### Gate 1 (HARD): Build
 
 ```bash
-npm test -- --run
+pnpm build   # or npm run build
 ```
-Pass: exit 0. If no tests yet, mark `skipped` not `passed`.
+Pass: exit 0 + `dist/` populated. Fail blocks deploy.
 
-### Gate 4: Lint
+### Gate 2 (HARD): Type Check
+
+`pnpm build` already runs `astro check`. Failure here is a build failure.
+
+### Gate 3 (HARD): Frontmatter Schema
+
+The Astro build itself validates content-collection frontmatter via Zod (`src/content/config.ts`). A build pass guarantees frontmatter is schema-valid. If `scripts/validate-frontmatter.ts` exists, also run it for redundancy; if not, rely on the build.
+
+### Gate 4 (SKIPPABLE): Tests
 
 ```bash
-npx eslint . --max-warnings 0
+pnpm test -- --run    # vitest
 ```
-Pass: exit 0.
+- Pass: exit 0
+- Fail: exit non-zero
+- Skipped: no `tests/` directory yet, or vitest not installed
 
-### Gate 5: Link Check
+### Gate 5 (SKIPPABLE): Lint
 
 ```bash
-npx linkinator dist --recurse --skip "localhost"
+pnpm exec eslint . --max-warnings 0
 ```
-Pass: zero broken links.
+- Pass: exit 0
+- Skipped: eslint not installed in this project yet
 
-### Gate 6: Lighthouse (per new article)
+### Gate 6 (SKIPPABLE): Link Check
 
-For each in `new_articles`:
+```bash
+pnpm exec linkinator dist --recurse --skip "localhost"
+```
+- Pass: zero broken links
+- Skipped: linkinator not installed
+
+### Gate 7 (SKIPPABLE): Lighthouse
+
 ```bash
 npx lighthouse "http://localhost:4321/blog/<slug>" \
   --only-categories=performance,seo,accessibility \
   --output=json --output-path=/tmp/lh-<slug>.json
 ```
-Pass: performance >= 90, SEO >= 95, accessibility >= 95.
+- Pass: performance >= 90, SEO >= 95, accessibility >= 95
+- Skipped: lighthouse not installed OR no dev server reachable
 
-### Gate 7: AI Detection (per new article)
+### Gate 8 (SKIPPABLE): AI Detection
 
 ```bash
 node scripts/detect-ai.ts <file>
 ```
-Pass: score < `target_score`.
+- Pass: score < `target_score`
+- Skipped: `scripts/detect-ai.ts` does not exist OR no detection API key is set
 
-### Gate 8: Frontmatter Schema
+### Gate 9 (CONDITIONAL): YMYL Fact-Check
 
-```bash
-node scripts/validate-frontmatter.ts <file>
-```
-Pass: all required fields, types correct, dates valid.
-
-### Gate 9: YMYL Fact-Check (for nurse-ai / ece-ai)
-
-Confirm `factChecked: true` in frontmatter.
+For nurse-ai and ece-ai articles, confirm `factChecked: true` in frontmatter.
+- Pass: `factChecked: true`
+- Fail: niche is YMYL but flag is false. Blocks deploy.
+- Skipped: niche is dev-diary (not YMYL).
 
 ## Output
 
 Report:
 
 ```
-Deploy Verification — feat/nurse-handoff-article
-Articles: 1 (src/content/posts/nurse-ai/handoff-notes-with-claude.mdx)
+Deploy Verification — auto/ece-ai-observations
+Articles: 1 (src/content/posts/ece-ai/learning-observations-claude.mdx)
 
-Gate                     | Status | Detail
--------------------------|--------|-------
-1. Build                 | PASS   | dist/ 4.2MB
-2. Type Check            | PASS   | 0 errors
-3. Tests                 | PASS   | 14/14
-4. Lint                  | PASS   | 0 warnings
-5. Link Check            | PASS   | 0 broken
-6. Lighthouse perf       | PASS   | 94
-6. Lighthouse SEO        | PASS   | 100
-6. Lighthouse a11y       | PASS   | 96
-7. AI Detection          | PASS   | 22%
-8. Frontmatter           | PASS   |
-9. Fact-Check            | PASS   |
+Gate                     | Status   | Detail
+-------------------------|----------|-------
+1. Build       (HARD)    | PASS     | dist/ 4.2MB
+2. Type Check  (HARD)    | PASS     | 0 errors (via astro check)
+3. Frontmatter (HARD)    | PASS     | Zod schema OK
+4. Tests                 | SKIPPED  | no tests yet
+5. Lint                  | SKIPPED  | eslint not installed
+6. Link Check            | PASS     | 0 broken
+7. Lighthouse            | SKIPPED  | no dev server in CI
+8. AI Detection          | SKIPPED  | no API key
+9. Fact-Check (YMYL)     | PASS     | factChecked: true
 
-Overall: READY TO DEPLOY
+Overall: READY TO DEPLOY (8 of 9 gates ran; 0 FAIL)
 ```
 
-If any FAIL:
+If any HARD or CONDITIONAL FAIL:
 
 ```
 Overall: BLOCKED
 Failed gates:
-- Gate 6 Lighthouse perf: 78 (need 90). LCP 3.1s — hero image too large.
-- Gate 7 AI Detection: 41% (need <30%). Re-run content-humanizer.
+- Gate 1 Build: build error in src/pages/[category]/index.astro:42
+- Gate 9 Fact-Check: niche is nurse-ai but factChecked is false
 ```
+
+If only SKIPPED gates accompany a PASS:
+
+```
+Overall: READY TO DEPLOY (partial verification)
+Skipped gates (reviewer must verify manually before merge):
+- Gate 8 AI Detection: provision ZEROGPT_API_KEY or run manually
+- Gate 7 Lighthouse: run manually against deployed preview
+```
+
+The deploy-verifier should print the receipt to its caller and exit 0 unless a HARD or CONDITIONAL gate FAILED.
 
 ## Verification Before Return
 

@@ -21,16 +21,29 @@ Take draft from `content-writer`. Strip AI smell. Hit detection score < 30%. Sto
 NEVER:
 - Add new factual claims, statistics, citations, quotes.
 - Change author voice (megan vs stone) — read frontmatter, match register.
-- Touch frontmatter except `draft` and `aiDetectionScore`.
+- Touch frontmatter except `draft`, `aiDetectionScore`, and `humanizationMode`.
 - Edit any file other than the target.
 - Run more than 3 humanization passes (cost cap).
+- Block the pipeline because an AI-detection API key is missing. See "Degraded mode" below.
 
 MUST:
 - Preserve every citation URL.
 - Preserve target keyword density.
 - Preserve word count ±10%.
-- Flip `draft: true` → `draft: false` ONLY if final score < `target_score`.
-- Record final score in frontmatter `aiDetectionScore`.
+- Flip `draft: true` → `draft: false` ONLY if final score < `target_score` AND `humanizationMode` is not `degraded` AND `needs-anecdote` is not in tags.
+- Record final score in frontmatter `aiDetectionScore` when an AI-detection API is available.
+- If `needs-anecdote` is in the tags array, keep `draft: true` regardless of score.
+
+## Degraded mode (no AI-detection API key)
+
+If neither `ZEROGPT_API_KEY` nor `ORIGINALITY_API_KEY` is set in the environment, do NOT block. Run a degraded humanization pass:
+
+1. Apply all the textual transformations from the workflow below (banlist scrub, sentence-length variation, specifics injection, parenthetical asides, hedging trim, regional voice) without measuring an external score.
+2. Record `aiDetectionScore: null` and `humanizationMode: "degraded"` in the frontmatter.
+3. Keep `draft: true` so a human reviewer can run AI-detection manually before publishing.
+4. Return `status: ready` with a note in the receipt indicating degraded mode.
+
+This is acceptable for development and for runs where the user has not yet provisioned a detection key. It is not acceptable for production publishing without a human review pass.
 
 ## Humanization Techniques (apply in order)
 
@@ -59,7 +72,8 @@ node scripts/detect-ai.ts --per-paragraph /tmp/body.md
 
 ## Verification Before Return
 
-- [ ] Final score < `target_score` (else leave `draft: true`, return with `status: blocked`)
+- [ ] If an AI-detection API is available: final score < `target_score` (else leave `draft: true`, return with `status: blocked`)
+- [ ] If running in degraded mode: `aiDetectionScore: null` and `humanizationMode: "degraded"` in frontmatter, `status: ready`
 - [ ] Word count delta < 10% from input
 - [ ] All citation URLs intact (diff-check)
 - [ ] Banned token count = 0
@@ -69,8 +83,9 @@ Return:
 
 ```
 file: <path>
-initial_score: 67
-final_score: 24
+mode: scored | degraded
+initial_score: 67    # null if degraded
+final_score: 24      # null if degraded
 passes: 2
 words_in: 1847
 words_out: 1812
