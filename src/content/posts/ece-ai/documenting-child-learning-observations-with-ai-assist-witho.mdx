@@ -1,0 +1,226 @@
+---
+title: "Writing Child Observations With AI Without Losing Your Voice"
+slug: "documenting-child-learning-observations-with-ai-assist-witho"
+description: "An ECT's honest workflow for writing child observations with AI assist: what to keep yours, what to hand to Claude, and the three-second pause that's the real learning."
+publishedAt: "2026-05-28"
+updatedAt: "2026-05-28"
+author: "megan"
+category: "ece-ai"
+tags: ["learning-stories", "eylf", "ai-workflow", "documentation", "early-childhood"]
+keywords: ["writing child observations with AI without losing your voice", "AI learning stories EYLF", "Claude child observation prompt", "AI wallpaper ECE", "humanise AI learning stories", "Te Whariki AI observation"]
+canonical: "https://stonemegan.dev/blog/documenting-child-learning-observations-with-ai-assist-witho"
+draft: true
+aiDetectionScore: null
+humanizationMode: "degraded"
+factChecked: true
+factCheckedAt: "2026-05-28T00:00:00Z"
+heroImage: "/images/documenting-child-learning-observations-with-ai-assist-witho-hero.png"
+ogImage: "/og/documenting-child-learning-observations-with-ai-assist-witho.png"
+---
+
+import Schema from '@/components/Schema.astro'
+
+Last fortnight I ran Claude over three individual learning observations, and then I deleted all three.
+
+The one that stuck with me was an outdoor-play moment. A four-year-old in our 3-5 room had just sorted out a toy dispute with a friend, and I wanted to write it up against EYLF Outcome 1. So I gave Claude my jot-pad notes and asked for a draft. It came back with a tidy little sentence: "the child demonstrated an emerging capacity for self-regulation and prosocial negotiation strategies." Tidy. Defensible. Completely useless.
+
+What I had actually seen was this: the child looked their friend dead in the eye and said "you can have it after I count to five," then counted out loud on their fingers. Claude wrote the conclusion. I had written down the moment, and then I had let the moment go.
+
+This post is what came out of that mess. My working rule for using AI on child observations without losing your voice. What stays mine, what Claude is allowed to touch, and the small habits I now use to stop my portfolio entries reading like every other centre's.
+
+## The "AI wallpaper" problem in ECE documentation
+
+There's a phrase doing the rounds among Australian and NZ educators at the moment: AI wallpaper. It's documentation that's grammatically perfect, framework-aligned, and basically indistinguishable from any other centre's. Hangs there in the portfolio. Says nothing.
+
+You can spot it by three things. No verbatim child quotes. No physical detail (which hand, which foot, where the eyes went). And conclusions you could cut and paste into any child's file: "demonstrated emerging capacity," "engaged meaningfully," "explored with curiosity." If you swap the child's name out, the observation still reads fine for any other child in the room. I call that the swap test, and AI wallpaper fails it every single time.
+
+Why this actually matters is structural. The [EYLF v2.0](https://www.acecqa.gov.au/sites/default/files/2023-01/Belonging_Being_And_Becoming_V2.0.pdf) is explicit that educators should "acknowledge, document and describe children's capabilities and unique ways of belonging, being and becoming." Unique is the load-bearing word in that sentence. Wallpaper observations describe a category of child. Real ones describe a specific child on a specific Tuesday.
+
+## Capture your raw observation in your own words first
+
+This is the rule I broke on those three deleted drafts. I opened Claude first and tried to prompt my way to an observation. Doesn't work. Once the AI draft is in front of you, your memory quietly starts shaping itself around the AI's words instead of what you actually saw. (I know this because I caught myself doing it. Twice in one week, actually.)
+
+So now I write the raw note first, before I touch any tool. Two formats work for me in a busy 3-5 room.
+
+One is a voice memo on my phone while the moment is still warm. Usually within ten minutes, sometimes during nap transition. I keep it short, under 90 seconds. What the child did, what they said (verbatim where I can manage it), one or two physical details: which hand, which direction they faced, whether there was a pause before they moved.
+
+The other is a jot-pad note in pencil, kept in my apron pocket. Five or six lines. Same content rules.
+
+What goes into that raw note, every time:
+- The child's exact words, in quote marks.
+- One specific physical detail.
+- The setting and rough time (outdoor area, 10:40am).
+- My gut read of what I think is happening for them, kept separate from the description so I can argue with it later.
+- A first guess at the [EYLF](https://www.acecqa.gov.au/sites/default/files/2023-01/Belonging_Being_And_Becoming_V2.0.pdf) outcome, or for our NZ colleagues the [Te Whariki](https://tewhariki.tahurangi.education.govt.nz/te-wh-riki-early-childhood-curriculum-document/5637184332.p) strand it might link to.
+
+That note is the thing AI cannot generate. Everything after it is just editing.
+
+## A voice-preserving prompt that keeps your observation yours
+
+Once I have the raw note, I open Claude (or whichever assistant your centre permits — check your service policy first). The prompt I use has four parts.
+
+```
+You are helping an ECT in a 3-5 room in Australia tighten a child
+learning observation for an individual portfolio entry.
+
+RAW NOTES (this is what I actually observed — do not change the facts,
+do not add details I did not mention, do not invent quotes):
+[paste raw note here, with child name replaced with "Child A"]
+
+FRAMEWORK: EYLF v2.0, suggested link Outcome 1.3 (children develop
+knowledgeable and confident self identities). Tell me if you think
+a different outcome fits better and why, but do not silently swap it.
+
+VOICE GUARDRAIL: Keep my child quotes verbatim including any
+non-standard grammar. Keep all physical details I included. Do not
+add adjectives about how the child "felt" unless I described a
+behaviour that shows the feeling. Use Australian English. Plain
+language. Around 120 words.
+```
+
+The line that does the heavy lifting is "do not add details I did not mention." Without it, Claude will quietly invent things. A smile. An eye-contact moment. A tone of voice. None of those were in my notes. All of them sound plausible. That's the danger.
+
+Even with the guardrail, I read the output side by side with my raw note and strike through anything I didn't see. About one draft in three, something has crept in.
+
+Related: [Claude-assisted nursing notes: 9× faster, and one near-miss](/blog/claude-nursing-handoff-notes).
+
+## EYLF and Te Whariki: where AI gets the outcome wrong
+
+I've been running this workflow on around 18 observations across the last term. AI got the framework link wrong, or only loosely right, on roughly one in four. And always in the same direction. It over-promotes. A child sharing a sandpit shovel becomes "developing a strong sense of identity and connectedness to community," when the truer and much smaller statement is "responding to a peer's request."
+
+For Te Whariki this gets harder. Claude has decent surface knowledge of the five strands (Mana Atua, Mana Whenua, Mana Tangata, Mana Reo, Mana Aotūroa) but its grasp of matauranga Maori and te reo phrasing is thin. If you're kaiako in Aotearoa, treat any AI-suggested strand mapping as a first guess. Check it against your own knowledge, or better, a colleague who teaches in te reo. The [Te Whariki curriculum document](https://tewhariki.tahurangi.education.govt.nz/te-wh-riki-early-childhood-curriculum-document/5637184332.p) is the source of truth, not the model.
+
+My two-line verification before anything goes into a portfolio system:
+1. Read the AI-suggested outcome out loud. Does the actual observed behaviour earn that outcome, or is it a stretch?
+2. If a colleague read only my raw note (not the AI draft) and had to pick an outcome, would they pick the same one?
+
+If either answer's no, I rewrite the link myself.
+
+## The 90-second quality check before it goes in the portfolio
+
+Three tests, in order. None of them optional.
+
+**Read-aloud test.** I read the finished observation out loud at speaking pace. If a sentence sounds like something I'd never actually say to a parent at pickup, I rewrite it. "Demonstrated prosocial negotiation strategies" fails this test. "Counted to five on her fingers before handing over the bucket" passes it.
+
+**Swap test.** I mentally swap the child's name for another child in the room. If the observation still reads perfectly, it's too generic. A real observation should break when you swap the child out, because it describes one child's specific moment.
+
+**Accuracy test.** I check the final draft against the original raw note line by line. Anything in the draft that isn't in the note gets cut, even when it reads nicely. This is the test that catches Claude's invented details (and there's almost always at least one).
+
+The three tests run about ninety seconds for a 120-word observation. That's non-negotiable time. The difference between documentation that helps the child's next educator and documentation that's just there to satisfy an audit.
+
+Related: [Aura week 1: I killed my voice-first ECE app on day 14](/blog/aura-week-1-claude-code).
+
+## What I never put into any AI tool
+
+This is centre policy at our service, and it should be at yours. Check before you assume.
+
+- Children's full names, dates of birth, or any photo with a face. I use "Child A," "Child B," and so on, and crop or describe images instead of uploading them.
+- Family circumstances, custody arrangements, safeguarding flags. None of this goes into a third-party tool, ever.
+- Internal incident or injury documentation. That stays in the centre's secure system.
+- Anything that could identify our service if combined with other data: room name, educator initials, suburb.
+
+The free tier of most AI tools retains conversations for model training unless you opt out. A paid business tier with a zero-retention agreement is the minimum bar if you're using AI for anything that touches child information, and even then I keep the data-minimisation rule above. Your centre's privacy policy and the relevant data protection law (Privacy Act 1988 in AU, Privacy Act 2020 in NZ) sit above any tool's terms of service.
+
+## My contrarian take: Claude should not write the conclusion
+
+Most of the educator-facing AI advice I've read in the last six months frames AI as the writer and the educator as the editor. I reckon that gets it exactly backwards, and it's why so much AI-assisted documentation ends up as wallpaper.
+
+There are two things no prompt can give an AI. The first is verbatim child language. A three-year-old saying "I maked it go faster" tells you something about language development that "used descriptive language" erases entirely. The grammatical error is the data. The second is physical detail. Which hand they used, whether they leaned in or held back, the three-second pause before they touched the paint. The pause is the learning. Without those two things, all you've got left is a label.
+
+So my rule, after deleting those three drafts: Claude helps with structure, grammar, and linking observed behaviour to EYLF or Te Whariki outcomes. The observational content stays mine. Raw note first, always, even if it's messy and full of crossings-out. Claude tightens after. Never start with Claude and edit down. If I can't write at least the core observation myself in one or two sentences, I don't publish it. Because if I can't write it, that means I didn't see it clearly enough to document it honestly.
+
+That rule has cost me around five minutes per observation compared to the "let AI draft, I edit" approach. It's also stopped my portfolio entries reading like every other centre's.
+
+## When AI actually helps (and when to just type the thing)
+
+AI saves me real time in three places:
+
+1. Linking a clearly described behaviour to the right EYLF sub-outcome wording, when I know the outcome but can't quite remember the exact phrasing.
+2. Tightening a 200-word ramble into 110 words for a parent-facing summary.
+3. Rewriting a clinical-sounding sentence into something warmer for a family newsletter blurb.
+
+AI costs me time in two places:
+
+1. Short observations, under 50 words. The prompt setup takes longer than just typing the thing.
+2. Observations involving cultural context, especially around te reo Maori, family naming conventions, or religious practice. Faster and safer to write it yourself, or ask a colleague who actually knows.
+
+The honest split, across those 18 observations I tested: AI helped meaningfully on about eleven, was neutral on four, and made things actively worse on three (the deleted ones). Roughly a 60 percent hit rate, which is useful but, you know, not magical. It's a tool, not a colleague.
+
+## Key takeaways
+
+- Write your raw observation in your own words first. Voice memo or jot-pad. Never start with the AI draft.
+- Include verbatim child quotes and at least one specific physical detail in every observation. These are the things AI cannot generate.
+- Use a four-part prompt: persona, raw notes, framework, voice guardrail. The "do not add details I did not mention" line is the single most important sentence in the prompt.
+- Run the three checks every time: read-aloud, swap, accuracy against raw note. About 90 seconds.
+- Never put identifying child or family information into a consumer AI tool. Check your centre's policy and the relevant Privacy Act before anything else.
+- Claude helps with structure and framework links. The observation itself stays yours.
+
+Related: [Claude wrote our parent newsletter — four prompts to sound like me](/blog/claude-parent-newsletter-iteration).
+
+## Sources
+
+- ACECQA. *Belonging, Being and Becoming: The Early Years Learning Framework for Australia V2.0.* [acecqa.gov.au](https://www.acecqa.gov.au/sites/default/files/2023-01/Belonging_Being_And_Becoming_V2.0.pdf)
+- New Zealand Ministry of Education. *Te Whariki Early Childhood Curriculum Document.* [tewhariki.tahurangi.education.govt.nz](https://tewhariki.tahurangi.education.govt.nz/te-wh-riki-early-childhood-curriculum-document/5637184332.p)
+
+---
+
+*Megan is an ECT (Cert IV, Diploma, Bachelor of Early Childhood Education) working in the 3-5 room at a community-based long day care service in Australia. This article reflects her own practice and her current centre's policy at time of writing. It is not a substitute for your service's documented procedures or your supervisor's guidance. Last reviewed 2026-05-28.*
+
+<Schema
+  type="Article"
+  data={{
+    headline: "Writing Child Observations With AI Without Losing Your Voice",
+    description: "An ECT's honest workflow for writing child observations with AI assist: what to keep yours, what to hand to Claude, and the three-second pause that's the real learning.",
+    datePublished: "2026-05-28",
+    dateModified: "2026-05-28",
+    inLanguage: "en-AU",
+    mainEntityOfPage: "https://stonemegan.dev/blog/documenting-child-learning-observations-with-ai-assist-witho",
+    image: "https://stonemegan.dev/images/documenting-child-learning-observations-with-ai-assist-witho-hero.png",
+    keywords: ["writing child observations with AI without losing your voice", "AI learning stories EYLF", "Claude child observation prompt", "humanise AI learning stories", "Te Whariki AI observation"],
+    articleSection: "Early Childhood + AI",
+    author: {
+      "@type": "Person",
+      name: "Megan",
+      jobTitle: "Early Childhood Teacher (ECT)",
+      hasCredential: [
+        { "@type": "EducationalOccupationalCredential", credentialCategory: "Certificate IV in Early Childhood Education and Care" },
+        { "@type": "EducationalOccupationalCredential", credentialCategory: "Diploma of Early Childhood Education and Care" },
+        { "@type": "EducationalOccupationalCredential", credentialCategory: "Bachelor of Early Childhood Education" }
+      ],
+      knowsAbout: ["EYLF v2.0", "Te Whariki", "early childhood documentation", "AI-assisted learning stories"],
+      worksFor: { "@type": "Organization", name: "Community-based long day care service (Australia)" }
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "ai-careers",
+      logo: { "@type": "ImageObject", url: "https://stonemegan.dev/logo.png" }
+    }
+  }}
+/>
+
+<Schema
+  type="Person"
+  data={{
+    name: "Megan",
+    jobTitle: "Early Childhood Teacher (ECT)",
+    description: "ECT working in a 3-5 room at a community-based long day care service in Australia. Writes on AI-assisted documentation, EYLF and Te Whariki workflows.",
+    hasCredential: [
+      { "@type": "EducationalOccupationalCredential", credentialCategory: "Certificate IV in Early Childhood Education and Care" },
+      { "@type": "EducationalOccupationalCredential", credentialCategory: "Diploma of Early Childhood Education and Care" },
+      { "@type": "EducationalOccupationalCredential", credentialCategory: "Bachelor of Early Childhood Education" }
+    ],
+    knowsAbout: ["EYLF v2.0", "Te Whariki", "early childhood documentation", "AI-assisted learning stories", "child observation"]
+  }}
+/>
+
+<Schema
+  type="BreadcrumbList"
+  data={{
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://stonemegan.dev/" },
+      { "@type": "ListItem", position: 2, name: "Blog", item: "https://stonemegan.dev/blog" },
+      { "@type": "ListItem", position: 3, name: "ECE + AI", item: "https://stonemegan.dev/blog/category/ece-ai" },
+      { "@type": "ListItem", position: 4, name: "Writing Child Observations With AI Without Losing Your Voice", item: "https://stonemegan.dev/blog/documenting-child-learning-observations-with-ai-assist-witho" }
+    ]
+  }}
+/>

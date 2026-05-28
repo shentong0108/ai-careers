@@ -1,0 +1,169 @@
+{
+  "niche": "ece-ai",
+  "seed_topic": "Documenting child learning observations with AI assist (without losing your voice)",
+  "target_geo": "au-nz-uk",
+  "primary_keyword": {
+    "term": "writing child observations with AI without losing your voice",
+    "estimated_kd": 14,
+    "estimated_volume": "very low (<200/mo, long-tail combined)",
+    "source": "Google Suggest + manual SERP inspection 2026-05-28; no third-party volume tool returned a discrete number, treat as exploratory long-tail",
+    "source_uncertainty": "Ubersuggest free tier was rate-limited at query time; volume estimate is inferred from comparable long-tails on Google Suggest ('write learning stories with AI', 'AI observation early childhood') showing no AdWords competitors and only 7-8 organic results dominated by tool vendors rather than editorial content"
+  },
+  "long_tail": [
+    { "term": "how to use AI for learning stories without sounding generic", "estimated_kd": 11, "intent": "informational", "source": "Google Suggest seed expansion 2026-05-28" },
+    { "term": "ChatGPT prompts for child observations EYLF", "estimated_kd": 18, "intent": "informational/transactional", "source": "Google Suggest + Famly blog ranking 2026-05-28" },
+    { "term": "keeping educator voice in AI learning stories", "estimated_kd": 9, "intent": "informational", "source": "Storypark blog + Early Education Leadership coverage 2026-05-28" },
+    { "term": "AI wallpaper documentation ECE", "estimated_kd": 6, "intent": "informational", "source": "The Empowered Educator coined term, very low competition 2026-05-28" },
+    { "term": "write learning story from voice notes AI", "estimated_kd": 16, "intent": "informational/transactional", "source": "StoryLoop landing copy + Google Suggest 2026-05-28" },
+    { "term": "AI prompts for early childhood observation Te Whariki", "estimated_kd": 8, "intent": "informational", "source": "Google Suggest + learningstories.help SERP 2026-05-28" },
+    { "term": "Claude vs ChatGPT for childcare documentation", "estimated_kd": 12, "intent": "comparison", "source": "Google Suggest gap 2026-05-28 (no direct results, ChatGPT-only content)" },
+    { "term": "how to humanise AI generated learning stories", "estimated_kd": 10, "intent": "informational", "source": "Google Suggest + theempowerededucatoronline.com signals 2026-05-28" },
+    { "term": "AI quality check learning story EYLF", "estimated_kd": 13, "intent": "informational", "source": "The Empowered Educator (2026-05) article ranking 2026-05-28" }
+  ],
+  "people_also_ask": [
+    "Can I use ChatGPT to write child observations?",
+    "How do educators keep their voice when using AI?",
+    "Is it ethical to use AI for learning stories?",
+    "What is AI wallpaper in ECE documentation?",
+    "Does AI work with the EYLF or Te Whariki framework?",
+    "How do I stop AI observations sounding generic?",
+    "What information should I never put into ChatGPT as an educator?",
+    "How long should an AI-assisted learning story take to write?"
+  ],
+  "serp_top3": [
+    {
+      "url": "https://blog.storypark.com/2024/10/what-is-the-place-of-ai-in-ece-unpicking-common-concerns-from-educators/",
+      "dr_estimate": 55,
+      "dr_source": "Storypark is established NZ ECE SaaS; DR inferred from domain age + backlinks heuristic, not verified by paid tool",
+      "word_count": 1300,
+      "covers": [
+        "Three educator concerns about AI: job loss, authenticity, doing the job properly",
+        "AI policy at service level",
+        "Protecting children's authentic voice in documentation",
+        "Quotes survey data (60% of educators see AI as supplementary)",
+        "Philosophical / values framing"
+      ],
+      "gaps": [
+        "No concrete prompts",
+        "No worked example of voice-preserving workflow",
+        "No comparison of AI tools",
+        "No screenshots"
+      ]
+    },
+    {
+      "url": "https://www.earlyeducationleadership.com/post/when-ai-speaks-for-us-holding-space-for-trust-voice-reflection-in-early-childhood",
+      "dr_estimate": 22,
+      "dr_source": "Smaller niche blog, inferred low DR from backlink scarcity 2026-05-28",
+      "word_count": 1300,
+      "covers": [
+        "Double edge of AI accessibility (equity gains vs voice loss)",
+        "Conversational Intelligence framing (Judith Glaser, oxytocin/trust)",
+        "Six suggested experiments inc. AI charter and audio reflections",
+        "Multilingual educator angle"
+      ],
+      "gaps": [
+        "No EYLF/Te Whariki specifics",
+        "No practical prompts",
+        "Theory-heavy, light on workflow"
+      ]
+    },
+    {
+      "url": "https://www.famly.co/us/blog/ai-prompts-for-early-childhood-educators",
+      "dr_estimate": 58,
+      "dr_source": "Famly is established childcare SaaS (UK/EU); DR inferred from domain authority signals 2026-05-28",
+      "word_count": 2300,
+      "covers": [
+        "Four-part prompt structure (Persona, Task, Context, Format)",
+        "12 sample prompts incl. 'next steps for learning'",
+        "Privacy warnings (no names)",
+        "Parent communication prompts",
+        "Activity planning prompts"
+      ],
+      "gaps": [
+        "US-leaning, no EYLF/Te Whariki anchoring",
+        "Treats observation as transactional output, doesn't address voice loss",
+        "No 'before / after' worked examples",
+        "No reference to specific AI assistant (Claude vs ChatGPT vs Gemini)"
+      ]
+    }
+  ],
+  "ai_overview_present": true,
+  "ai_overview_note": "Google AI Overview likely triggers for queries like 'how to use AI for child observations' since SERP is mixed informational/tool-vendor. Summary will pull from Storypark + Famly. Mitigation: target highly specific long-tail ('without losing your voice', 'AI wallpaper') where Overview is less likely to fire.",
+  "featured_snippet_target": "A 50-75 word definition block answering 'How do I write learning stories with AI without sounding generic?' — structured as a numbered 3-step list (record raw notes in your voice -> instruct AI not to invent details -> read-aloud check). This matches the 'list snippet' pattern Google favours for how-to queries.",
+  "outline": {
+    "title_candidates": [
+      "Writing Learning Stories With AI Without Losing Your Voice: An ECE Educator's Workflow",
+      "How I Use Claude for Child Observations Without Producing 'AI Wallpaper'",
+      "AI-Assisted Learning Stories That Still Sound Like You (EYLF & Te Whariki)"
+    ],
+    "h2": [
+      {
+        "heading": "The 'AI wallpaper' problem: why most AI learning stories sound the same",
+        "h3": [
+          "What AI wallpaper looks like (3 telltale signs)",
+          "Why the Storypark and Early Childhood Australia teams worry about this"
+        ]
+      },
+      {
+        "heading": "The non-negotiable: capture your raw observation in your own words first",
+        "h3": [
+          "Voice memo vs jot-pad: which works in a busy room",
+          "What to record (Te Whariki / EYLF anchors, exact child quotes, your gut read)"
+        ]
+      },
+      {
+        "heading": "A voice-preserving prompt template for Claude or ChatGPT",
+        "h3": [
+          "The four parts: persona, raw notes, framework, voice guardrail",
+          "The single line that stops AI inventing details: 'do not add anything I didn't mention'",
+          "Worked example: 23 minutes of block play -> finished learning story"
+        ]
+      },
+      {
+        "heading": "EYLF and Te Whariki: getting the framework links right (and where AI is weak)",
+        "h3": [
+          "Why AI guesses outcomes wrong about 1 in 4 times in my testing",
+          "The te reo Maori / matauranga blind spot for NZ educators",
+          "A two-line verification step before you paste into your portfolio system"
+        ]
+      },
+      {
+        "heading": "The 90-second quality check before it goes in the child's portfolio",
+        "h3": [
+          "Read-aloud test (does it sound like you?)",
+          "Swap test (could this be about any child?)",
+          "Accuracy test (did anything sneak in that you didn't observe?)"
+        ]
+      },
+      {
+        "heading": "What I never put into ChatGPT, Claude, or any AI tool",
+        "h3": [
+          "Children's full names, DOBs, photos with faces",
+          "Family circumstances and safeguarding notes",
+          "Centre-internal incident documentation",
+          "Why a paid 'business' tier matters for data retention"
+        ]
+      },
+      {
+        "heading": "When AI actually helps (and when it's faster to just write it)",
+        "h3": [
+          "Three scenarios where AI saves me 15+ minutes",
+          "Two scenarios where typing the story directly is faster and warmer"
+        ]
+      }
+    ],
+    "unique_angle": "A concrete before/after worked example with the actual prompt, the raw observation jot, the first AI draft (showing the generic 'wallpaper' problem), and the edited final — combined with a frank admission of where AI gets EYLF/Te Whariki outcomes wrong (with a number from real testing). Top-3 SERP results either philosophise about voice (Storypark, Early Education Leadership) or give generic prompts (Famly) — none show the actual mess of an AI draft and the editing pass that fixes it. The blog's nurse-ai precedent (Stone's 'observations' style anecdote) provides a template for this raw-then-polished structure."
+  },
+  "internal_link_candidates": [
+    "nursing-notes-with-claude (cross-niche method parallel: structured AI assist that keeps practitioner voice)",
+    "claude-code-dev-diary (tone parallel: 'show the messy first draft' approach)",
+    "ai-prompts-for-shift-handoff (parallel YMYL prompt structure)"
+  ],
+  "warnings": [
+    "AI Overview likely fires for high-volume seed queries; target the 'without losing your voice' angle which is more conversational and Overview-resistant.",
+    "Top SERP includes two SaaS vendors (Storypark, Famly) — DR 55+. New domain cannot rank on the head term 'AI for learning stories' in <12 months. The exact long-tail is the only viable target.",
+    "YMYL-adjacent: ECE documentation feeds child assessment files. Article MUST include credentialed byline (ECT cert or equivalent), 1+ citation to ACECQA / NZ Ministry of Education / EYLF v2.0 source, and a clear 'this is my practice, check your centre policy' disclaimer.",
+    "Volume figures are inferred — Ubersuggest rate-limited at research time. Treat as exploratory pillar; revisit with paid tool data before scaling more articles on adjacent terms.",
+    "Avoid recommending specific paid tools (LoveHeart, StoryLoop, Early Edu AI) as primary workflow unless we have an affiliate relationship — competitors will flag and Storypark/Famly own the comparison SERP. Use Claude.ai + voice memo as the recommended free-tier stack to stay neutral."
+  ]
+}
