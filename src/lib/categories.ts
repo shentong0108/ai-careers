@@ -7,11 +7,11 @@ export const CATEGORIES = {
       'Honest accounts of using Claude, ChatGPT, and others on the ward. No vendor pitches.',
   },
   'ece-ai': {
-    title: 'ECE + AI',
+    title: 'ECT + AI',
     description:
-      'AI for early childhood educators — lesson planning, parent comms, observations.',
+      'AI for early childhood teachers — lesson planning, parent comms, observations.',
     intro:
-      'Written by a working ECT. Real classroom examples, real iteration cycles.',
+      'Written by a working ECT in Sydney. Real classroom examples, real iteration cycles.',
   },
   'dev-diary': {
     title: 'Dev Diary',
