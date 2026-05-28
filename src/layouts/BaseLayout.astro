@@ -362,6 +362,177 @@ const fullOg = ogImage.startsWith('http') ? ogImage : new URL(ogImage, Astro.sit
         text-align: center;
       }
 
+      /* Author duo avatars (Markmanson-style overlapping circles) */
+      .author-duo {
+        display: inline-flex;
+        align-items: center;
+        margin-bottom: 1.5rem;
+      }
+      .author-duo img {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        border: 4px solid #ffffff;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        background: var(--c-bg);
+      }
+      .author-duo img:not(:first-child) { margin-left: -18px; }
+      .author-duo .label {
+        margin-left: 1rem;
+        font-family: var(--font-sans);
+        font-size: 0.85rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: var(--c-muted);
+        line-height: 1.4;
+      }
+      .author-duo .label strong { color: var(--c-text); display: block; font-size: 1rem; }
+
+      /* Big bold display heading for landing hero (Markmanson-style) */
+      h1.display-xl {
+        font-size: clamp(2.6rem, 7vw, 4.8rem);
+        font-weight: 800;
+        line-height: 1;
+        letter-spacing: -2px;
+        margin: 0 0 1.2rem;
+        color: var(--c-text);
+      }
+      h1.display-xl em {
+        font-style: normal;
+        background: linear-gradient(120deg, var(--c-teal) 0%, var(--c-green) 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      /* Pull quote (Markmanson-style emphasis blocks for articles) */
+      .pull-quote {
+        margin: 2.5rem 0;
+        padding: 1.5rem 0;
+        border-top: 2px solid var(--c-teal);
+        border-bottom: 2px solid var(--c-teal);
+        font-family: var(--font-sans);
+        font-size: clamp(1.4rem, 3vw, 1.8rem);
+        font-weight: 700;
+        line-height: 1.25;
+        color: var(--c-teal);
+        letter-spacing: -0.5px;
+      }
+      .pull-quote::before {
+        content: "";
+        display: block;
+        width: 40px;
+        height: 3px;
+        background: var(--c-green);
+        margin-bottom: 1rem;
+      }
+
+      /* Newsletter / subscribe block */
+      .signup-block {
+        background: var(--c-bg-soft);
+        border-radius: var(--radius-lg);
+        padding: 2.5rem 2rem;
+        margin: 3rem auto;
+        max-width: 720px;
+        text-align: center;
+        border: 1px solid var(--c-border);
+      }
+      .signup-block .eyebrow {
+        font-family: var(--font-sans);
+        font-size: 0.78rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: var(--c-teal-mid);
+        margin: 0 0 0.5rem;
+      }
+      .signup-block h3 {
+        font-size: clamp(1.5rem, 3.5vw, 2.1rem);
+        font-weight: 700;
+        line-height: 1.15;
+        letter-spacing: -0.8px;
+        margin: 0 0 0.85rem;
+      }
+      .signup-block p {
+        color: var(--c-text-soft);
+        margin: 0 auto 1.5rem;
+        max-width: 40ch;
+      }
+      .signup-block form {
+        display: flex;
+        gap: 0.6rem;
+        max-width: 480px;
+        margin: 0 auto;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .signup-block input[type="email"] {
+        flex: 1;
+        min-width: 220px;
+        padding: 0.85rem 1.1rem;
+        font-family: var(--font-sans);
+        font-size: 1rem;
+        border: 1.5px solid var(--c-border);
+        border-radius: 999px;
+        background: #ffffff;
+        color: var(--c-text);
+        outline: none;
+        transition: border-color 0.15s ease;
+      }
+      .signup-block input[type="email"]:focus { border-color: var(--c-teal-mid); }
+      .signup-block button {
+        padding: 0.85rem 1.6rem;
+        font-family: var(--font-sans);
+        font-size: 1rem;
+        font-weight: 600;
+        background: var(--c-teal);
+        color: #ffffff;
+        border: none;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: background 0.15s ease, transform 0.15s ease;
+      }
+      .signup-block button:hover { background: var(--c-teal-bar); transform: translateY(-1px); }
+      .signup-block .note { font-size: 0.78rem; color: var(--c-muted); margin: 1rem 0 0; }
+
+      /* Dark CTA band before footer (Markmanson-style high contrast) */
+      .cta-band {
+        background: var(--c-teal);
+        color: #ffffff;
+        padding: 3.5rem 1.5rem;
+        margin-top: 5rem;
+        text-align: center;
+      }
+      .cta-band h2 {
+        color: #ffffff;
+        font-size: clamp(1.8rem, 4vw, 2.6rem);
+        font-weight: 700;
+        line-height: 1.15;
+        margin: 0 auto 0.8rem;
+        max-width: 18ch;
+        letter-spacing: -0.8px;
+      }
+      .cta-band p {
+        color: #c7e2e8;
+        max-width: 50ch;
+        margin: 0 auto 1.8rem;
+      }
+      .cta-band .pill {
+        display: inline-block;
+        background: var(--c-green);
+        color: #ffffff;
+        padding: 0.9rem 2rem;
+        border-radius: 999px;
+        font-family: var(--font-sans);
+        font-weight: 600;
+        text-decoration: none;
+        transition: filter 0.15s ease, transform 0.15s ease;
+      }
+      .cta-band .pill:hover { filter: brightness(1.08); transform: translateY(-1px); color: #ffffff; }
+
+      .site-footer { margin-top: 0; }
+
       /* Hero with overlay card (homepage + category) */
       .hero-banner {
         position: relative;

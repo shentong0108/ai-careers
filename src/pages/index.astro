@@ -25,18 +25,24 @@ const CARD_FALLBACK: Record<string, string> = {
   title="stonemegan.dev — nurse + ECE + AI, no hype"
   description="Real stories from a Sydney-based RN and an early-childhood teacher using AI in their jobs. Plus an indie dev diary. No buzzwords. Failures included."
 >
-  <section
-    class="hero-banner"
-    style="background-image: url('/images/hero-default.jpg');"
-  >
+  <section class="hero-banner" style="background-image: url('/images/hero-default.jpg'); min-height: 560px;">
     <div class="hero-card-container">
-      <div class="hero-card">
-        <p class="eyebrow">Blog</p>
-        <h1>What AI actually does in our jobs.</h1>
-        <p>
-          A Sydney-based RN and an early-childhood teacher write about the AI tools
-          we actually use day to day — including the ones we dropped. Plus an indie
-          dev diary, failures included.
+      <div class="hero-card" style="max-width: 620px;">
+        <div class="author-duo">
+          <img src="/authors/stone.svg" alt="Stone" />
+          <img src="/authors/megan.svg" alt="Megan" />
+          <span class="label">
+            <strong>Stone &amp; Megan</strong>
+            Sydney · RN + ECT
+          </span>
+        </div>
+        <h1 class="display-xl">
+          What AI actually <em>does</em> in our jobs.
+        </h1>
+        <p style="font-size: 1.12rem; color: var(--c-text-soft); margin: 0;">
+          Two real professionals — a nurse and an early-childhood teacher —
+          writing about the AI tools we actually use on shift. Including the
+          ones we dropped. Including the failures.
         </p>
       </div>
     </div>
@@ -85,4 +91,28 @@ const CARD_FALLBACK: Record<string, string> = {
       </div>
     )}
   </div>
+
+  <div class="container">
+    <div class="signup-block">
+      <p class="eyebrow">Get a real post once a week</p>
+      <h3>No filler. No hype. Just what we tried this week.</h3>
+      <p>Drop your email and we'll send the new post the morning it goes up. Unsubscribe anytime.</p>
+      <form action="#" method="post" onsubmit="event.preventDefault(); alert('Newsletter sign-up coming soon — for now bookmark the site or subscribe via RSS.'); return false;">
+        <input type="email" placeholder="you@example.com" aria-label="Email address" required />
+        <button type="submit">Notify me</button>
+      </form>
+      <p class="note">No subscriber list active yet — this form is a placeholder until we wire up an email provider.</p>
+    </div>
+  </div>
+
+  <section class="cta-band">
+    <h2>Failures included. On purpose.</h2>
+    <p>
+      Most AI blogs sell you a workflow that worked. Ours show you the
+      iron-infusion record that nearly shipped without its batch number,
+      the four prompts before Claude stopped sounding corporate, and the
+      day-14 project we killed.
+    </p>
+    <a class="pill" href="/dev-diary">Read the dev diary →</a>
+  </section>
 </BaseLayout>
