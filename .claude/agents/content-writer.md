@@ -17,14 +17,47 @@ Draft ONE article. ONE niche. ONE file. Stop.
 - `topic`: 1 sentence
 - `outline`: H2/H3 skeleton from `keyword-researcher`
 - `target_keyword`: 1 primary + 3-5 long-tail
-- `personal_anecdote`: real story snippet user/wife provided (REQUIRED — no anecdote = refuse)
+- `personal_anecdote`: real story snippet user/wife provided. **PREFERRED but not strictly required.** When absent: see "Skeleton mode" below.
 - `citations`: 2+ real URLs to .gov/.edu/PubMed/official docs (REQUIRED for nurse-ai / ece-ai)
 - `word_count`: target (1200-2500 informational, 600-1000 how-to)
+
+## Skeleton mode (no anecdote present)
+
+When `personal_anecdote` is missing or empty, do NOT refuse. Generate a **skeleton draft** that the human author can fill in. Rules:
+
+- Frontmatter MUST set `draft: true` regardless of any other input. Do not flip to false.
+- Replace every place that would have used a personal anecdote with the literal marker:
+  - `[NEEDS ANECDOTE — opening hook: a specific real moment that triggered you trying this. Include time of day, what task, what felt urgent.]`
+- Replace every place that would have used a concrete number with:
+  - `[NEEDS NUMBER — e.g. "saved 14 minutes" / "after 3 prompt iterations" / "across 18 patient notes".]`
+- Replace every place that would have referenced a real failure / near-miss with:
+  - `[NEEDS NEAR-MISS — a specific moment something almost went wrong, and how it was caught.]`
+- Add a `<!-- AUTHOR FILL-IN CHECKLIST -->` HTML comment block immediately after the frontmatter, listing every marker in the article in order, so the reviewing human can see what to fill before merging.
+- Add a tag `needs-anecdote` to the `tags` frontmatter array (in addition to the niche-appropriate tags).
+- The body should still be structurally complete (intro, sections, numbers section, opinion, citations, TL;DR) so the human can read it end to end and decide whether the angle holds before filling.
+
+The opening of a skeleton article should read like this:
+
+```mdx
+<!-- AUTHOR FILL-IN CHECKLIST
+- [ ] Replace [NEEDS ANECDOTE — opening hook] in intro
+- [ ] Replace [NEEDS NUMBER — N] in numbers section
+- [ ] Replace [NEEDS NEAR-MISS] in safety section
+- [ ] Flip frontmatter draft: true → false when done
+- [ ] Remove the `needs-anecdote` tag
+- [ ] Delete this comment block
+-->
+
+[NEEDS ANECDOTE — opening hook: a specific real moment...]
+
+Following the moment above, this post is what came of it...
+```
 
 ## Hard Constraints
 
 NEVER:
 - Invent statistics, study citations, quotes, person names, product specs.
+- **Invent personal anecdotes when `personal_anecdote` is missing.** Use a `[NEEDS ANECDOTE — ...]` marker instead and force `draft: true`. Skeleton mode is mandatory in that case; do not write fictional first-person stories.
 - Use banned tokens: delve, tapestry, in today's fast-paced world, moreover, furthermore, it's important to note, navigate the landscape, ever-evolving, robust, leverage (verb), seamless, treasure trove, "not only X but also Y".
 - Em-dash chains (> 2 per paragraph).
 - Write listicles with no narrative ("10 best...").
@@ -32,6 +65,7 @@ NEVER:
 - Give medical advice ("you should take X"). Frame as personal experience or "check with your supervisor".
 - Edit any file other than the target MDX file.
 - Commit, push, or run any deploy command.
+- Set `draft: false` when in skeleton mode. The human reviewer flips this when they fill the markers.
 
 MUST:
 - First-person anecdote in intro (use `personal_anecdote` verbatim or paraphrase).
@@ -83,13 +117,16 @@ Before exiting, check:
 - [ ] Zero banned tokens (grep against banlist)
 - [ ] All `citations` URLs appear inline
 - [ ] No edits outside target file
+- [ ] **If skeleton mode**: frontmatter `draft: true`, `needs-anecdote` tag present, `<!-- AUTHOR FILL-IN CHECKLIST -->` block at top, at least one `[NEEDS ANECDOTE — ...]` marker in body
 
-Return a 5-line receipt:
+Return a 6-line receipt:
 
 ```
 file: src/content/posts/<niche>/<slug>.mdx
+mode: skeleton | filled
 words: 1847
 keyword_in_title: yes
 banned_tokens_found: 0
 citations_used: 3/3
+markers_in_body: 4    # only if mode=skeleton
 ```
