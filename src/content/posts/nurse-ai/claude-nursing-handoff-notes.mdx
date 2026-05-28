@@ -1,13 +1,13 @@
 ---
-title: "Claude-assisted nursing notes: 9× faster, and one near-miss"
+title: "AI-assisted nursing notes: 9× faster, and one near-miss"
 slug: "claude-nursing-handoff-notes"
-description: "An evening clinic. Twelve note types still to write. I built a Claude-assisted tool to draft them. Then an iron-infusion record nearly went out incomplete."
+description: "An evening clinic. Twelve note types still to write. I built an AI-assisted tool to draft them. Then an iron-infusion record nearly went out incomplete."
 publishedAt: "2026-05-28"
-updatedAt: "2026-05-28"
+updatedAt: "2026-05-29"
 author: "stone"
 category: "nurse-ai"
-tags: ["claude", "nursing", "primary care", "documentation", "AI safety", "GP clinic"]
-keywords: ["AI nursing documentation", "Claude for nurses", "primary care AI", "iron infusion documentation", "AHPRA AI", "nursing workload"]
+tags: ["ai-assistant", "nursing", "primary care", "documentation", "AI safety", "GP clinic"]
+keywords: ["AI nursing documentation", "AI for nurses", "primary care AI", "iron infusion documentation", "AHPRA AI", "nursing workload"]
 canonical: "https://stonemegan.dev/blog/claude-nursing-handoff-notes"
 draft: false
 aiDetectionScore: null
@@ -20,7 +20,7 @@ It was 7pm on a weekday evening at a busy GP clinic in Sydney. The waiting room 
 
 The GPs at our clinic had recently started using AI documentation tools. The notes that used to take them ten minutes were taking three. I sat there at 7pm thinking: why do nurses not get the same?
 
-That night I opened claude.ai. The article you're reading is what came of it, including the iron-infusion record that almost went out incomplete and what that taught me about how to actually use this tool safely.
+That night I opened an AI chat tool. The article you're reading is what came of it, including the iron-infusion record that almost went out incomplete and what that taught me about how to actually use this tool safely.
 
 ## What I write each shift
 
@@ -30,13 +30,13 @@ On a full clinic day I finish 15 to 20 individual notes. Some are short. A routi
 
 This is the part of nursing that doesn't make it into the workload model. It's invisible overtime, and it's been normalised.
 
-## What I built with Claude
+## What I built with the AI
 
-I didn't open Claude to draft a single note. I asked it to help me build a tool.
+I didn't open the AI to draft a single note. I asked it to help me build a tool.
 
 The brief I gave it was specific: a Python template generator for primary-care nursing notes, designed to ingest a small number of structured inputs (patient context, procedure type, vitals, batch numbers) and output a clinical note in the format our practice software expected. I described the twelve note types, the required fields for each, the regulatory requirements I could think of off the top of my head, and the formatting our system needed.
 
-Claude produced a working prototype in one session. Several template sections had gaps or phrasing that wasn't clinically precise. I went through each of them, identified the issues, and rewrote them with Claude's help until each template would produce a note that a nurse would actually sign off on.
+The AI produced a working prototype in one session. Several template sections had gaps or phrasing that wasn't clinically precise. I went through each of them, identified the issues, and rewrote them with the AI's help until each template would produce a note that a nurse would actually sign off on.
 
 The first version was usable. It was also wrong in a way I didn't catch for about a week.
 
@@ -98,7 +98,7 @@ Australia's nursing union, the ANMF, [made a related case to the federal governm
 ## TL;DR
 
 - Sole RN at a busy Sydney GP clinic. 15-20 nursing notes per shift across 12 distinct types.
-- Built a Claude-assisted Python tool to template the notes.
+- Built an AI-assisted Python tool to template the notes.
 - Injection notes: 4-5 minutes to 30 seconds. Iron-infusion records: 10 minutes to 30 seconds. About an hour saved per full clinic day.
 - One near-miss caught: an iron-infusion record looked complete, but the cannula batch number and expiry date had not populated. Legally required fields under Australian standards. Almost approved.
 - Every output is now treated as a first draft, not a finished record. Cross-check against physical source. Second read for anything involving medication, procedure, or complex patient.

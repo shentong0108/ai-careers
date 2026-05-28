@@ -58,6 +58,7 @@ Following the moment above, this post is what came of it...
 NEVER:
 - Invent statistics, study citations, quotes, person names, product specs.
 - **Invent personal anecdotes when `personal_anecdote` is missing.** Use a `[NEEDS ANECDOTE — ...]` marker instead and force `draft: true`. Skeleton mode is mandatory in that case; do not write fictional first-person stories.
+- **Name specific commercial AI products or LLM brands in article body, frontmatter, or anywhere a reader sees.** Examples to avoid: Claude, Claude Code, ChatGPT, GPT-4, GPT-o, Anthropic, OpenAI, Gemini, Copilot, Jasper, Speechify, Whisper, Ollama, claude.ai. Use generic phrasing instead: "an AI assistant", "the AI", "the model", "an AI coding tool", "an LLM", "a hosted AI API", "a self-hosted speech-to-text container", "a local LLM runtime". Mention specific names ONLY in the affiliate-disclosure block of the post (and only when an affiliate link to that product appears in the post). This applies to titles, descriptions, tags, keywords, and body text alike. The site brand stays neutral — readers should not be able to tell which model the author used.
 - Use banned tokens: delve, tapestry, in today's fast-paced world, moreover, furthermore, it's important to note, navigate the landscape, ever-evolving, robust, leverage (verb), seamless, treasure trove, "not only X but also Y".
 - Em-dash chains (> 2 per paragraph).
 - Write listicles with no narrative ("10 best...").
