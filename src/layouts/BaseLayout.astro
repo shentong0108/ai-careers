@@ -156,50 +156,27 @@ const fullOg = ogImage.startsWith('http') ? ogImage : new URL(ogImage, Astro.sit
       }
       .site-header .logo {
         display: inline-flex;
-        align-items: center;
-        gap: 0.7rem;
-        font-family: var(--font-serif);
+        align-items: baseline;
+        gap: 0.55rem;
+        font-family: var(--font-sans);
         text-decoration: none;
-        line-height: 1.1;
-      }
-      .site-header .logo-mark {
-        width: 38px;
-        height: 38px;
-        border-radius: 11px;
-        background: linear-gradient(135deg, var(--c-teal) 0%, var(--c-teal-mid) 55%, var(--c-green) 100%);
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        color: #ffffff;
-        font-family: var(--font-serif);
-        font-weight: 700;
-        font-size: 1.05rem;
-        letter-spacing: -1px;
-        flex-shrink: 0;
-        box-shadow: 0 2px 6px rgba(29, 79, 90, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.18);
-      }
-      .site-header .logo-text {
-        display: inline-flex;
-        flex-direction: column;
-        gap: 0.1rem;
+        line-height: 1;
       }
       .site-header .logo-main {
-        font-weight: 700;
-        font-size: 1.32rem;
-        color: var(--c-teal);
-        letter-spacing: -0.5px;
-      }
-      .site-header .logo-tld {
-        font-weight: 400;
-        color: var(--c-teal-mid);
+        font-weight: 800;
+        font-size: 1.45rem;
+        color: var(--c-text);
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
       }
       .site-header .logo-tag {
         font-family: var(--font-sans);
-        font-size: 0.66rem;
+        font-size: 0.7rem;
         font-weight: 600;
         color: var(--c-muted);
         text-transform: uppercase;
         letter-spacing: 1.5px;
+        white-space: nowrap;
       }
 
       .site-header nav {
@@ -789,21 +766,17 @@ const fullOg = ogImage.startsWith('http') ? ogImage : new URL(ogImage, Astro.sit
     <div class="top-strip"></div>
     <header class="site-header">
       <div class="inner">
-        <a class="logo" href="/" aria-label="stonemegan.dev home">
-          <span class="logo-mark" aria-hidden="true">sm</span>
-          <span class="logo-text">
-            <span><span class="logo-main">stonemegan</span><span class="logo-tld">.dev</span></span>
-            <span class="logo-tag">Nurse · ECE · Indie Dev</span>
-          </span>
+        <a class="logo" href="/" aria-label="stonemegan home">
+          <span class="logo-main">stonemegan</span>
+          <span class="logo-tag">Nurse · ECE · Indie Dev</span>
         </a>
         <nav>
-          <a class="nav-link" href="/nurse-ai">Nurse + AI</a>
-          <a class="nav-link" href="/ece-ai">ECE + AI</a>
+          <a class="nav-link" href="/#latest">Articles</a>
           <a class="nav-link" href="/dev-diary">Dev Diary</a>
           <a class="nav-link" href="/about">About</a>
           <span class="nav-divider" aria-hidden="true"></span>
-          <a class="cta cta-primary" href="/#latest">
-            Read latest
+          <a class="cta cta-primary" href="/#newsletter">
+            Newsletter
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
           </a>
         </nav>
@@ -815,7 +788,7 @@ const fullOg = ogImage.startsWith('http') ? ogImage : new URL(ogImage, Astro.sit
     <footer class="site-footer">
       <div class="inner">
         <div>
-          <h4>stonemegan.dev</h4>
+          <h4>stonemegan</h4>
           <p>
             Real stories about AI in nursing and early-childhood education,
             from a Sydney-based RN and an ECT.
@@ -839,7 +812,7 @@ const fullOg = ogImage.startsWith('http') ? ogImage : new URL(ogImage, Astro.sit
           <a href="/sitemap-index.xml">Sitemap</a>
         </div>
       </div>
-      <p class="bottom">© {new Date().getFullYear()} stonemegan.dev · Written by humans, edited by humans.</p>
+      <p class="bottom">© {new Date().getFullYear()} stonemegan · Written by humans, edited by humans.</p>
     </footer>
   </body>
 </html>

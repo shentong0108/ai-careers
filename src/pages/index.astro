@@ -92,12 +92,12 @@ const CARD_FALLBACK: Record<string, string> = {
     )}
   </div>
 
-  <div class="container">
+  <div class="container" id="newsletter">
     <div class="signup-block">
       <p class="eyebrow">Get a real post once a week</p>
       <h3>No filler. No hype. Just what we tried this week.</h3>
       <p>Drop your email and we'll send the new post the morning it goes up. Unsubscribe anytime.</p>
-      <form action="#" method="post" onsubmit="event.preventDefault(); alert('Newsletter sign-up coming soon — for now bookmark the site or subscribe via RSS.'); return false;">
+      <form id="newsletter" action="#" method="post" onsubmit="event.preventDefault(); alert('Newsletter sign-up coming soon — for now bookmark the site or subscribe via RSS.'); return false;">
         <input type="email" placeholder="you@example.com" aria-label="Email address" required />
         <button type="submit">Notify me</button>
       </form>
