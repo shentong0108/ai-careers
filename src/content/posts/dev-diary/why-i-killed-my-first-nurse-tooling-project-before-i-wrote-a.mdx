@@ -1,0 +1,170 @@
+---
+title: "Why I Killed My First Nurse-Tooling Project Before I Wrote Code"
+slug: "why-i-killed-my-first-nurse-tooling-project-before-i-wrote-a"
+description: "An RN and indie dev on when to kill a side project before building: the privacy wall that ended my clinical-note tool before a single line of integration code."
+publishedAt: "2026-05-29"
+updatedAt: "2026-05-29"
+author: "stone"
+category: "dev-diary"
+tags: ["dev-diary", "privacy", "healthcare-dev", "side-projects", "australian-privacy-act"]
+keywords: ["when to kill a side project before building", "can a third party app read patient data from practice management software australia", "australian privacy act 1988 health app developer", "practice management software api terms of service patient data", "clinical note automation tool privacy compliance australia", "indie dev healthcare app compliance australia"]
+canonical: "https://stonemegan.dev/blog/why-i-killed-my-first-nurse-tooling-project-before-i-wrote-a"
+draft: true
+aiDetectionScore: null
+humanizationMode: "degraded"
+heroImage: "/images/why-i-killed-my-first-nurse-tooling-project-before-i-wrote-a-hero.png"
+ogImage: "/og/why-i-killed-my-first-nurse-tooling-project-before-i-wrote-a.png"
+voicePolisherPasses: 1
+voicePolisherSamples: ["src/content/posts/dev-diary/aura-week-1-claude-code.mdx", "src/content/posts/nurse-ai/claude-nursing-handoff-notes.mdx"]
+---
+
+import Schema from '@/components/Schema.astro'
+
+I had the whole thing mapped out in my head between two patients. I'm an RN in Sydney primary care, and I also build software at night. The idea felt obvious: automate the clinical-note workflow that eats my afternoons. I sketched the data flow, named the repo, and got as far as opening a blank editor. Then I asked one question, and the answer killed it. This is the story of when to kill a side project before building. Not because the market was wrong. Because the project legally could not exist in the form I wanted.
+
+## The idea that felt obvious from the clinic floor
+
+### The shift that sparked it: a real handoff-notes pain point
+
+Some afternoons I lose 40-odd minutes to note tidying. Handoff context, repeated fields, the same patient summary retyped into three boxes. As a nurse it's tedious. As a dev it screams "automate me."
+
+So I did what devs do. I imagined a small tool sitting next to our practice management software, reading the structured data that's already there, and drafting the repetitive parts of a note. No retyping. The clinician reviews and signs. Clean.
+
+### Why automating clinical notes looked like a clean win
+
+On paper it was a textbook side project. The pain was real and I felt it daily. I sat inside the user base. There was a clear before-and-after, and I genuinely believed it would save me a quarter-hour per shift, maybe more across a team. That belief is the trap. A good problem makes you skip the question that matters most.
+
+## The one question I asked before opening an editor
+
+### "What must be true for this to be legal?"
+
+Before I wrote the integration, I made myself answer one thing. What must be true for this tool to be allowed to exist? Not "can I build it." I clearly could. The real question was whether the thing I built was permitted to touch the data it needed.
+
+The honest answer arrived fast. For the tool to be useful at all, it had to read patient data straight out of the practice management software. Names, identifiers, clinical history. The whole point was the data, and the data was the problem.
+
+### Where the data actually lives: inside the PMS
+
+Here's the part non-clinical devs miss. The useful data doesn't live in some neutral API I'm entitled to. It lives inside a regulated clinical system, attached to identified patients, governed by law that does not care how clever my prototype is. My tool would sit in that flow, with patient identifiers passing through code I wrote on my own laptop. Saying it plainly made the decision for me.
+
+## How the Australian Privacy Act 1988 ended it
+
+### APP 3 and APP 6: collection and use of health information
+
+I'm not a lawyer, and nothing here is legal advice. Confirm your own situation with proper counsel. But in my read of the [Australian Privacy Principles](https://www.oaic.gov.au/privacy/australian-privacy-principles), health information is sensitive information, and it gets the strictest handling under the Act. APP 3 governs when an entity may collect that information in the first place. APP 6 governs what you may then do with it. My tool would have collected and re-used identified health data for a purpose the patient never consented to: processing by a third-party app one of their nurses wrote at home.
+
+The clinic is the health service provider. The patient gave their information to the clinic, not to my side project.
+
+### Why "I'm an RN" doesn't make me a compliant health-service software vendor
+
+This was the uncomfortable bit. I assumed my clinical role gave me cover. It does not. The [OAIC's guidance on health information](https://www.oaic.gov.au/privacy/your-privacy-rights/health-information) is clear that strict rules apply to how a health service provider collects, uses and discloses health information. Being a nurse means I can access patient data inside my care relationship, for that patient's care. It does not authorise me to pipe that same data into a separate piece of software I own, operate, and could in theory deploy beyond this clinic. Those are two different legal hats. I'd been wearing the wrong one in my head.
+
+### What a Privacy Impact Assessment would have flagged on day one
+
+If I'd run even a back-of-envelope privacy impact assessment, the first line would have read: a new third party gains access to identified health information. That single line is the project. Everything downstream (security, retention, breach notification) only matters if that first line is permitted. It wasn't. So the assessment I never formally ran still did its job. The foundation was missing, and you don't pour concrete on a missing foundation.
+
+## The second wall: the PMS vendor's terms of service
+
+### Reading the database vs. an approved integration partner program
+
+Suppose the privacy wall hadn't been there. There was a second one right behind it. To read the data I needed, I'd have to either query the practice management database directly or hit an undocumented endpoint. Both almost certainly breach the vendor's terms of service. PMS vendors don't let arbitrary code read their patient data, and they're right not to.
+
+The legitimate path exists, but it's a door, not a window. Vendors run approved integration partner programs with contracts, security review, and accountability. A solo dev poking at the database is not that.
+
+### Why API access is gated to recognised providers, not solo devs
+
+I used to find that gating annoying (genuinely, it irritated me for years). Now I think it's the system working. The friction is the feature. When the data is identified health information, "move fast" is the wrong instinct, and a barrier that stops a well-meaning nurse-dev at the door is the same barrier that stops a bad actor. I happened to be on the wrong side of a door built for good reasons.
+
+## Killing a project is a skill, not a failure
+
+### The difference between "no market" and "cannot exist"
+
+Most "kill your side project" advice online is about markets, motivation, or sunk cost. Build the wrong thing, lose interest, chase the next shiny repo. This was a different category. The market was real and I was the customer. The thing simply could not exist in this form, full stop. "Cannot exist" is not "won't sell." A year ago I couldn't have told those two apart. Spotting the difference early is the whole skill. Spot it late and you pay in weekends.
+
+### The sunk-cost trap I avoided by killing it pre-code
+
+Here's my honest opinion, and it's the whole point of this post. The best line of code I wrote on this project was zero lines. If I'd built the integration first and discovered the wall after, I'd have had a working prototype I was emotionally invested in, and I'd have started bargaining. Maybe I anonymise it. Maybe just for me. Maybe just this once. Every one of those is how a privacy breach gets rationalised into existence. Killing it before code meant there was nothing to bargain over. I felt relief, not loss, and that reaction told me I'd made the right call.
+
+## What I'd build instead (the compliant version)
+
+### Tools that never touch patient data
+
+The salvageable version of this idea never sees a patient. A note-structuring tool that works on text I type or paste manually, with zero connection to the PMS and no identifiers leaving the room, sits in a completely different risk class. Less magic, more useful than it sounds. The tedious part was never the typing. It was the structure. And I can automate structure without ever automating access.
+
+### Working through an authorised integration path
+
+The other version is the slow, correct one. If a tool genuinely needs PMS data, the answer is the vendor's official integration program, a proper privacy impact assessment, and someone whose job is compliance signing off. That's not a nights-and-weekends project. It's a company. So before you open the editor, work out which one you're actually starting. One is a hobby. The other is a liability with your name on it.
+
+## TL;DR / Key Takeaways
+
+- The most useful version of my clinical-note tool required reading identified patient data from the practice management software, and that single requirement made the project illegal in its proposed form.
+- In my read of the [Australian Privacy Act 1988 and the APPs](https://www.oaic.gov.au/privacy/australian-privacy-principles), health information gets the strictest treatment; APP 3 and APP 6 cover collection and use, and a side project collecting it was a non-starter. Confirm your own case with counsel.
+- Being a registered nurse lets me access data for patient care. It does not make me a compliant software vendor. Two different legal hats.
+- The vendor's terms of service were a second wall: PMS data access is gated to approved integration partners, not solo devs, by design.
+- Some projects don't fail on market, they fail on "cannot exist." Spotting that before you write code is the skill. The cheapest kill is a pre-code kill.
+- The compliant rebuild touches no patient data, or goes through the vendor's official integration path with a real privacy impact assessment.
+
+See also: [the AI-assisted nursing notes tool I did build (and its one near-miss)](/blog/claude-nursing-handoff-notes) · [the side project I killed on day 14](/blog/aura-week-1-claude-code) · [structuring documentation with AI without piping in regulated data](/blog/documenting-child-learning-observations-with-ai-assist-witho)
+
+## Sources
+
+- Office of the Australian Information Commissioner — [Australian Privacy Principles](https://www.oaic.gov.au/privacy/australian-privacy-principles)
+- Office of the Australian Information Commissioner — [Health information and your privacy rights](https://www.oaic.gov.au/privacy/your-privacy-rights/health-information)
+- Office of the Australian Information Commissioner — [Australian Privacy Principles quick reference](https://www.oaic.gov.au/privacy/australian-privacy-principles/australian-privacy-principles-quick-reference)
+
+<Schema
+  type="Article"
+  data={{
+    headline: 'Why I Killed My First Nurse-Tooling Project Before I Wrote Code',
+    description: 'An RN and indie dev on when to kill a side project before building: the privacy wall that ended my clinical-note tool before a single line of integration code.',
+    datePublished: '2026-05-29',
+    dateModified: '2026-05-29',
+    inLanguage: 'en-AU',
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': 'https://stonemegan.dev/blog/why-i-killed-my-first-nurse-tooling-project-before-i-wrote-a',
+    },
+    image: 'https://stonemegan.dev/og/why-i-killed-my-first-nurse-tooling-project-before-i-wrote-a.png',
+    author: {
+      '@type': 'Person',
+      name: 'Stone Megan',
+      jobTitle: 'Registered Nurse & Indie Developer',
+      url: 'https://stonemegan.dev/about',
+      sameAs: ['https://stonemegan.dev'],
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'ai-careers',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://stonemegan.dev/logo.png',
+      },
+    },
+  }}
+/>
+
+<Schema
+  type="Person"
+  data={{
+    name: 'Stone Megan',
+    jobTitle: 'Registered Nurse & Indie Developer',
+    url: 'https://stonemegan.dev/about',
+    knowsAbout: ['Nursing', 'Healthcare software', 'Australian Privacy Act 1988', 'Indie development'],
+    sameAs: ['https://stonemegan.dev'],
+  }}
+/>
+
+<Schema
+  type="BreadcrumbList"
+  data={{
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Blog', item: 'https://stonemegan.dev/blog' },
+      { '@type': 'ListItem', position: 2, name: 'Dev Diary', item: 'https://stonemegan.dev/blog/category/dev-diary' },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: 'Why I Killed My First Nurse-Tooling Project Before I Wrote Code',
+        item: 'https://stonemegan.dev/blog/why-i-killed-my-first-nurse-tooling-project-before-i-wrote-a',
+      },
+    ],
+  }}
+/>
