@@ -2,7 +2,7 @@
   {
     "niche": "dev-diary",
     "slug": "aura-week-1-claude-code",
-    "topic": "Building Aura app week 1 — what the AI coding tool got right and what it didn't",
+    "topic": "Building Aura app week 1 \u2014 what the AI coding tool got right and what it didn't",
     "anecdote": "First commit at 11pm Sunday. By Tuesday the AI coding tool had refactored my auth flow three times. Two were wrong.",
     "status": "published",
     "pickedAt": "2026-05-26T00:00:00.000Z"
@@ -29,16 +29,18 @@
     "niche": "ece-ai",
     "topic": "Documenting child learning observations with AI assist (without losing your voice)",
     "anecdote": "Tried the AI on three individual learning observations for under-5s and deleted all three. The most memorable: I asked it to draft an observation aligned with EYLF Outcome 1 for a 4-year-old who had resolved a peer conflict over a toy in outdoor play. The AI returned a sentence about 'the child demonstrated an emerging capacity for self-regulation and prosocial negotiation strategies.' What I had actually seen was the child looking their friend in the eye and saying 'you can have it after I count to five,' then counting out loud on their fingers. The AI wrote the conclusion. I write the moment. Two things no prompt can give it. First, verbatim child words: a three-year-old saying 'I maked it go faster' tells you something about language development that the phrase 'used descriptive language' erases. Second, the physical detail: which hand they used, whether they leaned in or held back, the three seconds they spent staring at the paint before they touched it. The pause is the learning. My rule now: the AI helps with structure, grammar, and linking language to EYLF outcomes; the observational content stays mine. I write the raw note first, then the AI tightens. I never start with the AI and edit down. If I cannot write at least the core observation myself, I do not publish it.",
-    "status": "pending"
+    "status": "published",
+    "pickedAt": "2026-05-29T06:51:00.000Z",
+    "slug": "documenting-child-learning-observations-with-ai-assist-witho"
   },
   {
     "niche": "ece-ai",
-    "topic": "AI lesson planning for under-5s — the line between helpful and lazy",
+    "topic": "AI lesson planning for under-5s \u2014 the line between helpful and lazy",
     "status": "pending"
   },
   {
     "niche": "nurse-ai",
-    "topic": "AI triage support tools — what actually works in 2026",
+    "topic": "AI triage support tools \u2014 what actually works in 2026",
     "status": "pending"
   },
   {
@@ -49,8 +51,8 @@
   {
     "niche": "nurse-ai",
     "slug": "claude-nursing-handoff-notes",
-    "topic": "AI-assisted nursing notes — 9x faster and one near-miss",
-    "anecdote": "Built an AI-assisted Python template tool for 12 nursing-note types in a Sydney GP clinic. Iron-infusion record almost shipped without batch number / expiry — caught in cross-check.",
+    "topic": "AI-assisted nursing notes \u2014 9x faster and one near-miss",
+    "anecdote": "Built an AI-assisted Python template tool for 12 nursing-note types in a Sydney GP clinic. Iron-infusion record almost shipped without batch number / expiry \u2014 caught in cross-check.",
     "status": "published",
     "pickedAt": "2026-05-28T00:00:00.000Z"
   }
