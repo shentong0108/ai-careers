@@ -30,8 +30,14 @@ Does NOT call the Anthropic API directly — no API credits consumed.
 
    - `keyword-researcher` → writes `docs/research/keywords/$NICHE/$SLUG.json`
    - `content-writer` → writes `src/content/posts/$NICHE/$SLUG.mdx`
-   - `content-humanizer` → rewrites the file until AI-detection < 30%
+   - `content-humanizer` → deterministic humanise + AI-detect score
+     (degraded mode if no API key)
    - `fact-checker` → only if niche is `nurse-ai` or `ece-ai`
+   - `voice-polisher` → REQUIRED for every article. Loads same-author
+     published anchor articles as voice samples, rewrites the worst
+     3-5 paragraphs to match the author's actual rhythm and voice
+     quirks. Last anti-AI-smell pass before publish. Adds
+     `voicePolisherPasses: N` to frontmatter.
    - `seo-optimizer` → adds JSON-LD, internal links, OG meta
    - `deploy-verifier` → runs all 9 gates; must return `Overall: READY`
 

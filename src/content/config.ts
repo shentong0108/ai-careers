@@ -14,6 +14,7 @@ const postSchema = z.object({
   canonical: z.string().url(),
   draft: z.boolean().default(true),
   aiDetectionScore: z.number().min(0).max(100).nullable().default(null),
+  humanizationMode: z.enum(['scored', 'degraded']).optional(),
   heroImage: z.string().startsWith('/'),
   ogImage: z.string().startsWith('/').optional(),
   factChecked: z.boolean().default(false),
@@ -28,6 +29,8 @@ const postSchema = z.object({
       })
     )
     .default([]),
+  voicePolisherPasses: z.number().min(0).max(5).optional(),
+  voicePolisherSamples: z.array(z.string()).optional(),
 });
 
 const posts = defineCollection({

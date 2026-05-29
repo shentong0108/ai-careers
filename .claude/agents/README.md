@@ -9,9 +9,11 @@ keyword-researcher  →  research brief (JSON)
        ↓
 content-writer      →  draft MDX (frontmatter draft:true)
        ↓
-content-humanizer   →  rewrite for human voice + AI-detect < 30%
+content-humanizer   →  deterministic + AI-detect (degraded mode if no API key)
        ↓
 fact-checker        →  YMYL gate (nurse-ai + ece-ai only)
+       ↓
+voice-polisher      →  final anti-AI-smell pass against same-author samples
        ↓
 seo-optimizer       →  schema, internal links, OG meta
        ↓

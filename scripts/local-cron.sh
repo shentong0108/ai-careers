@@ -66,8 +66,8 @@ if [[ -f "$LAST_RUN_FILE" ]]; then
   LAST=$(cat "$LAST_RUN_FILE")
   NOW=$(date +%s)
   ELAPSED=$(( NOW - LAST ))
-  if (( ELAPSED < 165600 )); then
-    echo "$(date) — skip, last run ${ELAPSED}s ago (need >=165600s)" | tee -a "$LOG"
+  if (( ELAPSED < 79200 )); then
+    echo "$(date) — skip, last run ${ELAPSED}s ago (need >=79200s, ~22h)" | tee -a "$LOG"
     exit 0
   fi
 fi

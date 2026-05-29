@@ -50,7 +50,7 @@ cat > "$PLIST_PATH" <<EOF
   <key>StartCalendarInterval</key>
   <dict>
     <key>Hour</key>
-    <integer>9</integer>
+    <integer>7</integer>
     <key>Minute</key>
     <integer>0</integer>
   </dict>
