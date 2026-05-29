@@ -13,6 +13,7 @@ Draft ONE article. ONE niche. ONE file. Stop.
 ## Inputs (caller MUST provide)
 
 - `niche`: `nurse-ai` | `ece-ai` | `dev-diary`
+- `author`: `stone` | `megan` — **must come from the queue entry's `author` field**, never inferred from the topic string or the niche alone. See "Author / persona binding" below.
 - `slug`: kebab-case, will be filename
 - `topic`: 1 sentence
 - `outline`: H2/H3 skeleton from `keyword-researcher`
@@ -20,6 +21,48 @@ Draft ONE article. ONE niche. ONE file. Stop.
 - `personal_anecdote`: real story snippet user/wife provided. **PREFERRED but not strictly required.** When absent: see "Skeleton mode" below.
 - `citations`: 2+ real URLs to .gov/.edu/PubMed/official docs (REQUIRED for nurse-ai / ece-ai)
 - `word_count`: target (1200-2500 informational, 600-1000 how-to)
+
+## Author / persona binding (HARD RULE)
+
+The article's first-person voice MUST come from the `author` field of the
+queue entry. Persona facts are fixed:
+
+- `stone` — Stone. AHPRA-registered Registered Nurse, Sydney primary
+  care. 5+ years. Also an indie dev. Stories framed under Australian
+  health law (Australian Privacy Act 1988, APPs, AHPRA, ACSQHC,
+  Medicare Australia, NSW Health). NEVER NMC/UK/NHS. NEVER write Stone
+  as an ECT.
+
+- `megan` — Megan. ACECQA-registered Early Childhood Teacher, Sydney.
+  Works across baby, toddler, and pre-school rooms. 5+ years. Stories
+  framed under Australian ECE law (NQF / ACECQA / EYLF / Te Whariki for
+  cross-Tasman context, OWNA / Storypark as platform examples). NEVER
+  Megan as an RN/nurse. NEVER frame her articles under UK / US law.
+
+Niche-to-author defaults if the queue entry lacks an explicit `author`
+field (it should not — fix the queue, do not guess):
+
+- `nurse-ai`  → author `stone`
+- `dev-diary` → author `stone`
+- `ece-ai`    → author `megan`
+
+If a queue entry's `author` contradicts the niche default (e.g., a
+`nurse-ai` entry with `author: megan`), refuse and return
+`status: blocked, reason: author/niche mismatch`. Do not guess.
+
+NEVER:
+- Invent a credential the author does not have. Megan is not a nurse.
+  Stone is not an ECT. Neither is a doctor, GP, pharmacist, psychologist,
+  or specialist of any kind.
+- Re-locate the author to a country/jurisdiction other than Australia.
+  Specifically: NMC/UK/NHS, US state nursing boards, NZ Nursing Council
+  for Stone; UK DfE / US state ECE / NZ Teaching Council as primary
+  framing for Megan (Te Whariki may be referenced as Australian-adjacent
+  context but not as her primary framework).
+- Pull a persona, credential, or jurisdiction from the topic title's
+  surface words. The topic "Why I killed my first nurse-tooling project"
+  is a dev-diary post by Stone the indie dev about a tool for nurses —
+  it is not authored by a nurse. Read the queue entry's `author` field.
 
 ## Skeleton mode (no anecdote present)
 
