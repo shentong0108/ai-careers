@@ -1,0 +1,52 @@
+---
+/**
+ * AffiliateLink — wraps an outbound affiliate URL with the required
+ * disclosure attributes and (for Amazon) auto-appends the AU tag.
+ *
+ * Usage in MDX:
+ *
+ *   By ASIN (Amazon AU shorthand):
+ *     <AffiliateLink asin="B0DGXXXX">Littmann Classic III stethoscope</AffiliateLink>
+ *
+ *   By full URL (any merchant):
+ *     <AffiliateLink href="https://convertkit.com/?lmref=..." program="kit">
+ *       my Kit referral
+ *     </AffiliateLink>
+ *
+ * Always renders rel="sponsored noopener nofollow" per Google's
+ * monetised-link guidelines (https://developers.google.com/search/docs/essentials/spam-policies#link-spam).
+ */
+
+const AMAZON_AU_TAG = 'stonemegan22-22';
+
+export interface Props {
+  asin?: string;
+  href?: string;
+  program?: string;
+  newWindow?: boolean;
+}
+
+const { asin, href, program, newWindow = true } = Astro.props;
+
+let url: string;
+if (asin) {
+  url = `https://www.amazon.com.au/dp/${asin}?tag=${AMAZON_AU_TAG}`;
+} else if (href) {
+  url = href;
+} else {
+  throw new Error('AffiliateLink requires either `asin` or `href`.');
+}
+
+const dataAttrs: Record<string, string> = {};
+if (program) dataAttrs['data-program'] = program;
+else if (asin) dataAttrs['data-program'] = 'amazon-au';
+---
+
+<a
+  href={url}
+  rel="sponsored noopener nofollow"
+  target={newWindow ? '_blank' : undefined}
+  {...dataAttrs}
+>
+  <slot />
+</a>
