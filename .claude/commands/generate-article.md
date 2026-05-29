@@ -55,13 +55,33 @@ Does NOT call the Anthropic API directly — no API credits consumed.
      --body-file .claude/templates/pr-body.md
    ```
 
-6. **Cleanup worktree**:
+6. **Auto-merge** the PR via `gh pr merge <number> --squash --delete-branch`.
+
+   This is unconditional per user direction ("直接发布", option B). Safety
+   reasoning: skeleton articles (those generated when no `anecdote` field
+   exists in the queue entry) are forced to `draft: true` by the
+   content-writer in skeleton mode, and the homepage / category /
+   blog-post routes all filter `!data.draft` via `getCollection`. So a
+   skeleton merged to `main` lives in the repo but is **not** publicly
+   visible until a human flips `draft` to `false`. Filled articles
+   (anecdote present) end with `draft: false` and publish immediately
+   on the Cloudflare Pages auto-deploy that follows the merge.
+
+   If any agent earlier in the pipeline returned `status: blocked`, the
+   pipeline must abort BEFORE step 5 — no PR is opened and no merge
+   happens. Failure handling below.
+
+7. **Cleanup worktree**:
    ```bash
    cd "$OLDPWD"
    git worktree remove ../blog-site-$SLUG
    ```
 
-7. **Stop.** Do NOT merge. Human reviews.
+8. **Mark queue entry published** by editing `content-queue.json`,
+   flipping the entry's `status` from `in-flight` to `published` and
+   adding `mergedAt`. Commit + push as `chore: mark <slug> published`.
+
+9. **Stop.**
 
 ## Boundaries
 
