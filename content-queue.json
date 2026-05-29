@@ -29,8 +29,12 @@
     "author": "stone",
     "topic": "Why I killed my first nurse-tooling project before I wrote any code",
     "anecdote": "I am Stone (AHPRA-registered RN in Sydney primary care, indie dev). I wanted to automate clinical-note workflow at the clinic. The only way to make it actually useful was to read patient data straight from our practice management software. I worked through what that would mean: a third-party tool I built sitting inside the PMS data flow, with patient identifiers passing through. It was a clear breach of patient privacy (Australian Privacy Act 1988 / APPs) and almost certainly of the PMS vendor's terms of service. I killed the project before I wrote the integration code. Sometimes the right move is recognising the rule that means the project cannot exist in this form.",
-    "status": "pending",
-    "slug": "why-i-killed-my-first-nurse-tooling-project-before-i-wrote-a"
+    "status": "published",
+    "slug": "why-i-killed-my-first-nurse-tooling-project-before-i-wrote-a",
+    "pickedAt": "2026-05-29T00:56:38.474Z",
+    "mergedAt": "2026-05-29T01:12:15Z",
+    "draftGated": true,
+    "draftGatedReason": "AI-detection unverified (degraded mode, no API key); flip draft:false after manual AI-detection < 30% check"
   },
   {
     "niche": "ece-ai",
