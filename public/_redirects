@@ -1,0 +1,15 @@
+# Cloudflare Pages redirects.
+# Format: <source>  <destination>  <status>
+# https://developers.cloudflare.com/pages/configuration/redirects/
+#
+# Affiliate-link redirect wrapping. Source paths under /go/* are
+# brand-neutral on-domain URLs that 302-redirect to the underlying
+# affiliate URL. Reader sees stonemegan.dev/go/<merchant> until they
+# click; the merchant's tracking still works because cookies are set
+# on the destination after the redirect.
+#
+# This is used because the underlying affiliate URLs sometimes carry
+# the author's real name in the ?via=/?lmref= parameter and the
+# privacy policy is to keep real names off reader-visible surfaces.
+
+/go/beehiiv  https://www.beehiiv.com/?via=tong-shen  302
