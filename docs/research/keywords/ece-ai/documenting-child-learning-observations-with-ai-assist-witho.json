@@ -1,0 +1,98 @@
+{
+  "niche": "ece-ai",
+  "seed_topic": "documenting child learning observations with AI assist without losing your authentic teacher voice (early childhood, EYLF outcomes)",
+  "target_geo": "au",
+  "primary_keyword": {
+    "term": "writing child observations with AI without losing your voice",
+    "estimated_kd": 14,
+    "estimated_volume": "low (<300/mo)",
+    "source": "google suggest AU 2026-05-29 (combined long-tail returns empty suggestions, indicating thin direct competition); ahrefs free keyword difficulty estimate from top-10 DR spread"
+  },
+  "long_tail": [
+    { "term": "how to write children's observations with AI", "estimated_kd": 16, "intent": "informational", "source": "google suggest AU 2026-05-29" },
+    { "term": "AI for early childhood educators observations", "estimated_kd": 18, "intent": "informational", "source": "google suggest AU 2026-05-29" },
+    { "term": "link observations to EYLF outcomes with AI", "estimated_kd": 12, "intent": "informational", "source": "google suggest AU 2026-05-29 (EYLF observation cluster present, +AI modifier empty = open)" },
+    { "term": "anecdotal observation example early childhood", "estimated_kd": 19, "intent": "informational", "source": "google suggest AU 2026-05-29" },
+    { "term": "how to write observations for non verbal children with AI", "estimated_kd": 11, "intent": "informational", "source": "google suggest AU 2026-05-29 (suggest empty; one competitor article only)" },
+    { "term": "keep childcare observations authentic strengths-based", "estimated_kd": 13, "intent": "informational", "source": "butlerdiaries SERP snippet 2026-05-29" },
+    { "term": "AI observation writer EYLF reflection forward planning", "estimated_kd": 17, "intent": "informational", "source": "google suggest AU 2026-05-29 (eylf observation cycle/tracker present)" }
+  ],
+  "people_also_ask": [
+    "Can AI write child observations for educators?",
+    "How do you keep observations authentic when using AI?",
+    "How do you link a child observation to EYLF learning outcomes?",
+    "What is an anecdotal observation example in childcare?",
+    "Will using AI for documentation breach NQS or privacy requirements?",
+    "How do you write observations for non-verbal or quiet children?"
+  ],
+  "serp_top3": [
+    {
+      "url": "https://butlerdiaries.com/blogs/blog/documenting-developmental-milestones-and-interests-in-early-childhood-education",
+      "dr": 40,
+      "word_count": 1300,
+      "covers": ["why document milestones/interests", "ways to collect info (observations, children's voice, family input, work samples)", "practical documentation methods", "link to EYLF V2.0 outcomes and principles", "tips for meaningful documentation", "keep observations authentic, use child's voice, avoid overediting"],
+      "note": "DR estimated; no AI mention - gap"
+    },
+    {
+      "url": "https://www.earlyeducationleadership.com/post/when-ai-speaks-for-us-holding-space-for-trust-voice-reflection-in-early-childhood",
+      "dr": 20,
+      "word_count": 1300,
+      "covers": ["double edge of accessibility", "AI for questions not answers", "transparency of AI use", "voice/video reflections", "participant AI charter", "research on smoother-but-less-alive reflections"],
+      "note": "DR estimated; strong on voice/trust but no EYLF outcomes or step-by-step documentation workflow - gap"
+    },
+    {
+      "url": "https://theempowerededucatoronline.com/2024/01/ai-vision-technology-for-educators.html/",
+      "dr": 45,
+      "word_count": 1500,
+      "covers": ["analysing observations faster with AI", "voice memo / rough notes to structured observation", "structure: Observation / Links to EYLF / Reflection / Evaluation / Future activities", "safety prompt 'do not add anything I did not mention'", "AI as partner not replacement"],
+      "note": "DR estimated from search snippet; page blocks direct fetch (403). Niche-authority site, strong topical overlap - main competitor"
+    }
+  ],
+  "ai_overview_present": true,
+  "featured_snippet_target": "A 3-step prompt recipe for turning rough observation notes into an EYLF-linked anecdotal observation while keeping your own wording: (1) paste your raw notes, (2) ask for strengths-based phrasing with no added detail, (3) request the matching EYLF v2.0 outcome with your reasoning left intact.",
+  "outline": {
+    "title_candidates": [
+      "Writing Child Observations With AI Without Losing Your Voice",
+      "AI-Assisted EYLF Observations: How to Stay Authentic",
+      "How I Use AI for Learning Observations and Still Sound Like Me"
+    ],
+    "h2": [
+      {
+        "heading": "The fear that stops most educators using AI for observations",
+        "h3": ["\"It won't sound like me\"", "Why a generic AI observation reads hollow to a parent"]
+      },
+      {
+        "heading": "My before-and-after: one real anecdote, two write-ups",
+        "h3": ["The rough notes I jotted at the sandpit", "The over-edited version that lost the child"]
+      },
+      {
+        "heading": "A safe prompt recipe that keeps your wording",
+        "h3": ["The 'don't add anything I didn't mention' guardrail", "Strengths-based phrasing without invented detail", "Keeping the child's own words in"]
+      },
+      {
+        "heading": "Linking the observation to EYLF v2.0 outcomes",
+        "h3": ["Letting AI suggest the outcome, you confirm the reasoning", "Reflection and forward planning stay yours"]
+      },
+      {
+        "heading": "Documenting quiet and non-verbal children fairly",
+        "h3": ["Why templates over-reward talkers", "What to look for: gaze, intent, engagement, transitions"]
+      },
+      {
+        "heading": "Privacy, NQS and what to never paste into an AI tool",
+        "h3": ["De-identify before you draft", "Centre policy and supervisor sign-off"]
+      }
+    ],
+    "unique_angle": "A side-by-side 'two write-ups of the same sandpit moment' showing the exact point AI editing erases the child's voice, paired with a copy-paste guardrail prompt and a de-identification checklist. Top-3 either cover voice OR EYLF mechanics OR generic AI tips - none combine a concrete before/after artefact with both EYLF v2.0 outcome-linking and an AU privacy/NQS checklist."
+  },
+  "internal_link_candidates": [
+    "TODO-verify: list real slugs in src/content/posts/ece-ai/ before writing (directory not readable by research tools). Likely topical matches: an EYLF planning-cycle post, an intentional-teaching post, an AI-for-educator-workload post if they exist."
+  ],
+  "warnings": [
+    "AI Overview is present for 'how to write child observations' style queries and likely steals informational clicks - only target if depth + the before/after artefact wins.",
+    "theempowerededucatoronline.com is a high-authority niche competitor with multiple AI-observation articles (DR ~45); compete on the authentic-voice angle and an AU privacy/NQS checklist they lack, not on generic 'AI writes observations' coverage.",
+    "All DR figures are ESTIMATES from search snippets/known authority - the empowered educator page returned 403 and could not be fetched directly; treat KD as approximate (range 11-19).",
+    "Per project rules and the task brief: article body must NOT name commercial AI brands - keep all keyword usage generic ('AI assist', 'AI tool for educators').",
+    "YMYL-adjacent (child development): requires Megan's ECT byline, an EYLF/ACECQA .gov.au citation, and 'in my practice / ask your supervisor' framing, not advice.",
+    "internal_link_candidates are unverified - content-writer must enumerate real slugs in src/content/posts/ece-ai/ before inserting links."
+  ]
+}
