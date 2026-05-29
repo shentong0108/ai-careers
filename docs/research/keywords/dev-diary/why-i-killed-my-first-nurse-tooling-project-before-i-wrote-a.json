@@ -1,0 +1,96 @@
+{
+  "niche": "dev-diary",
+  "seed_topic": "Why I killed my first nurse-tooling project before I wrote any code — reading patient data from the PMS would breach the Australian Privacy Act 1988 (APPs) and the vendor ToS.",
+  "target_geo": "au",
+  "primary_keyword": {
+    "term": "when to kill a side project before building",
+    "estimated_kd": 14,
+    "estimated_volume": "low (<300/mo)",
+    "source": "Google Suggest + manual SERP read 2026-05-29 (no exact-match third-party volume tool returned a figure; treated as low-confidence estimate). Ubersuggest/Ahrefs free tier not queryable in this session — volume is an editorial estimate, NOT a tool figure."
+  },
+  "long_tail": [
+    { "term": "can a third party app read patient data from practice management software australia", "estimated_kd": 11, "intent": "informational" },
+    { "term": "australian privacy act 1988 health app developer", "estimated_kd": 18, "intent": "informational" },
+    { "term": "practice management software api terms of service patient data", "estimated_kd": 9, "intent": "informational" },
+    { "term": "deciding not to build a side project legal risk", "estimated_kd": 8, "intent": "informational" },
+    { "term": "clinical note automation tool privacy compliance australia", "estimated_kd": 16, "intent": "informational" },
+    { "term": "indie dev healthcare app compliance australia", "estimated_kd": 12, "intent": "informational" },
+    { "term": "australian privacy principles apps for software developers", "estimated_kd": 19, "intent": "informational" }
+  ],
+  "people_also_ask": [
+    "Can third-party apps access patient data from practice management software in Australia?",
+    "Does the Australian Privacy Act 1988 apply to small healthcare software?",
+    "When should you kill a software project before writing code?",
+    "What is a privacy impact assessment for a new health app?",
+    "Is reading data via a PMS API a breach of the vendor terms of service?",
+    "Who counts as a health service provider under the Privacy Act 1988?"
+  ],
+  "serp_top3": [
+    {
+      "url": "https://dev.to/eayurt/why-do-i-keep-killing-my-side-projects-31eh",
+      "dr": 90,
+      "word_count": 1300,
+      "covers": ["psychological pattern of abandonment", "confusing technical curiosity with product belief", "skipping market validation", "working in isolation"],
+      "note": "high DR but generic dev.to community post; zero legal/regulatory coverage"
+    },
+    {
+      "url": "https://www.saasfactor.co/blogs/how-to-validate-a-startup-idea-before-writing-code",
+      "dr": 25,
+      "word_count": 1600,
+      "covers": ["problem definition", "fake door test", "concierge MVP", "customer interviews", "pretotyping"],
+      "note": "fetch returned 403 in this session; structure inferred from SERP snippet + sibling validation articles. Treat word count as estimate. Pure market-validation framing, no compliance angle."
+    },
+    {
+      "url": "https://floridahealthcarelawfirm.com/the-top-5-legal-concerns-when-developing-a-healthcare-app/",
+      "dr": 40,
+      "word_count": 1500,
+      "covers": ["HIPAA compliance", "FDA classification", "data security", "business associate liability", "intellectual property"],
+      "note": "US HIPAA framing only; nothing on AU Privacy Act / APPs or PMS vendor ToS. Confirms the AU-specific dev-diary angle is open."
+    }
+  ],
+  "ai_overview_present": false,
+  "featured_snippet_target": "A one-paragraph definition answering 'Can a third-party app read patient data from Australian practice management software?' — frame: only a recognised health service provider acting in a clinician's care context may, and a solo indie dev reading the PMS database breaches APP 3/APP 6 plus the vendor ToS.",
+  "outline": {
+    "title_candidates": [
+      "Why I killed my first nurse-tooling project before I wrote a line of code",
+      "The day a privacy law killed my side project (and why I was relieved)",
+      "I'm an RN and an indie dev. Here's the app I refused to build."
+    ],
+    "h2": [
+      {
+        "heading": "The idea that felt obvious from the clinic floor",
+        "h3": ["The shift that sparked it: a real handoff-notes pain point", "Why automating clinical notes looked like a clean win"]
+      },
+      {
+        "heading": "The one question I asked before opening an editor",
+        "h3": ["'What must be true for this to be legal?'", "Where the data actually lives: inside the PMS"]
+      },
+      {
+        "heading": "How the Australian Privacy Act 1988 ended it",
+        "h3": ["APP 3 and APP 6: collection and use of health information", "Why 'I'm an RN' doesn't make me a compliant health-service software vendor", "What a Privacy Impact Assessment would have flagged on day one"]
+      },
+      {
+        "heading": "The second wall: the PMS vendor's terms of service",
+        "h3": ["Reading the database vs. an approved integration partner program", "Why API access is gated to recognised providers, not solo devs"]
+      },
+      {
+        "heading": "Killing a project is a skill, not a failure",
+        "h3": ["The difference between 'no market' and 'cannot exist'", "The sunk-cost trap I avoided by killing it pre-code"]
+      },
+      {
+        "heading": "What I'd build instead (the compliant version)",
+        "h3": ["Tools that never touch patient data", "Working through an authorised integration path"]
+      }
+    ],
+    "unique_angle": "Every 'kill your side project' post online cites markets, motivation, or sunk cost. None cover a hard regulatory wall where the project legally cannot exist no matter how good the idea is. This post is told from a dual RN + indie-dev seat, grounds the kill decision in specific AU law (Privacy Act 1988, APP 3/6) and a real PMS vendor ToS — not US HIPAA — making it the only AU-specific dev diary on 'a rule that means the project cannot exist.'"
+  },
+  "internal_link_candidates": [],
+  "warnings": [
+    "Volume + KD numbers are editorial low-confidence estimates: no Ahrefs/Ubersuggest tool output was retrievable this session. content-writer should NOT cite these as tool figures.",
+    "saasfactor competitor page returned HTTP 403; its structure is inferred, not directly fetched — re-verify if used as a sourcing claim.",
+    "dev.to ranks at DR 90 for the generic 'kill side project' phrase — do NOT compete head-on on that broad term; win on the AU-privacy long-tail where DR of ranking pages is low and intent is specific.",
+    "YMYL-adjacent: post discusses health data + AU law. Per project rules, needs Stone's AHPRA-registered RN byline and at least one citation to OAIC / legislation.gov.au, and must avoid giving legal advice — frame as 'in my read of the APPs, confirm with your own counsel'.",
+    "No AI Overview observed on the specific AU queries as of 2026-05-29, but Google may add one for the broad 'when to kill a project' term — depth on the AU-specific story is the defence.",
+    "internal_link_candidates left empty: did not enumerate existing published slugs (out of scope for this brief / would require touching files beyond docs/research/keywords/). content-writer or editor should backfill from the live sitemap."
+  ]
+}
