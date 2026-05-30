@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import SubscribeForm from '@/components/SubscribeForm.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
 
 const posts = (await getCollection('posts', ({ data }: CollectionEntry<'posts'>) => !data.draft))
@@ -85,16 +86,7 @@ const NICHE_LABEL: Record<string, string> = {
   </div>
 
   <div class="container" id="newsletter">
-    <div class="signup-block">
-      <p class="eyebrow">Get a real post once a week</p>
-      <h3>No filler. No hype. Just what we tried.</h3>
-      <p>Drop your email and we'll send the new post the morning it goes up. Unsubscribe anytime.</p>
-      <form id="signup" action="#" method="post" onsubmit="event.preventDefault(); alert('Newsletter sign-up coming soon — for now bookmark the site or subscribe via RSS.'); return false;">
-        <input type="email" placeholder="you@example.com" aria-label="Email address" required />
-        <button type="submit">Notify me</button>
-      </form>
-      <p class="note">No subscriber list active yet — this form is a placeholder until we wire up an email provider.</p>
-    </div>
+    <SubscribeForm variant="block" />
   </div>
 
   <section class="cta-band">

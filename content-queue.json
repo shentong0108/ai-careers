@@ -13,7 +13,9 @@
     "author": "stone",
     "topic": "Writing better patient education handouts with an AI assistant (with my actual prompts)",
     "anecdote": "I use the AI for two main handout types: post-procedure care (iron infusion, wound care, suture removal) and chronic disease education (diabetes, hypertension, asthma). The edits I make most often: bringing the reading level down from medical to patient-friendly, adding red-flag warnings the AI tends to omit (for example the line about returning immediately if a wound dressing shows heavy bleeding), and tailoring the language for the literacy mix in our patient pool. The AI gets the structure right; I add the safety net.",
-    "status": "pending"
+    "status": "in-flight",
+    "pickedAt": "2026-05-30T03:51:34.552Z",
+    "slug": "writing-better-patient-education-handouts-with-an-ai-assista"
   },
   {
     "niche": "dev-diary",
