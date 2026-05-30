@@ -134,14 +134,14 @@ slug: "..."
 description: "150-160 chars meta description"
 publishedAt: "YYYY-MM-DD"
 updatedAt: "YYYY-MM-DD"
-author: "stone" | "megan"  # stone=dev-diary, megan=nurse-ai+ece-ai
+author: "stone" | "megan"  # nurse-ai=stone, ece-ai=megan, dev-diary=stone — see "Author / persona binding" above; NEVER swap
 category: "nurse-ai" | "ece-ai" | "dev-diary"
 tags: ["...", "..."]
 keywords: ["...", "..."]
 canonical: "https://stonemegan.dev/blog/<slug>"
-draft: true  # always true on first write; humanizer flips to false
-aiDetectionScore: null  # filled by humanizer
-heroImage: "/images/<slug>-hero.png"
+draft: true  # always true on first write; the human reviewer flips this to false after AI-detection / fact-check
+aiDetectionScore: null  # left null in degraded mode (no API key); humanizer only fills when an AI-detection API is provisioned
+heroImage: "/images/card-<niche>.jpg"  # USE THE EXISTING card-<niche>.jpg — do NOT invent /images/<slug>-hero.png. The card- file is the project's only per-niche hero asset; per-article PNGs are not generated.
 ---
 ```
 
