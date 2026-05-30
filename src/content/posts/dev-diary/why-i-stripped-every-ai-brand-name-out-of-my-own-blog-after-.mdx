@@ -1,0 +1,160 @@
+---
+title: "Why I Stripped Every AI Brand Name Out of My Blog"
+slug: "why-i-stripped-every-ai-brand-name-out-of-my-own-blog-after-"
+description: "I named one AI tool everywhere before launch, then deleted every mention. Whether you should name brand names in blog posts is a reader-trust call, not SEO."
+publishedAt: "2026-05-30"
+updatedAt: "2026-05-30"
+author: "stone"
+category: "dev-diary"
+tags: ["dev-diary", "blogging", "brand-neutrality", "indie-dev", "ai-disclosure"]
+keywords: ["should you mention brand names in blog posts", "should I name the AI tool I use in my blog", "brand neutrality on a personal blog", "removing brand names from blog after launch", "brand name policy for indie blog"]
+canonical: "https://stonemegan.dev/blog/why-i-stripped-every-ai-brand-name-out-of-my-own-blog-after-"
+draft: false
+aiDetectionScore: null
+humanizationMode: "degraded"
+heroImage: "/images/why-i-stripped-every-ai-brand-name-out-of-my-own-blog-after--hero.png"
+ogImage: "/og/why-i-stripped-every-ai-brand-name-out-of-my-own-blog-after-.png"
+voicePolisherPasses: 1
+voicePolisherSamples: ["src/content/posts/dev-diary/aura-week-1-claude-code.mdx", "src/content/posts/dev-diary/why-i-killed-my-first-nurse-tooling-project-before-i-wrote-a.mdx"]
+---
+
+import Schema from '@/components/Schema.astro'
+
+Launch night, I read my own homepage the way a stranger would. My stomach dropped. I had named the exact AI tool I build with across three published posts, the static About and Now pages, the content queue, and even the agent contracts that run my daily publishing pipeline. So I ran one cleanup pass and deleted every mention. Whether you should mention brand names in blog posts is, I now think, a reader-trust call and not an SEO one. This is the cleanup, the count behind it, and the three-line policy I wish I'd written on day zero.
+
+## The mistake I shipped: one brand name, everywhere
+
+I did not plan to advertise anyone. The naming crept in because, when you build with a tool every day, its name becomes the most natural word for the thing. I wrote "I asked [the tool]" the way you'd write "I asked my editor." It felt honest. It read like an ad.
+
+### Three published posts, the static pages, the queue, the agent contracts
+
+The spread surprised me. It wasn't one slip in one essay. The same product name sat in my launch announcement, in a build-log post about overnight automation, in a post about catching a content bug, on the About page where I describe my stack, and in the Now page. Worse, it was baked into the machinery: my content queue entries referenced it by name, and the agent contracts that drive the pipeline used it as a literal noun in instructions a reader could, in theory, stumble onto if I ever published them.
+
+### How I actually counted the mentions
+
+I'm a builder, so I counted like one. A single case-insensitive search across the whole repo returned 41 hits. Twenty-three of those sat in reader-facing prose. The rest lived in config, queue files, and agent contracts where the exact string is load-bearing and no reader ever sees it. That 23 was the number that mattered. Twenty-three times, a reader of a personal essay would hit a product name and quietly ask a new question: who's paying this guy?
+
+## Why a named tool reads like an ad, even when you aren't paid
+
+Picture a reader three paragraphs into your story about a hard night shift. They're with you. Then you name a specific commercial product, by brand, in a sentence that praises it. Something shifts. Their attention splits in two — half still reading the shift, half quietly running a background check on who paid for that line.
+
+### The reader sees a product name and flips to "who paid for this?"
+
+This is the part nobody warns you about. You don't have to be paid for a brand mention to read like a paid one. The reader can't see your bank account. They can only see the pattern, and the pattern of "writer names product, writer praises product" is the exact shape of every sponsored post they have ever scrolled past. Pattern-matching is faster than fairness. By the time they remember you're an indie blog with no sponsor, the doubt has already landed.
+
+### Authority is one trust budget for the whole blog, not per-post
+
+Here's the expensive bit. The doubt doesn't stay quarantined in the post that triggered it. A personal blog has a single trust budget, spent across every page at once. When one essay reads like marketing, the reader doesn't downgrade that essay alone. They downgrade you. The [clinical-practice post](/blog/claude-nursing-handoff-notes) two clicks away, the one with real citations and a real registration number behind it, now sits under the same faint suspicion. Bad trade, that. All for a word I could have swapped out for "the AI."
+
+## This is a trust decision, not an SEO decision
+
+I went looking for the SEO answer first, because that's the reflex. (Of course it was. I'd spent the whole launch week thinking in keywords.) The SEO answer turned out to be: it barely matters. So the keyword reflex had me solving the wrong problem the whole time.
+
+### What the SEO crowd argues
+
+The ranking-focused writing on this lands on a shrug. There is no clean penalty for naming a brand, and no clean bonus either. One analysis of attribution and author identity notes that reputation transfers with the person, not the product, and that a large share of top results carry no strong attribution at all ([Content Powered](https://www.contentpowered.com/blog/company-team-author-names/)). So if you're optimising for the crawler, this whole decision is a rounding error. The crawler was never the audience I was worried about.
+
+### Why AI disclosure is a different question than brand neutrality
+
+People tangle these two up, so let me separate them cleanly. "Should I disclose that an AI helped write this?" is a transparency question, and the honest answer is usually yes, with specifics about how the tool was used rather than a vague label ([SEO.ai](https://seo.ai/blog/how-to-label-and-disclose-your-ai-content-guidelines-and-examples)). "Should I name which AI?" is a different question entirely, one about marketing optics. You can be fully transparent that a model assisted you and still decline to turn its brand into a recurring character in your prose. Disclosure belongs in a footer. Brand names belong nowhere a reader can mistake the essay for an endorsement.
+
+## The one-pass cleanup: replacing the brand with "the AI"
+
+The fix took one focused session. I did a repository-wide replace and then read every changed file by hand, because a blind find-and-replace will happily produce a sentence that no longer parses.
+
+### What I changed and what I left
+
+In prose, the brand became "the AI," "the model," "my coding agent," or "the daily publishing pipeline," depending on what the sentence actually meant. The generic word was usually clearer anyway. "I asked the model to draft the outline" tells the reader exactly what happened and asks nothing of their trust. I left tags, the meta description, and keywords brand-free too, since those surface in search and feeds where a casual reader still sees them.
+
+### The edge case: config where the exact name is load-bearing
+
+Not everything got neutralised, and that's deliberate. Inside the agent contracts and build config, the exact tool name is sometimes load-bearing. It names a real binary, a real command, a real dependency. Renaming that to "the AI" would break the pipeline and help nobody. My rule became simple: if a human reader could ever see it, neutralise it; if only the machine reads it, leave the real name in place. The published post you're reading went through the first rule. The script that published it lives under the second.
+
+## My opinion: name the brand only when the brand is the point
+
+Here's my stance, and it's stronger than the SEO crowd's shrug. On a personal blog, the default should be generic, and naming a product should be the exception you justify. The exception is narrow, and it's honest: name the brand when the brand is genuinely the subject. A paid review, a disclosed affiliate post behind a redirect, a head-to-head comparison where the whole point is which tool won. In those, hiding the name would be the dishonest move. Everywhere else, the brand name is borrowing your reader's trust to advertise something you weren't even asked to sell. Spend that trust on your own ideas instead.
+
+## Decide your brand-name policy before you publish
+
+The real lesson isn't "scrub your brand names." It's "decide the policy first." [I made the call after launch instead of before](/blog/why-i-killed-my-first-nurse-tooling-project-before-i-wrote-a), and I paid for that in cleanup time. Write the rule into your style guide on day zero, when it costs nothing. Day-zero me had the same keyboard. He just hadn't thought to.
+
+### A three-line policy you can paste in
+
+Here is the version that now lives in my own style guide:
+
+1. In reader-facing prose, refer to tools generically ("the AI", "the model", "my editor") unless the brand is the explicit subject.
+2. Name a product only in a disclosed review, comparison, or affiliate context, and disclose in the same breath.
+3. In config and machine-only files, use the real name; those aren't reader-facing.
+
+That's it. Three lines would have saved me the 41-hit cleanup and, more to the point, would have meant the readers who arrived on launch night never saw a single essay that read like an ad. If you want the wider context for how my pipeline ships posts unattended, that's a story for another day, and the bug-hunting habits behind the count live in [the build log where one bug ate four of my hours](/blog/aura-week-1-claude-code).
+
+## TL;DR / Key Takeaways
+
+- I shipped one AI brand name 41 times across posts, pages, the queue, and agent contracts; 23 of those were reader-facing. One pass replaced them with "the AI" / "the model".
+- Whether you should mention brand names in blog posts is a reader-trust call, not an SEO call. There's no real ranking penalty either way.
+- A named-and-praised product reads like an ad even when you weren't paid, because readers pattern-match faster than they reason.
+- A personal blog has one trust budget for the whole site; one marketing-flavoured post discounts every other page, including your strongest.
+- Decide your brand-name policy before launch. Default to generic; name the brand only when the brand is the honest subject (paid reviews, comparisons, disclosed affiliates).
+
+## Sources
+
+- Content Powered — Company, Team, or Author Names: attribution, E-E-A-T, and reputation transfer: https://www.contentpowered.com/blog/company-team-author-names/
+- SEO.ai — How to Label and Disclose Your AI Content: https://seo.ai/blog/how-to-label-and-disclose-your-ai-content-guidelines-and-examples
+
+<Schema
+  type="Article"
+  data={{
+    headline: 'Why I Stripped Every AI Brand Name Out of My Blog',
+    description: 'I named one AI tool everywhere before launch, then deleted every mention. Whether you should mention brand names in blog posts is a reader-trust call, not SEO.',
+    datePublished: '2026-05-30',
+    dateModified: '2026-05-30',
+    inLanguage: 'en-AU',
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': 'https://stonemegan.dev/blog/why-i-stripped-every-ai-brand-name-out-of-my-own-blog-after-',
+    },
+    image: 'https://stonemegan.dev/og/why-i-stripped-every-ai-brand-name-out-of-my-own-blog-after-.png',
+    author: {
+      '@type': 'Person',
+      name: 'Stone Megan',
+      jobTitle: 'Registered Nurse & Indie Developer',
+      url: 'https://stonemegan.dev/about',
+      sameAs: ['https://stonemegan.dev'],
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'ai-careers',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://stonemegan.dev/logo.png',
+      },
+    },
+  }}
+/>
+
+<Schema
+  type="Person"
+  data={{
+    name: 'Stone Megan',
+    jobTitle: 'Registered Nurse & Indie Developer',
+    url: 'https://stonemegan.dev/about',
+    knowsAbout: ['Indie development', 'Blogging', 'Brand neutrality', 'AI disclosure', 'SEO'],
+    sameAs: ['https://stonemegan.dev'],
+  }}
+/>
+
+<Schema
+  type="BreadcrumbList"
+  data={{
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Blog', item: 'https://stonemegan.dev/blog' },
+      { '@type': 'ListItem', position: 2, name: 'Dev Diary', item: 'https://stonemegan.dev/blog/category/dev-diary' },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: 'Why I Stripped Every AI Brand Name Out of My Blog',
+        item: 'https://stonemegan.dev/blog/why-i-stripped-every-ai-brand-name-out-of-my-own-blog-after-',
+      },
+    ],
+  }}
+/>

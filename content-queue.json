@@ -53,5 +53,33 @@
     "anecdote": "Tried the AI on three individual learning observations for under-5s and deleted all three. The most memorable: I asked it to draft an observation aligned with EYLF Outcome 1 for a 4-year-old who had resolved a peer conflict over a toy in outdoor play. The AI returned a sentence about 'the child demonstrated an emerging capacity for self-regulation and prosocial negotiation strategies.' What I had actually seen was the child looking their friend in the eye and saying 'you can have it after I count to five,' then counting out loud on their fingers. The AI wrote the conclusion. I write the moment.",
     "status": "published",
     "pickedAt": "2026-05-29T06:51:00.000Z"
+  },
+  {
+    "niche": "nurse-ai",
+    "author": "stone",
+    "topic": "When I do not reach for the AI — the cases that need hands not prompts",
+    "anecdote": "Walk-in patient with sudden central chest pain and diaphoresis. I went straight to ECG, baseline obs, and grabbed the senior nurse — the AI assistant did not come near it. Pulling leads onto a patient and reading a 12-lead is ten times faster than typing a prompt and reading a response. The AI lives in the documentation layer and the patient-education layer; it does not live at the bedside in the first five minutes of a possible cardiac event. Knowing which layer you are in is the actual skill.",
+    "status": "pending"
+  },
+  {
+    "niche": "nurse-ai",
+    "author": "stone",
+    "topic": "The clinical topic where the AI was a year behind — and how I caught it",
+    "anecdote": "Asked the AI for a stepwise asthma management summary I could adapt into a patient handout. The version it produced still leaned on a SABA-only reliever pathway. I cross-checked against the current Australian Asthma Handbook (National Asthma Council Australia) and the GINA 2024 update — both now lead with anti-inflammatory reliever therapy for adults and adolescents. Evergreen clinical topics are the most dangerous AI use case because the AI sounds confident on guidance that has already moved. The fix is a habit, not a feature: every clinical claim gets verified against the current Australian source before it touches a handout.",
+    "status": "pending"
+  },
+  {
+    "niche": "ece-ai",
+    "author": "megan",
+    "topic": "Five curriculum ideas from the AI — why I picked the one tied to our actual yard",
+    "anecdote": "Asked the AI for theme angles for sustainability with 3-4 year olds. It returned five: water play, recycling craft, garden patch, animal habitat, weather chart. I picked garden patch because our service had just put in a raised bed at the back of the yard, so the children could actually plant, water, and watch something grow over the term. The other four would have been fine on paper and dead in practice — they were not tied to anything the children could touch this week. The AI gave me options; the room and the yard told me which one was real.",
+    "status": "pending"
+  },
+  {
+    "niche": "dev-diary",
+    "author": "stone",
+    "topic": "Why I stripped every AI brand name out of my own blog (after launch)",
+    "anecdote": "Launched the site, then realised I had named the specific AI brand I use across three published posts, the static pages, the content queue, and even the agent contracts driving the daily publishing pipeline. Ran one pass to replace every mention with 'the AI' or 'the model'. Brand neutrality on a personal blog is not an SEO call. It is a reader-trust call: the moment a reader pattern-matches your essay as marketing for someone else's product, the rest of the newsletter loses authority — even posts that have nothing to do with that tool. The lesson is to decide your brand-name policy before you publish, not after.",
+    "status": "pending"
   }
 ]
