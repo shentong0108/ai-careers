@@ -3,6 +3,27 @@
 Three drafts, one per subreddit. Post each on a **different day** (spread
 the bandwidth so mods don't pattern-match this as a coordinated drop).
 
+## UTM convention
+
+Every outbound link uses UTM params so Beehiiv attribution.js tags
+new subscribers by source. Convention:
+
+| Param | Value |
+|---|---|
+| `utm_source` | `reddit` (channel family) |
+| `utm_medium` | `social` |
+| `utm_campaign` | `launch-<sub>` — `launch-sidep`, `launch-nursing`, `launch-ece` |
+
+After a post lands, check Beehiiv → Audience → Subscribers → filter
+by `utm_campaign` to see exactly which sub converted readers to
+subscribers. Without this you cannot distinguish a Reddit subscriber
+from a direct-traffic one.
+
+For future channels: keep `utm_source` semantic (`reddit`, `hn`,
+`twitter`, `newsletter-swap`) and put the specific origin in
+`utm_campaign` (`launch-sidep`, `show-hn-2026-06-02`,
+`swap-with-<other-newsletter>`).
+
 ## Anti-spam rules every Reddit promo MUST follow
 
 1. **Lead with the lesson, not the URL.** The post body must be useful
@@ -74,7 +95,7 @@ I've been writing the longer version of these as a small blog over
 the past couple of weeks — happy to share the link if anyone wants
 it, but the rule above is the whole gist of it.
 
-(If a commenter asks → reply with link: https://stonemegan.dev/nurse-ai/)
+(If a commenter asks → reply with link: https://stonemegan.dev/nurse-ai/?utm_source=reddit&utm_medium=social&utm_campaign=launch-nursing)
 
 ---
 
@@ -126,7 +147,7 @@ prompt that produces something I'd actually file.
 
 If anyone wants the longer write-up with the actual prompts I
 ended up using vs deleting, I've been collecting them on a small
-blog: https://stonemegan.dev/ece-ai/ — happy to share specific
+blog: https://stonemegan.dev/ece-ai/?utm_source=reddit&utm_medium=social&utm_campaign=launch-ece — happy to share specific
 prompts in this thread too.
 
 ---
@@ -167,7 +188,7 @@ Two fixes that stopped the bleed:
    Do not invent a different author, even if the topic surface
    words suggest one."
 
-The post itself: https://stonemegan.dev/dev-diary/
+The post itself: https://stonemegan.dev/dev-diary/?utm_source=reddit&utm_medium=social&utm_campaign=launch-sidep
 
 Stack: Astro + MDX, content collections with Zod schema, Cloudflare
 Pages, macOS launchd (not GitHub Actions — runs on Claude Code
