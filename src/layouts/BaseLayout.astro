@@ -611,6 +611,89 @@ const siteSchemas = [
         width: 100%;
         padding: 0 1rem;
       }
+      .hero-banner--article {
+        min-height: 460px;
+      }
+
+      /* Mobile: shrink hero, signup, cta padding to keep above-the-fold useful
+         on ~375px viewports. Single breakpoint at 640px covers phones + the
+         narrower foldables; the header already has its own 720px breakpoint.
+         Also tunes article-body reading: smaller drop cap, tighter heading
+         spacing, less padding around author footer + chunky CTAs. */
+      @media (max-width: 640px) {
+        .hero-banner {
+          min-height: 360px;
+        }
+        .hero-banner--article {
+          min-height: 300px;
+        }
+        .hero-banner .hero-card {
+          padding: 1.6rem 1.3rem;
+          margin: 1.5rem 0.75rem;
+          max-width: none;
+        }
+        .hero-banner .hero-card h1 {
+          font-size: clamp(1.7rem, 6vw, 2.2rem);
+          letter-spacing: -1px;
+        }
+        .hero-banner .hero-card p {
+          font-size: 0.97rem;
+        }
+        .signup-block {
+          padding: 2rem 1.25rem;
+        }
+        .cta-band {
+          padding: 1.25rem 0;
+        }
+        .container {
+          padding: 0 1rem;
+        }
+        .article-row {
+          padding-top: 1.25rem;
+        }
+        pre {
+          font-size: 0.82rem;
+          padding: 0.9rem 1rem;
+        }
+
+        /* Article body reading tuning */
+        article.post {
+          font-size: 18px;
+          line-height: 1.72;
+        }
+        article.post h2 {
+          margin: 2.2rem 0 0.8rem;
+        }
+        article.post h3 {
+          margin: 1.6rem 0 0.5rem;
+        }
+        article.post .lede {
+          font-size: 1.08rem;
+          padding-bottom: 1.5rem;
+          margin-bottom: 1.5rem;
+        }
+        article.post .lede + p::first-letter {
+          font-size: 3em;
+          margin: 0.08em 0.1em 0 0;
+          letter-spacing: -2px;
+        }
+        article.post img {
+          margin: 1.75rem 0;
+        }
+        .post-author-footer {
+          padding: 1.4rem 1.25rem;
+          gap: 1rem;
+          margin-top: 3rem;
+        }
+        .post-author-footer img {
+          width: 52px;
+          height: 52px;
+        }
+        .read-next {
+          margin-top: 2.5rem;
+          padding: 0 1rem;
+        }
+      }
 
       /* Filter row */
       .filter-row {
