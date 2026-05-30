@@ -61,7 +61,21 @@ const readNext = [...sameNiche, ...otherNiche].slice(0, 2);
   <section
     class="hero-banner"
     style={`background-image: url('${fm.heroImage}'); min-height: 460px;`}
+    role="img"
+    aria-label={`Hero image for "${fm.title}"`}
   >
+    {/* Hidden <img> so crawlers (Google Images, Bing) can index the
+        hero, screen readers can announce alt, and the asset gets
+        preloaded with priority. CSS bg-image stays for visual layout. */}
+    <img
+      src={fm.heroImage}
+      alt={fm.title}
+      loading="eager"
+      fetchpriority="high"
+      width="1200"
+      height="630"
+      style="position:absolute; width:1px; height:1px; opacity:0; pointer-events:none;"
+    />
     <div class="hero-card-container">
       <div class="hero-card">
         <p class="eyebrow">
