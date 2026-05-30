@@ -80,6 +80,9 @@
     "author": "stone",
     "topic": "Why I stripped every AI brand name out of my own blog (after launch)",
     "anecdote": "Launched the site, then realised I had named the specific AI brand I use across three published posts, the static pages, the content queue, and even the agent contracts driving the daily publishing pipeline. Ran one pass to replace every mention with 'the AI' or 'the model'. Brand neutrality on a personal blog is not an SEO call. It is a reader-trust call: the moment a reader pattern-matches your essay as marketing for someone else's product, the rest of the newsletter loses authority — even posts that have nothing to do with that tool. The lesson is to decide your brand-name policy before you publish, not after.",
-    "status": "pending"
+    "status": "published",
+    "pickedAt": "2026-05-30T03:35:12.370Z",
+    "slug": "why-i-stripped-every-ai-brand-name-out-of-my-own-blog-after-",
+    "mergedAt": "2026-05-30T03:49:44.000Z"
   }
 ]
