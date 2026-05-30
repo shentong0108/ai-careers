@@ -72,8 +72,49 @@ PYEOF
 
 BRAINSTORM_PROMPT="Read the published articles under src/content/posts/ and the current content-queue.json. Propose 5 new article topics (mixed across nurse-ai, ece-ai, dev-diary) that would fit the established voice and would naturally invite Stone or Megan to share a specific real moment from their work. For each topic, provide: (1) a one-line headline candidate, (2) the niche it belongs to, (3) an anecdote PROMPT — a specific question that, if answered with a real recollection, would anchor the article. Do NOT invent first-person anecdotes yourself; the author must supply real material. Save the output to ${BRAINSTORM_FILE} as markdown. Brief intro paragraph at top, then five numbered topics."
 
-"$CLAUDE_BIN" -p "$BRAINSTORM_PROMPT" --dangerously-skip-permissions >> "$LOG" 2>&1
-RC=$?
+# Retry up to 3 times — known intermittent 400 "thinking blocks ... cannot be
+# modified" from claude -p when retried mid-tool-use. Fresh invocation each time.
+RC=1
+for attempt in 1 2 3; do
+  echo "--- brainstorm attempt $attempt ---" >> "$LOG"
+  "$CLAUDE_BIN" -p "$BRAINSTORM_PROMPT" --dangerously-skip-permissions >> "$LOG" 2>&1
+  RC=$?
+  if [[ $RC -eq 0 && -f "$BRAINSTORM_FILE" ]]; then break; fi
+  echo "--- attempt $attempt failed rc=$RC, sleeping 10s ---" >> "$LOG"
+  sleep 10
+done
+
+# Fallback brainstorm doc so weekend action is never blocked by API hiccup.
+if [[ ! -f "$BRAINSTORM_FILE" ]]; then
+  cat > "$BRAINSTORM_FILE" <<EOF
+# Weekly brainstorm — $(date +%Y-%m-%d) (fallback)
+
+Automated brainstorm failed after 3 attempts (claude -p API error).
+Manual prompt below — fill 2-3 anecdotes from real recall this weekend.
+
+## Queue status
+
+\`\`\`
+${SUMMARY}
+\`\`\`
+
+## Prompts to consider
+
+**nurse-ai (Stone):**
+- A specific patient interaction this week where you used (or chose NOT to use) the AI assistant. What was the moment?
+- A handout / note you rewrote because the AI version was clinically wrong or unsafe. What did it miss?
+
+**ece-ai (Megan):**
+- A learning observation this week where the AI's wording would have lost the moment. What did the child actually do/say?
+- A parent communication you drafted with AI assist. What did you change before sending?
+
+**dev-diary (Stone):**
+- A build/refactor decision this week. What did you keep, what did you throw away?
+- A bug you debugged. Trigger + root cause + fix in 3 sentences.
+
+Drop answers into \`content-queue.json\` as new entries with \`anecdote\` filled.
+EOF
+fi
 
 # Compose mail body
 MAIL_BODY="Hi,
@@ -104,13 +145,24 @@ the site) until a human fills them in.
 
 Log: ${LOG}"
 
+# Always write an INBOX.md so user has a guaranteed file to read even if
+# mailto open fails (launchd Background sessions can't always launch GUI).
+INBOX_FILE="${BRAINSTORM_DIR}/INBOX.md"
+{
+  echo "# Latest weekly check — $(date '+%Y-%m-%d %H:%M %Z')"
+  echo
+  echo "$MAIL_BODY"
+} > "$INBOX_FILE"
+
 # URL-encode for mailto:
 ENC_SUBJECT=$(/usr/bin/python3 -c "import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))" "ai-careers weekly anecdote check — $(date +%Y-%m-%d)")
 ENC_BODY=$(/usr/bin/python3 -c "import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))" "$MAIL_BODY")
-/usr/bin/open "mailto:${NOTIFY_EMAIL}?subject=${ENC_SUBJECT}&body=${ENC_BODY}" >/dev/null 2>&1 || true
+MAIL_RC=0
+/usr/bin/open "mailto:${NOTIFY_EMAIL}?subject=${ENC_SUBJECT}&body=${ENC_BODY}" >> "$LOG" 2>&1 || MAIL_RC=$?
+echo "mailto open rc=$MAIL_RC" >> "$LOG"
 
-# macOS notification
-/usr/bin/osascript -e "display notification \"Weekly anecdote check complete. Brainstorm doc + email draft ready.\" with title \"ai-careers weekly ✓\" sound name \"Glass\"" >/dev/null 2>&1 || true
+# macOS notification — works even from Background ProcessType.
+/usr/bin/osascript -e "display notification \"Weekly anecdote check complete. See docs/brainstorm/INBOX.md\" with title \"ai-careers weekly ✓\" sound name \"Glass\"" >> "$LOG" 2>&1 || true
 
 echo "=== Completed $(date) (rc=$RC) ===" >> "$LOG"
 exit "$RC"
