@@ -41,7 +41,7 @@ MUST:
 2. **JSON-LD** — append before final `</article>` or at file end:
 
 ```mdx
-import { Schema } from '@/components/Schema.astro'
+import Schema from '@/components/Schema.astro'
 
 <Schema
   type="Article"
@@ -49,23 +49,26 @@ import { Schema } from '@/components/Schema.astro'
     headline: frontmatter.title,
     datePublished: frontmatter.publishedAt,
     dateModified: frontmatter.updatedAt,
-    author: { type: 'Person', name: '...', jobTitle: '...', sameAs: [...] },
+    author: { '@type': 'Person', name: '...', jobTitle: '...', sameAs: [] },
     image: frontmatter.heroImage,
-    publisher: { type: 'Organization', name: 'ai-careers', logo: '/logo.png' }
+    publisher: { '@type': 'Organization', name: 'stonemegan.dev', logo: '/favicon.svg' }
   }}
 />
 ```
 
 3. **Breadcrumb** — generate from category + slug.
 
-4. **OG image** — set `frontmatter.ogImage` to `/og/<slug>.png` (generation handled by build step).
+4. **OG image** — leave `frontmatter.ogImage` unset. BaseLayout falls
+   back to `/images/hero-default.jpg` when ogImage is absent. Custom
+   per-article OG generation is NOT wired up; do not set a path to a
+   file that doesn't exist.
 
 5. **Keyword check** — confirm primary keyword in: title, H1, first 100 words, ≥1 H2, conclusion. Flag if missing (do NOT auto-insert; return blocked status).
 
 ## Verification Before Return
 
 - [ ] Zero `[[internal:` placeholders remain in file
-- [ ] JSON-LD valid (run `node scripts/validate-jsonld.ts <file>`)
+- [ ] JSON-LD valid (paste each block into https://validator.schema.org/ if uncertain; `scripts/validate-jsonld.ts` does not exist)
 - [ ] All `<img>` have non-empty `alt`
 - [ ] Canonical URL = `https://stonemegan.dev/blog/<slug>`
 - [ ] No body sentence edits (diff line count delta in body == link replacements only)

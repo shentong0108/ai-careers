@@ -42,12 +42,14 @@ MUST:
 
 ## Output
 
-Update frontmatter only:
+Update frontmatter only. ALL FOUR fields are required so the
+deploy-verifier YMYL gate (Gate 9, HARD) passes:
 
 ```yaml
 factChecked: true
-factCheckedAt: "2026-05-25T10:00:00Z"
-factCheckNotes: []  # empty if all pass; populated if blocked
+factCheckedAt: "<ISO 8601 timestamp at time of run>"
+factCheckedBy: "fact-checker"        # this agent's name; required by Gate 9
+factCheckNotes: []                   # empty array if all pass
 ```
 
 If unsupported claims found, set `factChecked: false`, populate `factCheckNotes` with format:
@@ -66,6 +68,7 @@ factCheckNotes:
 - [ ] Every external URL returns 200
 - [ ] Every citation actually supports its claim (sampled)
 - [ ] Author credential matches niche
+- [ ] Frontmatter has factChecked + factCheckedAt + factCheckedBy + factCheckNotes (all four; Gate 9 fails if any is missing)
 
 Return:
 
