@@ -171,6 +171,29 @@ Skipped gates (reviewer must verify manually before merge):
 
 The deploy-verifier should print the receipt to its caller and exit 0 unless a HARD or CONDITIONAL gate FAILED.
 
+## Gate Override Policy
+
+Some gates can fail for environmental reasons that are not real defects:
+
+- **Gate 6 Link Check**: external link returns 403/404 because of bot
+  protection or rate-limiting (common on .gov.au and .acecqa.gov.au
+  domains in CI). The link is fine in a browser.
+- **Gate 7 Lighthouse**: no dev server in CI, so we can't run it at all.
+- **Gate 8 AI Detection**: no API key provisioned, so we can't score.
+
+The caller (the orchestrating workflow or a human) MAY override a
+non-HARD failure on these specific gates if and only if:
+
+1. ALL HARD gates pass (1, 2, 3, 9-when-YMYL). No exception.
+2. The override reason is captured in the commit message body
+   (`Override-reason: gate-6-link-check-403-from-OAIC-bot-protection`).
+3. The override is documented in the deploy-verifier's receipt as
+   `OVERRIDDEN` instead of `FAIL`, so the audit trail is honest.
+
+HARD gates 1, 2, 3, and 9 (for YMYL) are NEVER overridable. A failing
+build, a Zod schema violation, or a missing YMYL fact-check audit trail
+must be fixed before deploy. No exception, ever.
+
 ## Verification Before Return
 
 - [ ] All 9 gates executed (no skip without reason)

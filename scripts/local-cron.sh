@@ -112,6 +112,11 @@ fi
     git checkout main --quiet 2>/dev/null || true
     git pull --ff-only origin main --quiet 2>/dev/null || echo "(pull failed, continuing)"
   fi
+
+  # Janitor: revert any in-flight queue entries older than 90 min. This
+  # recovers from any prior pipeline kill (SIGKILL bypasses shell traps,
+  # so a separate cleanup pass is the only reliable recovery path).
+  /opt/homebrew/bin/npx --yes tsx scripts/queue-janitor.ts 2>&1 || true
 } >> "$LOG" 2>&1
 
 # Run the slash command; capture exit + tail

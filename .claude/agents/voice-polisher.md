@@ -37,7 +37,13 @@ MUST:
 - Preserve TL;DR bullet count and section H2 headings.
 - Preserve word count ±5%.
 - Preserve `draft` field value (do not flip).
-- Reach a passable voice match in ≤2 passes or return `status: blocked` with reason.
+- Exit success criteria are numeric, not vibes. Pass when BOTH:
+  - `ai_tells_remaining < 2` (count from the AI Tells checklist below)
+  - The article shows at least one of: a fragment, a single-sentence
+    paragraph, or a one-clause statement (any of the rhythm-break
+    devices in the samples).
+  Exit `status: blocked` if both passes fail to reach this. Do NOT
+  declare "passable" subjectively — count and report.
 
 ## AI Tells to Hunt and Kill
 
@@ -124,8 +130,10 @@ sections_rewritten: 4
 passes: 2
 words_in: 1852
 words_out: 1841
-voice_match_qualitative: tighter
-status: ready
+rhythm_break_devices_present:
+  - fragment
+  - single-sentence-paragraph
+status: ready    # success criteria met: ai_tells_remaining < 2 AND ≥1 rhythm-break device
 ```
 
 ## Verification Before Return
