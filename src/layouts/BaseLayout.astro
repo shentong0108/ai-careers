@@ -133,8 +133,21 @@ const siteSchemas = [
       }
 
       * { box-sizing: border-box; }
-      html { font-family: var(--font-sans); color: var(--c-text); background: var(--c-bg); -webkit-font-smoothing: antialiased; }
-      body { margin: 0; line-height: 1.6; font-size: 16px; }
+      html {
+        font-family: var(--font-sans);
+        color: var(--c-text);
+        background: var(--c-bg);
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        line-height: 1.6;
+        font-size: 16px;
+        -webkit-tap-highlight-color: rgba(29, 79, 90, 0.12);
+      }
 
       a { color: var(--c-link); text-decoration: none; transition: color 0.15s ease; }
       a:hover { color: var(--c-link-hover); }
@@ -307,9 +320,21 @@ const siteSchemas = [
       @media (max-width: 720px) {
         .site-header .logo-tag { display: none; }
         .site-header nav { gap: 0; }
-        .site-header nav a.nav-link { padding: 0.5rem 0.65rem; font-size: 0.88rem; }
+        /* WCAG 2.5.5 — minimum 44px tap target. font 0.88rem + 0.7rem
+           vertical padding × 2 + line-height ≈ 44px. */
+        .site-header nav a.nav-link {
+          padding: 0.7rem 0.7rem;
+          font-size: 0.88rem;
+          min-height: 44px;
+          display: flex;
+          align-items: center;
+        }
         .site-header .nav-divider { display: none; }
-        .site-header .cta { padding: 0.5rem 1rem; font-size: 0.85rem; }
+        .site-header .cta {
+          padding: 0.65rem 1.1rem;
+          font-size: 0.85rem;
+          min-height: 44px;
+        }
       }
 
       main { display: block; }
@@ -887,6 +912,33 @@ const siteSchemas = [
         max-width: 680px;
         margin: 0 auto;
         color: var(--c-text);
+        /* Long URLs / unspaced strings in MDX must not force horizontal
+           scroll on the whole page at 375px viewport. */
+        overflow-wrap: anywhere;
+      }
+      /* Tables in MDX scroll inside their own container instead of
+         widening the page. `display: block` switches the table off the
+         table layout algorithm so overflow-x actually applies. */
+      article.post .table-scroll,
+      article.post table {
+        display: block;
+        overflow-x: auto;
+        max-width: 100%;
+        margin: 1.75rem 0;
+        border-collapse: collapse;
+        font-family: var(--font-sans);
+        font-size: 0.95rem;
+        -webkit-overflow-scrolling: touch;
+      }
+      article.post th, article.post td {
+        border-bottom: 1px solid var(--c-border);
+        padding: 0.55rem 0.85rem;
+        text-align: left;
+        vertical-align: top;
+      }
+      article.post th {
+        background: var(--c-bg-soft);
+        font-weight: 700;
       }
       article.post h1 {
         font-family: var(--font-sans);
