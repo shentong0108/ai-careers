@@ -1,0 +1,110 @@
+---
+title: "Writing Better Patient Education Handouts With an AI Assistant"
+slug: "writing-better-patient-education-handouts-with-an-ai-assista"
+description: "An AHPRA-registered RN shares the actual AI prompts I use to write patient education handouts at a 6th-grade reading level, plus the safety edits I add by hand."
+publishedAt: "2026-05-31"
+updatedAt: "2026-05-31"
+author: "stone"
+category: "nurse-ai"
+tags: ["patient education", "health literacy", "ai prompts", "nursing", "readability"]
+keywords: ["ai prompts for patient education handouts", "ai prompts for patient education", "chatgpt patient education handout", "how to make patient education materials easier to read", "patient education handout reading level prompt", "ai patient education materials for nurses", "teach-back method ai prompt"]
+canonical: "https://stonemegan.dev/blog/writing-better-patient-education-handouts-with-an-ai-assista"
+draft: true
+aiDetectionScore: null
+humanizationMode: "degraded"
+heroImage: "/images/card-nurse-ai.jpg"
+factChecked: true
+factCheckedAt: "2026-05-31T00:00:00Z"
+factCheckedBy: "fact-checker"
+factCheckNotes: []
+voicePolisherPasses: 1
+voicePolisherSamples: ["src/content/posts/nurse-ai/claude-nursing-handoff-notes.mdx", "src/content/posts/dev-diary/why-i-killed-my-first-nurse-tooling-project-before-i-wrote-a.mdx"]
+---
+
+I handed a woman her iron infusion aftercare sheet last winter and watched her fold it into her bag without reading a word. She told me later she'd skim it at home. She didn't. Two days on she rang the clinic, worried about a bruise that was completely normal, and the answer was already on page one of the sheet she never opened. That moment is why I rebuilt how I write these. This post is the practical version: the AI prompts for patient education handouts I actually use in my Sydney primary care clinic, plus the safety edits I add by hand before anything reaches a patient.
+
+I'm a Registered Nurse (AHPRA-registered, 5+ years in primary care). None of this is medical advice. It's my workflow, and your facility may want it done differently, so check with your supervisor before you adopt any of it.
+
+## Why my old handouts didn't work
+
+The med-adherence sheet I used to give out was technically correct and practically useless. It read like a discharge summary written for another clinician. Long sentences. Words like "contraindicated" and "titrate." A patient with average literacy would stall on the second paragraph.
+
+Here's the number that reframed it for me. Only **12% of US adults** have proficient health literacy, according to the National Assessment of Adult Literacy ([NAAL, via PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC2668931/)). The Australian picture is similar in shape. So when I write at a clinician's reading level, I'm writing for roughly one in eight of the people in front of me, and missing the rest.
+
+Across the two handout families I use the AI for most, the pattern is the same. Post-procedure care covers iron infusion, wound care, and suture removal. Chronic disease education covers diabetes, hypertension, and asthma. In every one, the failure mode is identical: the words are too hard, and the part that actually keeps someone safe is buried.
+
+## The reading-level problem AI actually solves
+
+The target is a 6th-to-8th grade reading level, and I aim for 6th. AHRQ's [Health Literacy Universal Precautions Toolkit (Tool 11)](https://www.ahrq.gov/health-literacy/improve/precautions/tool11.html) is the reference I point colleagues to for this. Write two grades below the average adult reading level and most people can follow along.
+
+The catch: raw AI output lands two to four grades too high unless you tell it not to. Ask an AI assistant for a "diabetes handout" and it will hand you something at a 10th or 11th grade level, confidently, every time. Why? Because most of its training text is medical, so it defaults to sounding like a clinician. You have to override that on purpose.
+
+I check readability in about 30 seconds. Paste the draft into a free readability checker (Flesch-Kincaid grade), glance at the number, done. Above 7? Back it goes for another pass. That one habit catches more problems than any amount of careful first-drafting ever did.
+
+## My actual prompts (copy-paste, with the context I add)
+
+These are the real things I type. I redact every patient detail first, which I'll come back to in the safety section.
+
+**The base handout prompt:**
+
+> "Write a patient education handout about [topic, e.g. iron infusion aftercare]. Structure it as: what this is, what to expect, how to care for yourself at home, warning signs that mean you should seek help, and when to follow up. Use plain language. Short sentences. Active voice."
+
+**The reading-level refinement (the one that does the heavy lifting):**
+
+> "Rewrite that at a 6th-grade reading level. Avoid words with three or more syllables wherever a shorter word works. Keep sentences under 15 words. Don't drop any safety information."
+
+That last clause matters more than it looks. Push the reading level down and the AI loves to quietly trim the scary-sounding parts. Which are, of course, the safety net. (This one bit me on a wound-care draft once — the dressing-bleed warning just vanished between versions, and I nearly didn't notice.)
+
+**The red-flags / when-to-call prompt:**
+
+> "List the warning signs for [condition/procedure] that should make a patient seek urgent care. Write each as a short 'if this, do this' line a worried person can scan."
+
+**The teach-back questions prompt:**
+
+> "Give me three teach-back questions for this handout, phrased so a patient explains it back in their own words, not yes/no questions."
+
+The teach-back method is the bit clinicians skip when they're busy, and it's the bit that tells you whether any of this landed.
+
+## Structuring a handout the AI won't get right on its own
+
+The AI gets the bones right. It reliably produces the what-it-is / symptoms / self-care / red-flags / resources structure, and that's genuinely useful scaffolding. What it can't know is my clinic.
+
+So I add the local layer by hand. Our after-hours number. The follow-up pathway our patients actually use, not a generic one. And the carpark and interpreter details a model has no way of knowing. Then I fix the formatting for paper: real bullets, white space the eye can rest in, headings a tired person can scan.
+
+The literacy mix in our patient pool is wide, so I tune the language for the actual room, not an average. A sheet that works for a confident English reader and a sheet that works alongside an interpreter are not the same sheet, and the AI won't make that call for me.
+
+## Safety, accuracy, and the limits I never cross
+
+This is the part the generic prompt-list articles leave out, and it's the part that matters most.
+
+First, I fact-check every clinical claim against a current guideline before it goes near a patient. The AI's structure is trustworthy. Its specific medication figures and timeframes are not, and I treat them as a draft to verify, never as a source.
+
+Second, no patient health information ever goes into the prompt. No names, no dates of birth, no anything that could identify a person. Under the [Australian Privacy Act 1988](https://www.oaic.gov.au/privacy/the-privacy-act) and the APPs, that data doesn't belong in a third-party tool, full stop. I write generic handouts the AI never sees a real patient inside of.
+
+Third, the edits I make most often are the safety ones. Pulling the reading level down from medical to patient-friendly. Putting back the red-flag warnings the AI tends to omit, like the line about returning straight away if a wound dressing shows heavy bleeding. Then there's the literacy tuning for the actual room. The model hands me a skeleton. I'm the one who hangs the safety net on it.
+
+And the framing stays honest. A handout describes general care. It is not personal medical advice, and where a patient's situation is specific, the sheet sends them back to a clinician. Anything I roll out as a clinic resource gets supervisor sign-off first.
+
+## My honest opinion: the prompt is the easy 20%
+
+Here's where I'll take a stance that the copy-paste-prompt articles won't. The prompt library is the least valuable part of this entire workflow.
+
+Anyone can paste "write a diabetes handout at a 6th-grade level" into an AI tool. The value sits in the judgement stacked on top. You have to catch the red flag the model quietly dropped. You have to know the bleeding warning belongs in bold near the top, not three paragraphs down. And you have to know your own patients well enough to pitch the language right, which no model can do for you. A tool that writes handouts for you is selling you the 20% that was never the hard part. The 80% is still a nurse who reads the sheet the way a worried patient would, and asks what's missing. Use it as a fast first-drafter and it earns its place. Hand it the author's chair and you'll eventually give someone a sheet that reads beautifully and leaves out the one thing that keeps them safe.
+
+## Key takeaways
+
+- Target a **6th-to-8th grade reading level** and tell the AI the target explicitly; raw output lands 2-4 grades too high by default.
+- The reading-level refinement prompt does the heavy lifting, but always add "don't drop any safety information," because the AI trims red flags when it simplifies.
+- The AI gets the **structure** right; you add the safety net: red-flag warnings, facility-specific details, and the literacy tuning for your actual patients.
+- Never put patient health information in a prompt. Fact-check every clinical claim against a current guideline, and get supervisor sign-off before any handout becomes a clinic resource.
+- Check readability in 30 seconds with a Flesch-Kincaid grade tool; if it's above 7, rewrite.
+
+If you want the adjacent pieces of this workflow, see my notes on discharge instructions, the teach-back method, and how I handle [AI-assisted nursing handoff notes](/blog/claude-nursing-handoff-notes).
+
+*Last reviewed: 31 May 2026 by Stone, RN (AHPRA-registered). This article describes my personal clinical workflow and is not medical advice. Always follow your own facility's policy and check with your supervisor.*
+
+## Sources
+
+- National Assessment of Adult Literacy — health literacy proficiency in adults (via PMC): https://pmc.ncbi.nlm.nih.gov/articles/PMC2668931/
+- AHRQ Health Literacy Universal Precautions Toolkit, Tool 11 (easy-to-understand materials): https://www.ahrq.gov/health-literacy/improve/precautions/tool11.html
+- Office of the Australian Information Commissioner — the Privacy Act 1988: https://www.oaic.gov.au/privacy/the-privacy-act
