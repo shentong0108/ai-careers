@@ -96,12 +96,37 @@ node scripts/detect-ai.ts <file>
 - Pass: score < `target_score`
 - Skipped: `scripts/detect-ai.ts` does not exist OR no detection API key is set
 
-### Gate 9 (CONDITIONAL): YMYL Fact-Check
+### Gate 9 (HARD for YMYL): Fact-Check
 
-For nurse-ai and ece-ai articles, confirm `factChecked: true` in frontmatter.
-- Pass: `factChecked: true`
-- Fail: niche is YMYL but flag is false. Blocks deploy.
-- Skipped: niche is dev-diary (not YMYL).
+For nurse-ai and ece-ai articles, ALL of the following must be present
+in frontmatter. Treat any missing field as FAIL.
+
+- `factChecked: true`
+- `factCheckedAt: <ISO8601>` — when the check ran
+- `factCheckedBy: <agent-name | human-handle>` — who/what ran it
+- `factCheckNotes: []` — explicit empty array if no issues, or list of
+  issue strings if any were noted (and resolved before this gate)
+
+Rules:
+- This gate is HARD for nurse-ai and ece-ai. It cannot be overridden
+  in the calling workflow because YMYL articles must never ship
+  without an explicit fact-check audit trail.
+- Skipped for dev-diary (not YMYL).
+- If `factChecked: true` but other fields missing → FAIL (incomplete
+  audit trail is no better than no audit trail; the missing fields
+  prevent a reader from knowing who is accountable).
+
+Example PASS frontmatter:
+
+```yaml
+factChecked: true
+factCheckedAt: "2026-05-29T00:00:00Z"
+factCheckedBy: "fact-checker-agent"
+factCheckNotes: []
+```
+
+Example FAIL: `factChecked: true` with no `factCheckedBy` field
+(opaque audit trail, blocks deploy).
 
 ## Output
 

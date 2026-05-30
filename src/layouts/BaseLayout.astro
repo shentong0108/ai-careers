@@ -11,7 +11,7 @@ const {
   title,
   description,
   canonical,
-  ogImage = '/og-default.png',
+  ogImage = '/images/hero-default.jpg',
   type = 'website',
 } = Astro.props;
 
@@ -45,6 +45,7 @@ const fullOg = ogImage.startsWith('http') ? ogImage : new URL(ogImage, Astro.sit
 
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate" type="application/rss+xml" title="stonemegan.dev" href="/rss.xml" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -974,6 +975,7 @@ const fullOg = ogImage.startsWith('http') ? ogImage : new URL(ogImage, Astro.sit
         </div>
         <div>
           <h4>Subscribe</h4>
+          <a href="/rss.xml">RSS feed</a>
           <a href="/sitemap-index.xml">Sitemap</a>
         </div>
       </div>

@@ -19,6 +19,7 @@ const postSchema = z.object({
   ogImage: z.string().startsWith('/').optional(),
   factChecked: z.boolean().default(false),
   factCheckedAt: z.coerce.date().optional(),
+  factCheckedBy: z.string().optional(),
   factCheckNotes: z
     .array(
       z.object({

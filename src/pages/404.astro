@@ -1,0 +1,46 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+const recent = (await getCollection('posts', ({ data }: CollectionEntry<'posts'>) => !data.draft))
+  .sort((a: CollectionEntry<'posts'>, b: CollectionEntry<'posts'>) =>
+    b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf()
+  )
+  .slice(0, 3);
+---
+
+<BaseLayout
+  title="Page not found — stonemegan.dev"
+  description="That URL doesn't exist on stonemegan.dev. Some recent posts you might be looking for are below."
+>
+  <div class="static-page">
+    <h1>404 — Page not found</h1>
+    <p>
+      That URL doesn't exist on this site. Either the link is broken,
+      the post was moved, or it's a typo. The site is small — three
+      categories, a handful of posts — so a quick browse usually
+      gets you where you wanted.
+    </p>
+
+    <h2>Categories</h2>
+    <ul>
+      <li><a href="/nurse-ai">Nurse + AI</a> — Stone on using AI tools in primary care</li>
+      <li><a href="/ece-ai">ECT + AI</a> — Megan on AI in early childhood education</li>
+      <li><a href="/dev-diary">Dev Diary</a> — Stone on indie building with AI tools</li>
+    </ul>
+
+    <h2>Latest posts</h2>
+    <ul>
+      {recent.map((p: CollectionEntry<'posts'>) => (
+        <li>
+          <a href={`/blog/${p.data.slug}`}>{p.data.title}</a>
+          {' '}— {p.data.publishedAt.toISOString().slice(0, 10)}
+        </li>
+      ))}
+    </ul>
+
+    <p>
+      Or start from the <a href="/">homepage</a>.
+    </p>
+  </div>
+</BaseLayout>

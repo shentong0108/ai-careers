@@ -13,9 +13,7 @@
     "author": "stone",
     "topic": "Writing better patient education handouts with an AI assistant (with my actual prompts)",
     "anecdote": "I use the AI for two main handout types: post-procedure care (iron infusion, wound care, suture removal) and chronic disease education (diabetes, hypertension, asthma). The edits I make most often: bringing the reading level down from medical to patient-friendly, adding red-flag warnings the AI tends to omit (for example the line about returning immediately if a wound dressing shows heavy bleeding), and tailoring the language for the literacy mix in our patient pool. The AI gets the structure right; I add the safety net.",
-    "status": "in-flight",
-    "pickedAt": "2026-05-30T03:51:34.552Z",
-    "slug": "writing-better-patient-education-handouts-with-an-ai-assista"
+    "status": "pending"
   },
   {
     "niche": "dev-diary",
@@ -86,5 +84,19 @@
     "pickedAt": "2026-05-30T03:35:12.370Z",
     "slug": "why-i-stripped-every-ai-brand-name-out-of-my-own-blog-after-",
     "mergedAt": "2026-05-30T03:49:44.000Z"
+  },
+  {
+    "niche": "dev-diary",
+    "author": "stone",
+    "topic": "Why my daily 7am blog cron silently skipped for three days — a launchd throttle bug",
+    "anecdote": "Set up a macOS launchd LaunchAgent to publish one article every morning at 7am. The first three mornings the cron fired and immediately exited skip, last run 71190s ago. Read: 19.8 hours. My throttle threshold was 22 hours. Daily cadence is 24 hours; any prior run after 9am leaves a gap below 22h, so the next morning is silently skipped. Threshold too close to the daily period had zero safe margin. Fixed by dropping the throttle to 18 hours, which leaves a 6-hour buffer in either direction. The bug was invisible because launchd reported exit 0 and the script's skip-log line looked identical to the success log line at a glance.",
+    "status": "pending"
+  },
+  {
+    "niche": "dev-diary",
+    "author": "stone",
+    "topic": "How my content agent invented a UK nurse persona for a post about my own work",
+    "anecdote": "Wrote a dev-diary post about killing a clinical-tool side project. Sent the topic line, the author binding (Stone, AHPRA-registered RN, Sydney), and the real anecdote to the content-writer agent. The agent ignored the author binding and wrote the article as Megan — UK NMC-registered, North London NHS, completely fictional. It pattern-matched the word 'nurse' in the topic and reconstructed a persona that fit the surface words. Two fixes stopped the bleed: (1) author binding became a required field on every queue entry, not inferred from niche or topic, and (2) the content-writer contract now has a HARD RULE forbidding persona inference from topic strings. The lesson: when an agent has freedom to fabricate, freedom plus surface words equals fabrication.",
+    "status": "pending"
   }
 ]

@@ -42,7 +42,14 @@ function nextNiche(last: QueueEntry['niche'] | null): QueueEntry['niche'] {
 }
 
 function slugify(s: string): string {
-  return s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60);
+  // Trim dashes BEFORE slicing AND after — slicing a 61-char string at 60 may
+  // expose a trailing dash that the pre-slice trim wouldn't catch.
+  return s
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .slice(0, 60)
+    .replace(/-+$/, '');
 }
 
 function main() {
