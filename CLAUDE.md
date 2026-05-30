@@ -41,7 +41,15 @@ Required before merging any branch:
 - `npm run build` exits 0
 - `npm test` exits 0 (when tests exist)
 - `npx astro check` exits 0
-- New content: AI-detection score < 30% (ZeroGPT or Originality.ai)
+
+Advisory (run when an API key is provisioned, otherwise skip and keep
+`draft: true` until a human eyeballs the prose):
+- AI-detection score < 30% (ZeroGPT or Originality.ai). Not currently
+  enforceable in CI because neither `ZEROGPT_API_KEY` nor
+  `ORIGINALITY_API_KEY` is set, and `scripts/detect-ai.ts` does not
+  exist. To make this a hard gate, provision a key and write the
+  script — until then, the humanizer marks `humanizationMode: "degraded"`
+  and the deploy-verifier SKIPs gate 8.
 
 Invoke `verification-before-completion` skill before marking any task done.
 
@@ -115,9 +123,19 @@ Each article must have:
 
 `.claude/hooks/` enforces:
 - `pre-edit-fix.sh` — Edit/Write on bug-fix branches require ROOT_CAUSE.md or commit body line `root-cause: ...`
-- `post-build.sh` — captures `npm run build` output to `.claude/logs/`
-- `pre-publish.sh` — blocks deploy if AI-detection score > 30% or `astro check` non-zero
+- `pre-bash-guard.sh` — block specific destructive Bash commands before they run
+- `post-bash-log.sh` — captures executed Bash + output to `.claude/logs/`
+- `stop-verify.sh` — runs at the end of a Claude turn to surface any verification the agent skipped
 - `prompt-injector.sh` — appends current rules to every user prompt
+
+Hooks that USED to exist and have been removed (mentioned here so an
+agent reading CLAUDE.md and looking for them does not mis-diagnose
+the absence as a bug):
+- `post-build.sh` — superseded by `post-bash-log.sh` (captures any
+  bash output, including `npm run build`)
+- `pre-publish.sh` — never shipped; AI-detection enforcement was
+  punted to humanizer + deploy-verifier degraded-mode handling
+  documented under "Verify Before Claim" above
 
 ## Skills to Invoke
 

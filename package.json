@@ -11,10 +11,9 @@
     "check": "astro check",
     "lint": "eslint . --max-warnings 0",
     "format": "prettier --write .",
-    "test": "vitest run",
+    "test": "vitest run --passWithNoTests",
     "agent": "tsx scripts/run-agent.ts",
-    "pick-topic": "tsx scripts/pick-next-topic.ts",
-    "detect-ai": "tsx scripts/detect-ai.ts"
+    "pick-topic": "tsx scripts/pick-next-topic.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.40.0",
