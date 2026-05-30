@@ -1,0 +1,103 @@
+{
+  "niche": "nurse-ai",
+  "seed_topic": "Writing better patient education handouts with an AI assistant (with my actual prompts)",
+  "target_geo": "global",
+  "primary_keyword": {
+    "term": "ai prompts for patient education handouts",
+    "estimated_kd": 16,
+    "estimated_volume": "low (<300/mo)",
+    "source": "Google Suggest 2026-05-31 (echoed seed only, no expansion) + WebSearch SERP composition 2026-05-31; volume not available from a free tool this session, estimated low from SERP thinness — UNCERTAIN, confirm in Ubersuggest free tier before publish"
+  },
+  "long_tail": [
+    { "term": "ai prompts for patient education", "estimated_kd": 18, "intent": "informational", "source": "Google Suggest 2026-05-31 returned 'AI prompts for patient education'" },
+    { "term": "chatgpt patient education handout", "estimated_kd": 14, "intent": "informational", "source": "Google Suggest 2026-05-31 returned 'chatgpt patient education handout'" },
+    { "term": "how to write patient education materials", "estimated_kd": 22, "intent": "informational", "source": "Google Suggest 2026-05-31 (5 suggestions returned)" },
+    { "term": "how to make patient education materials easier to read", "estimated_kd": 12, "intent": "informational", "source": "Google Suggest 2026-05-31 'how to make patient education materials' + WebSearch readability cluster" },
+    { "term": "patient education handout reading level prompt", "estimated_kd": 10, "intent": "informational", "source": "WebSearch 2026-05-31 (FRO / 6th-grade reading-level prompting cluster)" },
+    { "term": "ai patient education materials for nurses", "estimated_kd": 15, "intent": "informational", "source": "Google Suggest 2026-05-31 'AI patient education materials' + nurse modifier from SERP" },
+    { "term": "teach-back method ai prompt", "estimated_kd": 9, "intent": "informational", "source": "WebSearch 2026-05-31 (teach-back prompt mention)" }
+  ],
+  "people_also_ask": [
+    "What reading level should patient education handouts be written at?",
+    "Can ChatGPT write patient education materials?",
+    "How do you simplify medical information for patients?",
+    "Is it safe for nurses to use AI for patient handouts?",
+    "What is the teach-back method in patient education?",
+    "How do you check the readability of a patient handout?"
+  ],
+  "paa_source_note": "Google /search direct fetch returned 403/error page and Bing PAA panel was empty this session; PAA list above is reconstructed from WebSearch result snippets + competitor FAQ sections (River FAQ, eq4c). Re-scrape live PAA before publish to confirm exact phrasing.",
+  "serp_top3": [
+    {
+      "url": "https://tools.eq4c.com/20-professional-ai-prompts-for-patient-education/",
+      "dr": 18,
+      "dr_source": "ESTIMATE — small tools subdomain, no live Ahrefs DR fetched (checker requires JS form submit). Confirm before publish.",
+      "word_count": 4500,
+      "covers": ["20 named copy-paste prompts", "simplify a diagnosis", "home management guide", "patient FAQ generator", "medication adherence", "5th-grade reading level guidance", "plain language / avoid 3+ syllable words", "multi-role (doctors, nurses, pharmacists)"]
+    },
+    {
+      "url": "https://rivereditor.com/tools/patient-education-handout",
+      "dr": 28,
+      "dr_source": "ESTIMATE — small SaaS product domain. Confirm before publish.",
+      "word_count": 1300,
+      "covers": ["free AI handout generator tool", "6th-8th grade reading level target", "handout structure (what it is/symptoms/causes/treatment/self-care/red flags/resources)", "design principles (short sentences, active voice, bullets, white space)", "facility customization", "annual review cadence", "FAQ"]
+    },
+    {
+      "url": "https://www.rheumatologyadvisor.com/features/use-of-ai-to-create-patient-education-materials/",
+      "dr": 70,
+      "dr_source": "ESTIMATE — Haymarket Media network property, high authority. Confirm before publish. NOTE: ranks on readability angle, NOT on the prompt-library intent; weaker direct competitor for our exact keyword.",
+      "word_count": 1600,
+      "covers": ["AI to simplify reading level", "Flesch / grade-level analysis", "mixed-results / consistency caveats", "no copy-paste prompts", "clinician-facing feature piece, not a how-to"]
+    }
+  ],
+  "serp_competitive_note": "The two on-intent competitors (eq4c, River) are LOW-DR. High-DR domains in the broader SERP (myamericannurse.com ~DR60, rheumatologyadvisor.com ~DR70, PMC/JMIR .gov/.edu readability studies) rank for adjacent readability/prompt-engineering intent, not for the 'copy-paste nurse handout prompts' intent. A new domain can realistically compete on the long-tail nurse + real-prompts angle.",
+  "ai_overview_present": true,
+  "ai_overview_note": "WebSearch consistently returned AI-Overview-style synthesized answers for readability + reading-level queries, so an AI Overview almost certainly fires on the broad 'how to simplify patient education materials' query. The narrower 'ai prompts for patient education handouts [nurse]' query is less likely to trigger a strong AIO — UNCERTAIN, verify on live SERP.",
+  "featured_snippet_target": "A short definition + numbered list: 'What reading level should a patient education handout be? — 6th-to-8th grade (aim for 6th). Tell the AI the target grade level explicitly; most models default 2-4 grades too high.' List-style snippet is the easiest to win here.",
+  "outline": {
+    "title_candidates": [
+      "Writing Better Patient Education Handouts With an AI Assistant (My Actual Prompts)",
+      "The AI Prompts I Use to Write Patient Handouts Patients Actually Read",
+      "How I Cut Handout Reading Levels From 12th to 6th Grade With AI (Real Prompts Inside)"
+    ],
+    "h2": [
+      {
+        "heading": "Why my old patient handouts didn't work (a real shift story)",
+        "h3": ["The med-adherence handout nobody read", "What '12% have proficient health literacy' looks like on the ward"]
+      },
+      {
+        "heading": "The reading-level problem AI actually solves",
+        "h3": ["Why 6th-8th grade is the target", "Why raw AI output still lands 2-4 grades too high", "How I check readability in 30 seconds"]
+      },
+      {
+        "heading": "My actual prompts (copy-paste, with the context I add)",
+        "h3": ["The base handout prompt", "The 'rewrite at 6th grade, no 3-syllable words' refinement", "The red-flags / when-to-call prompt", "The teach-back questions prompt"]
+      },
+      {
+        "heading": "Structuring a handout the AI won't get right on its own",
+        "h3": ["What it is / symptoms / self-care / red flags / resources", "Adding facility-specific details and contact info", "Formatting: bullets, white space, active voice"]
+      },
+      {
+        "heading": "Safety, accuracy, and the limits I never cross",
+        "h3": ["Fact-checking every claim against a guideline", "No PHI in the prompt", "'In my practice' vs medical advice — and getting supervisor sign-off"]
+      },
+      {
+        "heading": "My before/after: a real handout AI rewrote",
+        "h3": ["The original paragraph", "The AI-assisted version + grade-level drop"]
+      }
+    ],
+    "unique_angle": "Real RN first-person workflow with the EXACT prompts AND the manual fact-check/PHI-redaction step between draft and patient — the top-3 either dump a generic prompt list (eq4c), gate it behind a tool (River), or stay academic with zero copy-paste prompts (rheumatologyadvisor). None show a real before/after handout with a measured grade-level drop from an actual nurse."
+  },
+  "internal_link_candidates": [
+    "ai-shift-handoff-notes-nurses",
+    "ai-discharge-instructions-nurse",
+    "teach-back-method-patient-education"
+  ],
+  "internal_link_note": "docs/research/keywords/nurse-ai/ and the article collection did not exist in this worktree at research time, so internal-link slugs above are PROPOSED targets, not confirmed existing files. content-writer must verify each slug exists before linking.",
+  "warnings": [
+    "AI Overview likely fires on the broad readability query and will steal clicks — only target the narrower 'nurse + real prompts' long-tail where depth and first-person authority win.",
+    "All DR numbers are ESTIMATES — live Ahrefs DR could not be fetched (checker needs JS form submit). Confirm top-3 DR + a real volume figure in Ubersuggest/Ahrefs free tier before content-writer commits.",
+    "Google Suggest only echoed the seed for the exact-match phrase (thin/low-volume signal) — good for low competition, but confirm there is enough volume to justify the article.",
+    "YMYL: this is nurse health content — needs RN byline + reg #, a PubMed/.gov citation (AHRQ health-literacy stat + a readability study like JMIR e69955), 'last reviewed' date, and 'in my practice' framing. Flag to fact-checker.",
+    "PAA list reconstructed from snippets, not a live PAA scrape (Google blocked, Bing panel empty) — re-verify phrasing on live SERP."
+  ]
+}
