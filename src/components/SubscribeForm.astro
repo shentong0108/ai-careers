@@ -42,12 +42,14 @@ const defaultPitch =
   <p class="pitch">{pitch ?? defaultPitch}</p>
 
   {formId ? (
-    <script
-      is:inline
-      async
-      src="https://subscribe-forms.beehiiv.com/v3/loader.js"
-      data-beehiiv-form={formId}
-    ></script>
+    <div class="embed-wrap">
+      <script
+        is:inline
+        async
+        src="https://subscribe-forms.beehiiv.com/v3/loader.js"
+        data-beehiiv-form={formId}
+      ></script>
+    </div>
   ) : (
     <p class="fallback">
       Newsletter wiring in progress. For now: subscribe via
@@ -83,7 +85,27 @@ const defaultPitch =
   .subscribe-form .pitch {
     color: var(--c-muted, #6b6258);
     font-size: 0.95rem;
-    margin: 0 0 1rem;
+    margin: 0 0 1.25rem;
+    text-align: center;
+  }
+  .subscribe-form h3 {
+    text-align: center;
+  }
+  .subscribe-form .eyebrow {
+    text-align: center;
+  }
+  .embed-wrap {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  .embed-wrap :global(iframe) {
+    width: 100% !important;
+    max-width: 480px !important;
+    margin: 0 auto !important;
+    display: block !important;
+    border: 0 !important;
+    background: transparent !important;
   }
   .subscribe-form .fallback {
     font-size: 0.9rem;
