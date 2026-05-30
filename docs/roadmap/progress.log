@@ -9,3 +9,4 @@
 2026-05-31 03:24:48 / iter 8 / install-launchd.sh adds analytics plist + Interactive ProcessType + dead script flags in humanizer/analytics-reader contracts
 2026-05-31 04:16:57 / iter 9 / brand-name leaks in lib/categories rendered on /nurse-ai/ + /dev-diary/
 2026-05-31 05:09:17 / iter 10 / content-writer.md frontmatter example: wrong author map + nonexistent hero PNG + misleading humanizer flip claim
+2026-05-31 06:00:46 / iter 11 / CLAUDE.md falsely claimed Cloudflare Web Analytics installed; flagged + .env.example notes

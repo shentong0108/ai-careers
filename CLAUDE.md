@@ -11,7 +11,10 @@
   Code subscription quota via `claude -p "/generate-article"`
 - **GitHub Actions** — disabled by default, manual-dispatch backup that
   consumes API credits if used
-- **Plausible** + Cloudflare Web Analytics — dashboard
+- **Plausible** — analytics dashboard (the only analytics script
+  actually loaded in BaseLayout). Cloudflare Web Analytics is NOT
+  installed at present; the `CF_ANALYTICS_TOKEN` row in .env.example
+  is a reservation for a future second source, not active wiring.
 - **TypeScript** strict mode
 - LSP: `astro check` + `eslint` + `prettier`
 
