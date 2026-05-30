@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import Schema from '@/components/Schema.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
 import type { GetStaticPaths } from 'astro';
 import { CATEGORIES, type CategoryKey } from '@/lib/categories';
@@ -79,4 +80,26 @@ const NICHE_LABEL: Record<string, string> = {
       </ul>
     )}
   </div>
+
+  <Schema
+    type="CollectionPage"
+    data={{
+      name: `${meta.title} — stonemegan.dev`,
+      description: meta.description,
+      url: new URL(`/${category}`, Astro.site).toString(),
+      inLanguage: 'en-AU',
+      isPartOf: { '@type': 'WebSite', name: 'stonemegan.dev', url: Astro.site?.toString() },
+      mainEntity: {
+        '@type': 'ItemList',
+        itemListOrder: 'https://schema.org/ItemListOrderDescending',
+        numberOfItems: posts.length,
+        itemListElement: posts.map((p: CollectionEntry<'posts'>, idx: number) => ({
+          '@type': 'ListItem',
+          position: idx + 1,
+          url: new URL(`/blog/${p.data.slug}`, Astro.site).toString(),
+          name: p.data.title,
+        })),
+      },
+    }}
+  />
 </BaseLayout>

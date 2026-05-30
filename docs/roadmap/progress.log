@@ -3,3 +3,4 @@
 2026-05-30 22:50:15 / iter 2 / bucket 3 part-1 / 3 fixes: queue-janitor + voice-polisher numeric + override policy doc
 2026-05-30 23:24:35 / iter 3 / bucket 3 pt-2 / CLAUDE.md reconcile + package.json fixes
 2026-05-31 00:07:44 / iter 4 / bucket 4 a11y+SEO / skip-to-content + hero crawlable img
+2026-05-31 00:56:02 / iter 5 / SEO schema / sitewide WebSite+Organization + CollectionPage/ItemList on category indexes

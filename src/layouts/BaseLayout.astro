@@ -17,6 +17,30 @@ const {
 
 const fullCanonical = canonical ?? new URL(Astro.url.pathname, Astro.site).toString();
 const fullOg = ogImage.startsWith('http') ? ogImage : new URL(ogImage, Astro.site).toString();
+
+// Sitewide WebSite + Organization JSON-LD. Tells Google the canonical
+// name, logo, and (optional) search target. Rendered on every page;
+// article pages add Article/Person/BreadcrumbList on top via the
+// Schema component.
+const siteUrl = (Astro.site ?? new URL('https://stonemegan.dev')).toString().replace(/\/$/, '');
+const siteSchemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'stonemegan.dev',
+    url: siteUrl,
+    description:
+      'What working with AI actually looks like — from a Sydney nurse, an ECT, and an indie dev.',
+    inLanguage: 'en-AU',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'stonemegan.dev',
+    url: siteUrl,
+    logo: `${siteUrl}/favicon.svg`,
+  },
+];
 ---
 
 <!doctype html>
@@ -46,6 +70,10 @@ const fullOg = ogImage.startsWith('http') ? ogImage : new URL(ogImage, Astro.sit
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="alternate" type="application/rss+xml" title="stonemegan.dev" href="/rss.xml" />
+
+    {siteSchemas.map((s) => (
+      <script type="application/ld+json" is:inline set:html={JSON.stringify(s)} />
+    ))}
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
