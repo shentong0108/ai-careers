@@ -30,7 +30,13 @@ MUST:
 
 ## Workflow
 
-1. **Fetch** — `node scripts/fetch-analytics.ts --period <period>` reads all 3 APIs, writes to `.claude/cache/analytics-<date>.json`.
+1. **Fetch** — `node scripts/fetch-analytics.ts --period <period>`
+   reads all 3 APIs (Plausible, Cloudflare, GSC), writes to
+   `.claude/cache/analytics-<date>.json`. NOTE: as of 2026-05-31
+   this script does not exist in this repo and the API keys are
+   not provisioned. Until they are, this agent cannot run end-
+   to-end; the weekly checklist in `scripts/weekly-analytics-check.sh`
+   prompts a human to read the dashboards manually instead.
 2. **Summarize** — top-level metrics: sessions, pageviews, avg time, bounce, top countries.
 3. **Per-article** — group by slug, sort by sessions. Identify:
    - Top 5 by traffic

@@ -133,24 +133,87 @@ cat > "$WEEKLY_PLIST_PATH" <<EOF
   <false/>
 
   <key>ProcessType</key>
-  <string>Background</string>
+  <string>Interactive</string>
 </dict>
 </plist>
 EOF
 echo "wrote $WEEKLY_PLIST_PATH"
 
+# Weekly analytics-review prompt — Monday 09:00 local. Writes a
+# checklist file + opens a mailto draft. ProcessType=Interactive
+# so launchd can pop the user's Mail GUI from a Background session.
+ANALYTICS_LABEL="dev.stonemegan.aicareers-analytics"
+ANALYTICS_PLIST_PATH="$HOME/Library/LaunchAgents/${ANALYTICS_LABEL}.plist"
+ANALYTICS_SCRIPT_PATH="${PROJECT_ROOT}/scripts/weekly-analytics-check.sh"
+chmod +x "$ANALYTICS_SCRIPT_PATH" 2>/dev/null || true
+
+cat > "$ANALYTICS_PLIST_PATH" <<EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>${ANALYTICS_LABEL}</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/bash</string>
+    <string>${ANALYTICS_SCRIPT_PATH}</string>
+  </array>
+
+  <key>StartCalendarInterval</key>
+  <dict>
+    <key>Weekday</key>
+    <integer>1</integer>
+    <key>Hour</key>
+    <integer>9</integer>
+    <key>Minute</key>
+    <integer>0</integer>
+  </dict>
+
+  <key>WorkingDirectory</key>
+  <string>${PROJECT_ROOT}</string>
+
+  <key>StandardOutPath</key>
+  <string>${LAUNCHD_LOG_DIR}/analytics-stdout.log</string>
+
+  <key>StandardErrorPath</key>
+  <string>${LAUNCHD_LOG_DIR}/analytics-stderr.log</string>
+
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PATH</key>
+    <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+    <key>HOME</key>
+    <string>${HOME}</string>
+  </dict>
+
+  <key>RunAtLoad</key>
+  <false/>
+
+  <key>ProcessType</key>
+  <string>Interactive</string>
+</dict>
+</plist>
+EOF
+echo "wrote $ANALYTICS_PLIST_PATH"
+
 # Unload if already loaded (idempotent reinstall)
 launchctl unload "$PLIST_PATH" 2>/dev/null || true
 launchctl unload "$WEEKLY_PLIST_PATH" 2>/dev/null || true
+launchctl unload "$ANALYTICS_PLIST_PATH" 2>/dev/null || true
 
 launchctl load "$PLIST_PATH"
 echo "loaded $PLIST_LABEL"
 launchctl load "$WEEKLY_PLIST_PATH"
 echo "loaded $WEEKLY_LABEL"
+launchctl load "$ANALYTICS_PLIST_PATH"
+echo "loaded $ANALYTICS_LABEL"
 
 echo ""
-echo "Daily article cron: 07:00 local time."
-echo "Weekly anecdote check: Friday 18:00 local time."
+echo "Daily article cron:     07:00 local time."
+echo "Weekly anecdote check:  Friday 18:00 local time."
+echo "Weekly analytics check: Monday 09:00 local time."
 echo ""
 echo "Manual test (runs now, ignores throttle):"
 echo "  rm -f ${PROJECT_ROOT}/.claude/cache/local-cron-last-run"

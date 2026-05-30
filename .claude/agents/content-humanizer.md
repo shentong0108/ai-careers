@@ -57,6 +57,12 @@ This is acceptable for development and for runs where the user has not yet provi
 
 ## Detection Workflow
 
+NOTE: As of 2026-05-31 the `scripts/detect-ai.ts` script does not
+exist in this repo and no `ZEROGPT_API_KEY` or `ORIGINALITY_API_KEY`
+is provisioned. The workflow below is the spec for when those land.
+Until then, jump straight to the "Degraded mode" section above —
+running this block as-is will exit with "script not found".
+
 ```bash
 # 1. Extract body (strip frontmatter)
 sed -n '/^---$/,/^---$/!p' "$FILE" > /tmp/body.md
