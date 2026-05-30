@@ -13,7 +13,7 @@ Find low-competition long-tail keywords (KD < 20). Output research brief that `c
 ## Inputs
 
 - `niche`: `nurse-ai` | `ece-ai` | `dev-diary`
-- `seed_topic`: 1 sentence ("how nurses can use Claude for shift handoff notes")
+- `seed_topic`: 1 sentence ("how nurses can use an AI assistant for shift handoff notes")
 - `target_geo`: `uk` | `au` | `nz` | `global` (default global English)
 
 ## Hard Constraints
