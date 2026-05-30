@@ -1,0 +1,125 @@
+{
+  "niche": "dev-diary",
+  "seed_topic": "Why I stripped every AI brand name out of my own blog (after launch)",
+  "target_geo": "global",
+  "primary_keyword": {
+    "term": "should you mention brand names in blog posts",
+    "estimated_kd": 16,
+    "estimated_volume": "low (<500/mo)",
+    "source": "Google Suggest (client=chrome) 2026-05-30 confirmed term as live autocomplete; volume bucket inferred from SERP thinness (Quora/WordPress forum threads ranking top-10) — no third-party numeric volume retrieved, treat as estimate"
+  },
+  "long_tail": [
+    { "term": "should I name the AI tool I use in my blog", "estimated_kd": 8, "intent": "informational" },
+    { "term": "writing 'the AI' instead of naming the tool", "estimated_kd": 7, "intent": "informational" },
+    { "term": "brand neutrality on a personal blog", "estimated_kd": 10, "intent": "informational" },
+    { "term": "does naming a product make your blog look like an ad", "estimated_kd": 9, "intent": "informational" },
+    { "term": "removing brand names from blog after launch", "estimated_kd": 11, "intent": "informational" },
+    { "term": "should I disclose which AI I used to write a post", "estimated_kd": 18, "intent": "informational" },
+    { "term": "brand name policy for indie blog", "estimated_kd": 9, "intent": "informational" }
+  ],
+  "people_also_ask": [
+    "Can I use product brand names in my blog?",
+    "Do brand names hurt SEO or help it?",
+    "Should I disclose which AI tool wrote my content?",
+    "Does mentioning a specific tool make a post read like marketing?",
+    "Is it better to use a generic term or the exact product name?",
+    "What should I do if I already named brands across published posts?"
+  ],
+  "serp_top3": [
+    {
+      "url": "https://www.contentpowered.com/blog/company-team-author-names/",
+      "dr": 52,
+      "word_count": 2200,
+      "covers": [
+        "individual vs team/brand attribution",
+        "Google EEAT and Author Vectors patent",
+        "Moz finding: only 43% of top-3 results carry attribution",
+        "no definitive SEO penalty for brand vs name",
+        "reputation transfers with the person, not the brand"
+      ]
+    },
+    {
+      "url": "https://seo.ai/blog/how-to-label-and-disclose-your-ai-content-guidelines-and-examples",
+      "dr": 58,
+      "word_count": 2100,
+      "covers": [
+        "disclosing AI involvement to readers",
+        "Sports Illustrated AI byline scandal",
+        "Google's stance on AI-content transparency",
+        "specify HOW the tool was used, not just that it was",
+        "keep a human byline, disclose tool assistance"
+      ]
+    },
+    {
+      "url": "https://www.norberthires.blog/personal-brand-vs-business-brand/",
+      "dr": 41,
+      "word_count": 2200,
+      "covers": [
+        "personal name vs business brand as a publishing identity",
+        "extension of personality vs sellable asset",
+        "trend toward individual creators",
+        "long-term commitment and idea-testing under your own name"
+      ]
+    }
+  ],
+  "ai_overview_present": false,
+  "featured_snippet_target": "A short definition block answering 'Should you name the specific AI tool you use in a blog post?' — 'Naming a brand is a reader-trust decision, not an SEO one: the moment a reader pattern-matches your post as marketing for someone else's product, the rest of your blog loses authority. Decide your brand-name policy before you publish.'",
+  "outline": {
+    "title_candidates": [
+      "Why I Stripped Every AI Brand Name Out of My Own Blog (After Launch)",
+      "I Named One AI Tool 40 Times Before Launch. Then I Deleted Every Mention",
+      "Brand Neutrality Is a Trust Call, Not an SEO Call: A Post-Launch Cleanup"
+    ],
+    "h2": [
+      {
+        "heading": "The mistake I shipped: one brand name, everywhere",
+        "h3": [
+          "Three published posts, the static pages, the queue, the agent contracts",
+          "How I actually counted the mentions"
+        ]
+      },
+      {
+        "heading": "Why a named tool reads like an ad — even when you aren't paid",
+        "h3": [
+          "The pattern-match: reader sees a product name and flips to 'who paid for this?'",
+          "Authority is one trust budget for the whole blog, not per-post"
+        ]
+      },
+      {
+        "heading": "This is a trust decision, not an SEO decision",
+        "h3": [
+          "What the SEO crowd argues (no ranking penalty either way)",
+          "Why the AI-disclosure debate is a different question than brand neutrality"
+        ]
+      },
+      {
+        "heading": "The one-pass cleanup: replacing the brand with 'the AI' / 'the model'",
+        "h3": [
+          "What I changed and what I deliberately left",
+          "The edge case: agent contracts and config where the exact name is load-bearing"
+        ]
+      },
+      {
+        "heading": "Decide your brand-name policy before you publish",
+        "h3": [
+          "A three-line policy you can paste into your style guide",
+          "When naming the brand IS the honest choice (paid disclosure, reviews)"
+        ]
+      }
+    ],
+    "unique_angle": "Every top-3 result treats this as either an SEO-attribution question or an AI-disclosure-compliance question. None frame brand neutrality as a single, blog-wide reader-trust budget that a personal-essay author spends the instant a post reads like marketing. The article's concrete hook — actually counting brand mentions across posts, pages, queue, AND the agent contracts running the publishing pipeline, then doing one replace pass — is a builder's-eye angle no competitor has."
+  },
+  "internal_link_candidates": [
+    "VERIFY-against-src/content/posts/dev-diary: post about the daily publishing pipeline / agent contracts",
+    "VERIFY: affiliate-link redirect /go/<merchant> post (paid-disclosure contrast)",
+    "VERIFY: any earlier dev-diary post that itself named the AI brand (link as the 'before' example)"
+  ],
+  "warnings": [
+    "No third-party numeric search volume was retrieved (Ubersuggest/Ahrefs free not reachable in this run). All estimated_volume values are SERP-thinness inferences, not tool readouts — re-pull before treating as fact.",
+    "Google Suggest firefox-client endpoint returned empty arrays (likely region/rate-limit); chrome-client confirmed the primary term but did not return a full sibling list. Long-tail terms are seed-derived, not all confirmed as live autocomplete.",
+    "SERP top-3 are DR 41-58 generic marketing/SEO domains, but NONE exact-match the long-tail intent and none cover the reader-trust thesis — that gap is why KD stays low for a new domain. The risk is volume, not difficulty.",
+    "No AI Overview observed for these queries as of 2026-05-30, but this topic is AI-adjacent; recheck at publish — an AI Overview could appear and skim the definitional intent.",
+    "internal_link_candidates are unverified placeholders — I could not list src/content/posts with available tools. content-writer/editor must confirm real slugs before linking.",
+    "Quora top-10 result (Can-I-use-product-brand-name-in-my-blog) returned HTTP 403 and could not be inspected; coverage for that URL is unknown."
+  ]
+}
