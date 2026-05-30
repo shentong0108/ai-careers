@@ -4,7 +4,7 @@ export const CATEGORIES = {
     description:
       'AI tools in nursing practice — what actually helps and what wastes a shift, written by an RN.',
     intro:
-      'Honest accounts of using Claude, ChatGPT, and others on the ward. No vendor pitches.',
+      'Honest accounts of using AI assistants on the ward. No vendor pitches.',
   },
   'ece-ai': {
     title: 'ECT + AI',
@@ -16,7 +16,7 @@ export const CATEGORIES = {
   'dev-diary': {
     title: 'Dev Diary',
     description:
-      'Building Aura app with Claude Code — the bugs, the rewrites, the things I killed.',
+      'Building indie tools with AI coding assistants — the bugs, the rewrites, the things I killed.',
     intro: 'Public log of indie dev work. Failure stories included on purpose.',
   },
 } as const;
