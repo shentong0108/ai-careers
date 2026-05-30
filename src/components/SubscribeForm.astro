@@ -3,13 +3,15 @@
  * SubscribeForm — newsletter signup, Beehiiv-backed.
  *
  * Wiring:
- *   Set PUBLIC_BEEHIIV_PUB_URL in .env to your Beehiiv publication's
- *   form embed URL (looks like https://embeds.beehiiv.com/<uuid>).
- *   When unset, renders a graceful fallback pointing to RSS.
+ *   Set PUBLIC_BEEHIIV_FORM_ID in .env to the Beehiiv form UUID
+ *   (Beehiiv → Subscribers → Subscribe forms → your form → Embed
+ *   code; the `data-beehiiv-form` attribute on the script tag).
+ *   When unset, renders a graceful RSS fallback.
  *
- * The form posts directly to Beehiiv (iframe embed handles success
- * state, GDPR consent, double opt-in). No JS or API key on the
- * client side; we never touch the subscriber data.
+ * Beehiiv ships the actual subscribe widget client-side via the
+ * loader.js script. The script renders the form in place of the
+ * script tag itself, so the <script> must live where the form
+ * should appear in the DOM.
  *
  * Variants:
  *   <SubscribeForm variant="inline" />   — footer-of-article CTA
@@ -23,7 +25,7 @@ export interface Props {
 }
 
 const { variant = 'block', heading, pitch } = Astro.props;
-const embedUrl = import.meta.env.PUBLIC_BEEHIIV_PUB_URL || '';
+const formId = import.meta.env.PUBLIC_BEEHIIV_FORM_ID || '';
 const defaultHeading =
   variant === 'inline'
     ? 'Liked this? Get the next one in your inbox.'
@@ -39,15 +41,13 @@ const defaultPitch =
   <h3>{heading ?? defaultHeading}</h3>
   <p class="pitch">{pitch ?? defaultPitch}</p>
 
-  {embedUrl ? (
-    <iframe
-      src={embedUrl}
-      data-test-id="beehiiv-embed"
-      frameborder="0"
-      scrolling="no"
-      style="margin: 0; border-radius: 0; background-color: transparent;"
-      title="Subscribe to stonemegan.dev"
-    ></iframe>
+  {formId ? (
+    <script
+      is:inline
+      async
+      src="https://subscribe-forms.beehiiv.com/v3/loader.js"
+      data-beehiiv-form={formId}
+    ></script>
   ) : (
     <p class="fallback">
       Newsletter wiring in progress. For now: subscribe via
@@ -84,11 +84,6 @@ const defaultPitch =
     color: var(--c-muted, #6b6258);
     font-size: 0.95rem;
     margin: 0 0 1rem;
-  }
-  .subscribe-form iframe {
-    width: 100%;
-    min-height: 64px;
-    display: block;
   }
   .subscribe-form .fallback {
     font-size: 0.9rem;

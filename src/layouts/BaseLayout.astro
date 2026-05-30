@@ -979,5 +979,14 @@ const fullOg = ogImage.startsWith('http') ? ogImage : new URL(ogImage, Astro.sit
       </div>
       <p class="bottom">© {new Date().getFullYear()} stonemegan · Written by humans, edited by humans.</p>
     </footer>
+
+    {import.meta.env.PUBLIC_BEEHIIV_FORM_ID && (
+      <script
+        is:inline
+        type="text/javascript"
+        async
+        src="https://subscribe-forms.beehiiv.com/attribution.js"
+      ></script>
+    )}
   </body>
 </html>
