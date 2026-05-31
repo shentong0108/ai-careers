@@ -1,0 +1,115 @@
+{
+  "niche": "nurse-ai",
+  "seed_topic": "When a nurse should NOT use an AI assistant — clinical situations that need hands-on assessment not prompts (e.g. suspected cardiac event, acute deterioration)",
+  "target_geo": "uk",
+  "primary_keyword": {
+    "term": "when nurses should not rely on AI",
+    "estimated_kd": 13,
+    "estimated_volume": "low (<300/mo)",
+    "source": "Google Suggest + web SERP inspection 2026-06-01; no exact-match volume tool figure available (Ubersuggest/Ahrefs free tier not reachable this session) — volume band inferred from seed-modifier suggestion sparsity, treat as estimate"
+  },
+  "long_tail": [
+    { "term": "limitations of AI in nursing clinical decision-making", "estimated_kd": 16, "intent": "informational" },
+    { "term": "disadvantages of AI in nursing", "estimated_kd": 18, "intent": "informational" },
+    { "term": "when AI contradicts a nurse's clinical judgment", "estimated_kd": 10, "intent": "informational" },
+    { "term": "why AI cannot replace hands-on nursing assessment", "estimated_kd": 12, "intent": "informational" },
+    { "term": "AI vs nurse clinical judgment deteriorating patient", "estimated_kd": 11, "intent": "informational" },
+    { "term": "situations where nurses should trust judgment over AI", "estimated_kd": 9, "intent": "informational" }
+  ],
+  "people_also_ask": [
+    "Can AI detect patient deterioration as well as a nurse?",
+    "What are the disadvantages of AI in nursing?",
+    "When should a nurse override an AI acuity score?",
+    "What clinical signs does AI miss that nurses catch?",
+    "Is AI allowed to make nursing decisions?",
+    "Why can't AI replace bedside nursing assessment?"
+  ],
+  "serp_top3": [
+    {
+      "url": "https://nurseseducator.com/8-critical-limitations-of-ai-in-nursing-clinical-decision-making-every-nurse-must-know-in-2026/",
+      "dr": 22,
+      "word_count": 2400,
+      "covers": [
+        "algorithmic bias",
+        "black box problem",
+        "inability to capture holistic assessment",
+        "data quality",
+        "ethical/legal accountability",
+        "alert fatigue and over-reliance",
+        "workforce digital literacy gap"
+      ]
+    },
+    {
+      "url": "https://www.nationalnursesunited.org/artificial-intelligence",
+      "dr": 70,
+      "word_count": 2000,
+      "covers": [
+        "what is AI in nursing",
+        "problematic AI applications (acuity, predictive scores)",
+        "tell-tale signs AI misses (breath smell, skin tone, affect)",
+        "faulty/excessive alerts",
+        "fragmentation of holistic judgment",
+        "patients missed by automated systems"
+      ]
+    },
+    {
+      "url": "https://www.wsna.org/news/2025/ai-in-healthcare-an-innovation-not-a-replacement-for-nurses",
+      "dr": 50,
+      "word_count": 550,
+      "covers": [
+        "AI as augmentation not replacement",
+        "empathy, ethics, experience as human-only",
+        "professional accountability rests with nurse",
+        "AI cannot fix staffing/structural issues",
+        "individualised patient-centred care plans"
+      ]
+    }
+  ],
+  "ai_overview_present": true,
+  "featured_snippet_target": "A short definitional list answering 'When should a nurse NOT use an AI assistant' — e.g. suspected acute deterioration, suspected cardiac event, anaphylaxis/airway, sudden mental-status change, or any time the AI output conflicts with what your hands and eyes are telling you. Frame as a 5-6 item bulleted list to win the snippet.",
+  "outline": {
+    "title_candidates": [
+      "When I Don't Reach for the AI: The Cases That Need Hands, Not Prompts",
+      "5 Times a Nurse Should Put the AI Down and Go to the Bedside",
+      "When Not to Trust AI in Nursing: The Calls That Stay Human"
+    ],
+    "h2": [
+      {
+        "heading": "The 90-second rule: when there's no time to prompt anything",
+        "h3": ["Suspected cardiac event / chest pain", "Acute respiratory or airway compromise", "Why every second spent typing is a second off the patient"]
+      },
+      {
+        "heading": "When the AI's acuity score disagrees with your gut",
+        "h3": ["The 69% problem: scores that don't match the bedside", "Overriding (or escalating past) the algorithm", "Documenting why you went against the score"]
+      },
+      {
+        "heading": "The signs AI literally cannot sense",
+        "h3": ["Breath smell, skin tone, clamminess, 'off' affect", "Subtle deterioration before the obs change", "The hands-on cues no input field captures"]
+      },
+      {
+        "heading": "Accountability: the AI doesn't sign the notes, you do",
+        "h3": ["Where legal/clinical responsibility sits (NMC / Ahpra / NCNZ framing)", "Black-box outputs you can't justify to a coroner"]
+      },
+      {
+        "heading": "What AI IS good for in these same moments",
+        "h3": ["After-the-event: handoff notes, incident write-up, debrief", "Pre-shift prep, not real-time crisis decisions"]
+      },
+      {
+        "heading": "My personal 'put the phone down' checklist",
+        "h3": ["The decision rule I actually use on shift", "Teaching juniors when not to ask the AI"]
+      }
+    ],
+    "unique_angle": "A concrete first-person decision rule from a working nurse — a named 'put the phone down' checklist of specific time-critical presentations (cardiac, airway, sudden mental-status change) where reaching for any AI tool is itself the clinical error. Competitors argue AI 'shouldn't replace nurses' in the abstract; none give nurses an actionable bedside trigger list for when NOT to touch the tool, nor the post-event boundary (AI fine for the handoff write-up, never for the live call)."
+  },
+  "internal_link_candidates": [
+    "writing-better-patient-education-handouts-with-an-ai-assistant"
+  ],
+  "warnings": [
+    "AI Overview almost certainly present for the broad 'limitations/disadvantages of AI in nursing' head term and will steal informational clicks — only target the narrower 'when NOT to / cases that need hands' framing where depth + first-person authority wins.",
+    "Top-10 SERP is dominated by high-DR institutional/union/.gov pages (NNU DR~70, WSNA DR~50, PMC/.gov DR~90) for the BROAD term; ranking for the head term is unrealistic for a new domain. The long-tail 'when nurses should NOT rely on AI' framing has near-zero exact-match competition, hence the low KD estimate — but KD is high-uncertainty because authority sites bleed into the long-tail SERP.",
+    "No live volume figure pulled: Ubersuggest/Ahrefs free tiers were not reachable in this session. All estimated_volume bands are inferred from Google Suggest density and must be confirmed before treating as fact (project rule: never invent volume numbers).",
+    "DR values for serp_top3 are estimates from domain reputation, not a live Ahrefs DR pull — confirm before using in any KD-gated decision.",
+    "Could not enumerate src/content/posts/nurse-ai/ with available tools (no shell/glob access); internal_link_candidate confirmed only from git history (published 2026-05). Re-scan the directory before publish to add more internal links.",
+    "YMYL: this is clinical-safety content — content-writer must add RN credential byline, an NMC/Ahpra/NCNZ or PubMed/.gov citation on accountability, 'last reviewed' date, and 'in my practice / ask your supervisor' framing. No directive medical advice."
+  ]
+}

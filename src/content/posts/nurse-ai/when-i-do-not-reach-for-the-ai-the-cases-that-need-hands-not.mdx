@@ -1,0 +1,167 @@
+---
+title: "When Nurses Should Not Rely on AI: Cases That Need Hands, Not Prompts"
+slug: "when-i-do-not-reach-for-the-ai-the-cases-that-need-hands-not"
+description: "A walk-in with central chest pain. I went to the ECG, not a prompt. When nurses should not rely on AI: the clinical layer where typing is the error."
+publishedAt: "2026-06-01"
+updatedAt: "2026-06-01"
+author: "stone"
+category: "nurse-ai"
+tags: ["ai-assistant", "nursing", "clinical judgment", "patient safety", "acute deterioration", "primary care"]
+keywords: ["when nurses should not rely on AI", "limitations of AI in nursing clinical decision-making", "why AI cannot replace hands-on nursing assessment", "when AI contradicts a nurse's clinical judgment", "situations where nurses should trust judgment over AI"]
+canonical: "https://stonemegan.dev/blog/when-i-do-not-reach-for-the-ai-the-cases-that-need-hands-not"
+draft: false
+aiDetectionScore: null
+humanizationMode: "degraded"
+heroImage: "/images/card-nurse-ai.jpg"
+factChecked: true
+factCheckedAt: "2026-06-01T00:00:00Z"
+factCheckedBy: "fact-checker"
+factCheckNotes: []
+voicePolisherPasses: 1
+voicePolisherSamples: ["src/content/posts/nurse-ai/claude-nursing-handoff-notes.mdx", "src/content/posts/nurse-ai/writing-better-patient-education-handouts-with-an-ai-assista.mdx"]
+---
+
+import Schema from '@/components/Schema.astro'
+
+A walk-in patient came through the door with sudden central chest pain and a film of sweat across his forehead. I did not open anything on a screen. I went straight for the ECG leads, started a baseline set of observations, and called the senior nurse before I had finished the second sentence of the history. The AI assistant did not come near it. That moment is the cleanest answer I have to the question of when nurses should not rely on AI: the first five minutes of a possible cardiac event is not a layer the AI lives in.
+
+Which layer are you standing in? That is the whole skill, and this post is about how I tell.
+
+## The clinical layers, and why they matter
+
+I think about my work as three layers now.
+
+The documentation layer: handoff notes, injection records, the after-event write-up. The patient-education layer: the handout you give someone with newly diagnosed reflux, the plain-language explainer for a vaccination schedule. Then the one that matters here. The first-response bedside layer, where you find the diaphoretic chest-pain patient, the sudden stridor, the obs that fell off a cliff between one set and the next.
+
+An AI assistant has earned a real place in the first two. I have written before about how I [draft handoff notes with an AI assistant](/blog/claude-nursing-handoff-notes) and how I approach [writing better patient-education handouts](/blog/writing-better-patient-education-handouts-with-an-ai-assista). Those are layers where you have minutes, where a draft is a draft, where a second human read catches the gap. The bedside layer in an emergency has none of those affordances. Pulling leads onto a chest and reading a 12-lead is roughly ten times faster than typing a prompt and reading a response. The clock is the whole point.
+
+## The 90-second rule: when there is no time to prompt anything
+
+Here is the test I actually use. If a sensible answer to "what is happening to this patient" has to arrive inside about 90 seconds, the AI is the wrong tool, and reaching for it is itself the clinical error.
+
+A suspected cardiac event is the obvious case. Central chest pain, diaphoresis, the patient who suddenly looks grey: that is hands, leads, obs, and escalation, in that order. The [Australian Resuscitation Council's ANZCOR guidelines](https://www.anzcor.org/home/acute-coronary-syndromes/) on acute coronary syndromes are built around early assessment and early reperfusion pathways. Every second a nurse spends typing a description of the patient into a tool is a second that patient does not have a clinician's hands on them.
+
+Run the comparison honestly. To get a useful response out of an AI, I would have to unlock a device, open the tool, type a coherent clinical summary, wait, then read and interpret what came back. Call that two minutes on a good day. In those same two minutes I can have leads on the chest, a 12-lead printing, a manual pulse counted, and a second clinician walking through the door. The tool does not lose to a nurse here because it is unintelligent. It loses because the interface is slower than the disease.
+
+Airway and breathing compromise sits in the same box. Stridor, a falling oxygen saturation, the patient who can no longer finish a sentence: you reposition, you apply oxygen, you call for help. Acute mental-status change belongs there too. Someone who was oriented at the last set and is now confused and combative needs your eyes and a glucose check, not a query box.
+
+The common thread is not the diagnosis. It is the time budget. When the budget is 90 seconds, the only acceptable interface is the patient.
+
+## When the AI's score disagrees with your gut
+
+The harder cases are the ones where an algorithm is already running in the background.
+
+Plenty of systems now surface an acuity or early-warning score. Most of the time it agrees with you, and that is fine. The dangerous moment is the one where the score says stable and your hands say otherwise. I have stood at a bedside where the numbers were technically inside range and the patient was, in a way I could not yet put on a chart, wrong. Cooler than they should be. Quieter. A look that did not match the obs.
+
+There is a specific failure mode I watch for here, and it has a name in plain language: anchoring. Once a confident-looking score is sitting on the screen saying "low risk," it is genuinely harder to act on a vaguer human signal that says otherwise. The number feels like evidence and the gut feels like a feeling. (This one has caught me, by the way, not just the juniors I keep warning about it.) In a deteriorating patient that ranking is exactly backwards. The score is a snapshot of inputs from minutes ago. Your assessment is live.
+
+In my practice, the rule is that the human assessment wins the right to escalate, and the score never wins the right to stop you. The [ACSQHC Recognising and Responding to Acute Deterioration Standard](https://www.safetyandquality.gov.au/national-standards/nsqhs-standards/recognising-and-responding-acute-deterioration-standard) is explicit that deterioration includes acute changes in cognition and mental state, not just a number crossing a threshold, and that the workforce must be able to recognise and escalate when something is off. If your service runs a scoring tool, ask your supervisor how it expects you to document an override. You will want that pathway clear before the night you need it, not at 3am with a patient turning in front of you.
+
+## The signs an AI literally cannot sense
+
+There is a category of clinical information that never reaches any input field.
+
+The smell of ketones on a patient's breath. The particular grey of poor perfusion that a photo flattens out. Clammy skin under your fingers. The flatness in someone's affect that tells you they are sicker than they will admit, or sliding somewhere darker than the presenting complaint suggests. These are the cues that arrive through hands, nose, and eyes, and they routinely move before the observations do. An AI works from what gets typed in. By definition, it cannot weigh the thing nobody has typed yet.
+
+Think about the order of events in real deterioration. The patient changes first. Then a nurse catches something off, and only after that does it get measured, charted, and, much later, fed to any tool. By the time the data exists for a model to reason over, a nurse standing in the room has already held the information for several minutes, through senses no system captures. That lag is not a bug you can patch. It is structural.
+
+This is the heart of why AI cannot replace hands-on nursing assessment. The model is downstream of the data. The nurse is the instrument that generates the data in the first place.
+
+## Accountability: the AI does not sign the notes
+
+The boundary is about more than speed. It is about who answers for the decision.
+
+Whatever tool sits in the workflow, the registered nurse retains full professional responsibility for the care delivered. [AHPRA's guidance on AI in healthcare](https://www.ahpra.gov.au/Resources/Artificial-Intelligence-in-healthcare.aspx) is unambiguous on this: accountability does not shift to the model. If a decision in a deteriorating patient had to be defended later, "the score said the patient was stable" is not an account anyone wants to give. A black-box output you cannot explain is not a defence. Your assessment, your escalation, and your documentation are.
+
+This matters for how juniors learn, too. If a new grad is taught that the score is the source of truth, they will defer to it on exactly the shift when deferring is dangerous. The safer habit is the older one: the number is one input, your assessment is another, and where they conflict you investigate rather than pick the answer that lets you sit back down.
+
+## The opinion I will defend
+
+I think the framing of "AI versus the nurse" is lazy, and I think it is hurting the conversation.
+
+The useful question is never whether AI is good or bad for nursing. It is which layer a given task lives in. Put the tool in the documentation layer and it gives you back close to an hour a shift. Put it in the patient-education layer and it turns a rushed verbal explanation into something the patient can take home and read. Drag it into the first-response bedside layer and it becomes a liability, because it costs the one thing that layer cannot spare, which is time, and it cannot sense the things that layer runs on. The nurses who get the most out of AI are not the ones who trust it most. They are the ones with the sharpest sense of where its edge is. Knowing where to stop using a tool is a clinical skill, and we should teach it as one, with the same seriousness we teach when to escalate.
+
+## My "put the phone down" checklist
+
+This is the rule I hand to juniors. If any of these are true, the screen waits.
+
+- Suspected cardiac event: central chest pain, diaphoresis, the patient who suddenly looks unwell.
+- Airway or breathing compromise: stridor, falling saturations, the patient who cannot finish a sentence.
+- Acute mental-status change: new confusion, a sudden drop in responsiveness.
+- Any anaphylaxis or fast-moving allergic picture.
+- Any moment the tool's output contradicts what your hands and eyes are telling you.
+
+When the live moment is over and the patient is safe and handed over, the AI comes back into its lane. The incident write-up, the handoff note, the debrief summary: that is the documentation layer, and the tool is genuinely good there. Crisis decision in real time, no. Tidy record afterward, yes. I am not asking anyone to fear the tool. I want the "not now" reflex wired in so deep it never costs you a thought, because during the thing that matters you will not have one to spare.
+
+## TL;DR
+
+- Think in layers. AI belongs in the documentation and patient-education layers, not the first-response bedside layer.
+- The 90-second rule: if the answer has to arrive in about 90 seconds, the only acceptable interface is the patient. Reading a 12-lead is roughly ten times faster than prompting.
+- Suspected cardiac event, airway or breathing compromise, acute mental-status change, anaphylaxis: hands, not prompts.
+- When an acuity score disagrees with your assessment, the human gets to escalate; the score never gets to stop you. Know your service's override-documentation pathway before you need it.
+- AI cannot sense breath smell, skin colour, clamminess, or affect. It is downstream of the data the nurse generates.
+- Accountability never shifts to the model. The nurse signs the notes.
+
+## Sources
+
+- [Australian Resuscitation Council — ANZCOR Guidelines](https://www.anzcor.org/home/acute-coronary-syndromes/)
+- [ACSQHC — Recognising and Responding to Acute Deterioration Standard](https://www.safetyandquality.gov.au/national-standards/nsqhs-standards/recognising-and-responding-acute-deterioration-standard)
+- [AHPRA — Artificial Intelligence in healthcare](https://www.ahpra.gov.au/Resources/Artificial-Intelligence-in-healthcare.aspx)
+
+<Schema
+  type="Article"
+  data={{
+    headline: 'When Nurses Should Not Rely on AI: The Cases That Need Hands, Not Prompts',
+    description: 'A walk-in with central chest pain. I went to the ECG, not a prompt. When nurses should not rely on AI: the clinical layer where typing is the error.',
+    datePublished: '2026-06-01',
+    dateModified: '2026-06-01',
+    inLanguage: 'en-AU',
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': 'https://stonemegan.dev/blog/when-i-do-not-reach-for-the-ai-the-cases-that-need-hands-not',
+    },
+    image: 'https://stonemegan.dev/images/card-nurse-ai.jpg',
+    author: {
+      '@type': 'Person',
+      name: 'Stone Megan',
+      jobTitle: 'Registered Nurse (AHPRA-registered) & Indie Developer',
+      url: 'https://stonemegan.dev/about',
+      sameAs: ['https://stonemegan.dev'],
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'ai-careers',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://stonemegan.dev/logo.png',
+      },
+    },
+  }}
+/>
+
+<Schema
+  type="Person"
+  data={{
+    name: 'Stone Megan',
+    jobTitle: 'Registered Nurse (AHPRA-registered) & Indie Developer',
+    url: 'https://stonemegan.dev/about',
+    knowsAbout: ['Clinical nursing assessment', 'Patient safety', 'Acute deterioration', 'AI in healthcare', 'Primary care nursing'],
+    sameAs: ['https://stonemegan.dev'],
+  }}
+/>
+
+<Schema
+  type="BreadcrumbList"
+  data={{
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Blog', item: 'https://stonemegan.dev/blog' },
+      { '@type': 'ListItem', position: 2, name: 'Nurse + AI', item: 'https://stonemegan.dev/blog/category/nurse-ai' },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: 'When Nurses Should Not Rely on AI: The Cases That Need Hands, Not Prompts',
+        item: 'https://stonemegan.dev/blog/when-i-do-not-reach-for-the-ai-the-cases-that-need-hands-not',
+      },
+    ],
+  }}
+/>
