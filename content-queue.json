@@ -62,7 +62,10 @@
     "author": "stone",
     "topic": "When I do not reach for the AI — the cases that need hands not prompts",
     "anecdote": "Walk-in patient with sudden central chest pain and diaphoresis. I went straight to ECG, baseline obs, and grabbed the senior nurse — the AI assistant did not come near it. Pulling leads onto a patient and reading a 12-lead is ten times faster than typing a prompt and reading a response. The AI lives in the documentation layer and the patient-education layer; it does not live at the bedside in the first five minutes of a possible cardiac event. Knowing which layer you are in is the actual skill.",
-    "status": "pending"
+    "status": "published",
+    "pickedAt": "2026-05-31T21:00:19.498Z",
+    "mergedAt": "2026-05-31T21:19:18Z",
+    "slug": "when-i-do-not-reach-for-the-ai-the-cases-that-need-hands-not"
   },
   {
     "niche": "nurse-ai",
