@@ -55,6 +55,18 @@ const siteSchemas = [
     <meta name="description" content={description} />
     <link rel="canonical" href={fullCanonical} />
 
+    {/*
+      hreflang: this site serves one en-AU experience to all three target
+      regions (AU + UK + NZ). All three alternates point at the SAME
+      canonical URL — that is the correct configuration for a single-locale
+      site that wants Google to surface it for any of the three locales,
+      per https://developers.google.com/search/docs/specialty/international/localized-versions#xdefault.
+    */}
+    <link rel="alternate" hreflang="en-au" href={fullCanonical} />
+    <link rel="alternate" hreflang="en-gb" href={fullCanonical} />
+    <link rel="alternate" hreflang="en-nz" href={fullCanonical} />
+    <link rel="alternate" hreflang="x-default" href={fullCanonical} />
+
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={fullOg} />
@@ -402,7 +414,15 @@ const siteSchemas = [
         letter-spacing: 1px;
         margin: 0 0 0.85rem;
       }
-      .site-footer a { color: #d9eef2; font-size: 0.93rem; display: block; padding: 0.2rem 0; }
+      .site-footer a {
+        color: #d9eef2;
+        font-size: 0.93rem;
+        display: block;
+        padding: 0.55rem 0;
+        line-height: 1.4;
+        min-height: 44px;
+        box-sizing: border-box;
+      }
       .site-footer a:hover { color: #ffffff; text-decoration: underline; }
       .site-footer p { color: #b6d5dc; font-size: 0.88rem; margin: 0 0 0.5rem; line-height: 1.6; }
       .site-footer .bottom {
