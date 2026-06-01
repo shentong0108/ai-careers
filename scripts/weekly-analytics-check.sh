@@ -201,10 +201,19 @@ every week so you spot trends.
 — ai-careers cron
 Log: ${LOG}"
 
-ENC_SUBJECT=$(/usr/bin/python3 -c "import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))" "ai-careers weekly analytics — ${DATE}")
-ENC_BODY=$(/usr/bin/python3 -c "import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))" "$MAIL_BODY")
 MAIL_RC=0
-/usr/bin/open -b com.microsoft.Outlook "mailto:${NOTIFY_EMAIL}?subject=${ENC_SUBJECT}&body=${ENC_BODY}" >> "$LOG" 2>&1 || MAIL_RC=$?
+# Auto-send via Outlook AppleScript (no manual click). Falls back to a
+# mailto: draft if the AppleScript send fails — better a draft Stone has
+# to open than a silently-dropped weekly prompt.
+# shellcheck source=lib/send-outlook.sh
+. "$(dirname "$0")/lib/send-outlook.sh"
+if ! send_outlook "$NOTIFY_EMAIL" "ai-careers weekly analytics — ${DATE}" "$MAIL_BODY" >> "$LOG" 2>&1; then
+  MAIL_RC=$?
+  echo "send_outlook failed (rc=$MAIL_RC); falling back to mailto draft" >> "$LOG"
+  ENC_SUBJECT=$(/usr/bin/python3 -c "import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))" "ai-careers weekly analytics — ${DATE}")
+  ENC_BODY=$(/usr/bin/python3 -c "import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))" "$MAIL_BODY")
+  /usr/bin/open -b com.microsoft.Outlook "mailto:${NOTIFY_EMAIL}?subject=${ENC_SUBJECT}&body=${ENC_BODY}" >> "$LOG" 2>&1 || true
+fi
 
 /usr/bin/osascript -e "display notification \"Weekly analytics review. Open ${REPORT_FILE}\" with title \"stonemegan analytics ✓\" sound name \"Glass\"" >> "$LOG" 2>&1 || true
 

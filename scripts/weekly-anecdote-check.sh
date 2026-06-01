@@ -154,12 +154,18 @@ INBOX_FILE="${BRAINSTORM_DIR}/INBOX.md"
   echo "$MAIL_BODY"
 } > "$INBOX_FILE"
 
-# URL-encode for mailto:
-ENC_SUBJECT=$(/usr/bin/python3 -c "import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))" "ai-careers weekly anecdote check — $(date +%Y-%m-%d)")
-ENC_BODY=$(/usr/bin/python3 -c "import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))" "$MAIL_BODY")
+# Auto-send via Outlook AppleScript; fall back to mailto draft on failure.
 MAIL_RC=0
-/usr/bin/open -b com.microsoft.Outlook "mailto:${NOTIFY_EMAIL}?subject=${ENC_SUBJECT}&body=${ENC_BODY}" >> "$LOG" 2>&1 || MAIL_RC=$?
-echo "mailto open rc=$MAIL_RC" >> "$LOG"
+# shellcheck source=lib/send-outlook.sh
+. "$(dirname "$0")/lib/send-outlook.sh"
+if ! send_outlook "$NOTIFY_EMAIL" "ai-careers weekly anecdote check — $(date +%Y-%m-%d)" "$MAIL_BODY" >> "$LOG" 2>&1; then
+  MAIL_RC=$?
+  echo "send_outlook failed (rc=$MAIL_RC); falling back to mailto draft" >> "$LOG"
+  ENC_SUBJECT=$(/usr/bin/python3 -c "import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))" "ai-careers weekly anecdote check — $(date +%Y-%m-%d)")
+  ENC_BODY=$(/usr/bin/python3 -c "import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))" "$MAIL_BODY")
+  /usr/bin/open -b com.microsoft.Outlook "mailto:${NOTIFY_EMAIL}?subject=${ENC_SUBJECT}&body=${ENC_BODY}" >> "$LOG" 2>&1 || true
+fi
+echo "mail rc=$MAIL_RC (0 = auto-send ok, non-zero = draft fallback)" >> "$LOG"
 
 # macOS notification — works even from Background ProcessType.
 /usr/bin/osascript -e "display notification \"Weekly anecdote check complete. See docs/brainstorm/INBOX.md\" with title \"ai-careers weekly ✓\" sound name \"Glass\"" >> "$LOG" 2>&1 || true

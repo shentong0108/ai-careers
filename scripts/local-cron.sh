@@ -44,8 +44,9 @@ notify_failure() {
   local body="$2"
   local log_path="$3"
   /usr/bin/osascript -e "display notification \"${body//\"/\\\"}\" with title \"ai-careers cron ✗ ${title//\"/\\\"}\" sound name \"Basso\"" >/dev/null 2>&1 || true
-  # Open a mailto: draft in Microsoft Outlook (user preference 2026-06-01 —
-  # Apple Mail.app is no longer the receiver for cron-triggered drafts).
+  # Auto-send via Outlook (user preference 2026-06-01). Fall back to a
+  # mailto: draft if AppleScript send fails — pipeline failures should
+  # never be silently dropped.
   local subject="ai-careers cron failed: ${title}"
   local mail_body="Pipeline failed at $(date -u +%Y-%m-%dT%H:%M:%SZ)
 Reason: ${body}
@@ -54,11 +55,14 @@ Log: ${log_path}
 Tail:
 
 $(/usr/bin/tail -40 "${log_path}" 2>/dev/null || echo "(log not available)")"
-  # URL-encode subject + body via python (always available on macOS).
-  local enc_subject enc_body
-  enc_subject=$(/usr/bin/python3 -c "import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))" "$subject")
-  enc_body=$(/usr/bin/python3 -c "import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))" "$mail_body")
-  /usr/bin/open -b com.microsoft.Outlook "mailto:${NOTIFY_EMAIL}?subject=${enc_subject}&body=${enc_body}" >/dev/null 2>&1 || true
+  # shellcheck source=lib/send-outlook.sh
+  . "$(dirname "$0")/lib/send-outlook.sh"
+  if ! send_outlook "$NOTIFY_EMAIL" "$subject" "$mail_body" >/dev/null 2>&1; then
+    local enc_subject enc_body
+    enc_subject=$(/usr/bin/python3 -c "import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))" "$subject")
+    enc_body=$(/usr/bin/python3 -c "import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))" "$mail_body")
+    /usr/bin/open -b com.microsoft.Outlook "mailto:${NOTIFY_EMAIL}?subject=${enc_subject}&body=${enc_body}" >/dev/null 2>&1 || true
+  fi
 }
 
 # ---- Throttle ---------------------------------------------------------------
