@@ -13,3 +13,10 @@
 # privacy policy is to keep real names off reader-visible surfaces.
 
 /go/beehiiv  https://www.beehiiv.com/?via=tong-shen  302
+
+# Brand-name slug cleanup. The earliest published nurse-ai article
+# shipped with "claude-" in the slug before the brand-neutrality
+# rule was tightened. Renamed 2026-06-01; preserve link equity +
+# existing inbound bookmarks via a permanent redirect.
+/blog/claude-nursing-handoff-notes   /blog/ai-assisted-nursing-handoff-notes  301
+/blog/claude-nursing-handoff-notes/  /blog/ai-assisted-nursing-handoff-notes/  301
