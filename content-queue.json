@@ -72,7 +72,10 @@
     "author": "stone",
     "topic": "The clinical topic where the AI was a year behind — and how I caught it",
     "anecdote": "Asked the AI for a stepwise asthma management summary I could adapt into a patient handout. The version it produced still leaned on a SABA-only reliever pathway. I cross-checked against the current Australian Asthma Handbook (National Asthma Council Australia) and the GINA 2024 update — both now lead with anti-inflammatory reliever therapy for adults and adolescents. Evergreen clinical topics are the most dangerous AI use case because the AI sounds confident on guidance that has already moved. The fix is a habit, not a feature: every clinical claim gets verified against the current Australian source before it touches a handout.",
-    "status": "pending"
+    "status": "published",
+    "pickedAt": "2026-06-01T21:00:16.546Z",
+    "slug": "the-clinical-topic-where-the-ai-was-a-year-behind-and-how-i",
+    "mergedAt": "2026-06-01T21:15:35Z"
   },
   {
     "niche": "ece-ai",
