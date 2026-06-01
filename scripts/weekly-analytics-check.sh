@@ -33,6 +33,26 @@ LOG="${LOG_DIR}/analytics-${TS}.log"
 PUBLISHED_COUNT=$(/usr/bin/find src/content/posts -name '*.mdx' 2>/dev/null | /usr/bin/wc -l | /usr/bin/tr -d ' ')
 LAST_SLUG=$(/bin/ls -t src/content/posts/*/*.mdx 2>/dev/null | /usr/bin/head -1 | /usr/bin/sed 's|.*/||; s|\.mdx$||')
 
+# Content-queue depth per niche. Reader-visible warning if any niche
+# hits 0 pending — pipeline starvation precursor.
+QUEUE_TOTAL=0 QUEUE_NURSE=0 QUEUE_ECE=0 QUEUE_DEV=0 QUEUE_WARN=""
+if [ -f content-queue.json ]; then
+  QUEUE_TOTAL=$(/usr/bin/jq '[.[] | select(.status=="pending")] | length' content-queue.json 2>/dev/null || echo 0)
+  QUEUE_NURSE=$(/usr/bin/jq '[.[] | select(.status=="pending" and .niche=="nurse-ai")] | length' content-queue.json 2>/dev/null || echo 0)
+  QUEUE_ECE=$(/usr/bin/jq '[.[] | select(.status=="pending" and .niche=="ece-ai")] | length' content-queue.json 2>/dev/null || echo 0)
+  QUEUE_DEV=$(/usr/bin/jq '[.[] | select(.status=="pending" and .niche=="dev-diary")] | length' content-queue.json 2>/dev/null || echo 0)
+  for n in "$QUEUE_NURSE:nurse-ai" "$QUEUE_ECE:ece-ai" "$QUEUE_DEV:dev-diary"; do
+    count=${n%%:*}; niche=${n##*:}
+    if [ "$count" = "0" ]; then
+      QUEUE_WARN="${QUEUE_WARN}⚠️  $niche queue is EMPTY — pipeline will skip this niche on next cron.
+"
+    elif [ "$count" -lt 2 ] 2>/dev/null; then
+      QUEUE_WARN="${QUEUE_WARN}⚠️  $niche queue at $count pending — refill within 2 days.
+"
+    fi
+  done
+fi
+
 # Load PLAUSIBLE_API_KEY from .env if present (cron runs without shell env).
 if [ -f .env ]; then
   set -a
@@ -120,6 +140,9 @@ Site state:
 - Most recent: ${LAST_SLUG}
 - Plausible autofill: **$( [ "$PLAUSIBLE_MODE" = "autofill" ] && echo "enabled" || echo "off (set PLAUSIBLE_API_KEY in .env)" )**
 - GSC autofill: **$( if [ "$GSC_MODE" = "autofill" ]; then echo "enabled"; elif [ "$GSC_MODE" = "error" ]; then echo "error (see Q3)"; else echo "off (drop .gsc-service-account.json at repo root)"; fi )**
+- Content queue: **${QUEUE_TOTAL} pending** (nurse-ai: ${QUEUE_NURSE}, ece-ai: ${QUEUE_ECE}, dev-diary: ${QUEUE_DEV})
+${QUEUE_WARN:+
+${QUEUE_WARN}}
 
 ${Q_TOTALS:+## 7-day totals (Plausible)
 
