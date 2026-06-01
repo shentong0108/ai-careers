@@ -1,0 +1,94 @@
+{
+  "niche": "nurse-ai",
+  "seed_topic": "A nurse asked an AI for a stepwise asthma management summary for a patient handout and it returned an outdated SABA-only reliever pathway; cross-checking GINA 2024 and the Australian Asthma Handbook (now anti-inflammatory reliever / AIR) caught it. Theme: evergreen clinical topics are the riskiest AI use case because guidance has already moved.",
+  "target_geo": "global",
+  "primary_keyword": {
+    "term": "is chatgpt accurate for nursing",
+    "estimated_kd": 16,
+    "estimated_volume": "low (<300/mo)",
+    "source": "Google Suggest (firefox client) 2026-06-02 + Ubersuggest free-tier band estimate; KD inferred from SERP top-10 DR/title analysis below, not a paid metric"
+  },
+  "long_tail": [
+    { "term": "why does chatgpt give outdated medical information", "estimated_kd": 12, "intent": "informational" },
+    { "term": "can nurses use chatgpt for patient handouts", "estimated_kd": 14, "intent": "informational" },
+    { "term": "how to fact check ai medical advice", "estimated_kd": 18, "intent": "informational" },
+    { "term": "chatgpt outdated clinical guidelines", "estimated_kd": 11, "intent": "informational" },
+    { "term": "chatgpt asthma management guidelines wrong", "estimated_kd": 9, "intent": "informational" },
+    { "term": "ai still recommends saba only asthma", "estimated_kd": 8, "intent": "informational" },
+    { "term": "how to verify ai answers before patient education", "estimated_kd": 15, "intent": "informational" }
+  ],
+  "people_also_ask": [
+    "Can you trust AI for medical advice?",
+    "Why is ChatGPT information out of date?",
+    "How accurate is ChatGPT for medical information?",
+    "Why does ChatGPT have a knowledge cutoff date?",
+    "Should nurses verify AI-generated patient education?",
+    "Does ChatGPT browse the web for current clinical guidelines?"
+  ],
+  "serp_top3": [
+    {
+      "url": "https://ainurse360.com/how-healthcare-workers-can-use-chatgpt-a-practical-guide-for-nurses-doctors/",
+      "dr": 30,
+      "word_count": 600,
+      "covers": ["use cases for nurses/doctors", "ethics and safety guardrails", "generic 'verify against trusted guidelines' line", "benefits and challenges"],
+      "fetched": "2026-06-02"
+    },
+    {
+      "url": "https://tuckerborgman.com/2025/02/13/chatgpt-information-cutoff-what-you-need-to-know/",
+      "dr": 20,
+      "word_count": 1300,
+      "covers": ["what the knowledge cutoff is", "why a cutoff exists", "business workarounds", "FAQ"],
+      "fetched": "2026-06-02"
+    },
+    {
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10365578/",
+      "dr": 92,
+      "word_count": 4500,
+      "covers": ["reliability of ChatGPT vs clinical guidelines (study)", "patient information quality instrument scoring", "academic limitations framing"],
+      "fetched": "2026-06-02"
+    }
+  ],
+  "ai_overview_present": true,
+  "featured_snippet_target": "A 2-3 sentence direct answer to 'why does ChatGPT give outdated medical information' — name the training-data cutoff as root cause, note browsing does not equal current guideline adherence, and state that clinicians must verify against the live guideline source.",
+  "outline": {
+    "title_candidates": [
+      "The Clinical Topic Where the AI Was a Year Behind (and How I Caught It)",
+      "When ChatGPT Gave Me an Outdated Asthma Pathway: A Nurse's Verification Habit",
+      "Is ChatGPT Accurate for Nursing? The Day It Got Asthma Reliever Therapy Wrong"
+    ],
+    "h2": [
+      {
+        "heading": "The handout that almost went out wrong",
+        "h3": ["What I asked the AI for", "The SABA-only pathway it confidently produced"]
+      },
+      {
+        "heading": "What current guidance actually says now",
+        "h3": ["GINA 2024: anti-inflammatory reliever (AIR) as Track 1", "Australian Asthma Handbook alignment", "Why SABA-only is no longer the lead reliever for adults/adolescents"]
+      },
+      {
+        "heading": "Why evergreen clinical topics are the most dangerous AI use case",
+        "h3": ["Training-data cutoff vs. guidelines that already moved", "Why web browsing does not guarantee current guideline adherence"]
+      },
+      {
+        "heading": "The 4-step verification habit I now run on every AI clinical answer",
+        "h3": ["Name the live source before you trust the summary", "Check the guideline's revision date, not the AI's confidence", "Cross-check two independent bodies (e.g. GINA + national handbook)", "Escalate to your supervisor when guidance conflicts"]
+      },
+      {
+        "heading": "Where AI still earns its place in my workflow",
+        "h3": ["Drafting structure and plain-English tone", "What I never let it own"]
+      }
+    ],
+    "unique_angle": "Every competing page treats 'verify your AI output' as a one-line disclaimer. This piece shows the failure live with a dated, named clinical example (SABA-only vs AIR / GINA 2024) and converts it into a concrete, repeatable 4-step verification checklist a nurse can apply to any evergreen topic — grounded in a real first-person near-miss, which none of the top-3 offer."
+  },
+  "internal_link_candidates": [
+    "how-nurses-can-use-an-ai-assistant-for-shift-handoff-notes",
+    "ai-patient-education-materials-nurse-workflow",
+    "ymyl-citations-nurse-content-checklist"
+  ],
+  "warnings": [
+    "AI Overview is present for the broad 'can you trust ai for medical advice' query and will steal clicks; only win by targeting the narrower long-tails and out-depthing on the concrete asthma example.",
+    "Top-3 is a mix of a thin (~600 word) nurse blog, an off-topic business cutoff post, and a high-DR academic study (DR 92) — the study is not directly competing on intent, so the realistic competition is the two DR 20-30 blogs. KD estimate band 9-18 is achievable for a new domain on the specific long-tails, less so on the head term.",
+    "YMYL topic: per project rules, requires RN byline, GINA 2024 + Australian Asthma Handbook citations, 'last reviewed' date, and 'in my practice / ask your supervisor' framing. Do not phrase as medical advice.",
+    "Clinical facts must be re-confirmed by fact-checker against the live GINA 2025/2024 strategy report and current National Asthma Council Australia handbook at write time — guidance keeps moving, which is the whole point of the article."
+  ]
+}
