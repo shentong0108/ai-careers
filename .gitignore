@@ -9,10 +9,12 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# Env
+# Env + secrets
 .env
 .env.local
 .env.*.local
+.gsc-service-account.json
+*-service-account*.json
 
 # Claude / project state
 .claude/cache/

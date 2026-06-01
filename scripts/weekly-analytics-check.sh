@@ -47,7 +47,32 @@ fi
 PLAUSIBLE_BASE="https://plausible.io/api/v1/stats"
 SITE="stonemegan.dev"
 PLAUSIBLE_MODE="unset"
-Q_TOTALS="" Q1_TOP_SOURCE="" Q2_TOP_ENTRY="" Q4_TOP_BOUNCE=""
+GSC_MODE="unset"
+Q_TOTALS="" Q1_TOP_SOURCE="" Q2_TOP_ENTRY="" Q3_TOP_QUERY="" Q4_TOP_BOUNCE=""
+
+# GSC Search Analytics autofill via service-account JWT (scripts/lib/gsc-query.mjs).
+# Requires .gsc-service-account.json at repo root + the service account
+# added as a user on the GSC property (propagation can take up to ~24h
+# after the SA is created).
+if [ -f .gsc-service-account.json ]; then
+  GSC_RAW=$(/usr/bin/env node scripts/lib/gsc-query.mjs --days 7 --limit 5 2>/dev/null || echo "")
+  if [ -n "$GSC_RAW" ] && echo "$GSC_RAW" | /usr/bin/jq -e '.rows' >/dev/null 2>&1; then
+    ROW_COUNT=$(echo "$GSC_RAW" | /usr/bin/jq -r '.rows | length')
+    if [ "$ROW_COUNT" -gt 0 ]; then
+      GSC_MODE="autofill"
+      Q3_TOP_QUERY=$(echo "$GSC_RAW" | /usr/bin/jq -r '.rows | map("- \"" + .query + "\" — " + (.impressions|tostring) + " impressions, " + (.clicks|tostring) + " clicks, position " + (.position|tostring|.[0:4])) | join("\n")')
+    else
+      GSC_MODE="autofill"
+      Q3_TOP_QUERY="_GSC returned 0 rows for the last 7 days (no impressions yet — expected for a < 30-day-old site)._"
+    fi
+  else
+    GSC_MODE="error"
+    GSC_ERR=$(echo "$GSC_RAW" | /usr/bin/jq -r '.error // "unknown error"' 2>/dev/null || echo "unknown")
+    Q3_TOP_QUERY="_Autofill blocked — GSC API error: ${GSC_ERR}._"
+  fi
+else
+  Q3_TOP_QUERY="_Autofill blocked — no .gsc-service-account.json at repo root._"
+fi
 
 if [ -n "${PLAUSIBLE_API_KEY:-}" ]; then
   PLAUSIBLE_MODE="autofill"
@@ -94,6 +119,7 @@ Site state:
 - ${PUBLISHED_COUNT} published mdx articles in the repo
 - Most recent: ${LAST_SLUG}
 - Plausible autofill: **$( [ "$PLAUSIBLE_MODE" = "autofill" ] && echo "enabled" || echo "off (set PLAUSIBLE_API_KEY in .env)" )**
+- GSC autofill: **$( if [ "$GSC_MODE" = "autofill" ]; then echo "enabled"; elif [ "$GSC_MODE" = "error" ]; then echo "error (see Q3)"; else echo "off (drop .gsc-service-account.json at repo root)"; fi )**
 
 ${Q_TOTALS:+## 7-day totals (Plausible)
 
@@ -130,7 +156,9 @@ article ranks #1, that's a SEO win — note which.
 
 GSC → Performance → Queries.
 
-> Answer:
+${Q3_TOP_QUERY:->_Autofill blocked — see GSC autofill status above._}
+
+> Comment:
 
 Note the top 3 queries by impressions. The query Google is showing
 your site for is the topic to write the next piece about — even if
