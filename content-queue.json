@@ -21,7 +21,7 @@
   {
     "niche": "dev-diary",
     "author": "stone",
-    "slug": "aura-week-1-claude-code",
+    "slug": "aura-week-1-with-an-ai-coding-tool",
     "topic": "Building Aura app week 1 — what the AI coding tool got right and what it didn't",
     "anecdote": "First commit at 11pm Sunday. By Tuesday the AI coding tool had refactored my auth flow three times. Two were wrong.",
     "status": "published",
@@ -42,7 +42,7 @@
   {
     "niche": "ece-ai",
     "author": "megan",
-    "slug": "claude-parent-newsletter-iteration",
+    "slug": "ai-parent-newsletter-iteration",
     "topic": "Using AI to draft parent communication for a 3-year-old room",
     "anecdote": "Megan tried using an AI assistant to draft the weekly parent newsletter. First version was too corporate. Took 4 prompt iterations to sound like her.",
     "status": "published",

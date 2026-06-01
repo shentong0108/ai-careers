@@ -20,3 +20,7 @@
 # existing inbound bookmarks via a permanent redirect.
 /blog/claude-nursing-handoff-notes   /blog/ai-assisted-nursing-handoff-notes  301
 /blog/claude-nursing-handoff-notes/  /blog/ai-assisted-nursing-handoff-notes/  301
+/blog/aura-week-1-claude-code        /blog/aura-week-1-with-an-ai-coding-tool  301
+/blog/aura-week-1-claude-code/       /blog/aura-week-1-with-an-ai-coding-tool/ 301
+/blog/claude-parent-newsletter-iteration   /blog/ai-parent-newsletter-iteration  301
+/blog/claude-parent-newsletter-iteration/  /blog/ai-parent-newsletter-iteration/ 301

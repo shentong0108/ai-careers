@@ -15,3 +15,10 @@
 2026-05-31T07:24:54+1000  iter 14  feat: mobile polish — tap targets (WCAG 44px), table overflow, overflow-wrap, iOS tap-highlight + text-size-adjust  -> 541287d
 2026-05-31T07:27:34+1000  iter 15  content: publish today's article (draft flip after manual eyeball) + strip ChatGPT keyword leak  -> 7c0d66a
 2026-06-01T20:46:05+1000  iter 16  fix: humanizer draft-flip policy non-determinism (3-source contradiction, picked orchestrator as truth)  -> edf04c9
+2026-06-01T20:49:39+1000  iter 18  fix: rename claude-nursing-handoff-notes slug + Cloudflare 301 redirect (4 inline href + queue + voicePolisherSamples + canonical)  -> f35b944
+2026-06-01T20:56:14+1000  iter 19  docs: next-actions for Stone — Plausible enable, queue refill candidates (11 topics across 3 niches), iter-20 flag  -> 6fa7581
+2026-06-01T20:57:27+1000  iter 20  feat: hreflang en-au/en-gb/en-nz/x-default + footer touch targets 44px (WCAG)  -> 296c25e
+2026-06-01T21:08:03+1000  iter 21  feat: PLAUSIBLE_API_KEY wired into weekly-analytics-check.sh — Q1/Q2/Q4 autofill + 7-day totals real data  -> 6e9f857
+2026-06-01T21:09:22+1000  iter 22  fix: 3 cron scripts mailto → Outlook (bundle com.microsoft.Outlook) per user preference  -> 35d3353
+2026-06-01T21:11:40+1000  iter 23  feat: Outlook auto-send via AppleScript helper (scripts/lib/send-outlook.sh), no manual click — 3 cron scripts refactored  -> 6564492
+2026-06-01T21:49:22+1000  iter 24  feat: GSC Search Analytics autofill (Node JWT script + bash wrapper) — Q3 ready, waiting on SA->GSC propagation  -> 38b4100
