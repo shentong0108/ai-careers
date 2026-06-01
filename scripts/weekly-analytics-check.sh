@@ -33,6 +33,54 @@ LOG="${LOG_DIR}/analytics-${TS}.log"
 PUBLISHED_COUNT=$(/usr/bin/find src/content/posts -name '*.mdx' 2>/dev/null | /usr/bin/wc -l | /usr/bin/tr -d ' ')
 LAST_SLUG=$(/bin/ls -t src/content/posts/*/*.mdx 2>/dev/null | /usr/bin/head -1 | /usr/bin/sed 's|.*/||; s|\.mdx$||')
 
+# Load PLAUSIBLE_API_KEY from .env if present (cron runs without shell env).
+if [ -f .env ]; then
+  set -a
+  # shellcheck source=/dev/null
+  . .env
+  set +a
+fi
+
+# Plausible Stats API autofill. If no key, leave Q1/Q2/Q4 blank for
+# manual fill (matches the original behaviour) and write a note in
+# the report explaining the fallback.
+PLAUSIBLE_BASE="https://plausible.io/api/v1/stats"
+SITE="stonemegan.dev"
+PLAUSIBLE_MODE="unset"
+Q_TOTALS="" Q1_TOP_SOURCE="" Q2_TOP_ENTRY="" Q4_TOP_BOUNCE=""
+
+if [ -n "${PLAUSIBLE_API_KEY:-}" ]; then
+  PLAUSIBLE_MODE="autofill"
+  AUTH="Authorization: Bearer ${PLAUSIBLE_API_KEY}"
+  # Aggregate totals
+  AGG=$(/usr/bin/curl -fsS -H "$AUTH" "${PLAUSIBLE_BASE}/aggregate?site_id=${SITE}&period=7d&metrics=visitors,pageviews,bounce_rate,visit_duration" 2>/dev/null || echo "")
+  if [ -n "$AGG" ]; then
+    VISITORS=$(echo "$AGG" | /usr/bin/jq -r '.results.visitors.value')
+    PAGEVIEWS=$(echo "$AGG" | /usr/bin/jq -r '.results.pageviews.value')
+    BOUNCE=$(echo "$AGG" | /usr/bin/jq -r '.results.bounce_rate.value')
+    DUR=$(echo "$AGG" | /usr/bin/jq -r '.results.visit_duration.value')
+    Q_TOTALS="- **Unique visitors (7d):** ${VISITORS}
+- **Pageviews (7d):** ${PAGEVIEWS}
+- **Bounce rate:** ${BOUNCE}%
+- **Avg visit duration:** ${DUR}s"
+  fi
+  # Q1 — top source (drop Direct/None per the existing rubric)
+  SRC=$(/usr/bin/curl -fsS -H "$AUTH" "${PLAUSIBLE_BASE}/breakdown?site_id=${SITE}&period=7d&property=visit:source&limit=10" 2>/dev/null || echo "")
+  if [ -n "$SRC" ]; then
+    Q1_TOP_SOURCE=$(echo "$SRC" | /usr/bin/jq -r '.results | map(select(.source != "Direct / None")) | (if length == 0 then "_All traffic is Direct/None — promo channels not delivering yet._" else (map("- " + .source + " — " + (.visitors|tostring) + " visitors") | .[0:3] | join("\n")) end)')
+  fi
+  # Q2 — top entry page
+  ENT=$(/usr/bin/curl -fsS -H "$AUTH" "${PLAUSIBLE_BASE}/breakdown?site_id=${SITE}&period=7d&property=visit:entry_page&limit=5" 2>/dev/null || echo "")
+  if [ -n "$ENT" ]; then
+    Q2_TOP_ENTRY=$(echo "$ENT" | /usr/bin/jq -r '.results | map("- " + .entry_page + " — " + (.visitors|tostring) + " visitors") | join("\n")')
+  fi
+  # Q4 — highest-bounce page (filter pages with >=2 visitors so a single bounce on 1 visit doesn't dominate)
+  BNC=$(/usr/bin/curl -fsS -H "$AUTH" "${PLAUSIBLE_BASE}/breakdown?site_id=${SITE}&period=7d&property=event:page&metrics=bounce_rate,visitors&limit=10" 2>/dev/null || echo "")
+  if [ -n "$BNC" ]; then
+    Q4_TOP_BOUNCE=$(echo "$BNC" | /usr/bin/jq -r '.results | map(select(.visitors >= 2)) | sort_by(-.bounce_rate) | (if length == 0 then "_Not enough traffic to identify a high-bounce page yet (need pages with 2+ visitors)._" else (map("- " + .page + " — " + (.bounce_rate|tostring) + "% bounce (" + (.visitors|tostring) + " visitors)") | .[0:3] | join("\n")) end)')
+  fi
+fi
+
 cat > "$REPORT_FILE" <<EOF
 # Weekly analytics review — ${DATE} (week ${WEEK})
 
@@ -45,8 +93,13 @@ Stop. Open both dashboards before answering. Five-minute job, do not skip.
 Site state:
 - ${PUBLISHED_COUNT} published mdx articles in the repo
 - Most recent: ${LAST_SLUG}
+- Plausible autofill: **$( [ "$PLAUSIBLE_MODE" = "autofill" ] && echo "enabled" || echo "off (set PLAUSIBLE_API_KEY in .env)" )**
 
----
+${Q_TOTALS:+## 7-day totals (Plausible)
+
+${Q_TOTALS}
+
+}---
 
 ## The 5 questions (answer in this file, commit it)
 
@@ -54,7 +107,9 @@ Site state:
 
 Plausible → Sources tab. Ignore Direct/None.
 
-> Answer:
+${Q1_TOP_SOURCE:->_Autofill blocked — no PLAUSIBLE_API_KEY in .env._}
+
+> Comment:
 
 If still 100% Direct, the promo channels are not delivering yet —
 that's the next-week priority, not a metric problem.
@@ -63,7 +118,9 @@ that's the next-week priority, not a metric problem.
 
 Plausible → Top Pages → Entry Pages. Note the path.
 
-> Answer:
+${Q2_TOP_ENTRY:->_Autofill blocked — no PLAUSIBLE_API_KEY in .env._}
+
+> Comment:
 
 If \`/\` dominates, SEO is not landing people on long-tail articles
 yet (expected for a < 30-day-old site). If a niche page or specific
@@ -83,8 +140,10 @@ CTR is currently 0%.
 
 Plausible → Top Pages → click the page → see bounce rate.
 
+${Q4_TOP_BOUNCE:->_Autofill blocked — no PLAUSIBLE_API_KEY in .env._}
+
 Page with highest bounce:
-> Answer:
+> Comment:
 
 Hypothesis for why:
 
