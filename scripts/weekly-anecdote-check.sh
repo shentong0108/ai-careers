@@ -158,7 +158,7 @@ INBOX_FILE="${BRAINSTORM_DIR}/INBOX.md"
 ENC_SUBJECT=$(/usr/bin/python3 -c "import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))" "ai-careers weekly anecdote check — $(date +%Y-%m-%d)")
 ENC_BODY=$(/usr/bin/python3 -c "import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))" "$MAIL_BODY")
 MAIL_RC=0
-/usr/bin/open "mailto:${NOTIFY_EMAIL}?subject=${ENC_SUBJECT}&body=${ENC_BODY}" >> "$LOG" 2>&1 || MAIL_RC=$?
+/usr/bin/open -b com.microsoft.Outlook "mailto:${NOTIFY_EMAIL}?subject=${ENC_SUBJECT}&body=${ENC_BODY}" >> "$LOG" 2>&1 || MAIL_RC=$?
 echo "mailto open rc=$MAIL_RC" >> "$LOG"
 
 # macOS notification — works even from Background ProcessType.

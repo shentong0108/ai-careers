@@ -204,7 +204,7 @@ Log: ${LOG}"
 ENC_SUBJECT=$(/usr/bin/python3 -c "import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))" "ai-careers weekly analytics — ${DATE}")
 ENC_BODY=$(/usr/bin/python3 -c "import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))" "$MAIL_BODY")
 MAIL_RC=0
-/usr/bin/open "mailto:${NOTIFY_EMAIL}?subject=${ENC_SUBJECT}&body=${ENC_BODY}" >> "$LOG" 2>&1 || MAIL_RC=$?
+/usr/bin/open -b com.microsoft.Outlook "mailto:${NOTIFY_EMAIL}?subject=${ENC_SUBJECT}&body=${ENC_BODY}" >> "$LOG" 2>&1 || MAIL_RC=$?
 
 /usr/bin/osascript -e "display notification \"Weekly analytics review. Open ${REPORT_FILE}\" with title \"stonemegan analytics ✓\" sound name \"Glass\"" >> "$LOG" 2>&1 || true
 
