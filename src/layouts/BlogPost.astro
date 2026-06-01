@@ -104,7 +104,7 @@ const readNext = [...sameNiche, ...otherNiche].slice(0, 2);
     <SubscribeForm variant="inline" />
 
     <div class="post-author-footer">
-      <img src={author.image} alt={author.name} />
+      <img src={author.image} alt={author.name} width="64" height="64" loading="lazy" decoding="async" />
       <div class="body">
         <p>{author.name} · {author.jobTitle}</p>
         <p>{author.bio}</p>
