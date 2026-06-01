@@ -30,9 +30,11 @@ MUST:
 - Preserve every citation URL.
 - Preserve target keyword density.
 - Preserve word count ±10%.
-- Flip `draft: true` → `draft: false` ONLY if final score < `target_score` AND `humanizationMode` is not `degraded` AND `needs-anecdote` is not in tags.
+- **Draft-flip policy (deterministic, matches orchestrator + seo-optimizer input contract):**
+  - If `needs-anecdote` is in the tags array (skeleton mode) → keep `draft: true`. Never flip.
+  - If an AI-detection API IS available and final score >= `target_score` → keep `draft: true` AND return `status: blocked`.
+  - In every OTHER case (anecdote present + (scored pass OR degraded mode)) → flip `draft: true` → `draft: false`. This matches the orchestrator's "filled articles publish immediately" rule and satisfies seo-optimizer's input precondition.
 - Record final score in frontmatter `aiDetectionScore` when an AI-detection API is available.
-- If `needs-anecdote` is in the tags array, keep `draft: true` regardless of score.
 
 ## Degraded mode (no AI-detection API key)
 
@@ -40,10 +42,10 @@ If neither `ZEROGPT_API_KEY` nor `ORIGINALITY_API_KEY` is set in the environment
 
 1. Apply all the textual transformations from the workflow below (banlist scrub, sentence-length variation, specifics injection, parenthetical asides, hedging trim, regional voice) without measuring an external score.
 2. Record `aiDetectionScore: null` and `humanizationMode: "degraded"` in the frontmatter.
-3. Keep `draft: true` so a human reviewer can run AI-detection manually before publishing.
+3. **Flip `draft: true` → `draft: false`** if `needs-anecdote` is NOT in tags (filled article). The orchestrator's policy is that filled articles publish on merge; humanizer is the agent that enacts the flip in degraded mode. Skeleton articles (`needs-anecdote` in tags) keep `draft: true`.
 4. Return `status: ready` with a note in the receipt indicating degraded mode.
 
-This is acceptable for development and for runs where the user has not yet provisioned a detection key. It is not acceptable for production publishing without a human review pass.
+The safety net under degraded mode is the YMYL audit trail (Gate 9 HARD: `factChecked`/`factCheckedAt`/`factCheckedBy` required) plus `voice-polisher` running unconditionally, not the `draft` flag. If a reviewer wants articles held for manual eyeball, set `humanizationMode: "manual-review"` per-article in the content-queue entry — not implemented yet; raise this with the user before relying on it.
 
 ## Humanization Techniques (apply in order)
 
@@ -80,6 +82,7 @@ node scripts/detect-ai.ts --per-paragraph /tmp/body.md
 
 - [ ] If an AI-detection API is available: final score < `target_score` (else leave `draft: true`, return with `status: blocked`)
 - [ ] If running in degraded mode: `aiDetectionScore: null` and `humanizationMode: "degraded"` in frontmatter, `status: ready`
+- [ ] Draft-flip applied per the deterministic policy in MUST: filled article → `draft: false`; skeleton (`needs-anecdote` tag) → `draft: true`; scored-but-failed → `draft: true` + `status: blocked`
 - [ ] Word count delta < 10% from input
 - [ ] All citation URLs intact (diff-check)
 - [ ] Banned token count = 0
