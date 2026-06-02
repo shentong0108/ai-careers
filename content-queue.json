@@ -107,5 +107,82 @@
     "topic": "How my content agent invented a UK nurse persona for a post about my own work",
     "anecdote": "Wrote a dev-diary post about killing a clinical-tool side project. Sent the topic line, the author binding (Stone, AHPRA-registered RN, Sydney), and the real anecdote to the content-writer agent. The agent ignored the author binding and wrote the article as Megan — UK NMC-registered, North London NHS, completely fictional. It pattern-matched the word 'nurse' in the topic and reconstructed a persona that fit the surface words. Two fixes stopped the bleed: (1) author binding became a required field on every queue entry, not inferred from niche or topic, and (2) the content-writer contract now has a HARD RULE forbidding persona inference from topic strings. The lesson: when an agent has freedom to fabricate, freedom plus surface words equals fabrication.",
     "status": "pending"
+  },
+  {
+    "niche": "nurse-ai",
+    "author": "stone",
+    "topic": "The 4 things I check before any AI-drafted clinical note goes in the record",
+    "anecdote": "After the iron-infusion near-miss (batch number missing on the record I almost signed), I built a 4-point pre-sign checklist: identifiers verified, drug-specific data complete (batch / expiry / dose / lot), time stamps right, what-was-done vs what-was-planned. Took me about three weeks to make automatic. Stops every shortcut the AI tries to take when it summarises a long clinical event.",
+    "status": "pending"
+  },
+  {
+    "niche": "nurse-ai",
+    "author": "stone",
+    "topic": "Why I draft patient SMS reminders by hand, not with AI",
+    "anecdote": "Tried it for two weeks. AI-drafted SMS for appointment reminders and post-procedure check-ins. Patients started replying with confusion about steps the AI had paraphrased differently to my usual wording. Voice consistency matters more than draft speed for messages people read on their phone in five seconds. Switched back to a six-template hand library; failure rate dropped immediately.",
+    "status": "pending"
+  },
+  {
+    "niche": "nurse-ai",
+    "author": "stone",
+    "topic": "The clinical question I will not ask an AI and why",
+    "anecdote": "A patient asked me whether their new medication interacts with grapefruit. The AI gave a confident answer. I double-checked with MIMS and found three missing interactions. Now: medication-interaction questions never go through general AI. Specialist pharma databases only. The single rule that catches the most dangerous failure mode of AI in clinical work.",
+    "status": "pending"
+  },
+  {
+    "niche": "ece-ai",
+    "author": "megan",
+    "topic": "Drafting EYLF learning stories with AI: the format I keep, the voice I rewrite",
+    "anecdote": "AI nails the EYLF outcome alignment (Outcome 4: Confident learners, Outcome 5: Communicators, and so on). What it cannot do: the moment-specific child voice. Last week, a 3-year-old discovered his shadow stretches at sunset. The AI version was bland (explored shadows during outdoor play). What actually mattered: he chased his shadow for 12 minutes and made his own theory that the sun pulls it long. I rewrite the moment in. Keep the outcome scaffolding.",
+    "status": "pending"
+  },
+  {
+    "niche": "ece-ai",
+    "author": "megan",
+    "topic": "Using AI for parent comms when families do not read English at home",
+    "anecdote": "About half of our families are second-language English speakers. AI helps me draft at a Year-6 reading level and prepare a translation handoff prompt for the interpreter colleagues we work with. The catch: cultural reframes do not translate. Phrases like tummy time or settling in are not universal. I keep a running list of words AI gets wrong for our community and pre-substitute before the draft goes anywhere near a family.",
+    "status": "pending"
+  },
+  {
+    "niche": "ece-ai",
+    "author": "megan",
+    "topic": "The observation an AI could not help me write",
+    "anecdote": "A 2-year-old who had been mute for six weeks suddenly said her older brother's name in our room. AI tried to scaffold this into language development emerging with EYLF Outcome 5 tags. The actual story: it was the first day her mum dropped her off, not Dad. The trigger was attachment, not language. The AI had no way to know that. I wrote the observation myself. It took longer. Worth it.",
+    "status": "pending"
+  },
+  {
+    "niche": "ece-ai",
+    "author": "megan",
+    "topic": "OWNA templates: using AI alongside, not inside",
+    "anecdote": "OWNA templates are fixed-field. I use AI to draft a long-form version separately, then condense piece by piece back into OWNA fields. Going AI-direct-to-OWNA caused two sync errors last month: pasted text broke the data structure. Now: AI writes the draft outside the platform, I move pieces by hand. Slower, but never the platform-error email at 9pm.",
+    "status": "pending"
+  },
+  {
+    "niche": "dev-diary",
+    "author": "stone",
+    "topic": "The first time the AI coding tool lied to me about an API surface",
+    "anecdote": "Working on Aura. The AI confidently described an API parameter for per-token sampling that did not exist in the actual library. I wrote 30 lines around it before the runtime errors started. 45 minutes to find. Now every API claim the AI makes gets checked against the official docs URL in the same session before I write code against it. The rule sounds obvious. The first time it costs you an hour, it becomes automatic.",
+    "status": "pending"
+  },
+  {
+    "niche": "dev-diary",
+    "author": "stone",
+    "topic": "What I throw away after a week of AI-assisted coding",
+    "anecdote": "Killed four features last week. The common shape: AI got me to a working prototype fast, then I realised the prototype made an assumption I had not shared (offline mode, batched writes, optimistic UI). Rewriting was harder than rewriting from scratch. Now: a 30-minute spec note before any AI session, even for features that feel simple. The note pays itself back the first time the AI tries to read your mind and gets it wrong.",
+    "status": "pending"
+  },
+  {
+    "niche": "dev-diary",
+    "author": "stone",
+    "topic": "Aura week 3: the bug I could not even describe to the AI",
+    "anecdote": "Voice transcription was 60 percent accurate in dev and 92 percent in prod. Same code path. Spent three days describing it to AI assistants eight different ways. Eventually found it: the macOS dev environment used a different speech model than the iOS Safari shipped one. The AI could not help because the symptom was indistinguishable from a model-quality issue. The fix was outside the code surface entirely, in the platform model selection layer.",
+    "status": "pending"
+  },
+  {
+    "niche": "dev-diary",
+    "author": "stone",
+    "topic": "The day I stopped pasting full files into the AI prompt",
+    "anecdote": "For two weeks I pasted 500-line files as context. The AI started hallucinating function names that should exist based on the surrounding code patterns. Switched to a strict rule: paste only the changed function plus the three to five functions it calls plus the tests. Hallucination rate dropped to near zero. Less context, better output. Opposite of intuition.",
+    "status": "pending"
   }
 ]
