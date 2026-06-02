@@ -1,0 +1,36 @@
+# Reader-visible AI/LLM brand names that must NEVER appear in published content.
+# Used by scripts/lint-brand-leaks.ts (runs as a build prereq, blocks the merge).
+# One brand per line. Case-insensitive match. Whole-word boundary enforced
+# (so "claude" matches "Claude" and "claude.ai" but not "claudine").
+#
+# Allowed exceptions (handled by the linter, not listed here):
+#   - voicePolisherSamples frontmatter field paths (internal audit trail)
+#   - HTML comments + MDX {/* ... */} comments
+#   - Code fences with explicit "affiliate-disclosure" marker
+#   - robots.txt User-agent identifiers (not lint-target anyway)
+
+claude
+claude code
+claude.ai
+chatgpt
+gpt-3
+gpt-4
+gpt-4o
+gpt-o
+anthropic
+openai
+gemini
+github copilot
+copilot
+jasper
+speechify
+whisper
+ollama
+perplexity
+mistral
+llama 2
+llama 3
+llama-2
+llama-3
+gemini pro
+gemini advanced

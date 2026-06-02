@@ -45,6 +45,8 @@ pnpm build   # or npm run build
 ```
 Pass: exit 0 + `dist/` populated. Fail blocks deploy.
 
+The `build` npm script now runs `tsx scripts/lint-brand-leaks.ts` BEFORE `astro check && astro build`. That script greps every reader-visible mdx + astro file against `.claude/brand-blocklist.txt` (Claude, ChatGPT, Anthropic, OpenAI, Gemini, Copilot, etc.). Any leak prints `file:line` with the offending term and exits non-zero — so Gate 1 fails fast and the whole pipeline aborts before PR open. This is the deterministic backstop for the brand-neutrality rule that lives in content-writer.md + voice-polisher.md.
+
 ### Gate 2 (HARD): Type Check
 
 `pnpm build` already runs `astro check`. Failure here is a build failure.

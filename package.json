@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro check && astro build",
+    "build": "tsx scripts/lint-brand-leaks.ts && astro check && astro build",
+    "lint:brand": "tsx scripts/lint-brand-leaks.ts",
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check",
