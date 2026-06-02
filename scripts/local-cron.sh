@@ -67,16 +67,17 @@ $(/usr/bin/tail -40 "${log_path}" 2>/dev/null || echo "(log not available)")"
 
 # ---- Throttle ---------------------------------------------------------------
 
-# Throttle 18h, not 22h. launchd fires at 7am every day; if any prior run
-# completed after ~9am (manual trigger or slow pipeline), the next 7am
-# would skip with a >22h threshold. 18h leaves safe margin for the 24h
-# daily cadence without ever skipping the scheduled fire.
+# Throttle 9h, not 18h. launchd fires twice daily (07:00 + 18:00 = 11h
+# gap). Throttle must be < 11h so the evening slot doesn't get skipped
+# after the morning run. 9h leaves a 2h safety margin against
+# manual-trigger collisions or a slow morning pipeline that finishes
+# close to 18:00.
 if [[ -f "$LAST_RUN_FILE" ]]; then
   LAST=$(cat "$LAST_RUN_FILE")
   NOW=$(date +%s)
   ELAPSED=$(( NOW - LAST ))
-  if (( ELAPSED < 64800 )); then
-    echo "$(date) — skip, last run ${ELAPSED}s ago (need >=64800s, ~18h)" | tee -a "$LOG"
+  if (( ELAPSED < 32400 )); then
+    echo "$(date) — skip, last run ${ELAPSED}s ago (need >=32400s, ~9h)" | tee -a "$LOG"
     exit 0
   fi
 fi
