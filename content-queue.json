@@ -113,7 +113,10 @@
     "author": "stone",
     "topic": "The 4 things I check before any AI-drafted clinical note goes in the record",
     "anecdote": "After the iron-infusion near-miss (batch number missing on the record I almost signed), I built a 4-point pre-sign checklist: identifiers verified, drug-specific data complete (batch / expiry / dose / lot), time stamps right, what-was-done vs what-was-planned. Took me about three weeks to make automatic. Stops every shortcut the AI tries to take when it summarises a long clinical event.",
-    "status": "pending"
+    "status": "published",
+    "pickedAt": "2026-06-02T21:00:18.485Z",
+    "slug": "the-4-things-i-check-before-any-ai-drafted-clinical-note-goe",
+    "mergedAt": "2026-06-02T21:15:59Z"
   },
   {
     "niche": "nurse-ai",
