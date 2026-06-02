@@ -106,7 +106,8 @@ const readNext = [...sameNiche, ...otherNiche].slice(0, 2);
     <div class="post-author-footer">
       <img src={author.image} alt={author.name} width="64" height="64" loading="lazy" decoding="async" />
       <div class="body">
-        <p>{author.name} · {author.jobTitle}</p>
+        <p>About the author — <strong>{author.name}</strong> · {author.jobTitle}</p>
+        <p class="credential">{author.credential}</p>
         <p>{author.bio}</p>
         <p>More from {author.name} in <a href={`/${fm.category}`}>{NICHE_LABEL[fm.category]}</a>.</p>
       </div>
