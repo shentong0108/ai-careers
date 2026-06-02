@@ -1,0 +1,125 @@
+{
+  "niche": "nurse-ai",
+  "seed_topic": "The 4 things I check before any AI-drafted clinical note goes in the record",
+  "target_geo": "global",
+  "audience_note": "UK / AU / NZ English nurses (NMC / NMBA / Te Kaunihera framing, not US HIPAA-first)",
+  "primary_keyword": {
+    "term": "what to check before signing an AI-generated nursing note",
+    "estimated_kd": 12,
+    "estimated_kd_method": "top10_avg_DR(~50)/5 + exact_match_titles(~1)*2 = 12; HIGH UNCERTAINTY — DR values estimated by eyeballing domains, NOT pulled from Ahrefs (no API access this run)",
+    "estimated_volume": "low (<300/mo, long-tail)",
+    "source": "Google Suggest + SERP inspection 2026-06-03; volume band inferred from SERP thinness, NOT a tool number"
+  },
+  "long_tail": [
+    { "term": "are AI generated nursing notes legal", "estimated_kd": 14, "intent": "informational", "source": "WebSearch SERP 2026-06-03" },
+    { "term": "who is responsible for AI clinical note errors", "estimated_kd": 16, "intent": "informational", "source": "WebSearch SERP 2026-06-03 (liability articles rank, mid-DR)" },
+    { "term": "how to review AI generated clinical notes for accuracy", "estimated_kd": 15, "intent": "informational", "source": "WebSearch SERP 2026-06-03" },
+    { "term": "AI nursing notes hallucination check", "estimated_kd": 10, "intent": "informational", "source": "WebSearch SERP 2026-06-03 (thin SERP, mostly arxiv/PMC)" },
+    { "term": "do nurses have to review AI documentation before signing", "estimated_kd": 11, "intent": "informational", "source": "PAA 2026-06-03" },
+    { "term": "NMC AI documentation standards nurses UK", "estimated_kd": 9, "intent": "informational", "source": "WebSearch SERP 2026-06-03 (no consolidated answer; NMC code update not live until 2027)" },
+    { "term": "AI scribe medication error check nurse", "estimated_kd": 13, "intent": "informational", "source": "WebSearch SERP 2026-06-03" },
+    { "term": "checklist for reviewing AI clinical documentation", "estimated_kd": 12, "intent": "transactional/informational", "source": "WebSearch SERP 2026-06-03" }
+  ],
+  "people_also_ask": [
+    "Are AI-generated clinical notes legal?",
+    "Who is responsible if an AI note contains an error?",
+    "Do nurses still have to review AI documentation before signing?",
+    "How accurate are AI-generated clinical notes?",
+    "What are common errors in AI scribe notes?",
+    "Can AI catch clinical errors in my assessment?",
+    "What does the NMC / RCN say about AI in nursing documentation?",
+    "Is the audit trail kept when an AI drafts a note?"
+  ],
+  "serp_top3": [
+    {
+      "url": "https://nursechartingpro.com/guides/ai-nursing-notes",
+      "dr": 25,
+      "dr_source": "estimated, not pulled from Ahrefs",
+      "word_count": 4300,
+      "covers": [
+        "What AI nursing notes means (ambient, structured-input, boilerplate)",
+        "HIPAA 3-question test (US-centric)",
+        "What AI can and cannot do",
+        "5-question evaluation checklist",
+        "Common mistakes + pro tips",
+        "Accountability: 'your name is on it, you are accountable'"
+      ]
+    },
+    {
+      "url": "https://www.iatrox.com/blog/responsible-ai-use-for-clinicians-nhs-guide-2025",
+      "dr": 32,
+      "dr_source": "estimated, not pulled from Ahrefs",
+      "word_count": 2400,
+      "covers": [
+        "Four pillars of responsible clinical AI (UK lens)",
+        "UK GDPR / Data Protection Act 2018 / ICO",
+        "NHS England 2025 ambient scribe guidance",
+        "SAFE framework for frontline staff",
+        "RCN 'enhance not replace' line (no detailed NMC code mapping)"
+      ]
+    },
+    {
+      "url": "https://www.tmlt.org/resource/using-ai-medical-scribes-risk-management-considerations",
+      "dr": 55,
+      "dr_source": "estimated, not pulled from Ahrefs",
+      "word_count": 1800,
+      "covers": [
+        "Liability / risk management framing",
+        "Hallucinations, mis-transcribed terminology, omitted observations",
+        "EHR safeguards (flagging, confirm meds/allergies)",
+        "Need for strict review protocols and dedicated sign-off time",
+        "NO item-by-item verification checklist provided"
+      ]
+    }
+  ],
+  "ai_overview_present": true,
+  "ai_overview_note": "AI Overview likely fires for 'are AI nursing notes legal' and 'who is responsible for AI note errors' — accountability questions get summarised. The primary keyword (pre-sign verification, first-person 4-item routine) is narrower and less likely to be fully answered by an Overview.",
+  "featured_snippet_target": "A numbered list: 'Before signing an AI-drafted clinical note, check (1) medications & doses, (2) numbers/vitals, (3) anything you don't remember saying (hallucinations), (4) attribution — who/what the note assigns each finding to.' Structure as a tight ordered list to win the snippet.",
+  "outline": {
+    "title_candidates": [
+      "The 4 Things I Check Before Any AI-Drafted Note Goes in the Record",
+      "Before You Sign That AI Note: My 4-Check Routine on Shift",
+      "AI Wrote the Note. I Still Read It Like It'll End Up in Court — 4 Checks"
+    ],
+    "h2": [
+      {
+        "heading": "Why I read every AI note like my registration depends on it",
+        "h3": ["The shift where the AI 'remembered' a conversation that never happened", "Your name signs it, so it's your note — NMC/NMBA accountability in one line"]
+      },
+      {
+        "heading": "Check 1 — Medications, doses and allergies",
+        "h3": ["The single most dangerous category of AI error", "What a mis-heard drug name actually looks like in the draft"]
+      },
+      {
+        "heading": "Check 2 — Numbers (vitals, fluid balance, scores)",
+        "h3": ["Transcription slips on BP, HR, sats and EWS/NEWS scores", "Why I re-read numbers against the obs chart, not the conversation"]
+      },
+      {
+        "heading": "Check 3 — Anything I don't actually remember (hallucinations)",
+        "h3": ["Plausible-but-invented sentences and how to spot the smell", "The 'did this happen?' test I run on the subjective section"]
+      },
+      {
+        "heading": "Check 4 — Attribution: who or what the note says did each thing",
+        "h3": ["Misattributed findings and copy-forward context errors", "Keeping the AI's role visible in the audit trail"]
+      },
+      {
+        "heading": "My 60-second on-shift routine (and when I slow it down)",
+        "h3": ["The order I check in and why assessment/plan comes first", "What to do when a note is so wrong I rewrite from scratch"]
+      }
+    ],
+    "unique_angle": "A concrete, first-person, four-item bedside CHECKLIST framed for UK/AU/NZ regulators (NMC code, NMBA, Te Kaunihera accountability — not US HIPAA), with one named real-shift anecdote per check. Top-3 either give a US-HIPAA generic 5-question list (nursechartingpro), a doctor/AHP UK-policy overview (iatrox), or risk-management theory with NO actual checklist (tmlt). None give a nurse's personal, repeatable on-shift sequence with the specific four error classes ordered by danger."
+  },
+  "internal_link_candidates": [
+    "ai-for-shift-handoff-notes",
+    "best-ai-tools-for-nurses-2026",
+    "nmc-revalidation-ai"
+  ],
+  "internal_link_note": "Slugs are CANDIDATES inferred from the niche — content-writer must confirm they exist in src/content before linking; do not fabricate hrefs.",
+  "warnings": [
+    "DR values and KD are ESTIMATED by domain inspection, not pulled from Ahrefs/Ubersuggest this run (no tool access). Treat KD ~10-16 as a low-competition signal, not a precise figure.",
+    "AI Overview likely steals clicks on the 'is it legal / who is responsible' framings — win by depth + first-person checklist the Overview can't reproduce.",
+    "Volume band (<300/mo) is INFERRED from SERP thinness, not a tool number. Do not cite a numeric volume in the article.",
+    "YMYL: this is clinical content. Needs RN byline + reg credential, 1+ citation to a guideline/PubMed (e.g. NMC code, RCN AI position, or a PMC hallucination-rate study), 'last reviewed' date, and 'in my practice / ask your supervisor' framing — no medical advice phrasing.",
+    "NMC has no live AI-specific standard until ~Oct 2027; frame UK guidance via existing Code accountability + RCN position, not an invented NMC AI rule."
+  ]
+}

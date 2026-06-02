@@ -1,0 +1,148 @@
+---
+title: "The 4 Things I Check Before Any AI Note Goes in the Record"
+slug: "the-4-things-i-check-before-any-ai-drafted-clinical-note-goe"
+description: "A Sydney RN's 4-point routine for what to check before signing an AI-generated nursing note: identifiers, drug data, numbers and attribution — under NMBA accountability."
+publishedAt: "2026-06-03"
+updatedAt: "2026-06-03"
+author: "stone"
+category: "nurse-ai"
+tags: ["ai-documentation", "clinical-notes", "patient-safety", "nmba", "nursing-practice"]
+keywords: ["what to check before signing an AI-generated nursing note", "are AI generated nursing notes legal", "how to review AI generated clinical notes for accuracy", "AI nursing notes hallucination check", "checklist for reviewing AI clinical documentation"]
+canonical: "https://stonemegan.dev/blog/the-4-things-i-check-before-any-ai-drafted-clinical-note-goe"
+draft: false
+aiDetectionScore: null
+humanizationMode: "degraded"
+heroImage: "/images/card-nurse-ai.jpg"
+factChecked: true
+factCheckedAt: "2026-06-03T00:00:00Z"
+factCheckedBy: "fact-checker"
+factCheckNotes: []
+voicePolisherPasses: 1
+voicePolisherSamples: ["src/content/posts/nurse-ai/ai-assisted-nursing-handoff-notes.mdx", "src/content/posts/nurse-ai/when-i-do-not-reach-for-the-ai-the-cases-that-need-hands-not.mdx"]
+---
+
+import Schema from '@/components/Schema.astro'
+
+A few months back I almost signed a note that was missing the batch number on an iron infusion. The draft read clean. Finished, tidy, my finger already on the sign-off. That near-miss is the whole reason I now know exactly what to check before signing an AI-generated nursing note. Four checks, every single time: identifiers, drug-specific data, the numbers, and attribution. It took me about three weeks to make it automatic. Now it catches every shortcut the tool tries to take.
+
+## Why I read every AI note like my registration depends on it
+
+Here is the uncomfortable bit. When you sign a note, it is your note. The software drafted it, but your name carries it into the record, and that is the line that should sit in the back of your head every time a summary looks too polished to question.
+
+In my practice in Sydney primary care, I treat the AI as a fast junior who never gets tired and never quite remembers the room. It is good at structure. It is poor at judgement. The [Nursing and Midwifery Board of Australia](https://www.nursingmidwiferyboard.gov.au/Codes-Guidelines-Statements/Professional-standards/registered-nurse-standards-for-practice.aspx) is blunt that accountability cannot be delegated, and a tool is not a delegate anyway. Whether an AI-generated note is "legal" is the wrong question. The right one is whether the registered nurse who signed it can stand behind every clinical claim in it. That responsibility does not move to the vendor.
+
+The shift where this landed for me was the infusion. The AI had summarised a thirty-minute event into four neat sentences and silently dropped the one field that mattered for traceability. Polished. Wrong. So I built the checklist below, ordered by how much harm a missed error in that category can do.
+
+## Check 1 — Identifiers and drug-specific data
+
+This is the check the infusion taught me, and it runs first because it is the most dangerous to get wrong. I confirm the patient against three approved identifiers before I read another word of clinical content. The [Australian Commission on Safety and Quality in Health Care](https://www.safetyandquality.gov.au/national-standards/nsqhs-standards/communicating-safety-standard) sets that three-identifier expectation for the moments care, medication and documentation are generated, and an AI summary does not earn an exemption from it.
+
+Then the drug-specific fields. For anything administered I check name, dose, route, batch or lot number, and expiry. The model is good at writing "iron infusion administered as charted" and terrible at carrying the lot number it was never clearly given. A mis-heard drug name is the classic failure. "Cephalexin" becomes "cefalexin" becomes something close but not the charted agent, and the spelling looks plausible enough that a tired eye slides past it.
+
+What a mis-transcription actually looks like in a draft: the sentence is grammatical, the drug is real, the dose is a number that exists. Nothing screams error. That is exactly why I read this section against the medication chart and not against my memory of the consult.
+
+## Check 2 — Numbers (vitals, fluid balance, scores)
+
+Numbers are where ambient tools quietly slip. A blood pressure of 142/88 becomes 124/88. A set of obs gets attributed to the wrong time point. An escalation score lands one digit off, and one digit can be the difference between "monitor" and "escalate".
+
+So I re-read every number against the source, not against the conversation. The obs chart is the source. The fluid balance sheet is the source. If the note says the patient passed 1200 mL and the chart says 200, I trust the chart and fix the note. I have caught maybe one numeric slip in every dozen long event summaries, which sounds small until you remember each one sits in a record other clinicians will act on.
+
+I do not assume the tool transcribed a figure correctly just because the figure is reasonable. Reasonable is not the same as recorded. That distinction is the entire point of this check.
+
+## Check 3 — Anything I don't actually remember (hallucinations)
+
+This one has a feel to it. The note contains a sentence that reads perfectly and describes something that did not happen. A phantom reassurance given. A symptom denied that was never asked about. The AI fills gaps with plausible clinical prose because plausible prose is what it is built to produce.
+
+My test is one question, asked of the subjective and assessment sections: did this actually happen? If I cannot match a stated finding to an actual moment in the encounter, it comes out. I would rather a note be thinner and true than fuller and partly invented. Research on large language models in clinical text documents this tendency to generate confident, fluent, unsupported content. The [U.S. National Library of Medicine / PMC literature](https://pmc.ncbi.nlm.nih.gov/articles/PMC10292051/) on clinical LLM use is worth a read for the failure patterns alone, even though the regulatory framing there is American, not ours.
+
+The danger of a hallucination is that it does not look like an error. A blank field looks like an error. A confident invented sentence looks like good documentation. I trust the polished sentences least.
+
+## Check 4 — Attribution: who or what did each thing
+
+Last one. Who did each thing. AI summaries copy context forward and misattribute findings without flagging that they have. The note assigns an observation to me that the patient self-reported, or credits a decision to the GP that came from the practice nurse, or quietly blurs who escalated.
+
+I read each clinical action and confirm the actor. Patient-reported stays patient-reported. My assessment stays mine. And I keep the AI's role visible. If a tool drafted the note, that belongs in how the documentation is governed. A clean audit trail should show that a human reviewed and signed, not that prose simply appeared. Clear attribution is also what the [ACSQHC Communicating for Safety guidance](https://www.safetyandquality.gov.au/our-work/communicating-safety/clinical-handover) leans on for safe handover. The next clinician needs to know who said what.
+
+## My 60-second on-shift routine (and when I slow it down)
+
+On a normal day the four checks take me under a minute. (On a bad day, when the consult ran long and the draft is dense, a lot longer, and that is fine.) I run them in danger order: drugs and identifiers, then numbers, then the hallucination sniff, then attribution. I read the assessment and plan first inside that, because that is the section that changes what happens next to the patient.
+
+Here is my honest opinion, and it is not the comfortable one. I think the productivity pitch around AI scribes is oversold for nursing, and the time you "save" on drafting you should spend on verification, not pocket. The tool did not remove the work. It moved it from typing to checking, and checking is the harder skill. A nurse who signs faster because the draft looked done is not more efficient. They are exposed. The honest win is a cleaner first draft that still gets a real review, and any vendor implying otherwise is selling you risk with a friendly interface.
+
+When a note is badly wrong (multiple invented findings, scrambled numbers, the wrong agent) I do not patch it. I bin it and write from scratch. Salvaging a broken summary takes longer than starting clean, and it tempts you to keep the parts that "seem fine". If you are unsure whether your service even permits AI-drafted notes, that is a question for your supervisor and your local policy, not for a blog. Mine is one nurse's routine, not advice for your patient.
+
+For more on the documentation side, see [my AI-assisted handoff notes routine](/blog/ai-assisted-nursing-handoff-notes), [the cases where I do not reach for the AI at all](/blog/when-i-do-not-reach-for-the-ai-the-cases-that-need-hands-not), and [the clinical topic where the AI was a year behind and how I caught it](/blog/the-clinical-topic-where-the-ai-was-a-year-behind-and-how-i).
+
+## TL;DR / Key Takeaways
+
+- Before signing an AI-generated nursing note, check four things in danger order: identifiers and drug-specific data, numbers, hallucinations, attribution.
+- Read drug fields and numbers against the chart and obs, never against your memory of the encounter.
+- Treat fluent, confident sentences with the most suspicion. Invented content does not look like an error.
+- Your name signs it, so it is your note; under NMBA standards accountability cannot be delegated to software.
+- The time AI saves on drafting should be reinvested in verification, and badly wrong notes are faster to rewrite than to repair.
+
+## Sources
+
+- Nursing and Midwifery Board of Australia — [Registered nurse standards for practice](https://www.nursingmidwiferyboard.gov.au/Codes-Guidelines-Statements/Professional-standards/registered-nurse-standards-for-practice.aspx)
+- Australian Commission on Safety and Quality in Health Care — [Communicating for Safety Standard](https://www.safetyandquality.gov.au/national-standards/nsqhs-standards/communicating-safety-standard) and [Clinical handover guidance](https://www.safetyandquality.gov.au/our-work/communicating-safety/clinical-handover)
+- U.S. National Library of Medicine / PMC — [literature on large language models in clinical documentation](https://pmc.ncbi.nlm.nih.gov/articles/PMC10292051/)
+
+*Last reviewed: 3 June 2026 by Stone, AHPRA-registered Registered Nurse (Sydney). This is a personal account of my own documentation routine, not clinical or legal advice. Follow your own service's policy and check with your supervisor.*
+
+<Schema
+  type="Article"
+  data={{
+    headline: 'The 4 Things I Check Before Any AI Note Goes in the Record',
+    description: "A Sydney RN's 4-point routine for what to check before signing an AI-generated nursing note: identifiers, drug data, numbers and attribution — under NMBA accountability.",
+    datePublished: '2026-06-03',
+    dateModified: '2026-06-03',
+    inLanguage: 'en-AU',
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': 'https://stonemegan.dev/blog/the-4-things-i-check-before-any-ai-drafted-clinical-note-goe',
+    },
+    image: 'https://stonemegan.dev/images/card-nurse-ai.jpg',
+    author: {
+      '@type': 'Person',
+      name: 'Stone Megan',
+      jobTitle: 'Registered Nurse (AHPRA-registered) & Indie Developer',
+      url: 'https://stonemegan.dev/about',
+      sameAs: ['https://stonemegan.dev'],
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'ai-careers',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://stonemegan.dev/logo.png',
+      },
+    },
+  }}
+/>
+
+<Schema
+  type="Person"
+  data={{
+    name: 'Stone Megan',
+    jobTitle: 'Registered Nurse (AHPRA-registered) & Indie Developer',
+    url: 'https://stonemegan.dev/about',
+    knowsAbout: ['Clinical documentation', 'Patient safety', 'AI-generated clinical notes', 'NMBA standards', 'Primary care nursing'],
+    sameAs: ['https://stonemegan.dev'],
+  }}
+/>
+
+<Schema
+  type="BreadcrumbList"
+  data={{
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Blog', item: 'https://stonemegan.dev/blog' },
+      { '@type': 'ListItem', position: 2, name: 'Nurse + AI', item: 'https://stonemegan.dev/blog/category/nurse-ai' },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: 'The 4 Things I Check Before Any AI Note Goes in the Record',
+        item: 'https://stonemegan.dev/blog/the-4-things-i-check-before-any-ai-drafted-clinical-note-goe',
+      },
+    ],
+  }}
+/>
