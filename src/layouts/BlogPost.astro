@@ -99,6 +99,18 @@ const readNext = [...sameNiche, ...otherNiche].slice(0, 2);
           Last reviewed {fm.updatedAt.toISOString().slice(0, 10)}.
         </p>
       )}
+
+      {/* Share + submit links. Pre-filled URLs so Stone (or any reader)
+          can post the article to HN / Reddit / X / LinkedIn in one click
+          instead of hand-crafting the share URL each time. */}
+      <div class="share-row" aria-label="Share or submit this article">
+        <span class="share-label">Share or submit:</span>
+        <a class="share-btn" href={`https://news.ycombinator.com/submitlink?u=${encodeURIComponent(fm.canonical)}&t=${encodeURIComponent(fm.title)}`} target="_blank" rel="noopener">Hacker News</a>
+        <a class="share-btn" href={`https://www.reddit.com/submit?url=${encodeURIComponent(fm.canonical)}&title=${encodeURIComponent(fm.title)}`} target="_blank" rel="noopener">Reddit</a>
+        <a class="share-btn" href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(fm.title)}&url=${encodeURIComponent(fm.canonical)}`} target="_blank" rel="noopener">X</a>
+        <a class="share-btn" href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(fm.canonical)}`} target="_blank" rel="noopener">LinkedIn</a>
+        <a class="share-btn" href={`mailto:?subject=${encodeURIComponent(fm.title)}&body=${encodeURIComponent(fm.canonical)}`}>Email</a>
+      </div>
     </article>
 
     <SubscribeForm variant="inline" />

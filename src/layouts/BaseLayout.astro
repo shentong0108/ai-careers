@@ -1063,6 +1063,62 @@ const siteSchemas = [
         color: var(--c-text);
         font-size: 1.05rem;
       }
+      /* Share/submit row at the bottom of every article — gives the
+         author + readers one-click HN/Reddit/X/LinkedIn submission. */
+      .share-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.55rem;
+        margin: 2.5rem auto 0;
+        max-width: 680px;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--c-border-soft);
+        font-family: var(--font-sans);
+      }
+      .share-row .share-label {
+        font-size: 0.82rem;
+        color: var(--c-muted);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        margin-right: 0.4rem;
+      }
+      .share-row .share-btn {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.45rem 0.9rem;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--c-teal);
+        background: var(--c-bg-soft);
+        border: 1px solid var(--c-border);
+        border-radius: 999px;
+        text-decoration: none;
+        transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+        min-height: 36px;
+        background-image: none;
+      }
+      .share-row .share-btn:hover {
+        background: var(--c-teal);
+        color: #ffffff;
+        border-color: var(--c-teal);
+        text-decoration: none;
+      }
+      .share-row .share-btn:active {
+        transform: translateY(1px);
+      }
+      @media (max-width: 640px) {
+        .share-row {
+          gap: 0.4rem;
+          padding-top: 1.25rem;
+        }
+        .share-row .share-btn {
+          padding: 0.55rem 0.85rem;
+          min-height: 44px;
+        }
+      }
+
       .post-author-footer .body .credential {
         font-family: var(--font-sans);
         font-size: 0.85rem;
