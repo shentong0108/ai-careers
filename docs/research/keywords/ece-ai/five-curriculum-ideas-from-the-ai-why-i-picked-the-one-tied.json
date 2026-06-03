@@ -1,0 +1,136 @@
+{
+  "niche": "ece-ai",
+  "seed_topic": "An ECE practitioner brainstorms five sustainability curriculum themes for 3-4 year olds with AI, then picks the one (a garden patch / raised bed) actually grounded in the physical environment of their service.",
+  "target_geo": "global",
+  "generated": "2026-06-03",
+  "primary_keyword": {
+    "term": "ai for lesson planning in early childhood education",
+    "estimated_kd": 16,
+    "estimated_volume": "low (<500/mo)",
+    "source": "google suggest 2026-06-03 + SERP top-10 manual DR estimate 2026-06-03; volume not pulled from a metered tool — treat as directional, verify in Ubersuggest free tier before relying"
+  },
+  "long_tail": [
+    { "term": "ai to plan preschool curriculum", "estimated_kd": 12, "intent": "informational", "source": "google suggest 2026-06-03" },
+    { "term": "sustainability activities for preschoolers in childcare", "estimated_kd": 18, "intent": "informational", "source": "google suggest 2026-06-03" },
+    { "term": "sustainability activities for toddlers in childcare", "estimated_kd": 14, "intent": "informational", "source": "google suggest 2026-06-03" },
+    { "term": "using chatgpt for lesson planning early years", "estimated_kd": 11, "intent": "informational", "source": "google suggest seed (zero-result long-tail, low competition) 2026-06-03" },
+    { "term": "ai curriculum ideas early childhood", "estimated_kd": 10, "intent": "informational", "source": "google suggest seed (zero-result long-tail, low competition) 2026-06-03" },
+    { "term": "garden patch curriculum idea preschool sustainability", "estimated_kd": 9, "intent": "informational", "source": "derived from SERP gap — no exact-match competitor found 2026-06-03" }
+  ],
+  "people_also_ask": [
+    "Does AI lesson planning actually save educators time?",
+    "How do you write an AI prompt for an EYFS lesson plan?",
+    "Can AI-generated lesson plans be developmentally appropriate for 3-4 year olds?",
+    "What are the risks of using AI-generated lesson plans in early childhood?",
+    "How do you align AI activity ideas with EYFS learning goals?",
+    "What sustainability activities work for preschoolers in childcare?"
+  ],
+  "paa_source_note": "PAA box not directly scrapeable from google.com via fetch; questions above synthesised from recurring sub-headings and 'related question' framing across the live top-10 SERP result blocks (famly.co, teachingstrategies.com, illumine.app, structural-learning.com) fetched 2026-06-03.",
+  "serp_top3": [
+    {
+      "url": "https://www.famly.co/us/blog/ai-for-lesson-planning-early-childhood-education",
+      "dr": 60,
+      "word_count": 1300,
+      "covers": [
+        "AI do's and don'ts in ECE",
+        "benefits of AI-powered lesson planning",
+        "how to use ChatGPT for preschool planning",
+        "Famly activity library (product)"
+      ]
+    },
+    {
+      "url": "https://teachingstrategies.com/blog/ai-in-early-childhood-education-the-danger-of-ai-generated-lesson-plans/",
+      "dr": 58,
+      "word_count": 1200,
+      "covers": [
+        "using AI thoughtfully in ECE",
+        "developmentally appropriate practice lost to AI",
+        "responsive teaching limits",
+        "human connection",
+        "call to action for educators"
+      ]
+    },
+    {
+      "url": "https://illumine.app/blog/ai-lesson-planning-for-childcare-centers",
+      "dr": 45,
+      "word_count": 2700,
+      "covers": [
+        "why AI planning is a game-changer",
+        "step-by-step AI planning guide",
+        "selecting AI tools",
+        "writing effective prompts",
+        "aligning with standards",
+        "evaluating AI output",
+        "product walkthrough"
+      ]
+    }
+  ],
+  "serp_dr_note": "DR values are manual estimates from brand authority, not pulled from Ahrefs metered data (free authority checker did not return a number via fetch). top10 DR avg estimated ~48. exact-match-title count in top-10 = 0 (no competitor titles match the 'five ideas / picked the one tied to our yard' angle). Rough KD = 48/5 + 0*2 = ~10; bumped to 16 for primary to account for established brand domains. Uncertainty: MEDIUM-HIGH — confirm in a metered tool.",
+  "ai_overview_present": false,
+  "ai_overview_note": "No AI Overview observed on Bing for the primary term, and google.com AI Overview box was not scrapeable via fetch — assume LOW risk but re-check live. SERP is dominated by SaaS product blogs (Famly, illumine, brightwheel), NOT by a featured snippet, so a depth + lived-experience angle can win clicks.",
+  "featured_snippet_target": "How do you pick the right AI-generated curriculum idea for a preschool? — answer in a 40-60 word definition block: 'Generate several options, then choose the one grounded in your service's actual physical environment (garden bed, yard, local materials) so children can touch and revisit it, not just the one that reads best on screen.'",
+  "outline": {
+    "title_candidates": [
+      "Five Curriculum Ideas From the AI — Why I Picked the One Tied to Our Actual Yard",
+      "I Asked AI for 5 Sustainability Themes for 3-4s. Only One Fit Our Garden.",
+      "Using AI to Brainstorm Preschool Curriculum: Picking the Idea Your Space Can Actually Hold"
+    ],
+    "h2": [
+      {
+        "heading": "Why I turned to AI for sustainability themes (and the prompt I used)",
+        "h3": [
+          "The planning-time problem for 3-4 year olds",
+          "The exact prompt: EYFS-aligned, place-specific, 5 options"
+        ]
+      },
+      {
+        "heading": "The five ideas the AI gave me",
+        "h3": [
+          "Idea 1-5 at a glance (recycling sort, water play, worm farm, garden patch, energy/light)",
+          "What read well on screen vs. what we could actually do"
+        ]
+      },
+      {
+        "heading": "The filter: does it live in our actual environment?",
+        "h3": [
+          "Touchable, revisitable, child-led",
+          "Why the raised garden bed won over the slicker options"
+        ]
+      },
+      {
+        "heading": "Building the garden-patch theme into real EYFS/EYLF planning",
+        "h3": [
+          "Mapping to learning outcomes",
+          "Letting the yard, not the AI, set the pace"
+        ]
+      },
+      {
+        "heading": "Where the AI was wrong about my room",
+        "h3": [
+          "Generic ideas it couldn't ground",
+          "What I deleted and why"
+        ]
+      },
+      {
+        "heading": "How to run this filter on your own AI ideas",
+        "h3": [
+          "A 4-question checklist before you commit a theme",
+          "Keeping the educator's place-knowledge in charge"
+        ]
+      }
+    ],
+    "unique_angle": "Every top-3 competitor stops at 'use AI to generate plans + here are the risks.' None show the SELECTION step — comparing several AI outputs and rejecting four because they aren't anchored in the service's specific physical environment. The concrete angle: a place-based filter (touchable / revisitable / child-led) that demotes the AI idea that reads best in favour of the garden bed children can dig in every day. This is lived ECE practice the SaaS blogs structurally can't replicate."
+  },
+  "internal_link_candidates": [
+    "ai-lesson-planning-early-years-where-it-helps-where-it-hurts",
+    "writing-eyfs-aligned-prompts-for-ai",
+    "outdoor-play-sustainability-toddlers-childcare"
+  ],
+  "internal_link_note": "Slug candidates are conventional ece-ai targets; content-writer should verify which exist in src/content before linking and drop any that 404.",
+  "warnings": [
+    "Volume and DR figures are directional estimates, NOT metered tool output — confirm primary in Ubersuggest free tier / Ahrefs before treating KD 16 as final.",
+    "SERP owned by SaaS product blogs with DR 45-60; win on first-person depth, real yard photos, and the selection-filter angle they lack — do not try to out-rank on generic 'how to use AI' coverage.",
+    "YMYL-adjacent (ECE): requires ECT-credentialed byline, 1+ .gov/.edu/PubMed citation (e.g. NAEYC DAP guidance or SAGE garden-education PMC study), and 'in my practice' framing per project rules.",
+    "Re-verify AI Overview presence live on google.com — fetch could not read the AIO box."
+  ]
+}
