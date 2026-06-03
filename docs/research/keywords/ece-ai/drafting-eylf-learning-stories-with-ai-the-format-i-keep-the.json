@@ -1,0 +1,140 @@
+{
+  "niche": "ece-ai",
+  "seed_topic": "Drafting EYLF learning stories with AI: the format I keep, the voice I rewrite",
+  "target_geo": "au",
+  "primary_keyword": {
+    "term": "write EYLF learning stories with AI",
+    "estimated_kd": 16,
+    "estimated_volume": "unknown — no tool figure obtained; judged low (<500/mo) from SERP thinness, but NOT a measured number",
+    "source": "no third-party volume tool returned a figure for this exact term (keywordvolumechecker.com + Ubersuggest free both gated/empty on 2026-06-04); KD estimated from manual SERP DR audit, see serp_top3 + warnings"
+  },
+  "long_tail": [
+    { "term": "write EYLF learning stories with AI", "estimated_kd": 16, "intent": "informational" },
+    { "term": "how to make AI learning stories sound like me", "estimated_kd": 10, "intent": "informational" },
+    { "term": "ChatGPT prompt for EYLF learning story", "estimated_kd": 18, "intent": "informational" },
+    { "term": "AI learning story template EYLF V2.0", "estimated_kd": 17, "intent": "informational" },
+    { "term": "why AI learning stories sound generic", "estimated_kd": 9, "intent": "informational" },
+    { "term": "learning story format observation analysis next steps", "estimated_kd": 20, "intent": "informational" },
+    { "term": "AI EYLF outcome linking observation", "estimated_kd": 19, "intent": "informational" },
+    { "term": "edit AI learning story keep educator voice", "estimated_kd": 11, "intent": "informational" }
+  ],
+  "people_also_ask": [
+    "Can you use AI to write learning stories?",
+    "How do you make an AI learning story sound like you / keep your own voice?",
+    "What is the format of an EYLF learning story?",
+    "How do you link a learning story to EYLF V2.0 outcomes?",
+    "Is it okay / allowed to use ChatGPT for childcare documentation?",
+    "How long should a learning story be?",
+    "How do you keep children's privacy when putting observations into AI?"
+  ],
+  "serp_top3": [
+    {
+      "url": "https://storyloop.space/",
+      "dr": 12,
+      "word_count": 2200,
+      "covers": [
+        "rough notes -> structured first draft",
+        "EYLF V2.0 outcome links grounded in the observation",
+        "'plain educator language' not policy language (voice claim)",
+        "3-step how-it-works + 3 sample stories",
+        "educator stays responsible for interpretation + final edit"
+      ],
+      "note": "product landing page, low DR, no 'I rewrite the voice' workflow walkthrough — pitches a tool, not a method"
+    },
+    {
+      "url": "https://learningstories.help/au/eylf-learning-stories/",
+      "dr": 14,
+      "word_count": 1900,
+      "covers": [
+        "EYLF Outcomes 1-5 overview",
+        "map story sections to EYLF",
+        "reusable template blocks + 5 mini-story examples",
+        "outcome-mapping prompts + reusable evidence phrases",
+        "common pitfalls + FAQs"
+      ],
+      "note": "strong on format + outcome mapping; weak on AI-drafting workflow and on fixing AI voice"
+    },
+    {
+      "url": "https://www.theempowerededucatoronline.com/2025/06/ep-09-write-learning-stories-with-ai.html",
+      "dr": 38,
+      "word_count": 1500,
+      "covers": [
+        "podcast episode: writing better learning stories with AI",
+        "prompt approaches (What I Saw dump, schema identifier, strength-based reframe)",
+        "AI as starting point not replacement",
+        "linking to EYLF"
+      ],
+      "note": "highest DR in this niche cluster (returned HTTP 403 to fetch on 2026-06-04, so coverage inferred from search snippets + sibling posts, not a fresh body fetch); audio-first, light on a written reusable format and on the explicit keep-format / rewrite-voice split"
+    }
+  ],
+  "ai_overview_present": false,
+  "ai_overview_note": "No AI Overview / featured snippet observed on the long-tail 'write learning stories with AI EYLF' SERP (DuckDuckGo + Bing, 2026-06-04). WARNING: the BROAD head term 'EYLF learning stories' is dominated by .gov (education.gov.au, acecqa.gov.au, nsw.gov.au) — do NOT target the head term. The 'with AI' qualifier escapes that and is dominated by low-DR product pages + blogs, which is the crackable opening.",
+  "featured_snippet_target": "A reusable EYLF learning-story format (Title -> Narrative -> Analysis -> EYLF V2.0 outcome link -> Next steps) presented as a numbered list, so the post can win a list-snippet the .gov pages and product pages don't structure for.",
+  "outline": {
+    "title_candidates": [
+      "Drafting EYLF learning stories with AI: the format I keep, the voice I rewrite",
+      "I let AI draft my EYLF learning stories — here's the part I never let it write",
+      "The 5-part learning story format I feed AI (and the 3 things I rewrite by hand)"
+    ],
+    "h2": [
+      {
+        "heading": "The learning story format I never change",
+        "h3": [
+          "My five blocks: title, narrative, analysis, EYLF V2.0 outcome link, next steps",
+          "Why I keep word count to ~150-250 (and let AI pad nothing)"
+        ]
+      },
+      {
+        "heading": "The exact prompt I paste my rough notes into",
+        "h3": [
+          "The 'what I saw' note dump — bullets, not sentences",
+          "Telling the model the format and the framework (EYLF V2.0, not US standards)",
+          "Privacy: what I strip before anything touches AI (no names, no faces)"
+        ]
+      },
+      {
+        "heading": "Why the first AI draft always sounds wrong",
+        "h3": [
+          "The 'every child is a confident, capable learner' generic-voice tell",
+          "Outcome links that are decoration, not evidence"
+        ]
+      },
+      {
+        "heading": "The voice I rewrite by hand (and the format I leave alone)",
+        "h3": [
+          "Putting the child's actual words back in",
+          "Cutting policy-speak back to plain educator language",
+          "Making the analysis specific to THIS moment, not any moment"
+        ]
+      },
+      {
+        "heading": "Checking the EYLF outcome link is real, not pasted",
+        "h3": [
+          "Match the outcome to evidence in the narrative",
+          "When I delete an outcome the AI over-claimed"
+        ]
+      },
+      {
+        "heading": "My before / after: one real story, AI draft vs final",
+        "h3": [
+          "The AI version (with the generic bits marked)",
+          "What I changed and why it reads like me now"
+        ]
+      }
+    ],
+    "unique_angle": "An explicit keep-vs-rewrite split: a fixed reusable 5-block FORMAT the educator hands AI every time, paired with a named list of the exact things she rewrites by hand (child's real words, policy-speak removal, over-claimed outcome links) — shown with one concrete AI-draft-vs-final before/after. Top-3 either sell a tool (StoryLoop), teach format without the AI workflow (learningstories.help), or are audio-only and light on a written method (Empowered Educator). None give a side-by-side draft showing exactly which lines a human must own."
+  },
+  "internal_link_candidates": [
+    "five-curriculum-ideas-from-the-ai-why-i-picked-the-one-tied-to-our-actual-yard",
+    "the-4-things-i-check-before-any-ai-drafted-clinical-note-goes-in-the-record"
+  ],
+  "internal_link_note": "Confirmed-published slugs from git log (one ece-ai, one nurse-ai cross-niche on the 'check AI output before it counts' theme). content-writer should verify these slugs still resolve and prefer an ece-ai EYLF-outcomes or observations post if one exists in src/content by build time.",
+  "warnings": [
+    "VOLUME IS NOT MEASURED: no free tool returned a figure for this term on 2026-06-04 (keywordvolumechecker + Ubersuggest free were gated/empty). All KD numbers are manual SERP-audit estimates, not tool exports — treat as directional only.",
+    "Do NOT target the head term 'EYLF learning stories' — its SERP is .gov-dominated (education.gov.au, acecqa.gov.au) and near-impossible for a new domain. The whole opening is the 'with AI' + 'keep format / rewrite voice' long-tail.",
+    "KD estimate per contract formula = top10_avg_DR/5 + exact_match_count*2. Long-tail top results are low-DR (12-14) product/blog pages with one DR-38 outlier; rough KD ~14-18. Below the KD-25 ceiling, safe for a new domain.",
+    "Empowered Educator top result returned 403 to direct fetch; its coverage is inferred from search snippets + sibling posts, not a same-day body fetch — re-verify before leaning on it as the sole structural reference.",
+    "YMYL/ECE: this is documentation guidance for children. Per CLAUDE.md rule 5, content-writer must add ECT credential byline, cite the official EYLF V2.0 / ACECQA guideline, frame as 'in my practice' not advice, and stress the privacy step (strip names/faces before AI).",
+    "AdSense: childcare-tool vendors (LoveHeart, StoryLoop, earlyedu.ai) are active affiliate/ad targets in this SERP — there is commercial intent overlap, so an honest 'I tried X' affiliate angle is viable but must stay disclosed."
+  ]
+}
