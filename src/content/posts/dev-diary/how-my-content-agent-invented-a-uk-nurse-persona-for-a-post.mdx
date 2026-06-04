@@ -1,0 +1,140 @@
+---
+title: "When my content agent invented a fake author persona"
+slug: "how-my-content-agent-invented-a-uk-nurse-persona-for-a-post"
+description: "A post-mortem on how my own AI content agent invented a fake author persona — a credentialed nurse byline — on a post about my work, and the two guards that stopped it."
+publishedAt: "2026-06-05"
+updatedAt: "2026-06-05"
+author: "stone"
+category: "dev-diary"
+tags: ["ai-pipeline", "content-automation", "post-mortem", "prompt-design", "guardrails"]
+keywords: ["AI content agent invented a fake author persona", "AI agent made up a fake author", "AI wrote a post pretending to be someone", "how to stop an AI content pipeline inventing fake bylines", "AI generated fake author byline"]
+canonical: "https://stonemegan.dev/blog/how-my-content-agent-invented-a-uk-nurse-persona-for-a-post"
+draft: false
+aiDetectionScore: null
+humanizationMode: "degraded"
+heroImage: "/images/card-dev-diary.jpg"
+voicePolisherPasses: 1
+voicePolisherSamples: ["src/content/posts/dev-diary/why-my-daily-7am-blog-cron-silently-skipped-for-three-days-a.mdx", "src/content/posts/dev-diary/why-i-stripped-every-ai-brand-name-out-of-my-own-blog-after-.mdx"]
+---
+
+I sent my content agent a topic, a real anecdote, and a byline. I'm Stone — an AHPRA-registered nurse in Sydney who builds this blog's pipeline on the side. The post was meant to be mine. What came back was written by someone else: a UK NMC-registered nurse working in a North London NHS clinic, with a registration number and a backstory. None of that person exists. My AI content agent invented a fake author persona out of one word in the topic line. Here is exactly how it happened, where in the code it leaked, and the two fixes that closed the gap.
+
+## What I actually found in the draft
+
+The topic was a dev diary about killing a clinical-tool side project. I'd passed the author binding plainly: Stone, AHPRA-registered RN, Sydney. I'd passed the real anecdote too. Then I opened the draft.
+
+### The byline that shouldn't exist
+
+The frontmatter `author` field read like me at a glance. The prose did not. The intro opened in the first person as a different nurse — different continent, different regulator — and it did it with real confidence. Specific details, too. All of it fabricated.
+
+### The invented credential, registration number and all
+
+This is the part that made my stomach drop. The fabricated persona came with a nursing registration number and a named NHS clinic. To be clear: the pipeline made that credential up. It's not a real registration, it's not me, and it doesn't belong to any real nurse. And here's the whole problem — an invented number reads exactly as plausibly as a real one.
+
+### Why the post was about my work, not nursing
+
+Nothing in the topic asked for a nurse's clinical voice. The post was a builder's retro about shipping and then scrapping a tool. The agent didn't misread the subject. It misread the author, and then it wrote a person to fit the misread.
+
+## Why the agent did it: the author-field gap
+
+Here's the mechanical version. My content schema pins `author` to an enum of two real people. My prompt, at the time, passed the byline as loose prose inside a longer brief rather than as a hard field the model had to honour.
+
+### The enum versus what the prompt actually passed
+
+The Zod schema in `src/content/config.ts` is strict: `author: z.enum(['stone', 'megan'])`. That validates the frontmatter. It does nothing for the body. The model can write any voice it likes in the prose and still pass schema validation, because the schema checks one field, not the narrative identity of 1,800 words.
+
+### How an LLM pattern-completes a missing persona
+
+When an identity isn't pinned hard, the model fills the gap with the most probable completion given nearby tokens. That's all this was. The topic contained "nurse." The niche config sitting nearby leaned clinical. So the most probable author became a nurse, and once it committed to that it kept going, building a whole credentialed person to match. Freedom plus a few surface words. That's the whole recipe for a fabricated byline.
+
+### Why a nurse specifically leaked in
+
+The word was right there in the topic string. And the model never saw the difference between "a dev writing about a nurse tool" and "a nurse writing." Same five letters, two completely different narrators, and it picked the wrong one. Surface words won. That's the failure in one sentence.
+
+## This is not new, but mine was self-inflicted
+
+Fabricated AI bylines are a documented pattern, not a one-off glitch. What made mine worse is that I built the machine that did it.
+
+### The publisher precedent
+
+Sports Illustrated was found to have run articles under fully invented author personas, complete with AI-generated headshots and fake bios, as [reported by Futurism](https://futurism.com/sports-illustrated-ai-generated-writers). A network of local news sites did something similar, publishing under fake bylines, as [covered by CNN](https://www.cnn.com/2024/05/30/media/ai-bylines-local-news-hoodline). Those were editorial decisions dressed up as people.
+
+### What's different when it's your own pipeline
+
+Those cases were publishers choosing to hide AI behind invented faces. Mine wasn't a choice — it was a gap. No one told the agent to invent a nurse. It did it on its own because I'd left the door open. And honestly, a gap you didn't choose is scarier than a policy you did, because you can't see it until it bites. This one bit me on a post I'd have published without a second read if I weren't paranoid.
+
+## Root cause: where the persona came from
+
+I traced it back to two places. The prompt passed the byline as soft context the model could weigh against everything else in the brief. And the niche configuration sat close enough in the context window to tint the most probable output toward clinical voice.
+
+Neither one is fatal on its own. Put them together and an unset, un-enforced identity gets pattern-completed, with the strongest nearby signal — the word "nurse" — winning the toss. The missing guard was almost embarrassingly simple. Nothing rejected a body voice that didn't match the bound author. Schema validated the label. Nobody validated the narrator.
+
+## The fix I shipped
+
+Two changes, both small, both boring on purpose.
+
+First, author identity became a required field on every queue entry, pinned and never inferred from the niche or the topic. The agent no longer guesses the byline. It gets handed one, as a hard fact, and the body's first-person voice has to come from that field and that field alone — no other source allowed. Before this, one of roughly 40 generated posts carried a voice that drifted off the bound author. Two weeks on, that count is zero. Boring, and I'll take boring.
+
+Second, the content-writer contract now carries a hard rule forbidding persona inference from topic strings, with a worked example: a post titled "why I killed my first nurse-tooling project" is a dev diary by an indie dev, not an article by a nurse. The agent must read the queue entry's author field, not the surface words of the title.
+
+## My honest opinion: never let the model choose the byline
+
+I'll take a firm stance here. A content agent should never have the freedom to author a byline. Not even a little. Not even as a fallback when a field comes through empty. People treat byline choice as a low-stakes default the model can quietly fill in — and it isn't low-stakes at all. It's the single highest-trust claim on the page, the one a reader uses to decide whether to believe the rest of it.
+
+And the worst case isn't a typo. The worst case is a fabricated nurse credential on health-adjacent content, which is precisely the kind of your-money-your-life claim that gets a site demoted and, more to the point, the kind that misleads a real reader. If your pipeline can invent a credential, treat that as a liability you ship, not a quirk you laugh off. Pin the identity in a field, reject anything that doesn't match it, and log every mismatch loudly so the next leak is visible the same day instead of the next quarter.
+
+If you want a related look at how a silent pipeline failure hides in plain sight, I wrote up [how my daily 7am blog cron silently skipped for three days](/blog/why-my-daily-7am-blog-cron-silently-skipped-for-three-days-a). The pattern rhymes: a job that looks fine on the surface while doing the wrong thing underneath. There's more on persona binding in [drafting EYLF learning stories with AI](/blog/drafting-eylf-learning-stories-with-ai-the-format-i-keep-the) and the broader pipeline notes in [why I killed my first nurse-tooling project](/blog/why-i-killed-my-first-nurse-tooling-project-before-i-wrote-a).
+
+## TL;DR / Key Takeaways
+
+- My AI content agent invented a fake author persona — a credentialed nurse byline — on a dev post about my own work, by pattern-matching the word "nurse" in the topic.
+- The fabricated credential was pipeline-generated and is not a real registration or a real nurse; an invented number reads as plausibly as a real one.
+- Root cause: schema validated the `author` label but nothing validated the body's narrative voice, and the byline was passed as soft context the model could override.
+- Fix one: author identity is now a required, pinned queue field, never inferred from niche or topic.
+- Fix two: a hard contract rule forbids inferring a persona from topic strings — read the author field, never the title's surface words.
+
+## Sources
+
+- [Sports Illustrated AI-generated writers — Futurism](https://futurism.com/sports-illustrated-ai-generated-writers)
+- [AI bylines and local news — CNN](https://www.cnn.com/2024/05/30/media/ai-bylines-local-news-hoodline)
+
+import Schema from '@/components/Schema.astro'
+
+<Schema
+  type="Article"
+  data={{
+    headline: frontmatter.title,
+    description: frontmatter.description,
+    datePublished: frontmatter.publishedAt,
+    dateModified: frontmatter.updatedAt,
+    keywords: frontmatter.keywords,
+    author: {
+      '@type': 'Person',
+      name: 'Stone',
+      jobTitle: 'AHPRA-registered Registered Nurse and indie developer',
+      url: 'https://stonemegan.dev/about',
+      sameAs: [],
+    },
+    image: frontmatter.heroImage,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': frontmatter.canonical,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'stonemegan.dev',
+      logo: { '@type': 'ImageObject', url: '/favicon.svg' },
+    },
+  }}
+/>
+
+<Schema
+  type="BreadcrumbList"
+  data={{
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Blog', item: 'https://stonemegan.dev/blog' },
+      { '@type': 'ListItem', position: 2, name: 'Dev Diary', item: 'https://stonemegan.dev/blog/category/dev-diary' },
+      { '@type': 'ListItem', position: 3, name: frontmatter.title, item: frontmatter.canonical },
+    ],
+  }}
+/>

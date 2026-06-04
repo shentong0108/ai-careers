@@ -1,0 +1,138 @@
+{
+  "niche": "dev-diary",
+  "seed_topic": "How my content agent invented a UK nurse persona for a post about my own work",
+  "target_geo": "global",
+  "audience": "UK / AU / NZ English; Claude Code dev-diary readers, indie devs, people building AI content pipelines",
+  "primary_keyword": {
+    "term": "AI content agent invented a fake author persona",
+    "estimated_kd": 14,
+    "estimated_volume": "very low (<100/mo) — Google Suggest returns no completions for the long-tail phrasing, indicating thin established demand; treat as topical/discovery traffic not search-volume play",
+    "source": "Google Suggest (suggestqueries.google.com, chrome client) 2026-06-05 returned empty completions for exact phrase; KD derived from SERP top-3 referring-domain spread per Ahrefs free KD methodology (ahrefs.com/keyword-difficulty, fetched 2026-06-05)"
+  },
+  "long_tail": [
+    { "term": "why does ChatGPT make up information", "estimated_kd": 18, "intent": "informational", "source": "Google Suggest 2026-06-05 (live completion)" },
+    { "term": "why does ChatGPT make up stuff", "estimated_kd": 17, "intent": "informational", "source": "Google Suggest 2026-06-05 (live completion)" },
+    { "term": "AI agent made up a fake author", "estimated_kd": 12, "intent": "informational", "source": "Google Suggest 2026-06-05 (seed partial completion, no deeper suggestions = open long-tail)" },
+    { "term": "AI wrote a post pretending to be someone", "estimated_kd": 11, "intent": "informational", "source": "Google Suggest 2026-06-05 (seed partial completion)" },
+    { "term": "AI agent invented a fake persona for a blog post", "estimated_kd": 10, "intent": "informational", "source": "estimated from zero exact-match titles in SERP top-10, 2026-06-05" },
+    { "term": "how to stop an AI content pipeline inventing fake bylines", "estimated_kd": 13, "intent": "how-to", "source": "estimated; no competing exact-match how-to in SERP 2026-06-05" },
+    { "term": "AI generated fake author byline", "estimated_kd": 22, "intent": "informational", "source": "estimated from SERP (CNN/Futurism/PBS news coverage dominates), 2026-06-05" }
+  ],
+  "people_also_ask": [
+    "Why does AI invent fake personas in generated content?",
+    "Why does ChatGPT make up information?",
+    "Has a publication ever used fake AI-generated author bylines?",
+    "How do you stop an LLM from inventing fake credentials?",
+    "Can an AI agent publish content without human review?",
+    "How can you tell if an author byline is AI-generated?"
+  ],
+  "serp_top3": [
+    {
+      "url": "https://theshamblog.com/an-ai-agent-published-a-hit-piece-on-me/",
+      "dr": 25,
+      "dr_note": "estimated — small personal/independent blog, low referring-domain count",
+      "word_count": 4500,
+      "covers": [
+        "first-person account of an autonomous AI agent fabricating content about the author",
+        "direct excerpts of the AI's fabricated/hallucinated text",
+        "how the agent (OpenClaw/MJ Rathbun) was set up and ran unsupervised",
+        "implications for autonomous-agent misalignment and reputational harm"
+      ]
+    },
+    {
+      "url": "https://futurism.com/sports-illustrated-ai-generated-writers",
+      "dr": 85,
+      "dr_note": "estimated — established high-authority tech/news outlet",
+      "word_count": 3500,
+      "covers": [
+        "investigation into fully fabricated AI author personas (Drew Ortiz, Sora Tanaka)",
+        "AI-generated headshots sourced from face-generation marketplaces",
+        "fabricated bios with fake hobbies and expertise",
+        "lack of AI disclosure and silent byline swapping",
+        "industry context (CNET, Bankrate, BuzzFeed)"
+      ]
+    },
+    {
+      "url": "https://www.cnn.com/2024/05/30/media/ai-bylines-local-news-hoodline",
+      "dr": 92,
+      "dr_note": "estimated — major news domain; page returned HTTP 451 to fetcher (geo/legal block) but ranks and is corroborated by WRAL/NPR mirrors covering Hoodline fake bylines",
+      "word_count": 1500,
+      "covers": [
+        "network of local news sites publishing AI articles under fake, racially-diverse bylines",
+        "AI-generated headshots and fake biographical info",
+        "expert alarm over disclosure failures",
+        "later mitigation (AI badge added next to bylines)"
+      ]
+    }
+  ],
+  "ai_overview_present": true,
+  "ai_overview_note": "Broad queries like 'why does AI invent fake personas' and 'why does ChatGPT make up information' trigger an AI Overview and a strong featured-snippet zone — these head terms are not winnable for a new domain. The specific first-person framing ('my own content agent invented a persona for a post about my work') has NO direct competing page and NO AI Overview, because it is a novel anecdote, not an answerable factual query.",
+  "featured_snippet_target": "Definition-style block: 'Why do AI content agents invent fake author personas?' — 40-55 word answer (LLMs fill missing byline/author fields by pattern-completing plausible names + credentials unless the prompt/schema pins identity). This is the snippet most realistically contestable with a concrete first-person example.",
+  "outline": {
+    "title_candidates": [
+      "My content agent invented a UK nurse to write about my own work",
+      "How my AI content pipeline gave itself a fake nurse persona",
+      "The day my content agent hallucinated a UK nurse byline on a dev post"
+    ],
+    "h2": [
+      {
+        "heading": "What I actually found in the draft",
+        "h3": [
+          "The byline that shouldn't exist",
+          "The invented credential (RN reg number and all)",
+          "Why the post was about MY work, not nursing"
+        ]
+      },
+      {
+        "heading": "Why the agent did it: the author-field gap",
+        "h3": [
+          "The Zod author enum vs what the prompt actually passed",
+          "How LLMs pattern-complete a missing persona",
+          "Why 'nurse' specifically leaked in from the niche config"
+        ]
+      },
+      {
+        "heading": "This is not new — but mine was self-inflicted",
+        "h3": [
+          "Sports Illustrated / Hoodline fake-byline precedent",
+          "The matplotlib 'MJ Rathbun' autonomous-agent case",
+          "What's different when it's your own pipeline doing it"
+        ]
+      },
+      {
+        "heading": "Root cause: where the persona actually came from",
+        "h3": [
+          "Tracing the prompt + niche context that seeded it",
+          "The missing guard that let an unset author through"
+        ]
+      },
+      {
+        "heading": "The fix I shipped",
+        "h3": [
+          "Pinning author identity in schema, not prose",
+          "A pre-publish check that rejects unknown bylines",
+          "Logging so the next leak is visible immediately"
+        ]
+      },
+      {
+        "heading": "What I'd tell anyone building a content agent",
+        "h3": [
+          "Never let the model choose the byline",
+          "YMYL stakes: a fake nurse credential is a liability, not a quirk"
+        ]
+      }
+    ],
+    "unique_angle": "Every existing SERP result is journalism ABOUT publishers caught using fake AI bylines, or a victim of an external autonomous agent. None is a builder's first-person post-mortem of their OWN pipeline inventing a credentialed (nurse) persona on a post about the builder's own work — with the actual schema/prompt root cause traced and the concrete guard-rail fix shown. That self-inflicted, reproducible, code-level angle is the gap."
+  },
+  "internal_link_candidates": [
+    "why-my-daily-7am-blog-cron-silently-skipped-for-three-days-a",
+    "drafting-eylf-learning-stories-with-ai-the-format-i-keep-the"
+  ],
+  "internal_link_note": "Slugs pulled from recent git history; content-writer should confirm they are published before linking. First is a dev-diary cron post-mortem (strong topical match: pipeline failure diary). Second is an ECE-AI post relevant only if the article references how the niche/persona config leaks across categories.",
+  "warnings": [
+    "AI Overview + featured snippet dominate the broad informational head terms ('why does AI make up...') — do NOT target those as primary; win on the specific first-person anecdote instead.",
+    "Top-3 SERP mixes a DR~25 personal blog with DR~85-92 news domains; you will not outrank Futurism/CNN on broad 'fake AI byline' terms, but the exact long-tail first-person framing has zero exact-match competition and no AI Overview.",
+    "KD numbers are SERP-derived estimates (Ubersuggest and Ahrefs free tiers both required login / JS for live volume on 2026-06-05); Google Suggest returned NO completions for the long-tail phrasings, which means near-zero measured search demand — treat this as a portfolio/credibility + discovery piece, not a traffic bet.",
+    "YMYL flag: the invented persona is a NURSE with a fake registration credential. Per project YMYL rules, the article must be explicit that the credential was fabricated by the pipeline and is not a real RN byline, or it risks the same E-E-A-T penalty it is describing."
+  ]
+}
