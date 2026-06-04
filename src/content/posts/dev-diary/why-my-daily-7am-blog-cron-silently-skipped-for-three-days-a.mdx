@@ -1,0 +1,152 @@
+---
+title: "Why my 7am blog cron silently skipped for three days"
+slug: "why-my-daily-7am-blog-cron-silently-skipped-for-three-days-a"
+description: "A launchd job silently skipped daily for three mornings while reporting exit 0. The cause: a ThrottleInterval sitting too close to the 24h cadence with no safe margin."
+publishedAt: "2026-06-04"
+updatedAt: "2026-06-04"
+author: "stone"
+category: "dev-diary"
+tags: ["launchd", "macos", "cron", "automation", "debugging"]
+keywords: ["launchd job silently skipped daily", "launchd ThrottleInterval too short", "launchd exit 0 but job did not run", "launchd StartInterval ThrottleInterval conflict", "macos cron job skipped"]
+canonical: "https://stonemegan.dev/blog/why-my-daily-7am-blog-cron-silently-skipped-for-three-days-a"
+draft: false
+aiDetectionScore: null
+humanizationMode: "degraded"
+heroImage: "/images/card-dev-diary.jpg"
+voicePolisherPasses: 1
+voicePolisherSamples: ["src/content/posts/dev-diary/why-i-stripped-every-ai-brand-name-out-of-my-own-blog-after-.mdx", "src/content/posts/dev-diary/why-i-killed-my-first-nurse-tooling-project-before-i-wrote-a.mdx"]
+---
+
+I built a small thing to publish one article every morning at 7am. A macOS LaunchAgent, a script, a coffee, done. For three mornings straight it fired and published nothing. No error, no crash, no red text. The job exited cleanly each time, and the log line looked almost exactly like the line it writes on a good run. This is the story of a launchd job silently skipped daily, why exit 0 lied to me, and the one-number plist change that fixed it.
+
+## The symptom: three mornings, exit 0, zero articles published
+
+Morning one, I checked the site at 7:40am. Nothing new. I assumed I'd fat-fingered the deploy and moved on. Morning two, still nothing, and now I was annoyed. Morning three I actually opened the log file instead of guessing, and that's when the shape of the bug showed up.
+
+### What I expected at 7am vs what the log actually showed
+
+I expected one fresh post per day. What I got was a job that started, did a quick internal check, and bowed out before doing a stroke of real work. Exit status 0, every single morning. So by every signal you'd trust on a quick glance, the job had succeeded. It just hadn't done a thing.
+
+### Why the skip line looked identical to the success line
+
+Here's the trap. My script logs a one-liner on start. On a real run it then logs the publish result underneath, and on a skipped run it logs a short reason and exits. At 6am, half-awake, scanning a terminal, those two opening lines are nearly the same shape. The skip reason was buried in a phrase I'd written myself and stopped reading weeks ago: `skip, last run 71190s ago`. Seventy-one thousand seconds. I'd glossed right over it three mornings running (and yeah, that one stings to type out).
+
+## What ThrottleInterval actually does (and what the docs gloss)
+
+launchd has a key called `ThrottleInterval`. Most people meet it as a crash-protection feature: if a job dies instantly and relaunches in a tight loop, the throttle holds the next launch back so your machine doesn't melt. The default minimum spacing between launches is 10 seconds, which Apple documents in its [daemons and services guide](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/CreatingLaunchdJobs.html). That framing is correct but incomplete.
+
+### Throttle as a minimum gap between runs, not just crash backoff
+
+`ThrottleInterval` is really a minimum gap between the *start* of one run and the start of the next. That's it. It does not care whether the previous run crashed, succeeded, or did any meaningful work. The community reference at [launchd.info](https://www.launchd.info/) lists it among the timing keys, and once I read it that way the penny dropped: throttle is a floor on how often the job is *allowed* to begin, independent of your schedule. I'd been treating it as a safety net. It's a gate. This was one of the timing gotchas that pushed me off cron in the first place.
+
+### Why exit 0 doesn't save you
+
+This is the part that cost me three days. When launchd decides a scheduled fire falls inside the throttle window, it doesn't run your job and report failure. It quietly drops the launch on the floor. And the missed fire never produces its own exit code, because it never happens, so yesterday's exit 0 just sits there as the last word on the matter. Green status from a run that's already done, silence from the run that should have happened. Nothing in the obvious places says "I skipped one."
+
+## The root cause: a 22h throttle inside a 24h cadence
+
+My plist had `ThrottleInterval` set to 22 hours. My cadence was daily, 24 hours apart, at 7am. On paper that looks fine. Twenty-two is less than twenty-four. In practice it left almost no room, and the bug was waiting for the first morning the timing drifted even slightly.
+
+### The math: any prior run after 9am leaves a gap below 22h
+
+So walk it through with me. If the previous successful run started any time after 9am, the gap to the next 7am fire is under 22 hours. `71190s` is about 19.8 hours. The morning fire landed inside a 22-hour throttle window, launchd refused it, and the day produced nothing. A manual test run the afternoon before. A daylight-saving nudge. A retry. Anything that started the clock later than 9am, and the next morning was dead on arrival.
+
+### Why a daily job is the worst case for a tight threshold
+
+A 22-hour floor under a 24-hour ceiling gives you a two-hour margin on paper. On paper. That margin assumes every run starts at the exact same wall-clock moment forever, which never holds, not on a real machine. The moment one run starts late, the throttle eats the next scheduled fire. And because a skip pushes the *next* successful run later too, the thing chains: one late start, then a dead morning, then another. Two hours of slack can't absorb that.
+
+## How I diagnosed it (reading the log line that lies)
+
+The whole diagnosis hinged on stopping the morning-skim habit and reading one number properly.
+
+### Converting 71190 seconds to hours
+
+I copied the skip line and did the division. 71190 / 3600 is 19.775 hours. The instant I saw "under 20 hours" sitting next to a throttle I vaguely remembered setting to 22, the picture snapped together. The job wasn't broken. launchd was doing exactly what I'd configured: refusing to start a job less than 22 hours after the last start.
+
+### Confirming it wasn't sleep or shutdown
+
+Every forum thread about a launchd job not running every day blames sleep or shutdown first, and usually they're right. launchd does skip jobs while the Mac is off and coalesces missed intervals on wake, which Apple's docs spell out. So I checked, before I got attached to my throttle theory. Awake and plugged in across all three mornings, no sleep events in the window that mattered. Usual suspect ruled out. Which left the throttle as the only thing standing between 7am and a published post.
+
+## The fix: drop the throttle to 18h for a real buffer
+
+The change was one line. I set `ThrottleInterval` to 18 hours instead of 22.
+
+### A margin instead of a tight threshold
+
+Eighteen hours under a 24-hour cadence gives a six-hour buffer either way. A run can start as late as 1pm the day before and the next 7am fire still clears the throttle. I'm not really protecting against an instant crash-loop with this number anymore (the default already does that). I'm just making sure the floor sits well below the real inter-run gap. Six hours of slack swallows a late manual run, a retry, a daylight-saving shift — and nobody notices a thing.
+
+### Verifying four clean mornings after
+
+I unloaded and reloaded the agent, then watched. Four mornings in a row, four published posts, four log lines that ended in a publish result and not a skip reason. I also rewrote the skip log line so it now starts with a loud `SKIPPED:` prefix in caps, which is the cheap fix I should have shipped on day one. The same publish job is what drafts and posts pieces like [my EYLF learning-story drafting workflow](/blog/drafting-eylf-learning-stories-with-ai-the-format-i-keep-the) on a schedule, so a silent skip there means a quiet gap on the site.
+
+## My actual opinion: a throttle near your period is a latent bug, always
+
+Here's the stance. If your `ThrottleInterval` is within an hour or two of your scheduling period, you don't have a working job. You have a bug that hasn't fired yet. The two-hour margin I started with felt responsible. It wasn't. It was a tripwire I'd set for my future self, and it went off on the first morning the timing drifted, which on any real machine is roughly morning one.
+
+I'll go further. ThrottleInterval is the wrong tool for "don't run too often" on a calendar schedule entirely. If your fire times come from `StartCalendarInterval`, the calendar already controls cadence. Adding a throttle near the period only buys you a silent failure mode, never reliability. Keep the throttle for what it's actually good at, which is stopping crash loops: set it low, like the 10-second default, and let the schedule own the schedule. The two keys interacting is exactly where a [launchd StartInterval ThrottleInterval conflict](https://www.launchd.info/) turns into a job that loads fine and never runs.
+
+## Rules of thumb so this never bites you again
+
+A few things I now treat as non-negotiable on any scheduled launchd job:
+
+- Keep `ThrottleInterval` at or below your period minus a *real* buffer — hours of slack, not minutes. For a daily job, 18h under 24h, not 22h.
+- Don't use a throttle to set cadence. Let `StartCalendarInterval` own timing and keep the throttle low for crash protection only.
+- Make your skip log line visually impossible to confuse with success. A capitalised `SKIPPED:` prefix would have saved me three days.
+- When a daily job mysteriously misses, read the seconds-since-last-run number and divide by 3600 before you blame sleep or shutdown.
+- Test a late-afternoon manual run on purpose and confirm the next morning still fires. That's the exact drift that exposes a tight threshold.
+
+If you're moving off cron and hitting these timing keys for the first time, the rest of how this blog auto-publishes is [linked above](/blog/drafting-eylf-learning-stories-with-ai-the-format-i-keep-the).
+
+## TL;DR / Key Takeaways
+
+- A launchd job silently skipped daily for three mornings while reporting exit 0, because `ThrottleInterval` sat too close to the 24-hour cadence.
+- The skip log line read `skip, last run 71190s ago` — about 19.8 hours, under the 22-hour throttle, so launchd refused the 7am fire.
+- Exit 0 from the previous run masked the skip; the missed fire never produces its own exit code because it never runs.
+- Root cause: a 22h throttle inside a 24h period leaves no safe margin once any run drifts past 9am.
+- Fix: drop the throttle to 18h for a six-hour buffer either direction, and let the calendar own cadence.
+
+## Sources
+
+- Apple, [Creating launchd Jobs / Scheduled Jobs](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/CreatingLaunchdJobs.html) — launch behaviour, throttle defaults, and sleep/shutdown coalescing.
+- [launchd.info](https://www.launchd.info/) — community reference for plist keys including `ThrottleInterval` and `StartCalendarInterval`.
+
+import Schema from '@/components/Schema.astro'
+
+<Schema
+  type="Article"
+  data={{
+    headline: frontmatter.title,
+    description: frontmatter.description,
+    datePublished: frontmatter.publishedAt,
+    dateModified: frontmatter.updatedAt,
+    keywords: frontmatter.keywords,
+    author: {
+      '@type': 'Person',
+      name: 'Stone Megan',
+      jobTitle: 'Indie developer',
+      url: 'https://stonemegan.dev/about',
+      sameAs: [],
+    },
+    image: frontmatter.heroImage,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': frontmatter.canonical,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'stonemegan.dev',
+      logo: { '@type': 'ImageObject', url: '/favicon.svg' },
+    },
+  }}
+/>
+
+<Schema
+  type="BreadcrumbList"
+  data={{
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Blog', item: 'https://stonemegan.dev/blog' },
+      { '@type': 'ListItem', position: 2, name: 'Dev Diary', item: 'https://stonemegan.dev/blog/category/dev-diary' },
+      { '@type': 'ListItem', position: 3, name: frontmatter.title, item: frontmatter.canonical },
+    ],
+  }}
+/>

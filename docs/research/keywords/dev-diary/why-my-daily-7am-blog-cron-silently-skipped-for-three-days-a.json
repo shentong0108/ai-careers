@@ -1,0 +1,140 @@
+{
+  "niche": "dev-diary",
+  "seed_topic": "Why my daily 7am blog cron silently skipped for three days — a launchd ThrottleInterval bug where the throttle threshold sat too close to the 24h period and left no safe margin.",
+  "target_geo": "global",
+  "primary_keyword": {
+    "term": "launchd job silently skipped daily",
+    "estimated_kd": 11,
+    "estimated_volume": "low (<300/mo, no exact number in free tools)",
+    "source": "Google Suggest + DuckDuckGo SERP inspection 2026-06-04; no Ubersuggest/Ahrefs free-tier volume figure was retrievable, so volume is a qualitative estimate only — do not cite as exact",
+    "kd_basis": "top-10 organic for the precise long-tail phrasing is a mix of forum/blog pages (apple.stackexchange, launchd.info, dev.to, alvinalexander, ilostmynotes) with relevant-page avg DR ~40-50 and ZERO exact-match titles for the throttle-too-close-to-period framing. Rough KD = avg_DR(~45)/5 + exact_match(0)*2 ≈ 9-11. HIGH UNCERTAINTY: developer.apple.com (DR~92) and stackoverflow (DR~92) also rank for adjacent intent and can outrank on authority even without topical match."
+  },
+  "long_tail": [
+    { "term": "launchd ThrottleInterval too short", "estimated_kd": 8, "intent": "informational" },
+    { "term": "launchd job not running every day", "estimated_kd": 14, "intent": "informational" },
+    { "term": "launchagent daily not firing", "estimated_kd": 10, "intent": "informational" },
+    { "term": "launchd exit 0 but job did not run", "estimated_kd": 12, "intent": "troubleshooting" },
+    { "term": "launchd StartInterval ThrottleInterval conflict", "estimated_kd": 9, "intent": "informational" },
+    { "term": "macos cron job skipped", "estimated_kd": 15, "intent": "troubleshooting" },
+    { "term": "launchd StartCalendarInterval not firing reliably", "estimated_kd": 16, "intent": "troubleshooting" },
+    { "term": "launchd throttle interval daily cron margin", "estimated_kd": 6, "intent": "informational" }
+  ],
+  "long_tail_source": "Google Suggest autocomplete (firefox client endpoint) 2026-06-04 for stems 'launchd skipped', 'launchd StartInterval not running', 'launchagent daily not firing', 'macos cron job skipped', 'launchd job not running at scheduled'; KD figures derived from same relevant-page-DR heuristic as primary, all approximate.",
+  "people_also_ask": [
+    "Why does launchd skip a job when the Mac is asleep or off?",
+    "What is the difference between StartInterval and ThrottleInterval in launchd?",
+    "Why does my launchd job exit immediately but report success (exit 0)?",
+    "Does ThrottleInterval block a StartCalendarInterval job from running?",
+    "Why does mixing KeepAlive with StartInterval break scheduling?",
+    "How do I debug a LaunchAgent that loads but never runs?",
+    "What is the default 10-second throttle in launchd and why does it relaunch my job?"
+  ],
+  "paa_source": "Aggregated from WebSearch + DuckDuckGo HTML SERP result snippets 2026-06-04 (Google's live PAA panel was not directly scrapeable — google.com/search returned a bot-block error; these are the dominant recurring questions across the ranking pages and are equivalent to PAA intent).",
+  "serp_top3": [
+    {
+      "url": "https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/ScheduledJobs.html",
+      "dr": 92,
+      "word_count": 1500,
+      "covers": [
+        "launchd skips jobs when machine is off (never runs until next interval)",
+        "launchd runs missed job on wake from sleep, coalescing multiple intervals into one",
+        "cron-vs-launchd behaviour on sleep",
+        "StartCalendarInterval basics"
+      ],
+      "gap": "Says nothing about ThrottleInterval interacting with the scheduled period; assumes 'skip' is always a power-state issue."
+    },
+    {
+      "url": "https://www.launchd.info/",
+      "dr": 50,
+      "word_count": 8500,
+      "covers": [
+        "all 36+ plist config keys including ThrottleInterval and StartCalendarInterval",
+        "loading/unloading via launchctl",
+        "general troubleshooting + system log monitoring",
+        "exit code interpretation",
+        "recipes for common job types"
+      ],
+      "gap": "Reference-style breadth, no worked failure story; treats ThrottleInterval as restart-throttle only, never as something that silently suppresses a daily run when threshold > inter-run gap."
+    },
+    {
+      "url": "https://alvinalexander.com/mac-os-x/mac-os-x-startinterval-broken-launchctl-throttleinterval/",
+      "dr": 75,
+      "word_count": 1200,
+      "covers": [
+        "StartInterval firing every 10s instead of configured value",
+        "ThrottleInterval as a workaround to slow a job down",
+        "OnDemand/KeepAlive deprecation as root cause",
+        "full plist XML example"
+      ],
+      "gap": "Opposite problem (job runs too OFTEN). Does not cover a job running too SELDOM / being skipped because the throttle window straddles the next scheduled fire time."
+    }
+  ],
+  "serp_fetched_at": "2026-06-04",
+  "ai_overview_present": false,
+  "ai_overview_note": "Could not load Google's live AI Overview (google.com/search returned a bot-block page). Based on the SERP being dominated by deep technical docs + forum threads rather than a simple definitional query, an AI Overview is POSSIBLE but not confirmed. Treat ai_overview_present:false as unverified, not a guarantee.",
+  "featured_snippet_target": "A 40-60 word answer to 'why does a daily launchd job get silently skipped?' — name the cause (ThrottleInterval set too close to the 24h period leaves no margin; any earlier-than-scheduled prior run drops the gap below the throttle and launchd skips the next fire while still exiting 0).",
+  "outline": {
+    "title_candidates": [
+      "Why my 7am blog cron silently skipped for three days — a launchd throttle bug",
+      "launchd exited 0 every morning and still didn't publish: the ThrottleInterval margin trap",
+      "The launchd throttle threshold that quietly ate three days of my daily cron"
+    ],
+    "h2": [
+      {
+        "heading": "The symptom: three mornings, exit 0, zero articles published",
+        "h3": [
+          "What I expected at 7am vs what the log actually showed",
+          "Why the skip line looked identical to the success line at a glance (71190s ago / ~19.8h)"
+        ]
+      },
+      {
+        "heading": "What ThrottleInterval actually does (and what the docs don't say)",
+        "h3": [
+          "Throttle as a minimum-gap-between-runs, not just a crash backoff",
+          "Why exit 0 doesn't save you — launchd still suppresses the fire"
+        ]
+      },
+      {
+        "heading": "The root cause: a 22h throttle inside a 24h cadence has no safe margin",
+        "h3": [
+          "The math: any prior run after 9am leaves a gap below 22h",
+          "Why a daily job is the worst case for a threshold near the period"
+        ]
+      },
+      {
+        "heading": "How I diagnosed it (reading the launchd log line that lies)",
+        "h3": [
+          "Spotting 'last run 71190s ago' and converting to hours",
+          "Confirming it wasn't sleep/shutdown (the usual suspect everyone blames)"
+        ]
+      },
+      {
+        "heading": "The fix: drop the throttle to 18h for a 6-hour buffer either direction",
+        "h3": [
+          "Choosing a margin instead of a tight threshold",
+          "The plist change and how I verified four clean mornings after"
+        ]
+      },
+      {
+        "heading": "Rules of thumb so this never bites you again",
+        "h3": [
+          "Keep throttle <= period minus a real buffer (not period minus minutes)",
+          "Make skip logs visually distinct from success logs"
+        ]
+      }
+    ],
+    "unique_angle": "Every top-ranking page blames 'skipped daily job' on sleep/shutdown or on a KeepAlive+StartInterval conflict. None covers the failure mode where the job IS firing, IS exiting 0, but launchd silently swallows the run because ThrottleInterval sits too close to the 24h period — and the skip log line is byte-for-byte easy to mistake for success. The concrete artefact (real '71190s ago' log, the 22h→18h fix, the 6h-margin rule) is the differentiator the docs and forum threads lack."
+  },
+  "internal_link_candidates": [
+    "stop-using-cron-on-macos-launchd",
+    "drafting-eylf-learning-stories-with-ai-the-format-i-keep-the"
+  ],
+  "internal_link_note": "Repo dev-diary slug inventory was NOT directly enumerable from this worktree (Read cannot list directories; progress.log records iterations, not article slugs). The two candidates above are BEST-GUESS: the first is the natural launchd/cron sibling a dev-diary on this blog likely has, the second is a recently-published article confirmed in git log. content-writer MUST verify both slugs exist under src/content before linking.",
+  "warnings": [
+    "Search volume for every term here is a QUALITATIVE estimate — no Ahrefs/Ubersuggest free-tier numeric pulled; do not present any figure as measured.",
+    "KD estimates carry high uncertainty: developer.apple.com and stackoverflow (DR~92) rank for adjacent intent and can outrank a new domain on authority despite the topical gap. Win on specificity + the worked failure story, not on competing for the head term.",
+    "AI Overview presence is UNVERIFIED (google.com bot-blocked the live SERP). Re-check before assuming clean SERP.",
+    "Primary keyword volume is genuinely small (long-tail dev troubleshooting). Value is qualified-traffic + topical authority + a strong internal-link anchor, not raw volume.",
+    "internal_link_candidates are unverified slugs — content-writer must confirm they exist."
+  ]
+}
