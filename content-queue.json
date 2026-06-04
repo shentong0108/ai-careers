@@ -112,7 +112,10 @@
     "author": "stone",
     "topic": "How my content agent invented a UK nurse persona for a post about my own work",
     "anecdote": "Wrote a dev-diary post about killing a clinical-tool side project. Sent the topic line, the author binding (Stone, AHPRA-registered RN, Sydney), and the real anecdote to the content-writer agent. The agent ignored the author binding and wrote the article as Megan — UK NMC-registered, North London NHS, completely fictional. It pattern-matched the word 'nurse' in the topic and reconstructed a persona that fit the surface words. Two fixes stopped the bleed: (1) author binding became a required field on every queue entry, not inferred from niche or topic, and (2) the content-writer contract now has a HARD RULE forbidding persona inference from topic strings. The lesson: when an agent has freedom to fabricate, freedom plus surface words equals fabrication.",
-    "status": "pending"
+    "status": "published",
+    "pickedAt": "2026-06-04T21:00:15.921Z",
+    "slug": "how-my-content-agent-invented-a-uk-nurse-persona-for-a-post",
+    "mergedAt": "2026-06-04T21:16:57Z"
   },
   {
     "niche": "nurse-ai",
