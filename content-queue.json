@@ -102,7 +102,10 @@
     "author": "stone",
     "topic": "Why my daily 7am blog cron silently skipped for three days — a launchd throttle bug",
     "anecdote": "Set up a macOS launchd LaunchAgent to publish one article every morning at 7am. The first three mornings the cron fired and immediately exited skip, last run 71190s ago. Read: 19.8 hours. My throttle threshold was 22 hours. Daily cadence is 24 hours; any prior run after 9am leaves a gap below 22h, so the next morning is silently skipped. Threshold too close to the daily period had zero safe margin. Fixed by dropping the throttle to 18 hours, which leaves a 6-hour buffer in either direction. The bug was invisible because launchd reported exit 0 and the script's skip-log line looked identical to the success log line at a glance.",
-    "status": "pending"
+    "status": "published",
+    "pickedAt": "2026-06-04T08:00:19.779Z",
+    "slug": "why-my-daily-7am-blog-cron-silently-skipped-for-three-days-a",
+    "mergedAt": "2026-06-04T08:17:53Z"
   },
   {
     "niche": "dev-diary",
