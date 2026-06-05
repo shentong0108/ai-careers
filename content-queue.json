@@ -177,7 +177,10 @@
     "author": "stone",
     "topic": "The first time the AI coding tool lied to me about an API surface",
     "anecdote": "Working on Aura. The AI confidently described an API parameter for per-token sampling that did not exist in the actual library. I wrote 30 lines around it before the runtime errors started. 45 minutes to find. Now every API claim the AI makes gets checked against the official docs URL in the same session before I write code against it. The rule sounds obvious. The first time it costs you an hour, it becomes automatic.",
-    "status": "pending"
+    "status": "published",
+    "pickedAt": "2026-06-05T08:00:15.192Z",
+    "mergedAt": "2026-06-05T08:17:26Z",
+    "slug": "the-first-time-the-ai-coding-tool-lied-to-me-about-an-api-su"
   },
   {
     "niche": "dev-diary",
