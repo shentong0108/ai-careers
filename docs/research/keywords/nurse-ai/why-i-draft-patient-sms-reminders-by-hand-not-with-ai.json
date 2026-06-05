@@ -1,0 +1,102 @@
+{
+  "niche": "nurse-ai",
+  "seed_topic": "Why I draft patient SMS reminders by hand, not with AI",
+  "target_geo": "global",
+  "geo_notes": "Audience UK/AU/NZ nurses. Use 'text message' and 'SMS' interchangeably; prefer 'appointment reminder' (common across UK NHS, AU/NZ). Frame consent against UK GDPR / AU Privacy Act language rather than US HIPAA/TCPA, since top-ranking competitors are US-centric (a content gap).",
+  "primary_keyword": {
+    "term": "should nurses use AI to write patient messages",
+    "estimated_kd": 16,
+    "estimated_volume": "low (<300/mo, unverified)",
+    "source": "Google Suggest 2026-06-06 (autocomplete returned 'should nurses use ai', 'do nurses use ai', 'will ai replace nurses', 'should ai be used in healthcare'); volume/KD NOT pulled from a paid tool — Ubersuggest/Ahrefs/KeywordTool.io all gated behind login on 2026-06-06, so KD is estimated from SERP DR + exact-match signals, see warnings"
+  },
+  "long_tail": [
+    { "term": "why I draft patient SMS reminders by hand not with AI", "estimated_kd": 6, "intent": "informational", "note": "near-zero direct competition; first-person/opinion framing has no exact-match competitor in SERP" },
+    { "term": "should nurses use AI for patient text messages", "estimated_kd": 15, "intent": "informational" },
+    { "term": "is it ethical to use AI for patient communications", "estimated_kd": 19, "intent": "informational", "note": "PAA + ethics SERP cluster, leans academic/PMC" },
+    { "term": "AI vs human written patient messages", "estimated_kd": 14, "intent": "informational", "source": "Google Suggest 2026-06-06 ('ai vs human written patient')" },
+    { "term": "do patients trust AI written appointment reminders", "estimated_kd": 13, "intent": "informational" },
+    { "term": "disclosure when using AI for patient communication", "estimated_kd": 18, "intent": "informational" },
+    { "term": "personal touch in nurse patient communication", "estimated_kd": 12, "intent": "informational" },
+    { "term": "risks of AI generated patient text reminders", "estimated_kd": 17, "intent": "informational" }
+  ],
+  "people_also_ask": [
+    "Should nurses use AI to write patient communications?",
+    "Is it ethical to use AI for patient text messages?",
+    "Do patients need to be told when a message was written by AI?",
+    "Do patients trust AI-written messages?",
+    "Will AI replace nurses?",
+    "Are SMS text reminders HIPAA / privacy compliant?",
+    "Can AI understand the emotional needs of patients?"
+  ],
+  "serp_top3": [
+    {
+      "url": "https://www.paubox.com/blog/how-text-messaging-is-used-by-nurses-in-patient-updates-and-handoffs",
+      "dr": 70,
+      "word_count": 1150,
+      "covers": ["communication needs for patient updates", "choosing a platform", "standard messaging protocols (SBAR, I-PASS)", "integration with clinical systems", "training and compliance", "FAQs"],
+      "gap": "all pro-tooling; never argues for hand-drafting or against AI; US HIPAA framing only"
+    },
+    {
+      "url": "https://www.eisneramper.com/insights/health-care/building-patient-trust-through-ai-transparency-0925/",
+      "dr": 71,
+      "word_count": 1500,
+      "covers": ["why AI transparency matters", "where AI touches patient care", "five components of patient disclosure (what/who/when/how/level)", "tools and training", "strategic considerations for executives"],
+      "gap": "executive/compliance lens, not a frontline nurse's day-to-day; cites 63% of patients want AI-use notification but offers no personal practice example"
+    },
+    {
+      "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11897835/",
+      "dr": 92,
+      "word_count": 4000,
+      "covers": ["patient preferences for AI-drafted electronic message responses", "satisfaction drops when AI authorship is disclosed", "patient autonomy and empowerment", "ethics of disclosure"],
+      "gap": "academic study, dense, no actionable nurse workflow; finding that disclosed-AI satisfaction is lower is the key citation to lean on"
+    }
+  ],
+  "ai_overview_present": true,
+  "featured_snippet_target": "A short definition-style block: 'Why some nurses hand-write patient SMS reminders instead of using AI — patient trust drops when AI authorship is disclosed, reminders carry liability, and a personal line preserves the nurse-patient relationship.' Target with a 40-55 word answer paragraph near the top.",
+  "outline": {
+    "title_candidates": [
+      "Why I Still Draft Patient SMS Reminders by Hand (Not With AI)",
+      "I Don't Let AI Write My Patients' Text Reminders. Here's Why.",
+      "Hand-Written Patient Reminders vs AI: A Nurse's Case for Doing It Myself"
+    ],
+    "h2": [
+      {
+        "heading": "The 90 seconds it takes me to write one reminder by hand",
+        "h3": ["A real example from my appointment list", "Why the words I choose change per patient"]
+      },
+      {
+        "heading": "What patient research actually says about AI-written messages",
+        "h3": ["Satisfaction drops once patients know AI wrote it", "The 63% who want to be told when AI is involved"]
+      },
+      {
+        "heading": "The disclosure problem I can't get past",
+        "h3": ["If I disclose it, trust dips; if I don't, that feels worse", "Who is accountable when an AI reminder gets it wrong"]
+      },
+      {
+        "heading": "Consent, privacy and the wording AI gets wrong",
+        "h3": ["UK GDPR / AU Privacy Act framing, not just US HIPAA", "Why generic AI phrasing can over-share clinical detail in an SMS"]
+      },
+      {
+        "heading": "Where I do let AI help (and where I won't)",
+        "h3": ["Templates and spell-check: fine", "The actual patient-facing line: mine"]
+      },
+      {
+        "heading": "How I keep hand-drafting fast on a busy shift",
+        "h3": ["My short reusable phrase bank", "When a reminder needs a phone call instead of a text"]
+      }
+    ],
+    "unique_angle": "First-person frontline nurse opinion piece with a concrete time/word example (e.g. '90 seconds, three patients, three different opening lines'), framed for UK/AU/NZ privacy law rather than the US-centric HIPAA competitors. Top-3 are either pro-tooling vendor content, an executive compliance lens, or a dense academic study — none argue the personal, hand-drafted case from a working nurse's chair. The defensible wedge: pair the PMC finding that disclosed-AI satisfaction drops with a lived workflow showing the human line is worth the 90 seconds."
+  },
+  "internal_link_candidates": [
+    "how-my-content-agent-invented-a-uk-nurse-persona-for-a-post",
+    "the-first-time-the-ai-coding-tool-lied-to-me-about-an-api-su"
+  ],
+  "internal_link_note": "Slugs taken from git log of published posts in this repo; both touch the 'where AI gets things subtly wrong / trust' theme and link naturally from the disclosure and accountability sections. Confirm exact published slugs against src/content/posts before the content-writer hard-codes them.",
+  "warnings": [
+    "AI Overview is present for the broad 'should nurses use AI' query and will steal clicks — only winnable with depth + a genuine first-person angle the Overview cannot synthesise.",
+    "Volume and KD numbers are ESTIMATES, not tool-pulled. Ubersuggest, Ahrefs KD checker and KeywordTool.io all required login / returned 404 on 2026-06-06, so no third-party volume figure could be cited per contract. Treat estimated_kd as directional only.",
+    "Top-3 SERP is high-DR (70/71/92) but NONE target the long-tail opinion phrase; the rough-formula KD (top10_avg_DR/5) overstates true difficulty for the long-tail because exact-match-title count is 0. Real difficulty for 'why I draft patient SMS reminders by hand' is low; difficulty to outrank PMC for the broad ethics term is high — target the long-tail.",
+    "YMYL/nurse content: needs RN byline + credential, a .gov or PubMed citation (use PMC11897835 disclosure-satisfaction finding), 'last reviewed' date, and no medical-advice phrasing — frame as 'in my practice'.",
+    "Competitors are US-centric (HIPAA/TCPA). Differentiate with UK NHS / AU Privacy Act / NZ framing for the target audience."
+  ]
+}
