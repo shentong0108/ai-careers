@@ -132,7 +132,10 @@
     "author": "stone",
     "topic": "Why I draft patient SMS reminders by hand, not with AI",
     "anecdote": "Tried it for two weeks. AI-drafted SMS for appointment reminders and post-procedure check-ins. Patients started replying with confusion about steps the AI had paraphrased differently to my usual wording. Voice consistency matters more than draft speed for messages people read on their phone in five seconds. Switched back to a six-template hand library; failure rate dropped immediately.",
-    "status": "pending"
+    "status": "published",
+    "pickedAt": "2026-06-05T21:00:17.590Z",
+    "slug": "why-i-draft-patient-sms-reminders-by-hand-not-with-ai",
+    "mergedAt": "2026-06-05T21:18:38Z"
   },
   {
     "niche": "nurse-ai",
