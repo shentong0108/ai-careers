@@ -1,0 +1,132 @@
+{
+  "niche": "dev-diary",
+  "seed_topic": "The first time the AI coding tool lied to me about an API surface (it confidently generated a method that did not exist).",
+  "target_geo": "global",
+  "primary_keyword": {
+    "term": "ai coding tool hallucinated a method that doesn't exist",
+    "estimated_kd": 14,
+    "estimated_volume": "low (<300/mo)",
+    "source": "ESTIMATE from SERP composition method (top10 DR + exact-match titles), 2026-06-05. NOTE: Ubersuggest free tier returned HTTP 403 and Ahrefs free checker requires JS/login via WebFetch — no live third-party volume number could be pulled, so volume is a qualitative bucket, not a tool figure. Do not cite as a hard number."
+  },
+  "long_tail": [
+    { "term": "why does ai make up functions that don't exist", "estimated_kd": 12, "intent": "informational" },
+    { "term": "ai hallucinated an api method", "estimated_kd": 15, "intent": "informational" },
+    { "term": "copilot suggested a method that doesn't exist", "estimated_kd": 11, "intent": "informational" },
+    { "term": "ai coding tool confidently wrong code", "estimated_kd": 16, "intent": "informational" },
+    { "term": "how to catch ai hallucinated api calls", "estimated_kd": 13, "intent": "informational" },
+    { "term": "ai invented a package name that doesn't exist", "estimated_kd": 18, "intent": "informational" },
+    { "term": "phantom api ai generated code", "estimated_kd": 10, "intent": "informational" }
+  ],
+  "people_also_ask": [
+    "Why do AI coding assistants invent functions that don't exist?",
+    "How common are hallucinations in AI-generated code?",
+    "How do you catch a hallucinated API method before it ships?",
+    "Why is AI so confident when the code is wrong?",
+    "What is slopsquatting and how does it relate to hallucinated packages?",
+    "Are hallucinations in code more or less dangerous than other AI mistakes?"
+  ],
+  "serp_top3": [
+    {
+      "url": "https://simonwillison.net/2025/Mar/2/hallucinations-in-code/",
+      "dr": 82,
+      "dr_source": "ESTIMATE — long-established high-authority indie dev blog; DR not pulled from a live tool (Ahrefs free checker unreachable via WebFetch). Treat as directional.",
+      "word_count": 1300,
+      "covers": [
+        "thesis: code hallucinations are the LEAST dangerous LLM mistake because the compiler/runtime catches them",
+        "manual testing of code is essential",
+        "tips for reducing hallucinations (feed the error back to the LLM)",
+        "the real danger is subtle logic errors, not invented methods"
+      ]
+    },
+    {
+      "url": "https://blog.newtum.com/ai-hallucinations-in-code/",
+      "dr": 35,
+      "dr_source": "ESTIMATE — mid-size tutorial blog; DR directional only.",
+      "word_count": 3000,
+      "covers": [
+        "how code hallucinations differ from ordinary bugs",
+        "five failure patterns incl. Phantom APIs and Dependency Disasters",
+        "per-pattern: what it looks like / why it passes review / production impact / mitigation",
+        "defensive engineering stack, pre-commit + CI/CD gates, FAQ"
+      ]
+    },
+    {
+      "url": "https://albertoarena.it/posts/ai-hallucination-in-coding-agents/",
+      "dr": 25,
+      "dr_source": "ESTIMATE — personal senior-engineer blog; DR directional only.",
+      "word_count": 950,
+      "covers": [
+        "what is AI hallucination",
+        "why it happens (probabilistic prediction)",
+        "5 practical tips to spot it (verify imports, read don't run, test edges, cross-ref docs, watch vague explanations)",
+        "trust but verify framing"
+      ]
+    }
+  ],
+  "ai_overview_present": true,
+  "ai_overview_note": "Could not directly confirm via live Google SERP (google.com/search returned an access/bot page through WebFetch). Flagged TRUE as a precaution: 'why does ai make up X' and 'how common are hallucinations in code' are definitional/statistic queries Google routinely answers with AI Overview + the 42% / 19.7% stats. Treat broad informational phrasings as AI-Overview-exposed and lean the title toward the first-person STORY angle, which AI Overviews do not synthesize well.",
+  "featured_snippet_target": "A short, direct answer to 'why does an AI coding tool invent a method that doesn't exist?' — 2-3 sentences: it is a probabilistic next-token predictor pattern-matching against similar real APIs, with no ability to check whether the method actually exists, and it expresses guesses with the same confidence as facts.",
+  "outline": {
+    "title_candidates": [
+      "The first time my AI coding tool lied to me about an API that didn't exist",
+      "My AI assistant invented an API method — and said it with a straight face",
+      "The day Claude confidently called a method that was never real"
+    ],
+    "h2": [
+      {
+        "heading": "The commit that wouldn't compile (the actual moment)",
+        "h3": [
+          "What I asked for vs. the method it handed me",
+          "The exact red squiggle: 'property does not exist on type'"
+        ]
+      },
+      {
+        "heading": "Why I almost believed it — confidence is not correctness",
+        "h3": [
+          "It didn't hedge: no 'I think', just 'use this method'",
+          "The method name was plausible because it matched a real API's pattern"
+        ]
+      },
+      {
+        "heading": "What's actually happening under the hood",
+        "h3": [
+          "Next-token prediction has no 'does this exist?' check",
+          "Why newer / smaller-footprint libraries get hallucinated most"
+        ]
+      },
+      {
+        "heading": "How I now catch a phantom API before it costs me 20 minutes",
+        "h3": [
+          "Jump-to-definition / type errors as a first tripwire",
+          "Paste the real type signature back into the prompt",
+          "Pin the docs URL in context instead of trusting recall"
+        ]
+      },
+      {
+        "heading": "The part nobody warns juniors about: silent hallucinations",
+        "h3": [
+          "When the method DOES exist but takes different arguments",
+          "Why a compile pass is not a correctness pass"
+        ]
+      },
+      {
+        "heading": "The supply-chain tail: when a hallucinated name is real-but-malicious",
+        "h3": [
+          "Slopsquatting in one paragraph",
+          "Why agentic auto-install raises the stakes"
+        ]
+      }
+    ],
+    "unique_angle": "Every top-3 result is a generic explainer or listicle. None tell a single, timestamped first-person debugging story with the exact error string, the exact wrong method name, and the minute-cost of the detour. The wedge is a real dev-diary narrative (one bug, one shift) that lands the 'confidence != correctness' lesson emotionally, then briefly connects the personal phantom-API moment to the slopsquatting supply-chain risk — a bridge none of the top-3 make."
+  },
+  "internal_link_candidates": [
+    "how-my-content-agent-invented-a-uk-nurse-persona-for-a-post",
+    "why-my-daily-7am-blog-cron-silently-skipped-for-three-days-a"
+  ],
+  "warnings": [
+    "Live third-party keyword tool data could NOT be pulled: Ubersuggest returned HTTP 403 and Ahrefs free checkers require JS/login via WebFetch. All estimated_kd / volume / DR values are SERP-composition or reputation ESTIMATES, explicitly flagged — do not present any of them as tool-sourced figures to readers or schema.",
+    "Top-1 (Simon Willison, est. DR ~82) is hard to outrank on the broad head term. Do NOT target 'hallucinations in code' head-on; win on the long-tail first-person framing where high-DR explainers don't compete.",
+    "AI Overview likely steals clicks on the definitional phrasings ('why does ai make up...'). Only the STORY/diary angle reliably wins the click — keep the title narrative, not definitional.",
+    "YMYL note: this is dev-diary, not nurse/ece, so YMYL E-E-A-T citation rule is lighter, but still cite the 19.7% slopsquatting study (arxiv / Snyk) and Simon Willison for the 'least dangerous mistake' counter-take to keep authority signals."
+  ]
+}

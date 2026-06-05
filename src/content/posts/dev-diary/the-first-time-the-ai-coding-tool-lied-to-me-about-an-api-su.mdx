@@ -1,0 +1,147 @@
+---
+title: "The first time the AI coding tool lied to me about an API"
+slug: "the-first-time-the-ai-coding-tool-lied-to-me-about-an-api-su"
+description: "An AI coding tool hallucinated a method that doesn't exist while I built Aura. It cost me 45 minutes. Here's the exact bug and the rule it taught me."
+publishedAt: "2026-06-05"
+updatedAt: "2026-06-05"
+author: "stone"
+category: "dev-diary"
+tags: ["dev-diary", "ai-coding", "debugging", "aura", "hallucinations"]
+keywords: ["ai coding tool hallucinated a method that doesn't exist", "why does ai make up functions that don't exist", "ai hallucinated an api method", "how to catch ai hallucinated api calls", "phantom api ai generated code"]
+canonical: "https://stonemegan.dev/blog/the-first-time-the-ai-coding-tool-lied-to-me-about-an-api-su"
+draft: false
+aiDetectionScore: null
+humanizationMode: "degraded"
+heroImage: "/images/card-dev-diary.jpg"
+voicePolisherPasses: 1
+voicePolisherSamples: ["src/content/posts/dev-diary/why-my-daily-7am-blog-cron-silently-skipped-for-three-days-a.mdx", "src/content/posts/dev-diary/how-my-content-agent-invented-a-uk-nurse-persona-for-a-post.mdx"]
+---
+
+It was a Tuesday night, building Aura. I asked the AI coding tool how to do per-token sampling against a library I was wiring in, and it answered with total confidence. There was a method. It had a clean name and a clean signature. I believed it, wrote 30 lines around it, and then the runtime errors started. That was the first time an AI coding tool hallucinated a method that doesn't exist and said it to my face like a fact. This post is the exact bug, the 45 minutes it ate, and the one rule I now run on every API claim before I write a line.
+
+## The commit that wouldn't compile (the actual moment)
+
+I wasn't doing anything exotic. I wanted to control sampling per token, and I asked the tool what parameter the library exposed for it. It described a parameter. Named it. Told me where it slotted into the call. The description was specific enough that I never thought to doubt it.
+
+So I built around it. Configuration object, a wrapper, a couple of helpers that all assumed this parameter was real. About 30 lines of scaffolding, all hanging off one phantom hook. (Past me was so pleased with how tidy it looked.)
+
+### What I asked for vs. the method it handed me
+
+The gap was subtle. The thing I asked for was a reasonable feature to want. Plenty of libraries expose something like it. The tool pattern-matched against all of those and handed me a parameter that *should* exist by the logic of similar APIs. It just didn't exist in this one.
+
+### The exact red squiggle
+
+The editor didn't catch it, because the call was dynamic enough to slip past static checks. The runtime did. The argument got passed in, ignored or rejected depending on the path, and the behaviour was nonsense. No clean "this does not exist" message. Just wrong output and a stack trace pointing somewhere unhelpful. 45 minutes to trace it back to a parameter the library had never heard of.
+
+## Why I almost believed it — confidence is not correctness
+
+Here's the part that actually got me. The tool didn't hedge. There was no "I think" or "you may need to check the docs". It described the parameter the same way it would describe `console.log`. Same tone. Same certainty.
+
+### It read like documentation, not a guess
+
+Think about how a human expert talks. They hedge. "Off the top of my head." "Double-check the version." The AI flattens all of that out. A wild guess and a verified fact come back in the identical register, same flat certainty, and your instinct for spotting uncertainty has nothing to grip. That's the trap.
+
+### The name was plausible because it mirrored a real pattern
+
+The invented parameter wasn't random. It matched the naming convention of the library it lived in and the shape of the same feature in two other libraries I'd used. It earned my trust by being well-designed. That's the cruel bit: the better the hallucination fits the surrounding API, the longer it survives.
+
+## What's actually happening under the hood
+
+An AI coding tool is a next-token predictor. When you ask for a parameter, it generates the most statistically likely continuation given everything it has seen. It has no step that asks "does this symbol actually exist in this exact library version?" There is no lookup. There is only plausibility.
+
+### No "does this exist?" check
+
+This is the core thing to internalise. The model isn't reading the library's source when it answers you. No lookup, no source, nothing. It's reconstructing what a parameter for that job probably looks like, drawn from thousands of similar APIs in its training. Most of the time that reconstruction is right. When it's wrong, it's wrong with the exact same fluency — and that's the bit that gets you.
+
+### Why newer or niche libraries get hallucinated most
+
+The thinner the training signal, the more the model fills gaps with the average of everything adjacent. A massive, stable, heavily-documented library gets accurate recall. A newer or lower-traffic one gets confident interpolation. Aura leans on a few of the latter — which is, yeah, exactly why I got bitten there first.
+
+## How I now catch a phantom API before it costs me an hour
+
+The rule is embarrassingly simple. Every API claim the tool makes gets checked against the official docs URL, in the same session, before I write code against it. That's it. Sounds too obvious to write down, right? It did to me too — right up until the first time it cost me an hour. After that it stopped being optional and became a reflex.
+
+Concretely, three tripwires:
+
+1. **Treat type errors and jump-to-definition as the first line.** If I can't jump to the symbol or the type system can't find it, I stop. A missing definition is the cheapest possible signal, and it fires before any runtime.
+2. **Paste the real signature back into the prompt.** Once I've pulled the actual function signature from the docs, I feed it back so the rest of the generated code is built on the real surface, not the imagined one.
+3. **Pin the docs URL in context.** Instead of trusting the model's recall, I drop the official documentation link into the session first and ask it to work from that. Recall is where hallucinations breed; a pinned source narrows the room.
+
+This costs maybe 30 seconds per new API call. Against a 45-minute detour, the maths isn't close.
+
+## The part nobody warns juniors about: silent hallucinations
+
+A pure phantom method is the *kind* hallucination. It fails loudly. You get an error, you trace it, you move on. The dangerous version is the one that compiles.
+
+### When the method exists but the arguments are wrong
+
+The worse failure is a real method called with arguments it doesn't take, or in an order it doesn't expect. The code runs. The tests, if they're shallow, pass. And the behaviour is quietly off in a way you won't notice until it's sitting in front of a user. No squiggle, no stack trace. Just slow-burning wrongness.
+
+### A compile pass is not a correctness pass
+
+This is where I part ways with the comfortable take. [Simon Willison argues](https://simonwillison.net/2025/Mar/2/hallucinations-in-code/) that code hallucinations are the *least* dangerous LLM mistake, because the moment you run the code the error is instantly obvious. He's right about the phantom-method case. Genuinely useful framing, too. But don't let it relax you. My 45-minute bug never threw a clean "method not found" — it ran, and it produced garbage. His argument covers the loud hallucinations. The silent ones, where wrong code executes happily and survives both a compile and a quick glance, it doesn't. Those scare me more, not less.
+
+## The supply-chain tail: when a phantom name is real-but-malicious
+
+Here's the bridge nobody made for me. A hallucinated *method* is annoying. A hallucinated *package name* is a security problem.
+
+When an AI tool invents a package that doesn't exist and you run the install, normally you just get a not-found error. But attackers have started registering the names these tools commonly hallucinate, so the phantom dependency resolves to *their* code. It's called slopsquatting. A [USENIX Security 2025 study](https://www.usenix.org/conference/usenixsecurity25/presentation/spracklen) measured it across 576,000 generated code samples and found 19.7% of suggested packages didn't exist, totalling over 205,000 unique fake names. Worse, 43% of those phantom names recurred across repeated prompts, which means an attacker can predict the bait. Agentic tools that auto-install dependencies turn that from a typo into a remote-code-execution path.
+
+The lesson scales straight up from my one bad parameter. Confidence is not correctness. Believe it anyway and the bill climbs — from forty-five minutes of my evening at the small end, to your whole supply chain at the other. Same mistake. Wildly different blast radius.
+
+## TL;DR / Key Takeaways
+
+- An AI coding tool hallucinated a method that doesn't exist while I built Aura. I wrote 30 lines around it; it cost me 45 minutes to trace.
+- The model is a next-token predictor with no "does this symbol exist?" step. It states guesses in the exact tone it states facts.
+- Newer and niche libraries get hallucinated most, because thin training data gets filled with plausible averages.
+- My rule: check every API claim against the official docs URL, in the same session, before writing code against it. 30 seconds beats 45 minutes.
+- Silent hallucinations (real method, wrong arguments) are more dangerous than phantom ones, because they compile. A compile pass is not a correctness pass.
+- The supply-chain version is slopsquatting: 19.7% of AI-suggested packages don't exist, and attackers register the names that recur.
+
+If you've hit the same wall, my [post on how my content agent invented a UK nurse persona](/blog/how-my-content-agent-invented-a-uk-nurse-persona-for-a-post) is another case of an AI tool stating a confident fabrication, and [why my daily blog cron silently skipped for three days](/blog/why-my-daily-7am-blog-cron-silently-skipped-for-three-days-a) is what it looks like when the failure is silent instead of loud.
+
+## Sources
+
+- [Simon Willison — Hallucinations in code are the least dangerous form of LLM mistakes](https://simonwillison.net/2025/Mar/2/hallucinations-in-code/)
+- [Spracklen et al., USENIX Security 2025 — We Have a Package for You! A Comprehensive Analysis of Package Hallucinations by Code Generating LLMs](https://www.usenix.org/conference/usenixsecurity25/presentation/spracklen)
+
+import Schema from '@/components/Schema.astro'
+
+<Schema
+  type="Article"
+  data={{
+    headline: frontmatter.title,
+    description: frontmatter.description,
+    datePublished: frontmatter.publishedAt,
+    dateModified: frontmatter.updatedAt,
+    keywords: frontmatter.keywords,
+    author: {
+      '@type': 'Person',
+      name: 'Stone Megan',
+      jobTitle: 'Indie developer',
+      url: 'https://stonemegan.dev/about',
+      sameAs: [],
+    },
+    image: frontmatter.heroImage,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': frontmatter.canonical,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'stonemegan.dev',
+      logo: { '@type': 'ImageObject', url: '/favicon.svg' },
+    },
+  }}
+/>
+
+<Schema
+  type="BreadcrumbList"
+  data={{
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Blog', item: 'https://stonemegan.dev/blog' },
+      { '@type': 'ListItem', position: 2, name: 'Dev Diary', item: 'https://stonemegan.dev/blog/category/dev-diary' },
+      { '@type': 'ListItem', position: 3, name: frontmatter.title, item: frontmatter.canonical },
+    ],
+  }}
+/>
