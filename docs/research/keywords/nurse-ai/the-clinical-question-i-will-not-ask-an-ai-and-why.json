@@ -1,0 +1,128 @@
+{
+  "niche": "nurse-ai",
+  "seed_topic": "The clinical question I will not ask a general AI: medication-interaction questions go to specialist pharma databases (MIMS), not ChatGPT.",
+  "target_geo": "global",
+  "primary_keyword": {
+    "term": "why you shouldn't ask AI about medication interactions",
+    "estimated_kd": 15,
+    "estimated_volume": "low (<300/mo)",
+    "source": "Google Suggest 2026-06-06 (single-suggestion return, no volume); DuckDuckGo SERP composition 2026-06-06; volume bucket inferred from low/no autocomplete depth — NOT a tool-reported number, treat as rough",
+    "kd_method": "Rough KD = top10_avg_DR/5 + exact_match_count*2. Top-10 mixes ~2 low-DR personal blogs (DR ~10-20) with high-DR news/gov/edu (BBC, NYT, Oxford, Duke, health.gov.au ~ DR 85-93). Avg DR inflated by big-news pages that target the BROAD term 'AI medical advice', not this exact long-tail. Estimated avg ~65/5=13 + ~1 exact-match = ~15. HIGH UNCERTAINTY: no DR tool was queried; DR values are well-known-domain estimates, not Ahrefs output."
+  },
+  "long_tail": [
+    { "term": "can ChatGPT check drug interactions", "estimated_kd": 22, "intent": "informational", "note": "SERP dominated by academic journals (Wiley, ScienceDirect, Cureus, PMC) DR 80-90+ — too hard for a new domain as a primary; use only as a secondary/section target." },
+    { "term": "is it safe to ask AI about my medications", "estimated_kd": 14, "intent": "informational" },
+    { "term": "should nurses use AI for medication questions", "estimated_kd": 16, "intent": "informational", "note": "SERP is gov/regulator (AHPRA, health.gov.au, safetyandquality.gov.au) + journals — strong AU/NZ pull, good for target geo E-E-A-T citations." },
+    { "term": "does AI miss drug interactions", "estimated_kd": 12, "intent": "informational" },
+    { "term": "ChatGPT vs drug interaction checker accuracy", "estimated_kd": 18, "intent": "commercial-investigation" },
+    { "term": "grapefruit drug interaction AI", "estimated_kd": 10, "intent": "informational", "note": "Google Suggest returned this exact phrase 2026-06-06; very low competition, ties directly to the anecdote." },
+    { "term": "questions you should not ask AI about health", "estimated_kd": 19, "intent": "informational" }
+  ],
+  "people_also_ask": [
+    "Can ChatGPT check drug interactions accurately?",
+    "Is it safe to ask ChatGPT about my medications?",
+    "Why does AI give wrong medication information?",
+    "What should you never ask an AI chatbot about your health?",
+    "Does ChatGPT make up drug interaction information?",
+    "What is the best tool to check drug interactions?",
+    "Can nurses use AI for clinical decisions?"
+  ],
+  "serp_top3": [
+    {
+      "url": "https://www.drlindamarquez.com/single-post/why-you-shouldn-t-trust-chatgpt-with-your-health",
+      "dr": 18,
+      "word_count": 1200,
+      "covers": [
+        "general distrust of ChatGPT for health",
+        "hallucinated facts / made-up citations",
+        "no personalization to patient context",
+        "call to consult a real clinician"
+      ],
+      "note": "DR estimated (personal practitioner blog, not tool-verified). Broad framing, no specialist-database comparison, no nurse workflow."
+    },
+    {
+      "url": "https://www.lifewire.com/what-not-to-ask-ai-8731511",
+      "dr": 78,
+      "word_count": 1600,
+      "covers": [
+        "list-style 'what not to ask AI'",
+        "medical/legal/financial categories",
+        "privacy risk of pasting personal data",
+        "general 'verify with a professional' advice"
+      ],
+      "note": "DR estimated. Listicle breadth, shallow on medication interactions specifically; no MIMS/specialist-DB angle."
+    },
+    {
+      "url": "https://medschool.duke.edu/stories/hidden-risks-asking-ai-health-advice",
+      "dr": 91,
+      "word_count": 1100,
+      "covers": [
+        "red/yellow/green-light question categories",
+        "sycophancy / model agrees with leading questions",
+        "AI not trained on contextual patient data",
+        "safe use = prep before/after a visit"
+      ],
+      "note": "DR estimated (.edu, authoritative). Strong E-E-A-T but academic/general-public tone, no first-person clinician anecdote, no drug-database workflow."
+    }
+  ],
+  "ai_overview_present": true,
+  "ai_overview_note": "Google almost certainly fires an AI Overview for 'can AI check drug interactions' / 'is it safe to ask AI about medications' (YMYL health query). Could not confirm directly — Google blocks automated SERP fetch (HTTP error page), Bing mis-parsed the query, so AI Overview presence is INFERRED from the YMYL category, not observed. Treat as likely-present.",
+  "featured_snippet_target": "A 2-3 sentence direct answer to 'Can AI check drug interactions?' early in the post: e.g. 'General AI like ChatGPT can name common interactions but misses many — one British Journal of Clinical Pharmacology study found only minimal agreement (Cohen's kappa 0.08-0.14) with pharmacist review. Use a specialist database (MIMS, Stockley's, drugs.com) for any clinical decision.' Pairs with a comparison table to win the snippet.",
+  "outline": {
+    "title_candidates": [
+      "The clinical question I will not ask an AI (and why)",
+      "Why I never ask AI about drug interactions — a nurse's hard rule",
+      "The grapefruit question that ended my trust in AI for medications"
+    ],
+    "h2": [
+      {
+        "heading": "The question I asked, and the answer that looked perfect",
+        "h3": [
+          "A patient's new med and a grapefruit question",
+          "The confident, well-formatted AI reply"
+        ]
+      },
+      {
+        "heading": "What the cross-check against MIMS actually found",
+        "h3": [
+          "Three interactions the AI silently missed",
+          "Why 'confident and complete' are not the same thing"
+        ]
+      },
+      {
+        "heading": "Why general AI fails at medication interactions",
+        "h3": [
+          "It predicts plausible text, it does not query a curated drug database",
+          "What the research says: minimal agreement with pharmacists",
+          "Sycophancy: it agrees with how you phrase the question"
+        ]
+      },
+      {
+        "heading": "The rule I now follow on every shift",
+        "h3": [
+          "Interaction questions go to MIMS / Stockley's / drugs.com only",
+          "Where I still let AI help (and where I don't)"
+        ]
+      },
+      {
+        "heading": "Specialist databases vs general AI: a side-by-side",
+        "h3": [
+          "Coverage, currency, and citeable source",
+          "When even the database isn't enough — call the pharmacist"
+        ]
+      }
+    ],
+    "unique_angle": "A first-person RN anecdote with a concrete, reproducible failure (grapefruit + a named drug, three specific interactions MIMS caught that the AI missed) plus a portable decision rule — 'interaction questions never touch general AI.' Top-3 are either broad listicles or general-public health-advice explainers; none show a real clinician's cross-check workflow or compare a general LLM directly against a specialist pharma database from a bedside-practice viewpoint."
+  },
+  "internal_link_candidates": [
+    "why-i-draft-patient-sms-reminders-by-hand-not-with-ai",
+    "how-my-content-agent-invented-a-uk-nurse-persona-for-a-post"
+  ],
+  "warnings": [
+    "YMYL health topic — must follow CLAUDE.md rule 5: RN byline + reg #, 1+ PubMed/.gov citation (BJCP DDI study PMID 39359001 is a strong fit), 'last reviewed' date, no medical-advice phrasing ('in my practice' / 'ask your supervisor'). fact-checker must run before publish.",
+    "AI Overview likely steals top-of-page real estate for the broad query — only competitive if the post wins on depth + a concrete anecdote the Overview can't synthesize.",
+    "Do NOT make 'can ChatGPT check drug interactions' the primary keyword: its SERP is wall-to-wall DR 80-90 academic journals. Demote to a secondary/section target.",
+    "All DR and KD numbers here are ESTIMATES — no Ahrefs/Ubersuggest tool query succeeded this session (Ahrefs free tool returned no metrics, only instructional content). Volumes are inferred buckets, not tool-reported. Re-run with a logged-in tool before betting budget on this.",
+    "Cite MIMS carefully — MIMS is subscription/regional (AU/NZ/UK). For global readers also reference drugs.com / Stockley's so the rule generalises."
+  ]
+}
