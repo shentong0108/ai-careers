@@ -1,0 +1,143 @@
+---
+title: "The clinical question I will not ask an AI (and why)"
+slug: "the-clinical-question-i-will-not-ask-an-ai-and-why"
+description: "A patient's grapefruit question taught me why you shouldn't ask AI about medication interactions. The one rule a Sydney RN now follows on every shift."
+publishedAt: "2026-06-06"
+updatedAt: "2026-06-06"
+author: "stone"
+category: "nurse-ai"
+tags: ["medication-safety", "ai-in-nursing", "drug-interactions", "clinical-judgement", "patient-safety"]
+keywords: ["why you shouldn't ask AI about medication interactions", "can AI check drug interactions", "does AI miss drug interactions", "grapefruit drug interaction AI", "should nurses use AI for medication questions"]
+canonical: "https://stonemegan.dev/blog/the-clinical-question-i-will-not-ask-an-ai-and-why"
+draft: false
+aiDetectionScore: null
+humanizationMode: "degraded"
+factChecked: true
+factCheckedAt: "2026-06-06T00:00:00Z"
+factCheckedBy: "fact-checker"
+factCheckNotes: []
+heroImage: "/images/card-nurse-ai.jpg"
+voicePolisherPasses: 1
+voicePolisherSamples: ["src/content/posts/nurse-ai/why-i-draft-patient-sms-reminders-by-hand-not-with-ai.mdx", "src/content/posts/nurse-ai/when-i-do-not-reach-for-the-ai-the-cases-that-need-hands-not.mdx"]
+---
+
+A patient asked me a simple thing. Could they eat grapefruit on their new medication? I had an AI assistant open on a second tab, so I typed the question in while I reached for the patient's chart. The answer came back fast, confident, well-formatted, with a tidy little list. It looked right. Then I cross-checked it against MIMS and found three interactions the AI had not mentioned at all. That afternoon is the reason I can now tell you exactly why you shouldn't ask AI about medication interactions, and the one rule I have followed on every shift since.
+
+## The question I asked, and the answer that looked perfect
+
+It was mid-afternoon in our Sydney primary care clinic, the part of the day where the waiting room is full and you are running fifteen minutes behind. The patient was new to a medication and had read something online about grapefruit. Fair question. Grapefruit really does interfere with a long list of drugs through the gut, and patients are right to ask.
+
+So I asked the AI too, partly out of curiosity about how good these tools had become. The reply was genuinely impressive to read. It named the grapefruit-drug mechanism correctly. It listed a few interacting medications. It even formatted the warning in a calm, reassuring tone, the kind of tone that makes you want to trust it.
+
+That tone is the trap. Confident and complete are not the same thing, and a general AI is very good at sounding like both while only ever being the first one.
+
+I did not act on it though. In my practice anything touching a prescription gets a second source before it reaches a patient's ears. So I opened the database.
+
+## What the cross-check against MIMS actually found
+
+MIMS is the curated drug reference most Australian clinicians reach for, and the interaction module is the part I trust. I ran the patient's full medication list, not just the one drug, because interactions live in the combinations, not the single agents.
+
+Three interactions came back that the AI had said nothing about. Not minor footnotes either. One of them was the kind of pairing that changes how a drug is cleared from the body, which is exactly the category grapefruit belongs to. The AI had given me a partial picture and dressed it up as a whole one.
+
+Here is what bothered me most. The AI flagged nothing. No "this list might be incomplete, check a specialist source," no hedge at all. It just answered, fully, as if it had queried a real database. It had not. It had predicted the most plausible-sounding text.
+
+If I had read that answer aloud to the patient, I would have reassured them about a combination that genuinely warranted a conversation with their pharmacist or GP. That is a near-miss I think about. The catch was not clever clinical instinct. It was a boring habit: always cross-check medication questions against a real drug database before they leave my mouth.
+
+## Why general AI fails at medication interactions
+
+People assume an AI assistant is "looking something up." It is not. The model predicts the next likely word from patterns in its training data, and that is all it does. It does not run your patient's drug list through a maintained, version-controlled interaction database the way MIMS, Stockley's, or drugs.com does.
+
+That gap is the whole story. A drug interaction checker holds a structured table of known pairs, severities, and mechanisms, reviewed and dated. The model holds a fuzzy statistical impression of what such an answer tends to look like — no table, no source, just a vibe with good grammar. Sometimes the impression is right. That is exactly the part that nearly got me, because you cannot tell from the answer which time you are getting.
+
+The research backs this up. A 2024 study in the British Journal of Clinical Pharmacology tested a general AI against pharmacist review using real hospitalised-patient data and found only minimal agreement, with Cohen's kappa values between roughly 0.08 and 0.14, alongside low sensitivity for catching interactions ([British Journal of Clinical Pharmacology, 2024, PMID 39359001](https://pubmed.ncbi.nlm.nih.gov/39359001/)). A kappa that low is barely better than chance. For a medication-safety task, "barely better than chance" is a sentence that should end the debate.
+
+And there is a sneakier failure mode underneath the first one. Sycophancy. These models lean toward agreeing with how you framed the question. Ask "this combination is fine, right?" and you have already tilted the answer toward yes. In a busy clinic you phrase questions to confirm a hunch all the time, half the time without noticing. A tool that quietly rewards that habit is at its most dangerous in exactly the moments you most need pushback.
+
+## The rule I now follow on every shift
+
+The rule is one sentence. Medication-interaction questions never go through a general AI. Specialist pharmaceutical databases only.
+
+That is it. No exceptions, no "just to get a quick sense of it," because the quick sense is the part that fooled me. If a patient, a colleague, or my own curiosity raises an interaction question, it goes to MIMS first, and to the pharmacist when MIMS leaves doubt. The general AI does not get a vote on prescribing safety. I wrote more about my low-trust default for clinical AI in [why I draft patient SMS reminders by hand, not with AI](/blog/why-i-draft-patient-sms-reminders-by-hand-not-with-ai).
+
+This is not anti-AI. I still let an AI assistant help me with the work around the clinical core. Restructuring a referral letter into plainer English. Drafting patient-education wording I then check line by line. Summarising a long policy document so I know which section to read in full. None of those can quietly harm a patient if the tool is wrong, because a human reads every word before it counts.
+
+The test I use is simple. If the AI being confidently wrong could change what a patient takes, swallows, or stops, it does not get asked. Everything else is fair game, with review. If you only adopt one habit from this whole post, make it that boundary.
+
+## My honest opinion: the danger is the polish, not the errors
+
+Here is where I will take a stance some people will not like. The most dangerous thing about general AI in clinical work is not that it makes mistakes. Every reference makes mistakes; even MIMS has gaps, which is why pharmacists exist. The danger is that the AI makes mistakes with perfect presentation and zero hesitation.
+
+A reference book that is unsure looks unsure on the page. A thin search result feels thin, and you can sense the gaps under it. That friction is the thing that makes you stop and check. A general AI removes it entirely. It hands you a fluent, formatted, authoritative-sounding answer whether it knows the topic or is improvising, and it never once shows its working. Fine for an email. A hazard for a prescribing decision.
+
+So "is AI accurate enough yet for drug interactions" is, to me, the wrong question entirely. Say it got to ninety percent. You still could not tell which answers sat in the ninety and which sat in the ten, because on the screen they look identical. Until a tool can show me a citeable, dated, source-linked interaction record, it stays out of medication decisions. Polish is not evidence.
+
+## Specialist databases vs general AI: a side-by-side
+
+When I explain this to students on placement, I draw it out as a table. The differences are not subtle once you line them up.
+
+| Factor | General AI assistant | Specialist drug database (MIMS / Stockley's / drugs.com) |
+| --- | --- | --- |
+| What it does | Predicts plausible text | Queries a curated interaction table |
+| Coverage | Unknown and uneven | Defined, maintained drug-pair list |
+| Currency | Frozen at training cutoff | Versioned, dated updates |
+| Shows its source | No | Yes, citeable and traceable |
+| Flags uncertainty | Rarely | Severity ratings and gaps noted |
+| Safe for prescribing decisions | No | Yes, as a reference, with judgement |
+
+One caveat on the databases. MIMS is regional and subscription-based across Australia, New Zealand, and the UK, so reach for whatever curated checker your service licenses. drugs.com and Stockley's fill the same role for readers outside those regions. And even the database is not the last word. When the interaction is high-stakes, ambiguous, or involves an unusual combination, the answer is not a tool at all. It is a phone call to the pharmacist. If you take only one referral away from this, make it that one. I built my wider rule set partly after watching an automated workflow go wrong in a totally different way, which I unpack in [how my content agent invented a UK nurse persona for a post](/blog/how-my-content-agent-invented-a-uk-nurse-persona-for-a-post).
+
+If you are a student or new grad weighing where AI fits, I would point you to your facility's clinical governance policy first, then [my hand-drafted SMS reminder workflow](/blog/why-i-draft-patient-sms-reminders-by-hand-not-with-ai) for the everyday version of this judgement call. And always, ask your supervisor before changing how you check anything that affects a medication.
+
+## TL;DR / Key Takeaways
+
+- A patient's grapefruit question is why you shouldn't ask AI about medication interactions: a confident AI answer missed three interactions that MIMS caught.
+- General AI predicts plausible text; it does not query a curated, dated drug-interaction database the way a specialist checker does.
+- Research found only minimal agreement (Cohen's kappa ~0.08–0.14) between a general AI and pharmacist review on real patient data.
+- My one rule: interaction questions go to MIMS, Stockley's, or drugs.com only, and to the pharmacist when doubt remains.
+- The hazard is the polish, not just the errors. A fluent wrong answer looks identical to a fluent right one, so check the source every time and ask your supervisor.
+
+## Sources
+
+- British Journal of Clinical Pharmacology (2024;90(12):3361–3366). Real-world evaluation of a general AI chatbot's ability to predict drug-drug interactions using hospitalised-patient data. PMID 39359001. [https://pubmed.ncbi.nlm.nih.gov/39359001/](https://pubmed.ncbi.nlm.nih.gov/39359001/)
+
+---
+
+*Stone is an AHPRA-registered Registered Nurse (RN) working in primary care in Sydney, with 5+ years of clinical experience. This is a personal-practice reflection, not medical advice. Always confirm medication and interaction questions with a specialist drug database, your pharmacist, and your own facility's clinical governance policy. Last reviewed: 6 June 2026.*
+
+import Schema from '@/components/Schema.astro'
+
+<Schema
+  type="Article"
+  data={{
+    headline: "The clinical question I will not ask an AI (and why)",
+    description: "A patient's grapefruit question taught me why you shouldn't ask AI about medication interactions. The one rule a Sydney RN now follows on every shift.",
+    datePublished: "2026-06-06",
+    dateModified: "2026-06-06",
+    mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://stonemegan.dev/blog/the-clinical-question-i-will-not-ask-an-ai-and-why' },
+    author: {
+      '@type': 'Person',
+      name: 'Stone',
+      jobTitle: 'Registered Nurse (RN)',
+      description: 'AHPRA-registered Registered Nurse working in primary care in Sydney with 5+ years of clinical experience.',
+      sameAs: ['https://stonemegan.dev/about'],
+    },
+    image: 'https://stonemegan.dev/images/card-nurse-ai.jpg',
+    publisher: {
+      '@type': 'Organization',
+      name: 'stonemegan.dev',
+      logo: { '@type': 'ImageObject', url: 'https://stonemegan.dev/favicon.svg' },
+    },
+  }}
+/>
+
+<Schema
+  type="BreadcrumbList"
+  data={{
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://stonemegan.dev/' },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://stonemegan.dev/blog' },
+      { '@type': 'ListItem', position: 3, name: 'Nurse + AI', item: 'https://stonemegan.dev/blog/category/nurse-ai' },
+      { '@type': 'ListItem', position: 4, name: 'The clinical question I will not ask an AI (and why)', item: 'https://stonemegan.dev/blog/the-clinical-question-i-will-not-ask-an-ai-and-why' },
+    ],
+  }}
+/>
