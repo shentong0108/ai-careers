@@ -1,0 +1,113 @@
+{
+  "niche": "ece-ai",
+  "seed_topic": "Using AI for parent comms when families do not read English at home",
+  "target_geo": "global",
+  "audience_note": "UK/AU/NZ English early-childhood educators communicating with EAL/EAL-D / second-language and low-English-literacy families. Note: 'do not read English at home' covers both non-English-speaking AND oral-culture/low-literacy families, which is a distinct angle most SERP results miss.",
+  "primary_keyword": {
+    "term": "ai translation for parent communication in early childhood",
+    "estimated_kd": 16,
+    "estimated_volume": "low (<300/mo)",
+    "source": "Google Suggest returned no completions for 'ai translate parent communication' (no head-term competition) + Ubersuggest free-tier-style inference from sparse SERP 2026-06-07; volume NOT pulled from a paid tool, treat as rough"
+  },
+  "kd_confidence": "medium-low. KD derived from manual top-10 DR + exact-match count, not a paid tool API. Range 12-20. The phrase-level head term has near-zero autocomplete competition, which lowers difficulty; the SERP is split between high-DR product pages (Famly, Remind, ParentSquare) and generic K-12 articles, leaving the ECE-specific informational slot open.",
+  "long_tail": [
+    { "term": "how to communicate with EAL parents in early years", "estimated_kd": 14, "intent": "informational", "source": "Google Suggest 2026-06-07 ('communicating with eal parents', 'ways to communicate with parents')" },
+    { "term": "using chatgpt to translate daycare notes for parents", "estimated_kd": 18, "intent": "informational", "source": "SERP candidate findskill.ai + NAEYC blog, 2026-06-07" },
+    { "term": "is google translate accurate enough for parent newsletters", "estimated_kd": 12, "intent": "informational", "source": "SERP research (Journal of Latinos & Education ~75% accuracy finding) 2026-06-07" },
+    { "term": "communicating with parents who don't speak English in childcare", "estimated_kd": 17, "intent": "informational", "source": "WebSearch SERP 2026-06-07 (learningladders, ezchildtrack, teachingforchange)" },
+    { "term": "ai tools for multilingual family engagement early childhood", "estimated_kd": 19, "intent": "informational", "source": "WebSearch SERP 2026-06-07" },
+    { "term": "translate childcare messages to home language app", "estimated_kd": 22, "intent": "commercial", "source": "SERP dominated by product pages (Famly, Remind, Parent Hub) 2026-06-07 — note above KD-20, include only as a secondary mention not a target" },
+    { "term": "how to write parent messages for families with low English literacy", "estimated_kd": 11, "intent": "informational", "source": "inferred gap — no strong SERP match found 2026-06-07; addresses the 'do not READ English' (literacy, not just language) angle" }
+  ],
+  "people_also_ask": [
+    "Is it okay to use Google Translate for school newsletters?",
+    "How accurate is ChatGPT for translating messages to parents?",
+    "How do you communicate with parents who don't speak English?",
+    "Should you ask a child to translate for their parents?",
+    "What translation tool is best for childcare centres?",
+    "When should you NOT use AI to translate parent communication?",
+    "How do you support EAL/D families in early childhood education?"
+  ],
+  "serp_top3": [
+    {
+      "url": "https://www.naeyc.org/resources/blog/considering-ai-for-translation",
+      "dr": 78,
+      "word_count": 1400,
+      "covers": ["using a generative AI chatbot for home-language communication", "accuracy and cultural-context limits", "the case for human review", "framing AI as a starting draft not a final translation"],
+      "note": "Returned HTTP 403 to fetcher; structure inferred from search-result excerpts 2026-06-07. Authoritative US ECE body, high DR but US-centric and short."
+    },
+    {
+      "url": "https://findskill.ai/blog/daycare-multilingual-parent-translation-chatgpt/",
+      "dr": 32,
+      "word_count": 2900,
+      "covers": ["why Google Translate misses daycare context", "a 5-prompt ChatGPT workflow (family profile, sick-kid texts, daily reports, incident reports, voice)", "free-tier cost", "three things to NOT translate with AI (custody, licensing, legal medical)", "owner testimonials"],
+      "note": "Strongest structural competitor — concrete workflow. Lower DR, so beatable on E-E-A-T + AU/NZ specificity."
+    },
+    {
+      "url": "https://learningmole.com/ai-translation-for-schools/",
+      "dr": 55,
+      "word_count": 5800,
+      "covers": ["benefits", "use cases", "tech integration", "real-time translation", "tool selection", "accuracy/quality", "UK GDPR compliance & data privacy", "teacher enablement", "FAQ"],
+      "note": "Very broad K-12 schools piece, not ECE-specific and not first-person; thin on the under-fives / NQS / oral-literacy angle."
+    }
+  ],
+  "ai_overview_present": true,
+  "ai_overview_note": "AI Overview / featured-snippet box very likely triggers on 'is google translate accurate for parents' and 'how to communicate with parents who don't speak English'. The 'do not READ English at home' literacy framing and a first-person AU educator anecdote are the click-earning differentiators AI Overview cannot synthesise.",
+  "featured_snippet_target": "When should you NOT use AI to translate parent communication? (answer as a short bulleted list: incident/injury reports, custody & legal documents, health/medical consent, anything requiring a certified translator) — clean snippet-shaped list, low competition.",
+  "outline": {
+    "title_candidates": [
+      "Using AI for Parent Comms When Families Don't Read English at Home",
+      "AI Translation for EAL Families: What Worked in My Centre (and What I Won't Trust It With)",
+      "Translating Daily Reports for Families Who Don't Read English: A Practical AI Workflow for Educators"
+    ],
+    "h2": [
+      {
+        "heading": "The day a daily report went home and nobody read it",
+        "h3": ["My centre's language mix (real numbers)", "Why 'they don't speak English' and 'they don't read English' are two different problems"]
+      },
+      {
+        "heading": "Google Translate vs ChatGPT for parent messages: what I actually noticed",
+        "h3": ["Where phrase-by-phrase translation breaks (tone, warmth, jargon)", "The ~75% accuracy figure and what it means for a sick-child text"]
+      },
+      {
+        "heading": "A workflow I use for routine comms (and what I tell it)",
+        "h3": ["Setting up a family-language profile once", "Daily reports and newsletters in batch", "Keeping it plain enough for low-literacy readers (short sentences, no idioms)", "Adding audio / voice for families who don't read at all"]
+      },
+      {
+        "heading": "What I will NOT hand to AI",
+        "h3": ["Incident and injury reports", "Custody, consent and legal documents", "Anything a certified interpreter should do"]
+      },
+      {
+        "heading": "Doing this without breaking trust (or privacy)",
+        "h3": ["Never make the child the translator", "Telling families AI helped draft it", "Data privacy: what you paste into a chatbot"]
+      },
+      {
+        "heading": "Where this fits NQS / EYLF expectations for diverse families",
+        "h3": ["Respect for diversity as practice, not a poster", "Asking families their language and format preference first"]
+      }
+    ],
+    "unique_angle": "Reframe from 'translation' (language) to 'access' (literacy + oral cultures): a concrete AU educator workflow that pairs AI text translation with plain-language rewriting AND audio for families who genuinely cannot READ in any language at home — a gap every top-3 result (all language-only, mostly US/K-12) leaves wide open. Plus an honest 'what I refuse to automate' section anchored in NQS/EYLF."
+  },
+  "internal_link_candidates": [
+    "why-i-draft-patient-sms-reminders-by-hand-not-with-ai",
+    "the-clinical-question-i-will-not-ask-an-ai-and-why"
+  ],
+  "internal_link_note": "Candidate slugs taken from recent git history (nurse-ai niche) as cross-niche 'where I won't trust AI' companions; content-writer should confirm an ece-ai sibling slug exists before linking and prefer an ece-ai post if available.",
+  "warnings": [
+    "AI Overview likely steals clicks on the accuracy/how-to queries — only target if depth + first-person AU anecdote + audio/literacy angle win.",
+    "'translate childcare messages to home language app' (KD ~22) is above the KD-20 ceiling for a new domain and is product-page dominated (Famly/Remind/ParentSquare) — do NOT make it the primary; mention tools neutrally only.",
+    "Volume figures are rough inferences, NOT pulled from a paid Ahrefs/Ubersuggest API — confirm before any traffic projection.",
+    "YMYL-adjacent (children, health/incident comms): byline must show ECT credential, cite an official source (EYLF/NQS/ACECQA or NAEYC), include 'in my practice' framing, and run fact-checker before publish.",
+    "NAEYC top result fetched via search excerpts only (403 to fetcher) — re-verify its structure if used as the lead competitor."
+  ],
+  "sources_consulted": [
+    "Google Suggest (firefox client) 2026-06-07",
+    "WebSearch SERP samples 2026-06-07",
+    "NAEYC blog (excerpts)",
+    "findskill.ai daycare ChatGPT workflow",
+    "learningmole.com AI translation for schools",
+    "famly.co live translation product page",
+    "Journal of Latinos & Education / Tandfonline Google Translate accuracy study (cited via SERP)"
+  ],
+  "generated": "2026-06-07"
+}
