@@ -142,7 +142,10 @@
     "author": "stone",
     "topic": "The clinical question I will not ask an AI and why",
     "anecdote": "A patient asked me whether their new medication interacts with grapefruit. The AI gave a confident answer. I double-checked with MIMS and found three missing interactions. Now: medication-interaction questions never go through general AI. Specialist pharma databases only. The single rule that catches the most dangerous failure mode of AI in clinical work.",
-    "status": "pending"
+    "status": "published",
+    "pickedAt": "2026-06-06T08:00:17.936Z",
+    "slug": "the-clinical-question-i-will-not-ask-an-ai-and-why",
+    "mergedAt": "2026-06-06T08:19:20Z"
   },
   {
     "niche": "ece-ai",
