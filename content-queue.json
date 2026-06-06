@@ -162,7 +162,10 @@
     "author": "megan",
     "topic": "Using AI for parent comms when families do not read English at home",
     "anecdote": "About half of our families are second-language English speakers. AI helps me draft at a Year-6 reading level and prepare a translation handoff prompt for the interpreter colleagues we work with. The catch: cultural reframes do not translate. Phrases like tummy time or settling in are not universal. I keep a running list of words AI gets wrong for our community and pre-substitute before the draft goes anywhere near a family.",
-    "status": "pending"
+    "status": "published",
+    "slug": "using-ai-for-parent-comms-when-families-do-not-read-english",
+    "pickedAt": "2026-06-07T09:00:00.000Z",
+    "mergedAt": "2026-06-06T21:20:13Z"
   },
   {
     "niche": "ece-ai",
