@@ -172,7 +172,10 @@
     "author": "megan",
     "topic": "The observation an AI could not help me write",
     "anecdote": "A 2-year-old who had been mute for six weeks suddenly said her older brother's name in our room. AI tried to scaffold this into language development emerging with EYLF Outcome 5 tags. The actual story: it was the first day her mum dropped her off, not Dad. The trigger was attachment, not language. The AI had no way to know that. I wrote the observation myself. It took longer. Worth it.",
-    "status": "pending"
+    "status": "published",
+    "slug": "the-observation-an-ai-could-not-help-me-write",
+    "pickedAt": "2026-06-07T12:00:00.000Z",
+    "mergedAt": "2026-06-07T08:16:44Z"
   },
   {
     "niche": "ece-ai",
