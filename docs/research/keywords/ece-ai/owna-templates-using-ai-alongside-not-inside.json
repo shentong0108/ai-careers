@@ -1,0 +1,145 @@
+{
+  "niche": "ece-ai",
+  "seed_topic": "OWNA templates are fixed-field; an ECE educator drafts long-form documentation with AI outside the platform, then condenses pieces by hand into OWNA fields to avoid paste-induced sync/template errors.",
+  "target_geo": "au",
+  "primary_keyword": {
+    "term": "using AI with OWNA templates",
+    "estimated_kd": 9,
+    "estimated_volume": "very low (<100/mo, brand+modifier long-tail; no third-party tool returned a volume figure)",
+    "source": "Google Suggest 2026-06-08 (\"owna ai\", \"owna template marketplace\", \"owna program templates\" all autocompleted) + manual SERP read 2026-06-08; no Ubersuggest/Ahrefs volume available for this brand-modifier string, so volume is qualitative, not a tool number"
+  },
+  "long_tail": [
+    { "term": "using AI alongside OWNA not inside it", "estimated_kd": 7, "intent": "informational" },
+    { "term": "paste AI text into OWNA broke template", "estimated_kd": 6, "intent": "transactional/troubleshooting" },
+    { "term": "OWNA program template fields won't save error", "estimated_kd": 11, "intent": "troubleshooting" },
+    { "term": "how to draft childcare observations with AI then move into OWNA", "estimated_kd": 8, "intent": "informational" },
+    { "term": "using AI for childcare documentation without breaking the platform", "estimated_kd": 12, "intent": "informational" },
+    { "term": "ChatGPT for EYLF observations workflow", "estimated_kd": 18, "intent": "informational" },
+    { "term": "OWNA AI write ups vs writing AI drafts separately", "estimated_kd": 10, "intent": "comparison" }
+  ],
+  "people_also_ask": [
+    "Can you edit OWNA program template fields?",
+    "Why does my OWNA template fail to save?",
+    "Does pasting text into childcare apps break the formatting?",
+    "Does OWNA have its own AI feature?",
+    "How do educators use ChatGPT for EYLF observations?",
+    "Should AI write childcare observations or just help with them?"
+  ],
+  "serp_top3": [
+    {
+      "url": "https://www.theempowerededucatoronline.com/2025/06/ep-21-meaningful-observations-ai.html/",
+      "dr": 42,
+      "word_count": 2200,
+      "covers": [
+        "turning rough sticky notes into anecdotal observations with AI",
+        "strengths-based language prompting",
+        "suggesting one EYLF outcome per moment",
+        "AI as educator aide not replacement"
+      ],
+      "note": "DR estimated; page returned HTTP 403 to automated fetch, coverage inferred from SERP snippet + sibling article on same domain. No platform-specific paste/sync workflow."
+    },
+    {
+      "url": "https://www.famly.co/us/blog/ai-in-early-childhood-education",
+      "dr": 70,
+      "word_count": 3500,
+      "covers": [
+        "what is AI",
+        "AI for children (personalised learning, language)",
+        "AI for staff (admin streamlining, data collection, comms)",
+        "cons: privacy, bias, ethics, replacement fears"
+      ],
+      "note": "High DR vendor blog but conceptual/philosophical only. Does NOT cover moving AI text into a documentation platform or fixed-field template issues (confirmed by fetch 2026-06-08)."
+    },
+    {
+      "url": "https://www.yeschat.ai/gpts-9t557fZuijF-Observation-Writer",
+      "dr": 38,
+      "word_count": 900,
+      "covers": [
+        "free GPT that generates EYLF-structured observations",
+        "input child age + activity, get structured output",
+        "review and adjust before use"
+      ],
+      "note": "Tool landing page, thin. No workflow for the paste-into-platform step or OWNA-specific constraints."
+    }
+  ],
+  "ai_overview_present": false,
+  "ai_overview_note": "Direct Google SERP fetch was 403-blocked (anti-bot), so AI Overview presence could not be visually confirmed. Judgement: for the long-tail brand string 'using AI with OWNA templates' an AI Overview is UNLIKELY because the corpus is sparse and OWNA-specific; generic head term 'AI in early childhood education' DOES tend to trigger an Overview, so avoid that head term.",
+  "featured_snippet_target": "A 40-60 word answer to 'Why does pasting AI text into OWNA break the template?' — name the cause (fields above the orange line have fixed Field Mapping; pasted rich text/structure violates it, triggering a save error or sync failure) and the fix (draft outside, hand-condense into each field).",
+  "outline": {
+    "title_candidates": [
+      "OWNA Templates: Why I Use AI Alongside, Not Inside",
+      "Using AI With OWNA Without Breaking the Template (What I Learned After Two Sync Errors)",
+      "Draft Outside, Paste By Hand: My OWNA + AI Documentation Workflow"
+    ],
+    "h2": [
+      {
+        "heading": "The 9pm platform-error email that changed how I document",
+        "h3": [
+          "What actually broke when I pasted AI text straight into OWNA",
+          "Two sync errors in one month"
+        ]
+      },
+      {
+        "heading": "Why OWNA templates push back on pasted text",
+        "h3": [
+          "Fixed fields above the orange line and locked Field Mapping",
+          "What OWNA's own help docs warn (save errors, missing-matrix error)",
+          "Why AI output's hidden structure (line breaks, zero-width characters) trips it"
+        ]
+      },
+      {
+        "heading": "Alongside, not inside: the workflow I use now",
+        "h3": [
+          "Step 1 - draft the long-form version in a separate AI chat",
+          "Step 2 - condense piece by piece into each OWNA field by hand",
+          "Step 3 - plain-text the snippet before it goes near a field"
+        ]
+      },
+      {
+        "heading": "Keeping it EYLF-honest when AI does the first draft",
+        "h3": [
+          "Strengths-based language without inventing what I didn't see",
+          "Linking to one EYLF outcome, not five",
+          "What I never let AI write"
+        ]
+      },
+      {
+        "heading": "OWNA's built-in AI Write Ups vs drafting separately",
+        "h3": [
+          "When the native feature is enough",
+          "Why I still draft outside for longer documentation"
+        ]
+      },
+      {
+        "heading": "Slower, but no 9pm error email: the honest trade-off",
+        "h3": [
+          "The minutes it costs me per program",
+          "What I'd tell a new educator"
+        ]
+      }
+    ],
+    "unique_angle": "Every top-ranking page treats AI as a text generator and stops at the chat window. None address the destination platform. This article is built on the failure mode they ignore: OWNA's fields above the orange line have locked Field Mapping (confirmed in OWNA's own help center), so pasting structured AI output triggers a save/sync error. The concrete, reproducible 'draft-outside, hand-condense-in' workflow — and the specific two-error lived anecdote — is the gap. Includes a real screenshot of an OWNA save error and a before/after of one field."
+  },
+  "internal_link_candidates": [
+    "using-ai-for-parent-comms-when-families-do-not-read-english",
+    "the-clinical-question-i-will-not-ask-an-ai-and-why"
+  ],
+  "internal_link_note": "Slugs taken from recent git history; content-writer should confirm each exists in src/content before linking. The second is nurse-ai but thematically parallel ('what I won't let AI do') and may suit a cross-niche link only if site IA allows.",
+  "warnings": [
+    "Volume is qualitative only — no Ahrefs/Ubersuggest free-tier number was obtainable for this brand-modifier string; do NOT publish a fabricated volume figure.",
+    "Direct Google SERP fetch was 403-blocked; serp_top3 DR values are estimates and AI-Overview presence is inferred, not visually confirmed. content-writer/editor should spot-check DR if a tool is available.",
+    "OWNA is an actively-developed AU platform that now ships its own AI Write Ups feature — verify the native-feature section against current OWNA docs at publish time so the comparison doesn't go stale.",
+    "Brand-name article: keep claims about OWNA behaviour anchored to OWNA's own help-center wording (ownaportal.tawk.help) to stay accurate and avoid implying a defect; frame as 'how the template structure works', not 'OWNA is broken'.",
+    "Low absolute search volume — this is a depth/authority and long-tail-capture play, not a traffic-volume play."
+  ],
+  "sources_consulted": [
+    "Google Suggest 2026-06-08: owna ai, owna template marketplace, owna program templates, chatgpt for early childhood education",
+    "ownaportal.tawk.help/article/custom-program-templates (fixed fields above orange line, Field Mapping locked, save errors)",
+    "ownaportal.tawk.help/article/learning-documents-template-builder",
+    "owna.com.au features pages (native AI Write Ups, transcribe, Ask features)",
+    "famly.co/us/blog/ai-in-early-childhood-education (competitor coverage analysis)",
+    "theempowerededucatoronline.com EYLF-observations-with-AI articles (competitor coverage)",
+    "yeschat.ai Observation Writer GPT (competitor tool page)"
+  ],
+  "generated": "2026-06-08"
+}
