@@ -182,7 +182,10 @@
     "author": "megan",
     "topic": "OWNA templates: using AI alongside, not inside",
     "anecdote": "OWNA templates are fixed-field. I use AI to draft a long-form version separately, then condense piece by piece back into OWNA fields. Going AI-direct-to-OWNA caused two sync errors last month: pasted text broke the data structure. Now: AI writes the draft outside the platform, I move pieces by hand. Slower, but never the platform-error email at 9pm.",
-    "status": "pending"
+    "status": "published",
+    "slug": "owna-templates-using-ai-alongside-not-inside",
+    "pickedAt": "2026-06-07T21:00:39.929Z",
+    "mergedAt": "2026-06-07T21:17:56Z"
   },
   {
     "niche": "dev-diary",
