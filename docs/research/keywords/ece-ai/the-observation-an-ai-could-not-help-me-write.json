@@ -1,0 +1,142 @@
+{
+  "niche": "ece-ai",
+  "seed_topic": "The observation an AI could not help me write — when an educator's contextual knowledge (attachment, family circumstance) is the real story behind a child's behaviour and AI mis-tags it.",
+  "target_geo": "au",
+  "geo_note": "Topic is EYLF-anchored (Australian Early Years Learning Framework). Primary audience AU, with secondary NZ (Te Whariki) and UK (EYFS) educators who write observations. Default global English prose, AU framework references.",
+  "primary_keyword": {
+    "term": "can AI write childcare observations",
+    "estimated_kd": 14,
+    "estimated_volume": "low (<300/mo, likely <100)",
+    "source": "Google Suggest 2026-06-07 (query 'can ai write childcare observations' returned a stub with no competing autocompletes — signals thin, unconsolidated demand) + Ubersuggest-style inference from SERP fragmentation. No exact tool volume retrieved; treat as estimate.",
+    "kd_uncertainty": "MEDIUM-HIGH. KD computed from SERP DR sample below, not a paid tool. The SERP is fragmented (no page exact-matches the question framing), which usually lowers real difficulty for a depth/E-E-A-T play."
+  },
+  "long_tail": [
+    { "term": "when not to use AI for childcare observations", "estimated_kd": 9, "intent": "informational", "source": "Google Suggest + PAA synthesis 2026-06-07" },
+    { "term": "AI observation writer limitations early years", "estimated_kd": 12, "intent": "informational", "source": "WebSearch SERP 2026-06-07" },
+    { "term": "writing meaningful observations in childcare", "estimated_kd": 22, "intent": "informational", "source": "Google Suggest 2026-06-07 — flagged: at upper KD limit, sector authority sites own it; use as supporting term only, NOT primary" },
+    { "term": "AI vs educator professional judgement EYLF", "estimated_kd": 10, "intent": "informational", "source": "WebSearch SERP 2026-06-07" },
+    { "term": "interpreting child behaviour context attachment observation", "estimated_kd": 11, "intent": "informational", "source": "WebSearch 2026-06-07" },
+    { "term": "should I use AI to write learning stories", "estimated_kd": 13, "intent": "informational", "source": "Google Suggest cluster ('ai childcare observations', 'can ai write childcare observations') 2026-06-07" }
+  ],
+  "people_also_ask": [
+    "Can AI write childcare observations?",
+    "What should an observation in childcare include?",
+    "Why can't AI replace early childhood educators?",
+    "How do you link an observation to EYLF outcomes?",
+    "What is the difference between an anecdotal record and a learning story?",
+    "Is it OK to use ChatGPT for childcare documentation?"
+  ],
+  "paa_source": "Google Suggest + WebSearch result snippets 2026-06-07. Live PAA box not scraped programmatically; items synthesised from recurring question-form titles and snippet themes across the SERP. Flagged as derived, not verbatim PAA capture.",
+  "serp_top3": [
+    {
+      "url": "https://www.famly.co/us/blog/ai-in-early-childhood-education",
+      "dr": 72,
+      "dr_source": "estimate — Famly is an established ECE SaaS; DR not pulled from a tool",
+      "word_count": 3600,
+      "covers": [
+        "What is AI (definitions, Siri/Alexa/ChatGPT)",
+        "AI for children — personalised learning",
+        "AI for ECE staff — admin, data insights, comms",
+        "Disadvantages of AI — bias, privacy, interpretation",
+        "Explicit limitation: AI lacks the specific witnessed details (exact words between two children) needed for a real observation; AI should spell-check, never author"
+      ],
+      "gap": "States the limitation abstractly. No first-person anecdote, no concrete failed-observation example, no attachment/context worked example."
+    },
+    {
+      "url": "https://teachingstrategies.com/blog/how-ai-may-undermine-the-early-childhood-workforce/",
+      "dr": 71,
+      "dr_source": "estimate — Teaching Strategies is a major US ECE curriculum vendor; DR not tool-verified",
+      "word_count": 1100,
+      "covers": [
+        "Loss of professional autonomy (teacher as implementer not designer)",
+        "Undermining teacher expertise / relationship-based skills",
+        "Workforce morale and retention",
+        "Observe-reflect-decide 'dance' metaphor (mild first-person)"
+      ],
+      "gap": "Theoretical/workforce framing. Explicitly NO concrete failed-AI-observation case study. Opportunity to out-specific it."
+    },
+    {
+      "url": "https://aussiechildcarenetwork.com.au/articles/childcare-programming/step-by-step-guide-to-writing-an-observation-2",
+      "dr": 55,
+      "dr_source": "estimate — long-standing AU sector resource; DR not tool-verified",
+      "word_count": 1900,
+      "covers": [
+        "6-step method: choose moment, record, interpret, link to EYLF, educator reflection, plan extension",
+        "Sample observation",
+        "Framing of observation as 'acts of care, advocacy, professional insight'"
+      ],
+      "gap": "Zero mention of AI. Pure how-to. Does not address the AI-assist question at all — leaves the 'where does AI fit / fail' question open for us to own."
+    }
+  ],
+  "ai_overview_present": true,
+  "ai_overview_note": "WebSearch for the primary keyword returns a synthesised answer-style summary (AI Overview behaviour) that already states 'AI can assist BUT should never completely write observations'. The Overview steals the shallow yes/no answer. Our win is depth: a real, irreproducible-by-AI story it cannot summarise. Do NOT try to win the one-line definitional snippet.",
+  "featured_snippet_target": "When you should NOT use AI to write a childcare observation (short list: when the meaning depends on context only the educator witnessed — attachment, family change, a child's history). Target this as a bulleted 'When NOT to' list near the top — it's a snippet shape the current SERP does not own.",
+  "outline": {
+    "title_candidates": [
+      "The Observation an AI Couldn't Help Me Write",
+      "When AI Can't Write the Observation: A Two-Year-Old, Six Weeks of Silence, and One Name",
+      "Can AI Write Childcare Observations? The Day It Got the Whole Story Wrong"
+    ],
+    "h2": [
+      {
+        "heading": "The morning a silent two-year-old said one word",
+        "h3": [
+          "Six weeks of selective mutism in our room",
+          "What I actually saw and heard (the raw note)"
+        ]
+      },
+      {
+        "heading": "What the AI did with my note",
+        "h3": [
+          "It scaffolded 'language development emerging'",
+          "It auto-tagged EYLF Outcome 5 and stopped there"
+        ]
+      },
+      {
+        "heading": "Why the AI was confidently wrong",
+        "h3": [
+          "The trigger wasn't language — it was attachment",
+          "Mum dropped her off, not Dad: the context no model could see",
+          "AI expresses what you already know; it can't know what you witnessed"
+        ]
+      },
+      {
+        "heading": "How I wrote the observation myself",
+        "h3": [
+          "Recording the attachment moment honestly",
+          "Linking to the right outcome (belonging/security) instead of the convenient one",
+          "It took longer. Why it was worth it."
+        ]
+      },
+      {
+        "heading": "When NOT to hand an observation to AI",
+        "h3": [
+          "When meaning depends on family circumstance or a child's history",
+          "When the 'milestone' is a red herring for an emotional one",
+          "A quick gut-check before you paste a note into a chatbot"
+        ]
+      },
+      {
+        "heading": "Where AI does earn its place in my planning cycle",
+        "h3": [
+          "Plain-language family versions of an observation I authored",
+          "Tidying my own words — never inventing the meaning"
+        ]
+      }
+    ],
+    "unique_angle": "A specific, irreproducible first-person case study where AI mis-attributed causation (language vs attachment) because the decisive fact — which parent did drop-off that day — lives only in the educator's relational knowledge. Top-3 all assert 'AI lacks context' abstractly; none demonstrate a concrete mis-tag with the real cause revealed. We show the exact failure mechanism, then give a reusable 'when NOT to' gut-check. This is E-E-A-T (lived experience) the AI Overview cannot compress.",
+    "coverage_grounding": "H2s 1-4 mirror the union of top-3 coverage (observation method + AI-assist + AI-limitation) but ground each in the anecdote rather than asserting abstractly. H5 ('when NOT to') fills the snippet gap none of the top-3 own. H6 keeps it balanced/credible (not anti-AI), matching the empoweredducator/Famly nuance that AI is fine for plain-language rewrites."
+  },
+  "internal_link_candidates": [
+    "using-ai-for-parent-comms-when-families-do-not-read-english",
+    "the-clinical-question-i-will-not-ask-an-ai-and-why"
+  ],
+  "internal_link_note": "First slug confirmed from recent git history (ece-ai, parent comms — natural pair: 'AI for the family version, not the meaning'). Second is nurse-ai but a strong thematic sibling ('the thing I won't hand to AI'); use only if a cross-niche link fits editorially, otherwise content-writer should substitute a validated ece-ai slug. Both must be re-verified against the live content collection before linking.",
+  "warnings": [
+    "AI Overview is present and answers the shallow yes/no — only target if the article wins on lived-experience depth, which this anecdote does. Do not chase the definitional snippet.",
+    "'writing meaningful observations in childcare' (KD ~22) is owned by high-DR sector sites (Famly, Aussie Childcare Network, Illumine); keep it a supporting keyword, never the primary.",
+    "All DR figures and the volume figure are ESTIMATES — no paid tool (Ahrefs/Ubersuggest paid) output was available this run. KD formula inputs (DR sample, exact-match count) are approximate; treat KD as directional, not precise.",
+    "YMYL-adjacent (child development). Per project rules: real educator byline (Megan, ECE — NOT a nurse/NMC credential), 1+ citation to a .gov/.edu/official EYLF or attachment source (e.g. ACECQA EYLF V2.0, Harvard Center on the Developing Child 'serve-and-return'), 'last reviewed' date, no diagnostic phrasing about the child. Do not imply selective mutism is a diagnosis — frame as 'had not spoken in our room', and 'I'd raise patterns with my supervisor / the family'.",
+    "Author binding is fixed: Megan = ECE educator. Do NOT infer a clinical/nursing persona from the emotional weight of the topic."
+  ]
+}
