@@ -212,7 +212,10 @@
     "author": "stone",
     "topic": "Aura week 3: the bug I could not even describe to the AI",
     "anecdote": "Voice transcription was 60 percent accurate in dev and 92 percent in prod. Same code path. Spent three days describing it to AI assistants eight different ways. Eventually found it: the macOS dev environment used a different speech model than the iOS Safari shipped one. The AI could not help because the symptom was indistinguishable from a model-quality issue. The fix was outside the code surface entirely, in the platform model selection layer.",
-    "status": "pending"
+    "status": "published",
+    "slug": "aura-week-3-the-bug-i-could-not-even-describe-to-the-ai",
+    "pickedAt": "2026-06-09T08:00:00.000Z",
+    "mergedAt": "2026-06-08T21:18:08Z"
   },
   {
     "niche": "dev-diary",
