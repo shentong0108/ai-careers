@@ -1,0 +1,173 @@
+---
+title: "What I Throw Away After a Week of AI-Assisted Coding"
+slug: "what-i-throw-away-after-a-week-of-ai-assisted-coding"
+description: "I killed four AI-built features in one week. The pattern that decides when to throw away AI-generated code, and the 30-minute spec note that now prevents the rewrite."
+publishedAt: "2026-06-08"
+updatedAt: "2026-06-08"
+author: "stone"
+category: "dev-diary"
+tags: ["ai-coding", "indie dev", "workflow", "post-mortem", "spec writing"]
+keywords: ["when to throw away ai generated code", "throw away ai prototype rewrite from scratch", "ai coding spec note before session", "ai assisted coding rework wasted time", "why rewriting ai code is harder than starting over"]
+canonical: "https://stonemegan.dev/blog/what-i-throw-away-after-a-week-of-ai-assisted-coding"
+draft: false
+aiDetectionScore: null
+humanizationMode: "degraded"
+heroImage: "/images/card-dev-diary.jpg"
+factChecked: false
+factCheckNotes: []
+voicePolisherPasses: 1
+voicePolisherSamples: ["src/content/posts/dev-diary/aura-week-1-with-an-ai-coding-tool.mdx", "src/content/posts/dev-diary/the-first-time-the-ai-coding-tool-lied-to-me-about-an-api-su.mdx"]
+---
+
+import Schema from '@/components/Schema.astro'
+
+Last week I killed four features. All four worked. That is the part that still bothers me. Each one ran, passed a quick manual test, and looked done. Then I deleted the lot. This post is about when to throw away AI-generated code, why I now do it on purpose, and the cheap habit that has cut my rework in half. I build a blog and small tools in the evenings around my day job as a nurse in Sydney. Four kills in five days is a lot of deleting.
+
+## The week I deleted four working features
+
+Here is the shape they shared. I'd open an AI session, describe a feature in a sentence or two, and get a working prototype back fast. Genuinely fast. Then I'd look closer and find the prototype had quietly decided something I never told it.
+
+Feature one was a sync layer. I asked for "save the user's notes." The AI assumed there was always a network connection and wrote straight-through writes to the API. No offline mode. My whole app premise is that an educator or a clinician scribbles a note in a dead-zone room and it syncs later. The prototype baked in the opposite of my actual requirement.
+
+Feature two was a bulk import. It batched every write into one giant transaction. Elegant on paper. Useless when one bad row rolls back 200 good ones, which is exactly the messy real-world data I was importing.
+
+Feature three was a form. The AI gave me optimistic UI: update the screen instantly, reconcile with the server after. Slick. Wrong for a screen where a failed save must never look like a success. In a care setting "it looked saved" is not a harmless bug.
+
+Feature four was a smaller version of the same disease: a list view that assumed all data fit in memory.
+
+None of those assumptions were stupid. Honestly, they were reasonable defaults. They just were not *mine*, and I had never said so.
+
+## Why rewriting on top of AI code is harder than starting over
+
+My first instinct each time was to patch. Keep the working prototype, bolt on the missing requirement. Add offline mode to the sync layer. Add per-row error handling to the batch importer. That instinct cost me more than it saved every single time.
+
+The assumption is load-bearing by the time you notice it. Take the offline-mode case. Data flow, error handling, loading states, even the function signatures — all of it quietly assumed the network was there. So offline support wasn't a feature I could bolt on top. It was a different spine. I'd have had to unpick that one assumption from a dozen places that each looked innocent on their own.
+
+There's a second cost people undercount. Reading and un-picking someone else's reasoning is slower than writing your own. AI code reads as confident and tidy, which makes it *harder* to question, not easier. I'd find myself trying to reconstruct why the model chose a batched write, as if there were a hidden reason worth preserving. There wasn't. It guessed. [Martin Fowler's worked example](https://martinfowler.com/articles/exploring-gen-ai/partner-with-ai-and-throw-away-the-code.html) lands on the same conclusion from a harder problem than mine: when the generated version is plausible but wrong, the fix is to rewrite the core by hand for clarity, not to renovate the AI's draft.
+
+So the honest comparison was never "patch versus rewrite." It's renovating a thing built on the wrong foundation, versus pouring the right one and building once. Framed that way, throwing the prototype out stopped feeling wasteful. It felt like the cheaper job.
+
+## The common shape of throwaway AI code
+
+The model optimises for "it runs." It cannot optimise for "it matches the thing I never said out loud" — that target was never in the prompt. So a prototype that runs is the model doing its actual job, well. The gap is on me.
+
+There's a slower danger too. Burke Holland calls it the [graduation problem](https://burkeholland.github.io/blog/throw-ai-code-away): a throwaway prototype quietly becomes the production code because it works and nobody decided otherwise. That is precisely how a hidden assumption ships. Nobody chooses to put optimistic UI in a clinical form. It just survives, one "good enough for now" at a time, until it's load-bearing in production and a near-miss surfaces it.
+
+Thoughtworks parks this whole category under [complacency with AI-generated code](https://www.thoughtworks.com/radar/techniques/complacency-with-ai-generated-code) and rates it "hold," pointing at rising code churn and review fatigue. Churn is the measurable fingerprint of what I did all week: write, realise it's wrong, rewrite. The radar reads as abstract risk. My week was the receipt.
+
+## My fix: a 30-minute spec note before any AI session
+
+The change is small and, frankly, a bit boring. Before I open an AI session now, I write a spec note. Thirty minutes, in plain text, by hand. No tool. No template ceremony.
+
+What goes in it: the constraints the model would otherwise guess wrong. Offline behaviour. Whether writes are batched or per-row. Whether the UI is optimistic or pessimistic. What happens on partial failure. The edge cases I actually care about. And a short list I think of as the assumptions I refuse to delegate, things where a wrong guess is expensive rather than annoying.
+
+The discipline that matters most: I write it even for features that feel too simple to spec. *Especially* those. Three of my four kills last week were features that felt obvious. "Save the notes" felt obvious. The obviousness is the trap. A feature feels simple precisely because I'm holding a stack of unstated assumptions in my head, and the simpler it feels, the more of them I'm holding. The note's only job is to get them out of my head and into the prompt before the model fills the gaps for me.
+
+This is the same lesson I learned the hard way during my [first week building an app with an AI coding tool](/blog/aura-week-1-with-an-ai-coding-tool): the model is good at building the thing once you tell it what the thing connects to. It is not psychic about the parts you left implicit.
+
+## What I keep vs what I throw away
+
+Not everything from a thrown-away prototype is waste. The split is pretty clean now.
+
+Keep:
+
+- The tests. If I had the AI write tests, they often encode the behaviour correctly even when the implementation is wrong. Keep the tests, throw the implementation. That is the most reusable artifact from a dead prototype.
+- The spec note. It outlives the code. It's the input to the rewrite.
+- One-off throwaway scripts. A 20-line scraper or a data-munging script I'll run once and delete is the *ideal* AI job. No maintainer, no future, no hidden-assumption risk. Let it rip.
+
+Throw away:
+
+- Any implementation built on an assumption I never stated. No patching. Re-prompt with the spec note and regenerate, or hand-write the spine.
+- My own sunk-cost feeling about the hour it took to build the prototype.
+
+## When the note pays for itself
+
+It pays for itself the first time the model tries to read your mind and gets it wrong, which for me is roughly every session. Here's the rough before-and-after, in my own hours.
+
+The week of the four kills, I'd guess I spent around 11 hours total: a couple of hours building each prototype, then more hours each on the failed patch attempts before I gave up and rebuilt. Call it a third of my evening coding time that week spent on rework.
+
+Since I started the spec-note habit, I've shipped six small features. I rebuilt one from scratch, and that was a genuine scope change, not a hidden assumption. The 30-minute note per feature costs me about three hours across the six. Against a third of a week previously lost to rework, that is the cheapest insurance I've bought all year. The note isn't overhead. It's the rework I'm choosing to do up front, while it's still words and not code.
+
+## Controversial opinion: a fast prototype is a liability, not a head start
+
+Here's the stance I'll defend. The speed of AI prototyping is not the gift everyone treats it as. It is a liability dressed as a head start.
+
+A prototype you sweated over for two hours, you understand. You know which decisions were deliberate and which were lazy. A prototype the model handed you in ninety seconds, you understand none of, and the speed tricks you into skipping the part where you'd normally notice the assumptions. The faster the prototype arrives, the *less* you've interrogated it, and the more confidently wrong it can be.
+
+I expect pushback. Fast iteration is supposed to be the whole point. But fast iteration on the wrong foundation is just fast churn, and churn is the thing the research keeps flagging. My rule now: treat every AI prototype as disposable by default. Assume I will throw it away. If it survives contact with the spec note, great, it earned its place. The ones that don't survive cost me thirty minutes of reading, not eleven hours of patching.
+
+The mindset shift that fixed my week wasn't prompting better. It was deciding, before I start, that the code is throwaway until proven otherwise. The spec note is the proof. I came to the same place from the other direction when I [killed my first nurse-tooling project before writing a line of it](/blog/why-i-killed-my-first-nurse-tooling-project-before-i-wrote-a) without writing a line of it.
+
+## TL;DR / Key takeaways
+
+- I killed four working AI-built features in one week. All four had baked in an assumption I never stated: offline mode, batched writes, optimistic UI, in-memory data.
+- Rewriting on top of AI code is harder than starting over, because the wrong assumption is load-bearing by the time you notice and reading the model's reasoning costs more than writing your own.
+- When to throw away AI-generated code: the moment you find a hidden assumption you never specified. Keep the tests, throw the implementation.
+- The fix is a 30-minute spec note before any AI session, written even for features that feel too simple to spec. It pays for itself the first time the model guesses wrong.
+- Treat every AI prototype as disposable by default. Speed without interrogation is churn, not progress.
+
+More from this dev diary on the same theme: [why I stripped every AI brand name out of my own blog](/blog/why-i-stripped-every-ai-brand-name-out-of-my-own-blog-after-).
+
+## Sources
+
+- [Partner with AI and throw away the code — Martin Fowler](https://martinfowler.com/articles/exploring-gen-ai/partner-with-ai-and-throw-away-the-code.html)
+- [Complacency with AI-generated code — Thoughtworks Technology Radar](https://www.thoughtworks.com/radar/techniques/complacency-with-ai-generated-code)
+- [Throw your AI code away — Burke Holland](https://burkeholland.github.io/blog/throw-ai-code-away)
+
+<Schema
+  type="Article"
+  data={{
+    headline: 'What I Throw Away After a Week of AI-Assisted Coding',
+    description: 'I killed four AI-built features in one week. The pattern that decides when to throw away AI-generated code, and the 30-minute spec note that now prevents the rewrite.',
+    datePublished: '2026-06-08',
+    dateModified: '2026-06-08',
+    inLanguage: 'en-AU',
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': 'https://stonemegan.dev/blog/what-i-throw-away-after-a-week-of-ai-assisted-coding',
+    },
+    image: 'https://stonemegan.dev/images/card-dev-diary.jpg',
+    author: {
+      '@type': 'Person',
+      name: 'Stone Megan',
+      jobTitle: 'Indie Developer & Registered Nurse',
+      url: 'https://stonemegan.dev/about',
+      sameAs: ['https://stonemegan.dev'],
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'ai-careers',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://stonemegan.dev/logo.png',
+      },
+    },
+  }}
+/>
+
+<Schema
+  type="Person"
+  data={{
+    name: 'Stone Megan',
+    jobTitle: 'Indie Developer & Registered Nurse',
+    url: 'https://stonemegan.dev/about',
+    knowsAbout: ['AI-assisted coding', 'Spec writing', 'Prototyping', 'Indie development', 'Software workflow'],
+    sameAs: ['https://stonemegan.dev'],
+  }}
+/>
+
+<Schema
+  type="BreadcrumbList"
+  data={{
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Blog', item: 'https://stonemegan.dev/blog' },
+      { '@type': 'ListItem', position: 2, name: 'Dev Diary', item: 'https://stonemegan.dev/blog/category/dev-diary' },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: 'What I Throw Away After a Week of AI-Assisted Coding',
+        item: 'https://stonemegan.dev/blog/what-i-throw-away-after-a-week-of-ai-assisted-coding',
+      },
+    ],
+  }}
+/>

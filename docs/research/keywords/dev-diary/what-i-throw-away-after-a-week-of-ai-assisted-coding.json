@@ -1,0 +1,137 @@
+{
+  "niche": "dev-diary",
+  "seed_topic": "What an indie dev throws away after a week of AI-assisted coding, and why a 30-minute spec note before each session prevents rewrites.",
+  "target_geo": "global",
+  "generated": "2026-06-08",
+  "primary_keyword": {
+    "term": "when to throw away ai generated code",
+    "estimated_kd": 14,
+    "estimated_volume": "low (<500/mo, likely 100-300)",
+    "source": "Google Suggest 2026-06-08 (only 1 autocomplete returned for 'throwing away ai code' and 'ai prototype rewrite' — sparse autocomplete = low search demand + low competition; DuckDuckGo SERP 2026-06-08 shows niche blogs, not big publishers, ranking)",
+    "kd_method": "top10_avg_DR/5 + exact_match_count*2. Real relevant SERP (DuckDuckGo, 'when to throw away ai generated code') is a mix of high-DR generalist pages (thoughtworks ~91, martinfowler ~89) and low-DR personal blogs (burkeholland.github.io, junod.dev, ivanturkovic.com ~10-30). Estimated top10 avg DR ~45 -> 9; exact-match titles ~2-3 (burkeholland, junod) -> ~5. Sum ~14. UNCERTAIN: no Ahrefs/Ubersuggest API run; DR values are visual estimates, treat KD as a ballpark."
+  },
+  "long_tail": [
+    { "term": "when to throw away ai generated code", "estimated_kd": 14, "intent": "informational", "source": "Google Suggest + DuckDuckGo SERP 2026-06-08" },
+    { "term": "throw away ai prototype rewrite from scratch", "estimated_kd": 10, "intent": "informational", "source": "Google Suggest 'ai prototype rewrite' (1 result) + WebSearch 2026-06-08" },
+    { "term": "ai coding spec note before session", "estimated_kd": 12, "intent": "informational", "source": "WebSearch 'spec before ai coding' + Google Suggest (1 result) 2026-06-08" },
+    { "term": "ai assisted coding rework wasted time", "estimated_kd": 13, "intent": "informational", "source": "WebSearch 'avoid ai coding mistakes' cluster 2026-06-08" },
+    { "term": "ai prototype graduation problem production", "estimated_kd": 8, "intent": "informational", "source": "WebSearch (Burke Holland 'graduation problem', medium throwaway-software) 2026-06-08" },
+    { "term": "why rewriting ai code is harder than starting over", "estimated_kd": 11, "intent": "informational", "source": "WebSearch + martinfowler 'a failed attempt at rewrite' 2026-06-08" },
+    { "term": "how long should a spec be before ai coding", "estimated_kd": 9, "intent": "informational", "source": "WebSearch 'spec note prevent rework' (5-minute/30-minute framing) 2026-06-08" }
+  ],
+  "people_also_ask": [
+    "When should you throw away AI-generated code?",
+    "Is AI-generated code good enough for production?",
+    "Why does AI write a working prototype that you still have to rewrite?",
+    "How do you stop an AI coding agent from guessing your requirements?",
+    "What is the AI prototype 'graduation problem'?",
+    "How long should a spec be before you start an AI coding session?",
+    "Is it faster to rewrite AI code or write it yourself from scratch?"
+  ],
+  "paa_source": "Google HTML SERP and Bing returned blocked/irrelevant 'throw/axe/blanket' homonym results for 'People also ask'. The questions above are reconstructed from related-search article themes surfaced across WebSearch (pragmaticengineer, posthog 'avoid ai coding mistakes', Burke Holland 'graduation problem', Martin Fowler 'failed attempt at rewrite', addyosmani '70% problem'). FLAG: not scraped from a live Google PAA box — homonym pollution made the literal phrase un-scrapeable; treat as inferred intent, verify if a PAA scrape becomes available.",
+  "serp_top3": [
+    {
+      "url": "https://www.thoughtworks.com/radar/techniques/complacency-with-ai-generated-code",
+      "dr": 91,
+      "word_count": 850,
+      "covers": [
+        "Tech Radar 'Hold' rating on complacency with AI code",
+        "GitClear/Microsoft studies: rising code churn + duplication",
+        "automation bias and review fatigue",
+        "explicitly: throwaway/prototype code is fine, production is not"
+      ],
+      "fetched": "2026-06-08"
+    },
+    {
+      "url": "https://martinfowler.com/articles/exploring-gen-ai/partner-with-ai-and-throw-away-the-code.html",
+      "dr": 89,
+      "word_count": 2400,
+      "covers": [
+        "concrete worked example: reverse-engineering an unfamiliar algorithm",
+        "use AI for utilities + benchmarks + test coverage, keep the tests not the code",
+        "a failed rewrite, then rewriting the core by hand for clarity",
+        "lesson: when in doubt, restart from scratch"
+      ],
+      "fetched": "2026-06-08"
+    },
+    {
+      "url": "https://burkeholland.github.io/blog/throw-ai-code-away",
+      "dr": 22,
+      "word_count": 550,
+      "covers": [
+        "AI is great for one-off throwaway scripts (30-min YouTube scraper example)",
+        "code is for humans, AI lacks the psychology of maintainability",
+        "the 'graduation problem': throwaway projects becoming permanent",
+        "write code respecting whoever maintains it next"
+      ],
+      "fetched": "2026-06-08"
+    }
+  ],
+  "ai_overview_present": false,
+  "ai_overview_note": "Could not confirm a live Google AI Overview — Google's HTML SERP was access-blocked and Bing/DDG returned homonym ('throw blanket', 'axe throwing') results for the literal phrase. For the precise query 'when to throw away ai generated code' the relevant SERP (DuckDuckGo) showed standard organic blue links with no answer box. Low AI-Overview risk for this exact long-tail, but re-verify on a clean Google session.",
+  "featured_snippet_target": "A 2-3 sentence answer to 'When should you throw away AI-generated code?' — e.g. 'Throw it away when the prototype encodes an assumption you never specified (offline mode, batched writes, optimistic UI). Once a hidden assumption is baked in, rewriting on top of the AI's code is slower than starting from a spec. Keep the tests, throw the implementation.'",
+  "outline": {
+    "title_candidates": [
+      "What I Throw Away After a Week of AI-Assisted Coding",
+      "I Killed Four AI-Built Features Last Week. Here's the Pattern.",
+      "When to Throw Away AI-Generated Code (and the 30-Minute Note That Saves It)"
+    ],
+    "h2": [
+      {
+        "heading": "The week I deleted four working features",
+        "h3": [
+          "What each prototype got right",
+          "The hidden assumption in each one (offline mode, batched writes, optimistic UI)"
+        ]
+      },
+      {
+        "heading": "Why rewriting on top of AI code is harder than starting over",
+        "h3": [
+          "The assumption is load-bearing by the time you notice",
+          "Reading and un-picking someone else's reasoning costs more than writing"
+        ]
+      },
+      {
+        "heading": "The common shape of throwaway AI code",
+        "h3": [
+          "AI optimises for 'it runs', not 'it matches what I never said'",
+          "The graduation problem: prototypes that quietly become production"
+        ]
+      },
+      {
+        "heading": "My fix: a 30-minute spec note before any AI session",
+        "h3": [
+          "What goes in the note (constraints, edge cases, the assumptions I refuse to delegate)",
+          "Even for features that feel too simple to spec"
+        ]
+      },
+      {
+        "heading": "What I keep vs what I throw away",
+        "h3": [
+          "Keep: the tests, the spec note, the throwaway one-off scripts",
+          "Throw away: any implementation built on an unstated assumption"
+        ]
+      },
+      {
+        "heading": "When the note pays for itself",
+        "h3": [
+          "The first time the AI tries to read your mind and gets it wrong",
+          "A rough before/after on my own rework hours"
+        ]
+      }
+    ],
+    "unique_angle": "Top-3 all argue the abstract case (Thoughtworks: research/risk; Fowler: one algorithm worked example; Burke Holland: opinion essay). None give a repeatable indie-dev process tied to a concrete kill-count. This piece is a first-person dev diary: four named features killed in one week, the specific unstated assumptions that killed them (offline mode, batched writes, optimistic UI), and a concrete 30-minute spec-note ritual with real hours saved — process + receipts, not philosophy."
+  },
+  "internal_link_candidates": [
+    "owna-templates-using-ai-alongside-not-inside",
+    "the-observation-an-ai-could-not-help-me-write"
+  ],
+  "internal_link_note": "Candidates pulled from recent git commit history (most recent published dev-diary/AI-workflow posts). content-writer MUST verify these slugs exist in src/content before linking; the live site appears un-indexed externally so slugs could not be confirmed via search.",
+  "warnings": [
+    "KD ~14 is a visual-estimate ballpark — no Ahrefs/Ubersuggest API run this session. Treat as low-but-unverified; confirm with a free-tier tool before betting heavily.",
+    "Literal phrase 'throw away ai code' has very sparse Google Suggest and homonym-polluted SERPs (axe throwing / throw blankets). Low volume — win on the long-tail cluster and intent, not head-term traffic.",
+    "Two of top-3 are DR 89-91 (Thoughtworks, Martin Fowler) — outranking them on the head term is unrealistic for a new domain. Target the specific long-tails and the first-person process angle where high-DR generalist pages can't compete.",
+    "PAA list is inferred from related-article themes, not scraped from a live Google PAA box (homonym pollution blocked scraping). Verify if a clean PAA scrape becomes possible.",
+    "YMYL note: dev-diary is not YMYL, so no medical/credential citation gate — but keep the real first-person anecdote and >=1 specific number per CLAUDE.md 'No AI Smell' rules."
+  ]
+}
