@@ -1,0 +1,111 @@
+{
+  "niche": "dev-diary",
+  "seed_topic": "Aura week 3: the bug I could not even describe to the AI",
+  "target_geo": "global",
+  "primary_keyword": {
+    "term": "when AI can't help you debug",
+    "estimated_kd": 14,
+    "estimated_volume": "low (<300/mo)",
+    "source": "Google Suggest 2026-06-09 (autocomplete sparse: 'ai cant debug' returned 0 completions, 'ai can't help debug' surfaced 'what ai still can't do' + 'using ai to help debug'); SERP is all general guides, no exact-match dev-diary, so KD pegged low for a story-format post"
+  },
+  "long_tail": [
+    { "term": "the bug I couldn't describe to AI", "estimated_kd": 8, "intent": "informational", "note": "Google Suggest 2026-06-09 echoed exact phrase, no competing exact-match SERP result found" },
+    { "term": "works in dev but not in production same code", "estimated_kd": 18, "intent": "informational", "note": "Google Suggest 2026-06-09 echoed phrase; SERP has dev.to/Medium guides, KD pushed up by DR" },
+    { "term": "AI can't debug environment specific bug", "estimated_kd": 12, "intent": "informational" },
+    { "term": "web speech api iphone accuracy", "estimated_kd": 16, "intent": "informational", "note": "Google Suggest 2026-06-09 echoed phrase; Apple Developer Forums + LambdaTest rank, niche enough to crack" },
+    { "term": "voice transcription accuracy different in dev and production", "estimated_kd": 9, "intent": "informational" },
+    { "term": "macOS vs iOS Safari speech recognition model difference", "estimated_kd": 11, "intent": "informational" },
+    { "term": "bug outside the code surface", "estimated_kd": 7, "intent": "informational", "note": "near-zero competition, brandable angle phrase" }
+  ],
+  "people_also_ask": [
+    "Why does my code work locally but not in production?",
+    "Can AI help debug code it didn't write?",
+    "Why is Web Speech API less accurate on iPhone than on desktop?",
+    "Does Safari use a different speech model on iOS vs macOS?",
+    "Why does AI give plausible but wrong debugging suggestions?",
+    "What kinds of bugs can AI assistants not solve?"
+  ],
+  "serp_top3": [
+    {
+      "url": "https://www.locked.de/ai-can-write-code-but-it-cant-debug-without-context/",
+      "dr": 30,
+      "word_count": 1150,
+      "covers": [
+        "real bug story (app works locally, 500 in production)",
+        "feeding server config dumps to the AI",
+        "environment difference as root cause (PHP FastCGI vs Docker)",
+        "AI as partner not replacement"
+      ]
+    },
+    {
+      "url": "https://super-productivity.com/blog/ai-debugging-guide/",
+      "dr": 42,
+      "word_count": 2100,
+      "covers": [
+        "pattern bugs vs causal bugs taxonomy",
+        "the plausible hypothesis trap",
+        "when AI accelerates vs derails debugging",
+        "diagnostic decision tree + debugging ritual"
+      ]
+    },
+    {
+      "url": "https://medium.com/@martin.jordanovski/ai-coding-assistants-debugging-challenges-ais-limitations-4e49d04e8b6a",
+      "dr": 96,
+      "word_count": 2100,
+      "covers": [
+        "AI-generated subtle errors and outdated suggestions",
+        "cross-system / microservices debugging limits",
+        "accuracy studies on ChatGPT failures",
+        "trust-but-verify best practices"
+      ]
+    }
+  ],
+  "ai_overview_present": true,
+  "featured_snippet_target": "A short definition list answering 'why can't AI debug some bugs?' — frame: AI pattern-matches across codebases but cannot observe your runtime, and some bugs live outside the code surface (platform/model/config layer) where the symptom is indistinguishable from a quality problem.",
+  "outline": {
+    "title_candidates": [
+      "Aura Week 3: The Bug I Couldn't Even Describe to the AI",
+      "When the Bug Isn't in Your Code: Aura Week 3 Dev Diary",
+      "60% in Dev, 92% in Prod: The Bug AI Couldn't Touch"
+    ],
+    "h2": [
+      {
+        "heading": "The symptom that made no sense: 60% accuracy in dev, 92% in prod",
+        "h3": ["Same code path, two numbers", "Why I assumed it was a model-quality problem first"]
+      },
+      {
+        "heading": "Three days of describing it to the AI eight different ways",
+        "h3": ["Every prompt I tried", "Why the AI kept giving plausible, confident, wrong answers"]
+      },
+      {
+        "heading": "Why the AI literally couldn't help here",
+        "h3": ["The symptom was indistinguishable from a model-quality issue", "AI pattern-matches code; it can't observe your runtime or platform"]
+      },
+      {
+        "heading": "The actual root cause: two different speech models",
+        "h3": ["macOS dev used a different speech engine than shipped iOS Safari", "Web Speech API hands off to the platform, not your code"]
+      },
+      {
+        "heading": "The fix was outside the code surface entirely",
+        "h3": ["What 'outside the code surface' means", "Pinning model selection at the platform layer"]
+      },
+      {
+        "heading": "What I now check before I burn three days on the AI",
+        "h3": ["Is the symptom even inside the code I can paste?", "A quick dev-vs-prod parity checklist"]
+      }
+    ],
+    "unique_angle": "Every top-3 result treats 'AI can't debug' as a code/config or microservices problem. None covers a bug that lives in the PLATFORM MODEL SELECTION layer — where the symptom (low transcription accuracy) is identical to a model-quality issue, so the AI cannot distinguish 'your code is wrong' from 'the platform handed you a different model'. The concrete 60%/92% Web Speech API macOS-vs-iOS story is the wedge: it teaches readers to recognise bugs that are undescribable to an AI because the cause is unobservable from the code itself."
+  },
+  "internal_link_candidates": [
+    "what-i-throw-away-after-a-week-of-ai-assisted-coding",
+    "aura-week-2",
+    "the-observation-an-ai-could-not-help-me-write"
+  ],
+  "warnings": [
+    "AI Overview is present for broad 'why AI can't debug' queries and will steal clicks — only win with depth + the specific 60%/92% story; do NOT target the broad head term, target the long-tail story phrases.",
+    "Top-3 includes a DR 96 Medium domain; do not compete on the generic 'AI debugging limitations' term — compete on the platform-model-mismatch long-tail where DR is irrelevant.",
+    "'the bug I couldn't describe to AI' has near-zero search volume — it's an angle/title hook, not a traffic driver. Real traffic comes from 'web speech api iphone accuracy' + 'works in dev but not in production'.",
+    "Volume figures are estimates from Google Suggest sparsity only; no Ahrefs/Ubersuggest numeric volume was pulled this run — treat all estimated_volume as directional, not measured.",
+    "internal_link_candidates are inferred from the same dev-diary series (git log shows the 'what-i-throw-away' post); content-writer must verify slugs exist in src/content before linking."
+  ]
+}
