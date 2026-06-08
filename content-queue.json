@@ -202,7 +202,10 @@
     "author": "stone",
     "topic": "What I throw away after a week of AI-assisted coding",
     "anecdote": "Killed four features last week. The common shape: AI got me to a working prototype fast, then I realised the prototype made an assumption I had not shared (offline mode, batched writes, optimistic UI). Rewriting was harder than rewriting from scratch. Now: a 30-minute spec note before any AI session, even for features that feel simple. The note pays itself back the first time the AI tries to read your mind and gets it wrong.",
-    "status": "pending"
+    "status": "published",
+    "slug": "what-i-throw-away-after-a-week-of-ai-assisted-coding",
+    "pickedAt": "2026-06-08T08:00:44.000Z",
+    "mergedAt": "2026-06-08T08:19:22Z"
   },
   {
     "niche": "dev-diary",
