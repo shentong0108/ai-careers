@@ -1,0 +1,183 @@
+---
+title: "Aura Week 3: The Bug I Couldn't Even Describe to the AI"
+slug: "aura-week-3-the-bug-i-could-not-even-describe-to-the-ai"
+description: "Voice transcription was 60% accurate in dev and 92% in prod. Same code. Three days of describing it to an AI taught me when AI can't help you debug."
+publishedAt: "2026-06-09"
+updatedAt: "2026-06-09"
+author: "stone"
+category: "dev-diary"
+tags: ["aura", "indie dev", "debugging", "web speech api", "ai-coding"]
+keywords: ["when AI can't help you debug", "the bug I couldn't describe to AI", "works in dev but not in production same code", "web speech api iphone accuracy", "macOS vs iOS Safari speech recognition model difference", "bug outside the code surface"]
+canonical: "https://stonemegan.dev/blog/aura-week-3-the-bug-i-could-not-even-describe-to-the-ai"
+draft: false
+aiDetectionScore: null
+humanizationMode: "degraded"
+heroImage: "/images/card-dev-diary.jpg"
+factChecked: false
+factCheckNotes: []
+voicePolisherPasses: 1
+voicePolisherSamples: ["src/content/posts/dev-diary/aura-week-1-with-an-ai-coding-tool.mdx", "src/content/posts/dev-diary/what-i-throw-away-after-a-week-of-ai-assisted-coding.mdx"]
+---
+
+import Schema from '@/components/Schema.astro'
+
+Week 3 of building Aura nearly broke me. Voice transcription, the feature the whole app leans on, came back 60% accurate on my Mac in development and 92% accurate once it shipped to my iPhone. Same code path. Same words, same microphone, same quiet room. Identical except for the result. I spent three days learning when AI can't help you debug, because this was the bug I could not even describe to the AI. This post is the story of that bug, why every AI assistant gave me confident wrong answers, and the one check I now run before I burn three days again.
+
+## The symptom that made no sense: 60% accuracy in dev, 92% in prod
+
+Aura lets you scribble a note by voice. I record a sentence, the browser transcribes it, the text lands in a draft. Simple feature. The kind you assume works once and forget.
+
+In development I'd say "review medication chart before the morning round" and get back something like "review medication chart before the morning ground" or worse. Roughly four words in ten landed wrong. I logged it across 20 test phrases and dev sat at 60%. Then I deployed the exact same build, opened it in Safari on my phone, said the same sentences, and watched 92% of the words come back clean.
+
+### Same code path, two numbers
+
+The part that wrecks your reasoning: I had the arrow pointing backwards. Production is supposed to be the scary environment. Dev is where things work and prod is where they break. Not here. Worse results locally, better results live, from one codebase with no environment branch in the transcription logic at all.
+
+### Why I assumed it was a model-quality problem first
+
+My first hypothesis was the obvious one. The transcription is bad, so my use of the speech API must be bad. Wrong sample rate. Wrong language hint. A buffering issue mangling the audio before it reached the recogniser. Every one of those would show up as exactly this symptom: words coming back wrong. So I went hunting in my code, because that is the only surface I can read.
+
+## Three days of describing it to the AI eight different ways
+
+I lean on an AI coding assistant for most of Aura. It is genuinely good at this stuff. So I pasted the bug and waited for the usual quick win.
+
+### Every prompt I tried
+
+First prompt: "My Web Speech API transcription is only 60% accurate, how do I improve it?" I got a tidy list. Set the language. Tune the sample rate. Add interim results. Debounce. All reasonable. None of it moved the number.
+
+So I reframed. "Transcription is 60% in dev and 92% in prod with the same code, why?" The AI reached for the standard playbook: environment variables, build minification differences, a CDN serving a stale bundle, microphone permissions behaving differently. I checked all of it. The bundles were byte-identical. No env branch existed.
+
+I kept going. Eight framings over three days. I described it as an audio pipeline bug, a build bug, a permissions bug, a network bug, a race condition. Each time the AI confidently produced a plausible cause and a fix, and each time the fix did nothing.
+
+### Why the AI kept giving plausible, confident, wrong answers
+
+What I missed for three days: the AI was answering the question I asked, not the question that mattered. I kept asking "what in my code makes transcription worse," and it kept finding things in code that could make transcription worse. The answers were internally correct and externally useless, because the cause was never in the code I was pasting.
+
+## Why the AI literally couldn't help here
+
+I want to be fair to the tool. This was not the AI being dumb. It was the AI being asked to see something it structurally cannot see.
+
+### The symptom was indistinguishable from a model-quality issue
+
+Low transcription accuracy has one fingerprint: wrong words. A bad sample rate produces wrong words. A weak model produces wrong words. A different model produces wrong words. From inside my code, all three are the same observation. The AI had no way to tell "your audio handling is broken" apart from "the platform handed you a different recogniser," because both arrive as the identical symptom. The signal that would separate them does not exist on the code surface.
+
+### AI pattern-matches code; it can't observe your runtime or platform
+
+An AI assistant is extraordinary at pattern-matching across millions of codebases. Show it a stack trace, a function, a config, and it will recognise the shape. What it cannot do is stand in my actual runtime and watch which speech engine my browser reached for. It never sees my Mac, my phone, or the operating-system service sitting underneath the API. The [super-productivity AI debugging guide](https://super-productivity.com/blog/ai-debugging-guide/) calls this the difference between pattern bugs and causal bugs, and it matches my three days exactly. My bug was causal, and the cause lived somewhere the model could not look.
+
+## The actual root cause: two different speech models
+
+I found it by accident. Out of stubbornness I read the [MDN SpeechRecognition docs](https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognition) line by line, and one sentence stopped me: the recognition is performed by a service the browser hands the audio to, not by your code. The API is a doorway. What is on the other side is not yours.
+
+### macOS dev used a different speech engine than shipped iOS Safari
+
+That doorway opens onto different rooms depending on the platform. On my Mac in development, the browser was routing audio to one recognition service. On iOS Safari, where Aura actually ships, it routes to Apple's on-device engine, the same one that powers Siri. WebKit's own [Safari 14.1 release notes](https://webkit.org/blog/11648/new-webkit-features-in-safari-14-1/) say it plainly: speech recognition on Safari is powered by the same engine as Siri. Two platforms, two models, two accuracy numbers. My dev machine was the bad room the whole time. Production was fine because production used the good model. I had been grading my code against an engine I will never ship to.
+
+### Web Speech API hands off to the platform, not your code
+
+Once I understood that, the 60/92 split stopped being a paradox and became obvious. I was never measuring my code. I was measuring two different speech models and crediting the gap to a bug I wrote. There was no bug in my code. There never had been.
+
+## The fix was outside the code surface entirely
+
+Here is the lesson I keep coming back to. The fix lived nowhere I could paste into a prompt. (Which, when you have spent three days pasting things into prompts, stings.)
+
+### What "outside the code surface" means
+
+The code surface is everything you can show an AI: your source, your config, your logs, your tests. Plenty of bugs live there. But some bugs live one layer down, in the platform's choice of which model, which service, which engine to hand your request to. You cannot see that layer from your code, so you cannot describe it, so the AI cannot help. The bug was outside the code surface, and that is precisely why it was undescribable.
+
+### Pinning model selection at the platform layer
+
+The actual fix was boring once I knew the shape. I stopped treating my dev machine's transcription number as ground truth. I now test transcription accuracy on the target platform, on a real iPhone, because that is the only number that means anything for Aura. Where I could, I made the platform's model choice explicit instead of letting it default silently. A few lines plus a habit. Not a clever algorithm.
+
+## What I now check before I burn three days on the AI
+
+Three days is an expensive lesson. So here's the cheap version I run now.
+
+### Is the symptom even inside the code I can paste?
+
+Before I open a single AI prompt, I ask one question. Can the cause of this symptom appear in the files I'm about to paste? If the symptom is "wrong words from a transcription service," the honest answer might be no, the cause is below my code. That one question would have saved me two and a half of the three days. The AI is a phenomenal pattern-matcher over code. The first job is deciding whether code is even where the answer lives.
+
+### A quick dev-vs-prod parity checklist
+
+When something works in dev but not in production with the same code, I now walk a short list before blaming my own logic. What does each environment actually use underneath: which runtime, which service, which model, which OS? The [Twelve-Factor App dev/prod parity principle](https://12factor.net/dev-prod-parity) is usually framed around databases and backing services, and it applies just as hard to an invisible platform speech engine. Same code does not mean same environment. It almost never does.
+
+## My opinion: chasing the AI for too long is its own bug
+
+Here's the stance I'll defend, and it's partly aimed at myself. The real failure in week 3 was not the speech models. It was that I asked the AI the same question eight times and trusted the eighth confident answer as much as the first. That is a debugging anti-pattern the AI did not cause but absolutely enabled.
+
+A human senior dev, after the second wrong guess, would have stopped and said "I don't think this is in your code." The AI never says that. It will generate a plausible cause forever, because generating plausible causes is what it does. The confidence never drops. So the responsibility to call it, to step back and ask whether the bug is even on the code surface, sits entirely with me. I expect pushback on this. People love the speed. But speed into the wrong layer is just a faster way to waste three days, and the tool will happily keep you there.
+
+## TL;DR / Key takeaways
+
+- Aura's voice transcription was 60% accurate in dev and 92% in prod from one identical codebase, with no environment branch in the code.
+- The AI gave confident, plausible, wrong answers for three days because low transcription accuracy looks identical whether the cause is your code or the platform's model choice.
+- The Web Speech API hands audio off to a platform speech service. My Mac's dev browser and shipped iOS Safari used different speech models, and that gap was the whole "bug."
+- The fix was outside the code surface: test on the target platform, treat the platform's model choice as a real variable, and stop trusting the dev number.
+- Before burning days on an AI, ask one question first: can the cause of this symptom even appear in the files I'm about to paste?
+
+More from the Aura build diary: [where Aura started, week 1 with an AI coding tool](/blog/aura-week-1-with-an-ai-coding-tool). On the same theme of where AI stops being useful: [the observation an AI could not help me write](/blog/the-observation-an-ai-could-not-help-me-write) and [what I throw away after a week of AI-assisted coding](/blog/what-i-throw-away-after-a-week-of-ai-assisted-coding).
+
+## Sources
+
+- [SpeechRecognition — MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognition)
+- [New WebKit Features in Safari 14.1 — WebKit](https://webkit.org/blog/11648/new-webkit-features-in-safari-14-1/)
+- [Dev/prod parity — The Twelve-Factor App](https://12factor.net/dev-prod-parity)
+- [The AI debugging guide — Super Productivity](https://super-productivity.com/blog/ai-debugging-guide/)
+
+<Schema
+  type="Article"
+  data={{
+    headline: "Aura Week 3: The Bug I Couldn't Even Describe to the AI",
+    description: 'Voice transcription was 60% accurate in dev and 92% in prod. Same code. Three days of describing it to an AI taught me when AI can\'t help you debug.',
+    datePublished: '2026-06-09',
+    dateModified: '2026-06-09',
+    inLanguage: 'en-AU',
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': 'https://stonemegan.dev/blog/aura-week-3-the-bug-i-could-not-even-describe-to-the-ai',
+    },
+    image: 'https://stonemegan.dev/images/card-dev-diary.jpg',
+    author: {
+      '@type': 'Person',
+      name: 'Stone Megan',
+      jobTitle: 'Indie Developer & Registered Nurse',
+      url: 'https://stonemegan.dev/about',
+      sameAs: ['https://stonemegan.dev'],
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'ai-careers',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://stonemegan.dev/logo.png',
+      },
+    },
+  }}
+/>
+
+<Schema
+  type="Person"
+  data={{
+    name: 'Stone Megan',
+    jobTitle: 'Indie Developer & Registered Nurse',
+    url: 'https://stonemegan.dev/about',
+    knowsAbout: ['AI-assisted coding', 'Debugging', 'Web Speech API', 'Indie development', 'Voice transcription'],
+    sameAs: ['https://stonemegan.dev'],
+  }}
+/>
+
+<Schema
+  type="BreadcrumbList"
+  data={{
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Blog', item: 'https://stonemegan.dev/blog' },
+      { '@type': 'ListItem', position: 2, name: 'Dev Diary', item: 'https://stonemegan.dev/blog/category/dev-diary' },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: "Aura Week 3: The Bug I Couldn't Even Describe to the AI",
+        item: 'https://stonemegan.dev/blog/aura-week-3-the-bug-i-could-not-even-describe-to-the-ai',
+      },
+    ],
+  }}
+/>
