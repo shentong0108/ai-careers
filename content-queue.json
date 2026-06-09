@@ -222,6 +222,9 @@
     "author": "stone",
     "topic": "The day I stopped pasting full files into the AI prompt",
     "anecdote": "For two weeks I pasted 500-line files as context. The AI started hallucinating function names that should exist based on the surrounding code patterns. Switched to a strict rule: paste only the changed function plus the three to five functions it calls plus the tests. Hallucination rate dropped to near zero. Less context, better output. Opposite of intuition.",
-    "status": "pending"
+    "status": "published",
+    "slug": "the-day-i-stopped-pasting-full-files-into-the-ai-prompt",
+    "pickedAt": "2026-06-10T08:00:00.000Z",
+    "mergedAt": "2026-06-09T21:16:23Z"
   }
 ]
