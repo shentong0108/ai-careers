@@ -1,0 +1,124 @@
+{
+  "niche": "dev-diary",
+  "seed_topic": "The day I stopped pasting full files into the AI prompt — pasting 500-line files made the AI hallucinate function names; switching to changed-function + 3-5 callers + tests dropped hallucinations to near zero.",
+  "target_geo": "global",
+  "research_date": "2026-06-10",
+  "sources_used": [
+    "Google Suggest (suggestqueries.google.com) 2026-06-10",
+    "Google web SERP result blocks via WebSearch 2026-06-10 (used as proxy for People Also Ask / related queries; direct Google SERP scrape blocked by access notice)",
+    "Top-competitor pages fetched 2026-06-10: github.blog, mindstudio.ai, martinfowler.com"
+  ],
+  "primary_keyword": {
+    "term": "should I paste the whole file into AI coding assistant",
+    "estimated_kd": 16,
+    "estimated_volume": "low (<300/mo)",
+    "source": "no third-party volume tool returned a numeric figure for this exact long-tail (Ubersuggest free tier + Ahrefs free both gate this query); volume bucket is an inference from zero dedicated top-ranking page existing, NOT a tool-reported number — treat as UNVERIFIED estimate",
+    "kd_basis": "top10 are mostly tool-vendor / Medium / personal blogs, not the very high-DR pages that own the broad 'context engineering' head term; rough KD = top10_avg_DR(~55)/5 + exact_match_count(2) * 2 = 11 + 4 = 15 (rounded to 16). UNCERTAIN — DR values are eyeballed, not pulled from a live Ahrefs export."
+  },
+  "long_tail": [
+    { "term": "why does AI invent function names that don't exist", "estimated_kd": 14, "intent": "informational", "source": "Google web SERP 2026-06-10 — multiple personal-blog/Medium results, no single dominant authority" },
+    { "term": "too much context makes AI coding worse", "estimated_kd": 19, "intent": "informational", "source": "Google web SERP 2026-06-10 — note Augment/MindStudio compete here, harder than the head-noun-free phrasings" },
+    { "term": "how much code to paste into ChatGPT for coding", "estimated_kd": 17, "intent": "informational", "source": "Google Suggest variant 'ai coding too much code in prompt' 2026-06-10" },
+    { "term": "AI hallucinates methods that should exist", "estimated_kd": 13, "intent": "informational", "source": "Google web SERP 2026-06-10 — db.fetchUserWithRole / database.fast_query examples recur, gap for a first-person dev-diary take" },
+    { "term": "paste only the changed function to AI prompt", "estimated_kd": 11, "intent": "informational/how-to", "source": "no dedicated ranking page found 2026-06-10 — genuine gap; lowest competition, narrowest volume" },
+    { "term": "claude code context window best practices", "estimated_kd": 22, "intent": "informational", "source": "Google Suggest 2026-06-10 — flagged at upper KD bound; only target as a secondary section, not the primary, on a new domain" }
+  ],
+  "people_also_ask": [
+    "Should I paste the whole file or just the function into an AI coding assistant?",
+    "Why does AI make up function names that don't exist?",
+    "Does giving an AI more context make code generation worse?",
+    "How much code should I paste into ChatGPT or Claude for a coding task?",
+    "What is context rot in AI coding?",
+    "How do I stop AI from hallucinating imports and methods?"
+  ],
+  "serp_top3": [
+    {
+      "url": "https://github.blog/ai-and-ml/generative-ai/want-better-ai-outputs-try-context-engineering/",
+      "dr": 92,
+      "word_count": 1150,
+      "fetched": "2026-06-10",
+      "covers": [
+        "definition of context engineering",
+        "custom instructions file (.github/copilot-instructions.md)",
+        "reusable prompts / slash commands",
+        "custom agents / personas"
+      ],
+      "gap": "high-level, vendor-framed; never mentions pasting whole files, hallucinated function names, or the changed-function-plus-callers tactic"
+    },
+    {
+      "url": "https://www.mindstudio.ai/blog/what-is-context-rot-ai-coding",
+      "dr": 60,
+      "word_count": 3200,
+      "fetched": "2026-06-10",
+      "covers": [
+        "context rot definition + attention/compounding/displacement",
+        "symptoms and how to measure",
+        "session-management habits (bounded sessions, compacting)",
+        "keeping file loads targeted (indirect)"
+      ],
+      "gap": "heavily promotes own tool (Remy); long-session framing, not the manual copy-paste decision; no hallucinated-name anecdote"
+    },
+    {
+      "url": "https://martinfowler.com/articles/exploring-gen-ai/context-engineering-coding-agents.html",
+      "dr": 85,
+      "word_count": 2300,
+      "fetched": "2026-06-10",
+      "covers": [
+        "what counts as context in coding agents",
+        "who/when decides to load context",
+        "keeping context as small as possible",
+        "Claude Code example + sharing config"
+      ],
+      "gap": "agent-centric (auto-loading), not the human pasting into a chat box; no concrete callers-plus-tests rule, no hallucination story"
+    }
+  ],
+  "ai_overview_present": true,
+  "ai_overview_note": "Broad queries like 'why does AI hallucinate code' and 'too much context AI coding' trigger an AI Overview that summarises the pattern-fill explanation. Avoid those head phrasings as the primary target. The specific decision-question primary keyword ('whole file vs just the function') is less likely to be fully answered by an Overview, so depth + a real first-person anecdote can still win the click.",
+  "featured_snippet_target": "A 40-60 word definition list answering 'How much code should you paste into an AI coding assistant?' — e.g. 'Paste the function you're changing, the 3-5 functions it directly calls, and the relevant tests — not the whole file. Extra unrelated lines make the model pattern-match and invent function names that look plausible but don't exist.'",
+  "outline": {
+    "title_candidates": [
+      "The day I stopped pasting whole files into the AI prompt",
+      "Less context, better code: why I now paste one function, not the whole file",
+      "My AI kept inventing functions — until I pasted less code"
+    ],
+    "h2": [
+      {
+        "heading": "Two weeks of pasting 500-line files (and feeling clever about it)",
+        "h3": ["The habit: dump the whole file, ask for the change", "Why it felt like the right move at the time"]
+      },
+      {
+        "heading": "The day it started inventing functions that didn't exist",
+        "h3": ["A method that 'should' have existed by the surrounding patterns", "How a hallucinated call passes a quick eyeball — and where it bit me"]
+      },
+      {
+        "heading": "The counterintuitive fix: paste less, not more",
+        "h3": ["The rule: changed function + the 3-5 functions it calls + the tests", "Why the tests matter most for grounding"]
+      },
+      {
+        "heading": "Why fewer lines lowered the hallucination rate",
+        "h3": ["Pattern-fill: the model guesses the gap when context is noisy", "Less surface area for the model to confidently improvise"]
+      },
+      {
+        "heading": "How I actually decide what goes in the prompt now",
+        "h3": ["A 30-second checklist before I paste", "When I do still hand over more (and why that's rare)"]
+      },
+      {
+        "heading": "What this changed about how I work with AI day to day",
+        "h3": []
+      }
+    ],
+    "unique_angle": "A first-person, measured dev-diary account framing this as a copy-paste decision a solo dev makes in a chat box — not abstract 'context engineering' or agent auto-loading. The concrete spine the top-3 all lack: a named failure (AI inventing a method that 'should' exist from surrounding patterns), a specific rule (changed function + 3-5 callers + tests), and a before/after on hallucination rate dropping to near zero. Ties hallucination cause (pattern-fill on noisy context) directly to the manual paste habit, which none of the three competitors connect."
+  },
+  "internal_link_candidates": [
+    "what-i-throw-away-after-a-week-of-ai-assisted-coding",
+    "aura-week-3-the-bug-i-could-not-even-describe-to-the-ai",
+    "owna-templates-using-ai-alongside-not-inside"
+  ],
+  "warnings": [
+    "AI Overview present on the broad hallucination/context phrasings — do NOT target those as primary; only the specific 'whole file vs just the function' decision-question is safe, and only if depth + real anecdote beats the summary.",
+    "All KD and volume figures are estimates: no third-party tool returned a numeric volume for these exact long-tails (Ubersuggest/Ahrefs free tiers gate them), and DR values are eyeballed from known-domain reputation, not a live export. Do not present any number as tool-sourced.",
+    "Direct Google SERP scrape was blocked (access notice); PAA/related queries were reconstructed from WebSearch result blocks rather than a live PAA box — treat the PAA list as high-confidence-topic, not verbatim-box-order.",
+    "'claude code context window best practices' (KD ~22) sits at the upper edge of the KD-25 ceiling for a new domain — use only as a secondary section heading, never the article's primary target.",
+    "YMYL note: this is dev-diary, not nurse/ece, so the medical E-E-A-T citation rule does not apply; still keep the RN/indie-dev byline for author consistency."
+  ]
+}

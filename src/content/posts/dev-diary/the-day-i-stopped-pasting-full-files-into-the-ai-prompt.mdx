@@ -1,0 +1,154 @@
+---
+title: "The Day I Stopped Pasting Whole Files Into the AI Prompt"
+slug: "the-day-i-stopped-pasting-full-files-into-the-ai-prompt"
+description: "Should I paste the whole file into an AI coding assistant? I did for two weeks, the model invented functions, and pasting less code dropped hallucinations to near zero."
+publishedAt: "2026-06-10"
+updatedAt: "2026-06-10"
+author: "stone"
+category: "dev-diary"
+tags: ["ai-coding", "indie dev", "context", "prompting", "workflow", "hallucination"]
+keywords: ["should I paste the whole file into AI coding assistant", "why does AI invent function names that don't exist", "too much context makes AI coding worse", "how much code to paste into an AI assistant for coding", "paste only the changed function to AI prompt", "AI hallucinates methods that should exist"]
+canonical: "https://stonemegan.dev/blog/the-day-i-stopped-pasting-full-files-into-the-ai-prompt"
+draft: false
+aiDetectionScore: null
+humanizationMode: "degraded"
+heroImage: "/images/card-dev-diary.jpg"
+factChecked: false
+factCheckNotes: []
+voicePolisherPasses: 1
+voicePolisherSamples: ["src/content/posts/dev-diary/what-i-throw-away-after-a-week-of-ai-assisted-coding.mdx", "src/content/posts/dev-diary/aura-week-3-the-bug-i-could-not-even-describe-to-the-ai.mdx"]
+---
+
+import Schema from '@/components/Schema.astro'
+
+For two weeks I answered the question "should I paste the whole file into the AI coding assistant?" with a confident yes. Every session, I'd dump a 500-line file into the prompt and ask for one small change. It felt thorough. Then the model started inventing functions that did not exist anywhere in my codebase. So here's the day I reversed the habit, the rule I replaced it with, and why pasting less code made the output better. For context: I build a small app called Aura in the evenings, around my day job as a registered nurse in Sydney.
+
+## Two weeks of pasting 500-line files (and feeling clever about it)
+
+The habit was simple. Open a session, paste the entire file, type the change I wanted at the bottom, hit send. My logic felt airtight at the time. More context, better understanding, better answers. Obviously. Right?
+
+It looked right for a while. The change requests were small, and the model handed back patches that slotted in. I felt clever giving it the full picture. What I did not notice was that most of those 500 lines had nothing to do with the function I was actually touching. I was feeding it a haystack and pointing at one needle.
+
+That mismatch is where the trouble started.
+
+## The day it started inventing functions that didn't exist
+
+Here is the one that bit me. I was changing a small sync helper, and I pasted the whole sync module, around 480 lines. The file had a cluster of helpers named `queueWrite`, `flushQueue`, and `retryFailed`. I asked for a change to the flush logic. The model wrote a clean patch that called `this.markQueueDrained()`.
+
+That method does not exist. It never existed. But sitting next to `queueWrite` and `flushQueue`, a `markQueueDrained` looked like it absolutely should exist. The naming was perfect. The signature was plausible. The call read like something I would have written myself on a good day.
+
+And that's the dangerous part. A hallucinated call like that sails past a quick eyeball. It's not garbage. It's the exact shape of a real method, dropped into a real spot, with a name that fits the surrounding pattern. I nearly committed it. The only reason I caught it: the tests went red on the next run, and I sat there for a minute wondering why a method I was sure I'd written was undefined.
+
+## The counterintuitive fix: paste less, not more
+
+So I flipped the rule. Instead of the whole file, I now paste three things and nothing else:
+
+1. The function I'm actually changing.
+2. The 3 to 5 functions it directly calls.
+3. The relevant tests for that function.
+
+That's it. No surrounding module. No unrelated helpers. If the change touches `flushQueue`, the model sees `flushQueue`, the handful of methods `flushQueue` calls, and the test file that exercises it. Usually that lands somewhere between 60 and 120 lines instead of 480.
+
+The tests matter most here, and I underrated them at first. A test file is a contract written in real method names with real expected behaviour. When the model can see `expect(queue.flushQueue()).toResolve()`, it has a hard anchor for what actually exists, instead of guessing from naming patterns. The tests fence the model in. They tell it the real surface area of the code rather than letting it imagine a richer one.
+
+### So how much code should you actually paste?
+
+Short version. Paste the function you're changing, the 3 to 5 functions it directly calls, and the relevant tests. Not the whole file. Extra unrelated lines make the model pattern-match and invent function names that look plausible but don't exist. Can't fit the change in under roughly 120 lines? That's usually a sign it's touching too much at once, and the prompt is telling you to split the task before you split the file. I treat the line count as a smell test now. A bloated paste isn't the model setting itself up to fail. It's a hint my change isn't scoped tightly enough yet.
+
+## Why fewer lines lowered the hallucination rate
+
+The result still surprises me. After switching to the trimmed-context rule, the invented-method problem dropped to near zero across the next few weeks of work. Less context, better output. The exact opposite of what my intuition was screaming.
+
+Once I sat with it, the mechanism made sense. These models fill gaps by pattern. Give one 480 lines of richly named, interconnected helpers and ask it to extend the pattern, and a fluent guess like `markQueueDrained` is *exactly* what a pattern-matcher produces. The noise invites confident improvisation. I was handing it a half-finished crossword and acting shocked when it pencilled in plausible words.
+
+Trim the context to the function, its real callers, and its tests, and there's far less surface for the model to improvise across. It can see what exists. It has fewer adjacent patterns to extrapolate from. The gap it would otherwise fill with a guess is mostly closed before it starts. This is the same idea the [github.blog piece on context engineering](https://github.blog/ai-and-ml/generative-ai/want-better-ai-outputs-try-context-engineering/) circles, and what [Martin Fowler's write-up on context for coding agents](https://martinfowler.com/articles/exploring-gen-ai/context-engineering-coding-agents.html) calls keeping context as small as possible. Neither names the failure I hit, but both land on the same instinct: smaller is safer.
+
+## My honest opinion: "give it everything" is bad advice
+
+I'll take a stance. The common wisdom that you should give an AI coding assistant as much context as possible is wrong for day-to-day work, and it's wrong in a way that quietly costs you. It does not blow up loudly. It produces clean, plausible, wrong code that survives a casual review and fails later, usually somewhere more expensive than a unit test. Big context does not make the model smarter about your code. It makes it more *confident* about patterns, and confidence on noisy input is the one thing you do not want near a commit. I'd rather paste 80 careful lines than 480 lazy ones. Every single time. The "more is better" crowd is optimising for feeling thorough, not for being correct.
+
+## How I actually decide what goes in the prompt now
+
+Before I paste anything, I run a 30-second checklist in my head:
+
+- What is the one function I'm changing? Paste it.
+- What does that function call directly? Paste those 3 to 5, no more.
+- Is there a test for it? Paste it. If there isn't, that's a separate problem.
+- Is anything else in this file actually relevant to the change? Almost always no.
+
+I do still hand over more on rare occasions. If I'm asking the model to reason about architecture across modules, or trace a data flow I don't understand yet, the wide view earns its place. But that's maybe one session in ten, and I go in knowing the hallucination risk goes up with the line count. For a normal "change this behaviour" task, narrow wins. If you want a related habit, see [what I throw away after a week of AI-assisted coding](/blog/what-i-throw-away-after-a-week-of-ai-assisted-coding) and the way I handle bugs I can't even describe in [the Aura week 3 bug I couldn't describe to the AI](/blog/aura-week-3-the-bug-i-could-not-even-describe-to-the-ai).
+
+## What this changed about how I work day to day
+
+The bigger shift was mental. I stopped treating context as a generosity I extend to the model and started treating it as a liability I manage. Every extra unrelated line is a chance for a confident guess. My sessions got faster too, because trimming the paste forces me to actually understand which functions are in play before I ask for the change. The discipline that fixed the hallucinations made me a sharper reader of my *own* code. Funny, that. I touch on the alongside-not-inside approach in [using AI alongside, not inside, the templates](/blog/owna-templates-using-ai-alongside-not-inside) as well.
+
+## TL;DR / Key Takeaways
+
+- Pasting whole 500-line files made the AI invent methods that "should" exist by naming pattern, like a `markQueueDrained` that never existed.
+- The fix: paste only the changed function, the 3 to 5 functions it directly calls, and the relevant tests.
+- That trimmed context dropped my invented-method rate to near zero, the opposite of the "more context is better" intuition.
+- Tests are the strongest anchor; they show the model the real method surface instead of letting it guess.
+- Keep more context only for genuine cross-module reasoning, and know the hallucination risk rises with line count.
+
+## Sources
+
+- [Want better AI outputs? Try context engineering — github.blog](https://github.blog/ai-and-ml/generative-ai/want-better-ai-outputs-try-context-engineering/)
+- [Context engineering for coding agents — martinfowler.com](https://martinfowler.com/articles/exploring-gen-ai/context-engineering-coding-agents.html)
+
+<Schema
+  type="Article"
+  data={{
+    headline: 'The Day I Stopped Pasting Whole Files Into the AI Prompt',
+    description: 'Should I paste the whole file into an AI coding assistant? I did for two weeks, the model invented functions, and pasting less code dropped hallucinations to near zero.',
+    datePublished: '2026-06-10',
+    dateModified: '2026-06-10',
+    inLanguage: 'en-AU',
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': 'https://stonemegan.dev/blog/the-day-i-stopped-pasting-full-files-into-the-ai-prompt',
+    },
+    image: 'https://stonemegan.dev/images/card-dev-diary.jpg',
+    author: {
+      '@type': 'Person',
+      name: 'Stone Megan',
+      jobTitle: 'Indie Developer & Registered Nurse',
+      url: 'https://stonemegan.dev/about',
+      sameAs: ['https://stonemegan.dev'],
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'ai-careers',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://stonemegan.dev/logo.png',
+      },
+    },
+  }}
+/>
+
+<Schema
+  type="Person"
+  data={{
+    name: 'Stone Megan',
+    jobTitle: 'Indie Developer & Registered Nurse',
+    url: 'https://stonemegan.dev/about',
+    knowsAbout: ['AI-assisted coding', 'Prompting', 'Context engineering', 'Hallucination', 'Indie development', 'Software workflow'],
+    sameAs: ['https://stonemegan.dev'],
+  }}
+/>
+
+<Schema
+  type="BreadcrumbList"
+  data={{
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Blog', item: 'https://stonemegan.dev/blog' },
+      { '@type': 'ListItem', position: 2, name: 'Dev Diary', item: 'https://stonemegan.dev/blog/category/dev-diary' },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: 'The Day I Stopped Pasting Whole Files Into the AI Prompt',
+        item: 'https://stonemegan.dev/blog/the-day-i-stopped-pasting-full-files-into-the-ai-prompt',
+      },
+    ],
+  }}
+/>
